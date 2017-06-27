@@ -1,53 +1,47 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { EditableNode } from './EditableNode';
+import { ListNode } from './ListNode';
 
 class TextNode extends Component {
   constructor(props) {
     super(props);
-    this.handleClickSave = this.handleClickSave.bind(this);
-    this.handleClickCancel = this.handleClickCancel.bind(this);
-    this.handleClickDelete = this.handleClickDelete.bind(this);
+    this.setEdit = this.setEdit.bind(this);
+    this.delete = this.delete.bind(this);
     this.state = {
-      textBackup: props.text,
       text: props.text,
+      edit: false,
     };
   }
-  updateInputValue(evt) {
-    this.setState({
-      text: evt.target.value,
-    });
+  setEdit(text) {
+    if (this.state.edit === true) {
+      this.props.saved(this.props.id, text);
+    }
+    this.state.edit = !this.state.edit;
+    this.state.text = text;
+    this.forceUpdate();
   }
-  handleClickSave() {
-    console.log('Before save text: ' + this.state.text + ', textBackup: ' + this.state.textBackup);
-    this.setState({
-      textBackup: this.state.text,
-    });
-    console.log('After save text: ' + this.state.text + ', textBackup: ' + this.state.textBackup);
-  }
-  handleClickCancel() {
-    console.log('Before cancel text: ' + this.state.text + ', textBackup: ' + this.state.textBackup);
-    this.setState({
-      text: this.state.textBackup,
-    });
-    console.log('After cancel text: ' + this.state.text + ', textBackup: ' + this.state.textBackup);
-  }
-  handleClickDelete() {
+  delete() {
+    this.props.deleted(this.props.id);
   }
 
   render() {
+    if (this.state.edit === true) {
+      return (
+        <EditableNode text={this.state.text} edit={this.setEdit} delete={this.delete} />
+      );
+    }
     return (
-      <div>
-        <input value={this.state.text} onChange={evt => this.updateInputValue(evt)} />
-        <button onClick={this.handleClickSave}> Save</button>
-        <button onClick={this.handleClickCancel}> Cancel</button>
-        <button onClick={this.handleClickDelete}> Delete</button>
-      </div>
+      <ListNode text={this.state.text} edit={this.setEdit} />
     );
   }
 }
 
 TextNode.propTypes = {
   text: PropTypes.string,
+  id: PropTypes.string,
+  saved: PropTypes.func,
+  deleted: PropTypes.func,
 };
 
-export default TextNode;
+export { TextNode };
