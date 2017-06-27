@@ -15,7 +15,7 @@ class ListNode extends Component {
   }
   render() {
     return (
-      <div onClick={this.isEdited}>{this.state.text}</div>
+      <div onClick={this.isEdited}>{this.props.index}. {this.state.text}</div>
     );
   }
 }
@@ -23,6 +23,7 @@ class ListNode extends Component {
 ListNode.propTypes = {
   text: PropTypes.string,
   edit: PropTypes.func,
+  index: PropTypes.number,
 };
 
 export { ListNode };

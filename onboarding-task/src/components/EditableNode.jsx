@@ -29,10 +29,12 @@ class EditableNode extends Component {
 
   render() {
     return (
-      <div><input value={this.state.text} onChange={evt => this.updateInputValue(evt)} />
-        <button onClick={this.isSaved}>Save</button>
-        <button onClick={this.isCanceled}>Cancel</button>
-        <button onClick={this.isDeleted}>Delete</button></div>
+      <div className="form-inline">
+        {this.props.index}. <input className="form-control" value={this.state.text} onChange={evt => this.updateInputValue(evt)} />
+        <button className="btn btn-primary" disabled={!this.state.text} onClick={this.isSaved}>Save</button>
+        <button className="btn btn-default" onClick={this.isCanceled}>Cancel</button>
+        <button className="btn btn-danger" onClick={this.isDeleted}>Delete</button>
+      </div>
     );
   }
 }
@@ -41,6 +43,7 @@ EditableNode.propTypes = {
   text: PropTypes.string,
   edit: PropTypes.func,
   delete: PropTypes.func,
+  index: PropTypes.number,
 };
 
 export { EditableNode };

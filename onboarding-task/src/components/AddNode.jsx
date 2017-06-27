@@ -25,9 +25,9 @@ class AddNode extends Component {
 
   render() {
     return (
-      <div>
-        <input value={this.state.inputValue} onChange={evt => this.updateInputValue(evt)} />
-        <button onClick={this.handleClickAdd}>
+      <div className="form-inline">
+        <input className="form-control" value={this.state.inputValue} onChange={evt => this.updateInputValue(evt)} />
+        <button className="btn btn-default" onClick={this.handleClickAdd} disabled={!this.state.inputValue}>
           Add
         </button>
       </div>
