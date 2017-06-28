@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import assignment from './../../../assignment.gif';
-import { AddNode } from './AddNode.jsx';
+import { Adder } from './Adder.jsx';
 import { Node } from './Node.jsx';
-import { generateId } from '../utils/GenerateId';
+import { generateId } from '../utils/generateId';
 
 class List extends Component {
   constructor(props) {
@@ -27,11 +27,11 @@ class List extends Component {
     this.forceUpdate();
   };
   _updateText = (id, text) => {
-    this.forceUpdate();
     const updateIndex = this.state.nodes.findIndex(node => {
       return node.id === id;
     });
     this.state.nodes[updateIndex].text = text;
+    this.forceUpdate();
   };
   render() {
     return (
@@ -52,12 +52,12 @@ class List extends Component {
                     id={node.id}
                     index={index + 1}
                     text={node.text}
-                    saved={this._updateText}
-                    deleted={this._deleteNode}
+                    onSave={this._updateText}
+                    onDelete={this._deleteNode}
                   />
                 </li>)}
               <li className="list-group-item">
-                <AddNode clicked={this._addNode} />
+                <Adder onAdd={this._addNode} />
               </li>
             </ul>
           </div>
@@ -67,4 +67,4 @@ class List extends Component {
   }
 }
 
-export default List;
+export { List };

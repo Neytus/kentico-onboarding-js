@@ -2,28 +2,27 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class ListNode extends Component {
+  static propTypes = {
+    text: PropTypes.string,
+    onEdit: PropTypes.func,
+    index: PropTypes.number,
+  };
   constructor(props) {
     super(props);
-    this.isEdited = this.isEdited.bind(this);
     this.state = {
       text: props.text,
     };
+    this._edit = this._edit.bind(this);
   }
 
-  isEdited() {
-    this.props.edit(this.state.text);
+  _edit() {
+    this.props.onEdit(this.state.text);
   }
   render() {
     return (
-      <div onClick={this.isEdited}>{this.props.index}. {this.state.text}</div>
+      <div onClick={this._edit}>{this.props.index}. {this.state.text}</div>
     );
   }
 }
-
-ListNode.propTypes = {
-  text: PropTypes.string,
-  edit: PropTypes.func,
-  index: PropTypes.number,
-};
 
 export { ListNode };
