@@ -21,10 +21,9 @@ class Adder extends PureComponent {
   };
 
   _updateText = e => {
-    // TODO setState s lambdou
-    this.setState({
-      text: e.target.value,
-    });
+    e.persist();
+    this.setState(() => ({
+      text: e.target.value }));
   };
 
   render() {
