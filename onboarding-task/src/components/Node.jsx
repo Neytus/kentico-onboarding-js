@@ -21,7 +21,7 @@ class Node extends PureComponent {
     };
   }
 
-  _save = (text) => {
+  _onSave = (text) => {
     this.props.onSave(this.props.id, text);
     this._toggleNodeEditable();
     this.props.text = text;
@@ -33,16 +33,16 @@ class Node extends PureComponent {
     }));
   };
 
-  _delete = () => this.props.onDelete(this.props.id);
+  _onDelete = () => this.props.onDelete(this.props.id);
 
   render() {
     return this.state.isBeingEdited === true ? (
       <EditableNode
         text={this.props.text}
         index={this.props.index}
-        onSave={this._save}
+        onSave={this._onSave}
         onCancel={this._toggleNodeEditable}
-        onDelete={this._delete}
+        onDelete={this._onDelete}
       />
     ) : (
       <ListNode

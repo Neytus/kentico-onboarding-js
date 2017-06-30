@@ -29,7 +29,7 @@ class List extends PureComponent {
     }));
   };
 
-  _updateText = (id, text) => {
+  _onUpdateText = (id, text) => {
     this.setState(state => {
       const updateIndex = state.nodes.findIndex(node => node.id === id);
       const updatedList = [...state.nodes];
@@ -53,7 +53,7 @@ class List extends PureComponent {
                   id={node.id}
                   index={index + 1}
                   text={node.text}
-                  onSave={this._updateText}
+                  onSave={this._onUpdateText}
                   onDelete={this._deleteNode}
                 />
               </li>)}

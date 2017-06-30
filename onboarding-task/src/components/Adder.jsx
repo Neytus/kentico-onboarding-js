@@ -15,12 +15,12 @@ class Adder extends PureComponent {
     };
   }
 
-  _clickAdd = () => {
+  _onClickAdd = () => {
     this.props.onAdd(this.state.text);
     this.setState(() => ({ text: '' }));
   };
 
-  _updateText = e => {
+  _onUpdateText = e => {
     e.persist();
     this.setState(() => ({
       text: e.target.value }));
@@ -29,8 +29,8 @@ class Adder extends PureComponent {
   render() {
     return (
       <div className="form-inline">
-        <input className="form-control" value={this.state.text} onChange={this._updateText} />
-        <button className="btn btn-default" onClick={this._clickAdd} disabled={!this.state.text}>
+        <input className="form-control" value={this.state.text} onChange={this._onUpdateText} />
+        <button className="btn btn-default" onClick={this._onClickAdd} disabled={!this.state.text}>
           Add
         </button>
       </div>
