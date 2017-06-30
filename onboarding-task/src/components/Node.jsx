@@ -17,39 +17,40 @@ class Node extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      isEdited: false,
+      isBeingEdited: false,
     };
   }
 
   _save = (text) => {
     this.props.onSave(this.props.id, text);
-    this._swap();
+    this._toggleNodeEditable();
     this.props.text = text;
   };
 
-  _swap = () => {
+  _toggleNodeEditable = () => {
     this.setState(state => ({
-      isEdited: !state.isEdited,
+      isBeingEdited: !state.isBeingEdited,
     }));
   };
 
-  _delete = () => {
-    this.props.onDelete(this.props.id);
-  };
+  _delete = () => this.props.onDelete(this.props.id);
 
   render() {
-    return (<div>
-      {(this.state.isEdited === true) ? (
-        <EditableNode
-          text={this.props.text}
-          index={this.props.index}
-          onSave={this._save}
-          onCancel={this._swap}
-          onDelete={this._delete}
-        />
-      ) : (
-        <ListNode text={this.props.text} index={this.props.index} onEdit={this._swap} />)
-      }</div>);
+    return this.state.isBeingEdited === true ? (
+      <EditableNode
+        text={this.props.text}
+        index={this.props.index}
+        onSave={this._save}
+        onCancel={this._toggleNodeEditable}
+        onDelete={this._delete}
+      />
+    ) : (
+      <ListNode
+        text={this.props.text}
+        index={this.props.index}
+        onEdit={this._toggleNodeEditable}
+      />
+    );
   }
 }
 
