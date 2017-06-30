@@ -29,7 +29,7 @@ class Adder extends PureComponent {
     return (
       <div className="form-inline">
         <input className="form-control" value={this.state.text} onChange={this._onUpdateText} />
-        <button className="btn btn-default" onClick={this._onClickAdd} disabled={!this.state.text}>
+        <button className="btn btn-default" onClick={this._onClickAdd} disabled={!this.state.text.replace(/\s/g, '').length}>
           Add
         </button>
       </div>
