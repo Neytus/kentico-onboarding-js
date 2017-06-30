@@ -21,9 +21,8 @@ class Adder extends PureComponent {
   };
 
   _onUpdateText = e => {
-    e.persist();
-    this.setState(() => ({
-      text: e.target.value }));
+    const text = e.target.value;
+    this.setState(() => ({ text }));
   };
 
   render() {

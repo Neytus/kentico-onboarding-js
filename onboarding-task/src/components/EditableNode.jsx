@@ -25,9 +25,8 @@ class EditableNode extends PureComponent {
   _delete = () => this.props.onDelete();
 
   _onUpdateText = e => {
-    e.persist();
-    this.setState(() => ({
-      text: e.target.value }));
+    const text = e.target.value;
+    this.setState(() => ({ text }));
   };
 
   render() {
