@@ -25,11 +25,17 @@ class Adder extends PureComponent {
     this.setState(() => ({ text }));
   };
 
+  _onKeyPress = e => {
+    if ((e.key === 'Enter') && (this.state.text.replace(/\s/g, '').length)) {
+      this._onClickAdd();
+    }
+  };
+
   render() {
     return (
-      <div className="form-inline">
+      <div className="form-inline" onKeyDown={this._onKeyPress}>
         <input className="form-control" value={this.state.text} onChange={this._onUpdateText} />
-        <button className="btn btn-default" onClick={this._onClickAdd} disabled={!this.state.text.replace(/\s/g, '').length}>
+        <button className="btn btn-default" onClick={this._onClickAdd} onSubmit={this._onClickAdd} disabled={!this.state.text.replace(/\s/g, '').length}>
           Add
         </button>
       </div>
