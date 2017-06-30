@@ -10,9 +10,9 @@ const ListNode = ({ text, index, onEdit }) => {
 ListNode.displayName = 'ListNode';
 
 ListNode.propTypes = {
-  text: PropTypes.string,
-  onEdit: PropTypes.func,
-  index: PropTypes.number,
+  text: PropTypes.string.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 export { ListNode };

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Adder } from './Adder.jsx';
 import { Node } from './Node.jsx';
-import { generateId } from '../utils/generateId';
+import { generateId } from '../utils/generateId.js';
 
 class List extends PureComponent {
   static displayName = 'List';

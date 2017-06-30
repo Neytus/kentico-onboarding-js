@@ -5,7 +5,7 @@ class Adder extends PureComponent {
   static displayName = 'Adder';
 
   static propTypes = {
-    onAdd: PropTypes.func,
+    onAdd: PropTypes.func.isRequired,
   };
 
   constructor(props) {

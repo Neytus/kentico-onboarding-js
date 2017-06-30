@@ -5,11 +5,12 @@ class EditableNode extends PureComponent {
   static displayName = 'EditableNode';
 
   static propTypes = {
-    text: PropTypes.string,
-    onCancel: PropTypes.func,
-    onDelete: PropTypes.func,
-    index: PropTypes.number,
+    text: PropTypes.string.isRequired,
+    onCancel: PropTypes.func.isRequired,
+    onDelete: PropTypes.func.isRequired,
+    index: PropTypes.number.isRequired,
   };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -17,17 +18,11 @@ class EditableNode extends PureComponent {
     };
   }
 
-  _save = () => {
-    this.props.onSave(this.state.text);
-  };
+  _save = () => this.props.onSave(this.state.text);
 
-  _cancel = () => {
-    this.props.onCancel(this.props.text);
-  };
+  _cancel = () => this.props.onCancel(this.props.text);
 
-  _delete = () => {
-    this.props.onDelete();
-  };
+  _delete = () => this.props.onDelete();
 
   _updateText = e => {
     e.persist();

@@ -55,10 +55,12 @@
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "immutable": "^3.8.1",
+    "prop-types": "^15.4.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "ts-jest": "^19.0.0",
-    "prop-types": "^15.4.2"
+    "react-set-state-usage": "^1.0.4",
+    "ts-jest": "^19.0.0"
   },
   "scripts": {
     "start": "node scripts/start.js",
