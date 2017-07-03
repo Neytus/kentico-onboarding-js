@@ -11,31 +11,27 @@ class Node extends PureComponent {
     id: PropTypes.string.isRequired,
     onSave: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired,
+    onEdit: PropTypes.func.isRequired,
     index: PropTypes.number.isRequired,
+    isBeingEdited: PropTypes.bool.isRequired,
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      isBeingEdited: false,
-    };
-  }
-
-  _onSave = (text) => {
+  _onSave = text => {
     this.props.onSave(this.props.id, text);
-    this._toggleNodeEditable();
+  };
+
+  _onCancel = () => {
+    this.props.onEdit(this.props.id);
   };
 
   _toggleNodeEditable = () => {
-    this.setState(state => ({
-      isBeingEdited: !state.isBeingEdited,
-    }));
+    this.props.onEdit(this.props.id);
   };
 
   _onDelete = () => this.props.onDelete(this.props.id);
 
   render() {
-    return this.state.isBeingEdited === true ? (
+    return this.props.isBeingEdited === true ? (
       <EditableNode
         text={this.props.text}
         index={this.props.index}

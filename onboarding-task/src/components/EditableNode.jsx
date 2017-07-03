@@ -7,6 +7,7 @@ class EditableNode extends PureComponent {
 
   static propTypes = {
     text: PropTypes.string.isRequired,
+    onSave: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired,
     index: PropTypes.number.isRequired,
@@ -21,7 +22,7 @@ class EditableNode extends PureComponent {
 
   _save = () => this.props.onSave(this.state.text);
 
-  _cancel = () => this.props.onCancel(this.props.text);
+  _cancel = () => this.props.onCancel();
 
   _delete = () => this.props.onDelete();
 
@@ -40,6 +41,7 @@ class EditableNode extends PureComponent {
           onChange={this._onUpdateText}
         />
         <button
+          type="button"
           className="btn btn-primary"
           disabled={isEmptyOrWhitespace(this.state.text)}
           onClick={this._save}
@@ -47,11 +49,13 @@ class EditableNode extends PureComponent {
         >Save</button>
 
         <button
+          type="button"
           className="btn btn-default"
           onClick={this._cancel}
         >Cancel</button>
 
         <button
+          type="button"
           className="btn btn-danger"
           onClick={this._delete}
         >Delete</button>
