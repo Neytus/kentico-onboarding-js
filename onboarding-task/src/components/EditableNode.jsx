@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { notEmptyNotWhitespace } from '../utils/validation';
+import { isEmptyOrWhitespace } from '../utils/validation';
 
 class EditableNode extends PureComponent {
   static displayName = 'EditableNode';
@@ -41,7 +41,7 @@ class EditableNode extends PureComponent {
         />
         <button
           className="btn btn-primary"
-          disabled={notEmptyNotWhitespace(this.state.text)}
+          disabled={isEmptyOrWhitespace(this.state.text)}
           onClick={this._save}
           onSubmit={this._save}
         >Save</button>
