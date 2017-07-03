@@ -26,20 +26,21 @@ class Adder extends PureComponent {
     this.setState(() => ({ text }));
   };
 
-  _onKeyPress = e => {
-    if ((e.key === 'Enter') && !notEmptyNotWhitespace(this.state.text)) {
-      this._onClickAdd();
-    }
-  };
-
   render() {
     return (
-      <div className="form-inline" onKeyDown={this._onKeyPress}>
-        <input className="form-control" value={this.state.text} onChange={this._onUpdateText} />
-        <button className="btn btn-default" onClick={this._onClickAdd} onSubmit={this._onClickAdd} disabled={notEmptyNotWhitespace(this.state.text)}>
-          Add
-        </button>
-      </div>
+      <form className="form-inline" >
+        <input
+          className="form-control"
+          value={this.state.text}
+          onChange={this._onUpdateText}
+        />
+        <button
+          className="btn btn-default"
+          onClick={this._onClickAdd}
+          onSubmit={this._onClickAdd}
+          disabled={notEmptyNotWhitespace(this.state.text)}
+        >Add</button>
+      </form>
     );
   }
 }

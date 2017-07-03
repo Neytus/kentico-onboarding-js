@@ -32,12 +32,33 @@ class EditableNode extends PureComponent {
 
   render() {
     return (
-      <div className="form-inline">
-        {this.props.index}. <input className="form-control" value={this.state.text} onChange={this._onUpdateText} />
-        <button className="btn btn-primary" disabled={notEmptyNotWhitespace(this.state.text)} onClick={this._save}>Save</button>
-        <button className="btn btn-default" onClick={this._cancel}>Cancel</button>
-        <button className="btn btn-danger" onClick={this._delete}>Delete</button>
-      </div>
+      <form className="form-inline">
+        {this.props.index}.
+        <input
+          className="form-control"
+          value={this.state.text}
+          onChange={this._onUpdateText}
+        />
+
+        <button
+          className="btn btn-primary"
+          disabled={notEmptyNotWhitespace(this.state.text)}
+          onClick={this._save}
+          onSubmit={this._save}
+        >Save</button>
+
+        <button
+          className="btn btn-default"
+          onClick={this._cancel}
+        >Cancel
+        </button>
+
+        <button
+          className="btn btn-danger"
+          onClick={this._delete}
+        >Delete</button>
+
+      </form>
     );
   }
 }
