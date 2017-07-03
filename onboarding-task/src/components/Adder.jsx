@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { notEmptyNotWhitespace } from '../utils/validation.js';
+import { notEmptyNotWhitespace } from '../utils/validation';
 
 class Adder extends PureComponent {
   static displayName = 'Adder';
