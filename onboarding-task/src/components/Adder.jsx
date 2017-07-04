@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { isEmptyOrWhitespace } from '../utils/validation';
+import { isNullOrWhitespace } from '../utils/validation';
 
 class Adder extends PureComponent {
   static displayName = 'Adder';
@@ -38,8 +38,9 @@ class Adder extends PureComponent {
           className="btn btn-default"
           onClick={this._onClickAdd}
           onSubmit={this._onClickAdd}
-          disabled={isEmptyOrWhitespace(this.state.text)}
-        >Add</button>
+          disabled={isNullOrWhitespace(this.state.text)}
+        >Add
+        </button>
       </form>
     );
   }

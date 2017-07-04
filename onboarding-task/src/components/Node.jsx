@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { EditableNode } from './EditableNode';
-import { ListNode } from './ListNode';
+import { ViewNode } from './ViewNode';
 
 class Node extends PureComponent {
   static displayName = 'Node';
@@ -36,7 +36,7 @@ class Node extends PureComponent {
         onDelete={this._onDelete}
       />
     ) : (
-      <ListNode
+      <ViewNode
         text={this.props.text}
         index={this.props.index}
         onEdit={this._toggleNodeEditable}

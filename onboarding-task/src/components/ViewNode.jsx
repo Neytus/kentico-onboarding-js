@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ListNode = ({ text, index, onEdit }) => <div onClick={onEdit}>{index}. {text}</div>;
+const ViewNode = ({ text, index, onEdit }) => <div onClick={onEdit}>{index}. {text}</div>;
 
-ListNode.displayName = 'ListNode';
+ViewNode.displayName = 'ViewNode';
 
-ListNode.propTypes = {
+ViewNode.propTypes = {
   text: PropTypes.string.isRequired,
   onEdit: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
 };
 
-export { ListNode };
+export { ViewNode };
