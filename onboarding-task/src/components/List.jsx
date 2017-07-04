@@ -1,15 +1,9 @@
 import React, { PureComponent } from 'react';
-import { OrderedMap, Record } from 'immutable';
+import { OrderedMap } from 'immutable';
 import { Adder } from './Adder';
+import { Item } from './Item';
 import { Node } from './Node';
 import { generateId } from '../utils/generateId';
-
-// class Item extends Record {
-//   constructor(props) {
-//     super(props);
-//     text: '',
-//   };
-// }
 
 class List extends PureComponent {
   static displayName = 'List';
@@ -18,7 +12,7 @@ class List extends PureComponent {
     super(props);
     this.state = {
       nodes: [],
-      nodesMap: OrderedMap(),
+      nodesMap: OrderedMap,
     };
   }
 
@@ -28,13 +22,12 @@ class List extends PureComponent {
       isBeingEdited: false,
       text,
     };
-    const newImtNode = new Record({
-      text,
-      isBeingEdited: false,
-    });
+    const newImtNode = Item({ id: generateId(), text });
+    const newNodesMap = this.state.nodesMap;
+
     this.setState(state => ({
       nodes: [...state.nodes, newNode],
-      nodesMap: this.state.nodesMap.set(generateId(), newImtNode),
+      nodesMap: newNodesMap.set(generateId(), newImtNode),
     }));
   };
 
