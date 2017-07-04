@@ -20,10 +20,6 @@ class Node extends PureComponent {
     this.props.onSave(this.props.id, text);
   };
 
-  _onCancel = () => {
-    this.props.onEdit(this.props.id);
-  };
-
   _toggleNodeEditable = () => {
     this.props.onEdit(this.props.id);
   };
