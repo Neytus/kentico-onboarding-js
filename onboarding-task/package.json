@@ -59,13 +59,14 @@
     "prop-types": "^15.4.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "react-set-state-usage": "^1.0.4",
+    "react-set-state-usage": "^2.0.0",
     "ts-jest": "^19.0.0"
   },
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom --no-cache"
+    "test": "node scripts/test.js --env=jsdom --no-cache",
+    "tslint": "tslint \"./src/**/*.ts?(x)\""
   },
   "jest": {
     "collectCoverageFrom": [
