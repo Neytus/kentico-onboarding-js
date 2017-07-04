@@ -49,7 +49,7 @@ class List extends PureComponent {
       const updateIndex = state.nodes.findIndex(node => node.id === id);
       const updatedList = [...state.nodes];
       updatedList[updateIndex] = {
-        id: updatedList[updateIndex].id,
+        ...updatedList[updateIndex],
         text,
         isBeingEdited: false,
       };
@@ -63,8 +63,7 @@ class List extends PureComponent {
       const updateIndex = state.nodes.findIndex(node => node.id === id);
       const updatedList = [...state.nodes];
       updatedList[updateIndex] = {
-        id: updatedList[updateIndex].id,
-        text: state.nodes[updateIndex].text,
+        ...updatedList[updateIndex],
         isBeingEdited: !state.nodes[updateIndex].isBeingEdited,
       };
 
