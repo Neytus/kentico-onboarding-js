@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { OrderedMap } from 'immutable';
+import { OrderedMap, Map } from 'immutable';
 import { Adder } from './Adder';
 import { Item } from './Item';
 import { Node } from './Node';
@@ -12,28 +12,33 @@ class List extends PureComponent {
     super(props);
     this.state = {
       nodes: [],
-      nodesMap: OrderedMap,
+      nodesMap: OrderedMap(),
     };
   }
 
   _addNode = text => {
+    const generatedId = generateId();
     const newNode = {
-      id: generateId(),
+      id: generatedId,
       isBeingEdited: false,
       text,
     };
-    const newImtNode = Item({ id: generateId(), text });
-    const newNodesMap = this.state.nodesMap;
+    const newImtNode = new Item({ id: generatedId, text });
+    const newNodesMap = this.state.nodesMap.set(newImtNode.id, newImtNode);
 
     this.setState(state => ({
       nodes: [...state.nodes, newNode],
-      nodesMap: newNodesMap.set(generateId(), newImtNode),
+      nodesMap: newNodesMap,
     }));
+
+    console.log(this.state.nodesMap.toJS());
   };
 
   _deleteNode = id => {
+    const newNodesMap = this.state.nodesMap.delete(id);
     this.setState(state => ({
       nodes: state.nodes.filter(node => node.id !== id),
+      nodesMap: newNodesMap,
     }));
   };
 
