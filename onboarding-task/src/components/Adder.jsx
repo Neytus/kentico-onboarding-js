@@ -39,7 +39,8 @@ class Adder extends PureComponent {
           onClick={this._onClickAdd}
           onSubmit={this._onClickAdd}
           disabled={isEmptyOrWhitespace(this.state.text)}
-        >Add</button>
+        >Add
+        </button>
       </form>
     );
   }

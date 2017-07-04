@@ -44,17 +44,20 @@ class EditableNode extends PureComponent {
           disabled={isEmptyOrWhitespace(this.state.text)}
           onClick={this._save}
           onSubmit={this._save}
-        >Save</button>
+        >Save
+        </button>
 
         <button
           className="btn btn-default"
           onClick={this._cancel}
-        >Cancel</button>
+        >Cancel
+        </button>
 
         <button
           className="btn btn-danger"
           onClick={this._delete}
-        >Delete</button>
+        >Delete
+        </button>
 
       </form>
     );
