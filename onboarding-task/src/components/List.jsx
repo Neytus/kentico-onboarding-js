@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { OrderedMap, Map } from 'immutable';
+import { OrderedMap } from 'immutable';
 import { Adder } from './Adder';
 import { Item } from './Item';
 import { Node } from './Node';
@@ -30,8 +30,6 @@ class List extends PureComponent {
       nodes: [...state.nodes, newNode],
       nodesMap: newNodesMap,
     }));
-
-    console.log(this.state.nodesMap.toJS());
   };
 
   _deleteNode = id => {
@@ -43,6 +41,14 @@ class List extends PureComponent {
   };
 
   _onUpdateText = (id, text) => {
+    const chosenNode = this.state.nodesMap.get(id);
+    const updatedNode = new Item({
+      id: chosenNode.id,
+      isBeingEdited: false,
+      text,
+    });
+    const newNodesMap = this.state.nodesMap.set(chosenNode.id, updatedNode);
+
     this.setState(state => {
       const updateIndex = state.nodes.findIndex(node => node.id === id);
       const updatedList = [...state.nodes];
@@ -52,11 +58,22 @@ class List extends PureComponent {
         isBeingEdited: false,
       };
 
-      return { nodes: updatedList };
+      return {
+        nodes: updatedList,
+        nodesMap: newNodesMap,
+      };
     });
   };
 
   _toggleItemEditable = id => {
+    const chosenNode = this.state.nodesMap.get(id);
+    const updatedNode = new Item({
+      id: chosenNode.id,
+      isBeingEdited: !chosenNode.isBeingEdited,
+      text: chosenNode.text,
+    });
+    const newNodesMap = this.state.nodesMap.set(chosenNode.id, updatedNode);
+
     this.setState(state => {
       const updateIndex = state.nodes.findIndex(node => node.id === id);
       const updatedList = [...state.nodes];
@@ -65,11 +82,16 @@ class List extends PureComponent {
         isBeingEdited: !state.nodes[updateIndex].isBeingEdited,
       };
 
-      return { nodes: updatedList };
+      return {
+        nodes: updatedList,
+        nodesMap: newNodesMap,
+      };
     });
   };
 
   render() {
+    const nodesSequence = this.state.nodesMap.toIndexedSeq();
+
     return (
       <div className="row">
         <div className="col-sm-12 col-md-offset-2 col-md-8 ">
