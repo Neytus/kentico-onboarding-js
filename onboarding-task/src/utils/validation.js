@@ -1,6 +1,1 @@
-function isEmptyOrWhitespace(text) {
-  return !(text.replace(/\s/g, '').length);
-//  (!text) ||
-}
-
-export { isEmptyOrWhitespace };
+export const isNullOrWhitespace = text => !text || !text.trim().length;
