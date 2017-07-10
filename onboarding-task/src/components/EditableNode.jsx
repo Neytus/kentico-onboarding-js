@@ -20,11 +20,20 @@ class EditableNode extends PureComponent {
     };
   }
 
-  _save = () => this.props.onSave(this.state.text);
+  _save = e => {
+    e.preventDefault();
+    this.props.onSave(this.state.text);
+  };
 
-  _cancel = () => this.props.onCancel();
+  _cancel = e => {
+    e.preventDefault();
+    this.props.onCancel();
+  };
 
-  _delete = () => this.props.onDelete();
+  _delete = e => {
+    e.preventDefault();
+    this.props.onDelete();
+  };
 
   _onUpdateText = e => {
     const text = e.target.value;
