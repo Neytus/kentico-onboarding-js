@@ -20,14 +20,14 @@ class List extends PureComponent {
     const newImtNode = new Item({ id: generatedId, text });
     const newNodesMap = this.state.nodesMap.set(newImtNode.id, newImtNode);
 
-    this.setState(state => ({
+    this.setState(() => ({
       nodesMap: newNodesMap,
     }));
   };
 
   _deleteNode = id => {
     const newNodesMap = this.state.nodesMap.delete(id);
-    this.setState(state => ({
+    this.setState(() => ({
       nodesMap: newNodesMap,
     }));
   };
@@ -41,7 +41,7 @@ class List extends PureComponent {
     });
     const newNodesMap = this.state.nodesMap.set(chosenNode.id, updatedNode);
 
-    this.setState(state => ({
+    this.setState(() => ({
       nodesMap: newNodesMap,
     }));
   };
@@ -55,7 +55,7 @@ class List extends PureComponent {
     });
     const newNodesMap = this.state.nodesMap.set(chosenNode.id, updatedNode);
 
-    this.setState(state => ({
+    this.setState(() => ({
       nodesMap: newNodesMap,
     }));
   };
