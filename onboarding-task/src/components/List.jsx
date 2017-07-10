@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { OrderedMap } from 'immutable';
 import { Adder } from './Adder';
-import { Item } from '../models/Item';
+import { Item } from '../models/Node';
 import { Node } from './Node';
 import { generateId } from '../utils/generateId';
 
