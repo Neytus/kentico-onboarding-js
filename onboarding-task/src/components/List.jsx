@@ -90,13 +90,13 @@ class List extends PureComponent {
   };
 
   render() {
-    const nodesSequence = this.state.nodesMap.toIndexedSeq();
+    const nodesSequence = this.state.nodesMap.valueSeq();
 
     return (
       <div className="row">
         <div className="col-sm-12 col-md-offset-2 col-md-8 ">
           <ul className="list-group">
-            {this.state.nodes.map((node, index) =>
+            {nodesSequence.map((node, index) =>
               <li className="list-group-item" key={node.id}>
                 <Node
                   id={node.id}
@@ -116,6 +116,7 @@ class List extends PureComponent {
       </div>
     );
   }
+
 }
 
 export { List };
