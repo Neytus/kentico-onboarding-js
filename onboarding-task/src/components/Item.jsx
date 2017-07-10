@@ -6,5 +6,5 @@ const defaultItem = {
   text: '',
 };
 
-export const Item = Record(defaultItem);
+export const Item = Record(defaultItem, 'Item');
 

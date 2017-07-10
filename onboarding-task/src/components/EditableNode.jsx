@@ -20,20 +20,15 @@ class EditableNode extends PureComponent {
     };
   }
 
-  _save = e => {
-    e.preventDefault();
-    this.props.onSave(this.state.text);
-  };
+  componentDidMount() {
+    this.refs.inputField.focus();
+  }
 
-  _cancel = e => {
-    e.preventDefault();
-    this.props.onCancel();
-  };
+  _save = () => this.props.onSave(this.state.text);
 
-  _delete = e => {
-    e.preventDefault();
-    this.props.onDelete();
-  };
+  _cancel = () => this.props.onCancel();
+
+  _delete = () => this.props.onDelete();
 
   _onUpdateText = e => {
     const text = e.target.value;
@@ -42,14 +37,16 @@ class EditableNode extends PureComponent {
 
   render() {
     return (
-      <form className="form-inline">
+      <form className="form-inline" onSubmit={this._save}>
         {this.props.index}.
         <input
           className="form-control"
+          ref="inputField"
           value={this.state.text}
           onChange={this._onUpdateText}
         />
         <button
+          type="button"
           className="btn btn-primary"
           disabled={isNullOrWhitespace(this.state.text)}
           onClick={this._save}
@@ -59,6 +56,7 @@ class EditableNode extends PureComponent {
         </button>
 
         <button
+          type="button"
           className="btn btn-default"
           onClick={this._cancel}
         >
@@ -66,6 +64,7 @@ class EditableNode extends PureComponent {
         </button>
 
         <button
+          type="button"
           className="btn btn-danger"
           onClick={this._delete}
         >

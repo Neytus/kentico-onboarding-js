@@ -11,58 +11,61 @@ class List extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      nodesMap: OrderedMap(),
+      nodes: OrderedMap(),
     };
   }
 
   _addNode = text => {
-    const newImtNode = new Item({ id: generateId(), text });
-    const newNodesMap = this.state.nodesMap.set(newImtNode.id, newImtNode);
+    const newNode = new Item({ id: generateId(), text });
+    const newNodes = this.state.nodes.set(newNode.id, newNode);
 
     this.setState(() => ({
-      nodesMap: newNodesMap,
+      nodes: newNodes,
     }));
   };
 
   _deleteNode = id => {
-    const newNodesMap = this.state.nodesMap.delete(id);
+    const newNodes = this.state.nodes.delete(id);
+
     this.setState(() => ({
-      nodesMap: newNodesMap,
+      nodes: newNodes,
     }));
   };
 
   _onToggleOrUpdate = (id, text) => {
-    const chosenNode = this.state.nodesMap.get(id);
+    const chosenNode = this.state.nodes.get(id);
     const updatedNode = new Item({
       id: chosenNode.id,
       isBeingEdited: !chosenNode.isBeingEdited,
       text,
     });
-    const newNodesMap = this.state.nodesMap.set(chosenNode.id, updatedNode);
+    const newNodesMap = this.state.nodes.set(chosenNode.id, updatedNode);
 
     this.setState(() => ({
-      nodesMap: newNodesMap,
+      nodes: newNodesMap,
     }));
   };
 
   render() {
-    const nodesSequence = this.state.nodesMap.valueSeq();
+    const nodes = this.state.nodes
+      .valueSeq()
+      .map((node, index) =>
+        <li className="list-group-item" key={node.id}>
+          <Node
+            id={node.id}
+            index={index + 1}
+            text={node.text}
+            isBeingEdited={node.isBeingEdited}
+            onSave={this._onToggleOrUpdate}
+            onDelete={this._deleteNode}
+          />
+        </li>);
 
     return (
       <div className="row">
         <div className="col-sm-12 col-md-offset-2 col-md-8 ">
           <ul className="list-group">
-            {nodesSequence.map((node, index) =>
-              <li className="list-group-item" key={node.id}>
-                <Node
-                  id={node.id}
-                  index={index + 1}
-                  text={node.text}
-                  isBeingEdited={node.isBeingEdited}
-                  onSave={this._onToggleOrUpdate}
-                  onDelete={this._deleteNode}
-                />
-              </li>)}
+            {nodes}
             <li className="list-group-item">
               <Adder onAdd={this._addNode} />
             </li>

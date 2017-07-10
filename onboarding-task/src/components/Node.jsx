@@ -15,18 +15,14 @@ class Node extends PureComponent {
     isBeingEdited: PropTypes.bool.isRequired,
   };
 
-  _onSave = text => {
-    this.props.onSave(this.props.id, text);
-  };
+  _onSave = text => this.props.onSave(this.props.id, text);
 
-  _toggleNodeEditable = () => {
-    this.props.onSave(this.props.id, this.props.text);
-  };
+  _toggleNodeEditable = () => this.props.onSave(this.props.id, this.props.text);
 
   _onDelete = () => this.props.onDelete(this.props.id);
 
   render() {
-    return this.props.isBeingEdited === true ? (
+    return this.props.isBeingEdited ? (
       <EditableNode
         text={this.props.text}
         index={this.props.index}
