@@ -11,23 +11,16 @@ class List extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      nodes: [],
       nodesMap: OrderedMap(),
     };
   }
 
   _addNode = text => {
     const generatedId = generateId();
-    const newNode = {
-      id: generatedId,
-      isBeingEdited: false,
-      text,
-    };
     const newImtNode = new Item({ id: generatedId, text });
     const newNodesMap = this.state.nodesMap.set(newImtNode.id, newImtNode);
 
     this.setState(state => ({
-      nodes: [...state.nodes, newNode],
       nodesMap: newNodesMap,
     }));
   };
@@ -35,7 +28,6 @@ class List extends PureComponent {
   _deleteNode = id => {
     const newNodesMap = this.state.nodesMap.delete(id);
     this.setState(state => ({
-      nodes: state.nodes.filter(node => node.id !== id),
       nodesMap: newNodesMap,
     }));
   };
@@ -49,20 +41,9 @@ class List extends PureComponent {
     });
     const newNodesMap = this.state.nodesMap.set(chosenNode.id, updatedNode);
 
-    this.setState(state => {
-      const updateIndex = state.nodes.findIndex(node => node.id === id);
-      const updatedList = [...state.nodes];
-      updatedList[updateIndex] = {
-        ...updatedList[updateIndex],
-        text,
-        isBeingEdited: false,
-      };
-
-      return {
-        nodes: updatedList,
-        nodesMap: newNodesMap,
-      };
-    });
+    this.setState(state => ({
+      nodesMap: newNodesMap,
+    }));
   };
 
   _toggleItemEditable = id => {
@@ -74,19 +55,9 @@ class List extends PureComponent {
     });
     const newNodesMap = this.state.nodesMap.set(chosenNode.id, updatedNode);
 
-    this.setState(state => {
-      const updateIndex = state.nodes.findIndex(node => node.id === id);
-      const updatedList = [...state.nodes];
-      updatedList[updateIndex] = {
-        ...updatedList[updateIndex],
-        isBeingEdited: !state.nodes[updateIndex].isBeingEdited,
-      };
-
-      return {
-        nodes: updatedList,
-        nodesMap: newNodesMap,
-      };
-    });
+    this.setState(state => ({
+      nodesMap: newNodesMap,
+    }));
   };
 
   render() {
