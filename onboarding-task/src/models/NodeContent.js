@@ -1,10 +1,10 @@
 import { Record } from 'immutable';
 
-const defaultNode = {
+const defaultNodeContent = {
   id: '00000000000000000000000000000000',
   isBeingEdited: false,
   text: '',
 };
 
-export const Node = Record(defaultNode, 'Node');
+export const NodeContent = Record(defaultNodeContent, 'NodeContent');
 
