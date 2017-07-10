@@ -41,7 +41,6 @@ class EditableNode extends PureComponent {
           onChange={this._onUpdateText}
         />
         <button
-          type="button"
           className="btn btn-primary"
           disabled={isNullOrWhitespace(this.state.text)}
           onClick={this._save}
@@ -51,7 +50,6 @@ class EditableNode extends PureComponent {
         </button>
 
         <button
-          type="button"
           className="btn btn-default"
           onClick={this._cancel}
         >
@@ -59,7 +57,6 @@ class EditableNode extends PureComponent {
         </button>
 
         <button
-          type="button"
           className="btn btn-danger"
           onClick={this._delete}
         >
