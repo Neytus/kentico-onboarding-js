@@ -36,22 +36,8 @@ class List extends PureComponent {
     const chosenNode = this.state.nodesMap.get(id);
     const updatedNode = new Item({
       id: chosenNode.id,
-      isBeingEdited: false,
-      text,
-    });
-    const newNodesMap = this.state.nodesMap.set(chosenNode.id, updatedNode);
-
-    this.setState(() => ({
-      nodesMap: newNodesMap,
-    }));
-  };
-
-  _toggleItemEditable = id => {
-    const chosenNode = this.state.nodesMap.get(id);
-    const updatedNode = new Item({
-      id: chosenNode.id,
       isBeingEdited: !chosenNode.isBeingEdited,
-      text: chosenNode.text,
+      text,
     });
     const newNodesMap = this.state.nodesMap.set(chosenNode.id, updatedNode);
 
@@ -76,7 +62,7 @@ class List extends PureComponent {
                   isBeingEdited={node.isBeingEdited}
                   onSave={this._onUpdateText}
                   onDelete={this._deleteNode}
-                  onEdit={this._toggleItemEditable}
+                  onEdit={this._onUpdateText}
                 />
               </li>)}
             <li className="list-group-item">

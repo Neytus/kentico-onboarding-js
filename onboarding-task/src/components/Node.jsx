@@ -21,7 +21,7 @@ class Node extends PureComponent {
   };
 
   _toggleNodeEditable = () => {
-    this.props.onEdit(this.props.id);
+    this.props.onEdit(this.props.id, this.props.text);
   };
 
   _onDelete = () => this.props.onDelete(this.props.id);
