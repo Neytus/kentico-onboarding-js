@@ -17,7 +17,7 @@ class Node extends PureComponent {
 
   _onSave = text => this.props.onSave(this.props.id, text);
 
-  _toggleNodeEditable = () => this.props.onSave(this.props.id, this.props.text);
+  _toggleNodeEditable = () => this.props.onToggle(this.props.id);
 
   _onDelete = () => this.props.onDelete(this.props.id);
 

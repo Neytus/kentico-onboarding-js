@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { OrderedMap } from 'immutable';
 import { Adder } from './Adder';
 import { NodeContent } from '../models/NodeContent';
+import { NodeInfo } from '../models/NodeInfo';
 import { Node } from './Node';
 import { generateId } from '../utils/generateId';
 
@@ -12,6 +13,7 @@ class List extends PureComponent {
     super(props);
     this.state = {
       nodes: OrderedMap(),
+      nodeInfos: OrderedMap(),
     };
   }
 
@@ -19,20 +21,38 @@ class List extends PureComponent {
     const newNode = new NodeContent({ id: generateId(), text });
     const newNodes = this.state.nodes.set(newNode.id, newNode);
 
+    const newNodeInfos = this.state.nodeInfos.set(newNode.id, new NodeInfo({ id: newNode.id }));
+
     this.setState(() => ({
       nodes: newNodes,
+      nodeInfos: newNodeInfos,
     }));
   };
 
   _deleteNode = id => {
     const newNodes = this.state.nodes.delete(id);
+    const newNodeInfos = this.state.nodeInfos.delete(id);
 
     this.setState(() => ({
       nodes: newNodes,
+      nodeInfos: newNodeInfos,
     }));
   };
 
-  _onToggleOrUpdate = (id, text) => {
+  _onToggle = id => {
+    const newNodeInfos = this.state.nodeInfos.update(
+      id,
+      node => new NodeInfo({ id, isBeingEdited: !node.isBeingEdited })
+    );
+
+    this.setState(() => ({
+      nodeInfos: newNodeInfos,
+    }));
+  };
+
+  _onSave = (id, text) => {
+    this._onToggle(id);
+
     const chosenNode = this.state.nodes.get(id);
     const updatedNode = new NodeContent({
       id: chosenNode.id,
@@ -56,7 +76,8 @@ class List extends PureComponent {
             index={index + 1}
             text={node.text}
             isBeingEdited={node.isBeingEdited}
-            onSave={this._onToggleOrUpdate}
+            onSave={this._onSave}
+            onToggle={this._onToggle}
             onDelete={this._deleteNode}
           />
         </li>);
