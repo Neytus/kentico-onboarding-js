@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { OrderedMap } from 'immutable';
 import { Adder } from './Adder';
-import { Item } from '../models/Node';
+import { Node } from '../models/NodeContent';
 import { Node } from './Node';
 import { generateId } from '../utils/generateId';
 
@@ -16,7 +16,7 @@ class List extends PureComponent {
   }
 
   _addNode = text => {
-    const newNode = new Item({ id: generateId(), text });
+    const newNode = new Node({ id: generateId(), text });
     const newNodes = this.state.nodes.set(newNode.id, newNode);
 
     this.setState(() => ({
@@ -34,7 +34,7 @@ class List extends PureComponent {
 
   _onToggleOrUpdate = (id, text) => {
     const chosenNode = this.state.nodes.get(id);
-    const updatedNode = new Item({
+    const updatedNode = new Node({
       id: chosenNode.id,
       isBeingEdited: !chosenNode.isBeingEdited,
       text,
