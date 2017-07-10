@@ -11,7 +11,6 @@ class Node extends PureComponent {
     id: PropTypes.string.isRequired,
     onSave: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired,
-    onEdit: PropTypes.func.isRequired,
     index: PropTypes.number.isRequired,
     isBeingEdited: PropTypes.bool.isRequired,
   };
@@ -21,7 +20,7 @@ class Node extends PureComponent {
   };
 
   _toggleNodeEditable = () => {
-    this.props.onEdit(this.props.id, this.props.text);
+    this.props.onSave(this.props.id, this.props.text);
   };
 
   _onDelete = () => this.props.onDelete(this.props.id);
