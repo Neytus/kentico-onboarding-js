@@ -22,11 +22,12 @@ class EditableNode extends PureComponent {
     };
   }
 
-  componentDidMount() {
-    this.refs.inputField.focus();
-  }
-
-  _save = () => this.props.onSave(this.state.text);
+  _save = e => {
+    e.preventDefault();
+    if (!isNullOrWhitespace(this.state.text)) {
+      this.props.onSave(this.state.text);
+    }
+  };
 
   _cancel = () => this.props.onCancel();
 
@@ -42,8 +43,8 @@ class EditableNode extends PureComponent {
       <form className="form-inline" onSubmit={this._save}>
         {this.props.nodeModel.index}.
         <input
+          autoFocus
           className="form-control"
-          ref="inputField"
           value={this.state.text}
           onChange={this._onUpdateText}
         />
@@ -52,7 +53,6 @@ class EditableNode extends PureComponent {
           className="btn btn-primary"
           disabled={isNullOrWhitespace(this.state.text)}
           onClick={this._save}
-          onSubmit={this._save}
         >
           Save
         </button>
