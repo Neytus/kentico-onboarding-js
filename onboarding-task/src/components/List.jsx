@@ -81,10 +81,7 @@ class List extends PureComponent {
         });
         return (<li className="list-group-item" key={nodeViewModel.id}>
           <Node
-            id={nodeViewModel.id}
-            index={nodeViewModel.index}
-            text={nodeViewModel.text}
-            isBeingEdited={nodeViewModel.isBeingEdited}
+            nodeModel={nodeViewModel}
             onSave={this._onSave}
             onToggle={this._onToggle}
             onDelete={this._deleteNode}

@@ -6,17 +6,19 @@ class EditableNode extends PureComponent {
   static displayName = 'EditableNode';
 
   static propTypes = {
-    text: PropTypes.string.isRequired,
     onSave: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired,
-    index: PropTypes.number.isRequired,
+    nodeModel: PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      index: PropTypes.number.isRequired,
+    }).isRequired,
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      text: props.text,
+      text: this.props.nodeModel.text,
     };
   }
 
@@ -38,7 +40,7 @@ class EditableNode extends PureComponent {
   render() {
     return (
       <form className="form-inline" onSubmit={this._save}>
-        {this.props.index}.
+        {this.props.nodeModel.index}.
         <input
           className="form-control"
           ref="inputField"

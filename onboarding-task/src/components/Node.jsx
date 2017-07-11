@@ -7,33 +7,31 @@ class Node extends PureComponent {
   static displayName = 'Node';
 
   static propTypes = {
-    text: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
     onSave: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired,
-    index: PropTypes.number.isRequired,
-    isBeingEdited: PropTypes.bool.isRequired,
+    nodeModel: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      isBeingEdited: PropTypes.bool.isRequired,
+    }).isRequired,
   };
 
-  _onSave = text => this.props.onSave(this.props.id, text);
+  _onSave = text => this.props.onSave(this.props.nodeModel.id, text);
 
-  _toggleNodeEditable = () => this.props.onToggle(this.props.id);
+  _toggleNodeEditable = () => this.props.onToggle(this.props.nodeModel.id);
 
-  _onDelete = () => this.props.onDelete(this.props.id);
+  _onDelete = () => this.props.onDelete(this.props.nodeModel.id);
 
   render() {
-    return this.props.isBeingEdited ? (
+    return this.props.nodeModel.isBeingEdited ? (
       <EditableNode
-        text={this.props.text}
-        index={this.props.index}
+        nodeModel={this.props.nodeModel}
         onSave={this._onSave}
         onCancel={this._toggleNodeEditable}
         onDelete={this._onDelete}
       />
     ) : (
       <ViewNode
-        text={this.props.text}
-        index={this.props.index}
+        nodeModel={this.props.nodeModel}
         onEdit={this._toggleNodeEditable}
       />
     );
