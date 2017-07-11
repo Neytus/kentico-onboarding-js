@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { OrderedMap } from 'immutable';
-import { AddNode } from './Adder';
+import { AddNode } from './AddNode';
 import { NodeContent } from '../models/NodeContent';
 import { NodeInfo } from '../models/NodeInfo';
 import { NodeViewModel } from '../models/NodeViewModel';
