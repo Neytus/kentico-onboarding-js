@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { isNullOrWhitespace } from '../utils/validation';
 
-class Adder extends PureComponent {
-  static displayName = 'Adder';
+class AddNode extends PureComponent {
+  static displayName = 'AddNode';
 
   static propTypes = {
     onAdd: PropTypes.func.isRequired,
@@ -46,4 +46,4 @@ class Adder extends PureComponent {
   }
 }
 
-export { Adder };
+export { AddNode };

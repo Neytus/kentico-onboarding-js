@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { OrderedMap } from 'immutable';
-import { Adder } from './Adder';
+import { AddNode } from './Adder';
 import { NodeContent } from '../models/NodeContent';
 import { NodeInfo } from '../models/NodeInfo';
 import { NodeViewModel } from '../models/NodeViewModel';
@@ -91,22 +91,6 @@ class List extends PureComponent {
           />
         </li>);
       });
-    //
-    // const nodes = this.state.nodes
-    //   .valueSeq()
-    //   .map((node, index) => {
-    //     return (<li className="list-group-item" key={node.id}>
-    //       <Node
-    //         id={node.id}
-    //         index={index + 1}
-    //         text={node.text}
-    //         isBeingEdited={node.isBeingEdited}
-    //         onSave={this._onSave}
-    //         onToggle={this._onToggle}
-    //         onDelete={this._deleteNode}
-    //       />
-    //     </li>); }
-    // );
 
     return (
       <div className="row">
@@ -114,7 +98,7 @@ class List extends PureComponent {
           <ul className="list-group">
             {nodes}
             <li className="list-group-item">
-              <Adder onAdd={this._addNode} />
+              <AddNode onAdd={this._addNode} />
             </li>
           </ul>
         </div>
