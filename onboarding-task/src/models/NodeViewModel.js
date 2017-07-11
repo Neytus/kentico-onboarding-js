@@ -7,4 +7,15 @@ const defaultNodeViewModel = {
   index: 0,
 };
 
-export const NodeViewModel = Record(defaultNodeViewModel, 'NodeViewModel');
+const NodeViewModel = Record(defaultNodeViewModel, 'NodeViewModel');
+
+const _createNodeViewModel = (nodeContent, nodeInfo, index) => {
+  return NodeViewModel({
+    id: nodeContent.id,
+    isBeingEdited: nodeInfo.isBeingEdited,
+    text: nodeContent.text,
+    index: index + 1,
+  });
+};
+
+export { _createNodeViewModel };

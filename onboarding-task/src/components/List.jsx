@@ -3,9 +3,12 @@ import { OrderedMap } from 'immutable';
 import { AddNode } from './AddNode';
 import { NodeContent } from '../models/NodeContent';
 import { NodeInfo } from '../models/NodeInfo';
-import { NodeViewModel } from '../models/NodeViewModel';
+import { _createNodeViewModel } from '../models/NodeViewModel';
 import { Node } from './Node';
 import { generateId } from '../utils/generateId';
+
+const memoize = require('memoizee');
+const memoizedModeller = memoize(_createNodeViewModel);
 
 class List extends PureComponent {
   static displayName = 'List';
@@ -57,7 +60,6 @@ class List extends PureComponent {
     const chosenNode = this.state.nodes.get(id);
     const updatedNode = new NodeContent({
       id: chosenNode.id,
-      isBeingEdited: !chosenNode.isBeingEdited,
       text,
     });
     const newNodesMap = this.state.nodes.set(chosenNode.id, updatedNode);
@@ -67,27 +69,22 @@ class List extends PureComponent {
     }));
   };
 
+  _createViewModelMap = (createModel) => {
+    return this.state.nodes.keySeq().map((key, index) => {
+      const nodeViewModel = createModel(this.state.nodes.get(key), this.state.nodeInfos.get(key), index);
+      return (<li className="list-group-item" key={nodeViewModel.id}>
+        <Node
+          nodeModel={nodeViewModel}
+          onSave={this._onSave}
+          onToggle={this._onToggle}
+          onDelete={this._deleteNode}
+        />
+      </li>);
+    });
+  };
+
   render() {
-    const nodes = this.state.nodes
-      .keySeq()
-      .map((key, index) => {
-        const nodeContent = this.state.nodes.get(key);
-        const nodeInfo = this.state.nodeInfos.get(key);
-        const nodeViewModel = new NodeViewModel({
-          id: key,
-          isBeingEdited: nodeInfo.isBeingEdited,
-          text: nodeContent.text,
-          index: index + 1,
-        });
-        return (<li className="list-group-item" key={nodeViewModel.id}>
-          <Node
-            nodeModel={nodeViewModel}
-            onSave={this._onSave}
-            onToggle={this._onToggle}
-            onDelete={this._deleteNode}
-          />
-        </li>);
-      });
+    const nodes = this._createViewModelMap(memoizedModeller);
 
     return (
       <div className="row">
@@ -102,7 +99,6 @@ class List extends PureComponent {
       </div>
     );
   }
-
 }
 
 export { List };
