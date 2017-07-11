@@ -1,14 +1,14 @@
 import React, { PureComponent } from 'react';
 import { OrderedMap } from 'immutable';
 import { AddNode } from './AddNode';
+import { Node } from './Node';
 import { NodeContent } from '../models/NodeContent';
 import { NodeInfo } from '../models/NodeInfo';
 import { _createNodeViewModel } from '../models/NodeViewModel';
-import { Node } from './Node';
 import { generateId } from '../utils/generateId';
 
 const memoize = require('memoizee');
-const memoizedModeller = memoize(_createNodeViewModel);
+const createViewModel = memoize(_createNodeViewModel);
 
 class List extends PureComponent {
   static displayName = 'List';
@@ -24,7 +24,6 @@ class List extends PureComponent {
   _addNode = text => {
     const newNode = new NodeContent({ id: generateId(), text });
     const newNodes = this.state.nodes.set(newNode.id, newNode);
-
     const newNodeInfos = this.state.nodeInfos.set(newNode.id, new NodeInfo());
 
     this.setState(() => ({
@@ -44,9 +43,9 @@ class List extends PureComponent {
   };
 
   _onToggle = id => {
-    const newNodeInfos = this.state.nodeInfos.update(
-      id,
-      node => new NodeInfo({ isBeingEdited: !node.isBeingEdited })
+    const newNodeInfos = this.state.nodeInfos.updateIn(
+      [id, 'isBeingEdited'],
+      isBeingEdited => !isBeingEdited
     );
 
     this.setState(() => ({
@@ -56,20 +55,14 @@ class List extends PureComponent {
 
   _onSave = (id, text) => {
     this._onToggle(id);
-
-    const chosenNode = this.state.nodes.get(id);
-    const updatedNode = new NodeContent({
-      id: chosenNode.id,
-      text,
-    });
-    const newNodesMap = this.state.nodes.set(chosenNode.id, updatedNode);
+    const newNodes = this.state.nodes.setIn([id, 'text'], text);
 
     this.setState(() => ({
-      nodes: newNodesMap,
+      nodes: newNodes,
     }));
   };
 
-  _createViewModelMap = (createModel) => {
+  _createViewModelMap = createModel => {
     return this.state.nodes.keySeq().map((key, index) => {
       const nodeViewModel = createModel(this.state.nodes.get(key), this.state.nodeInfos.get(key), index);
       return (<li className="list-group-item" key={nodeViewModel.id}>
@@ -84,7 +77,7 @@ class List extends PureComponent {
   };
 
   render() {
-    const nodes = this._createViewModelMap(memoizedModeller);
+    const nodes = this._createViewModelMap(createViewModel);
 
     return (
       <div className="row">

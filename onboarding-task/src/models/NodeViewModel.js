@@ -1,13 +1,11 @@
 import { Record } from 'immutable';
 
-const defaultNodeViewModel = {
+const NodeViewModel = Record({
   id: '00000000000000000000000000000000',
   isBeingEdited: false,
   text: '',
   index: 0,
-};
-
-const NodeViewModel = Record(defaultNodeViewModel, 'NodeViewModel');
+}, 'NodeViewModel');
 
 const _createNodeViewModel = (nodeContent, nodeInfo, index) => {
   return NodeViewModel({
