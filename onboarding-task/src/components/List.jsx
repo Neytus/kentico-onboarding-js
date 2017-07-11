@@ -3,6 +3,7 @@ import { OrderedMap } from 'immutable';
 import { Adder } from './Adder';
 import { NodeContent } from '../models/NodeContent';
 import { NodeInfo } from '../models/NodeInfo';
+import { NodeViewModel } from '../models/NodeViewModel';
 import { Node } from './Node';
 import { generateId } from '../utils/generateId';
 
@@ -21,7 +22,7 @@ class List extends PureComponent {
     const newNode = new NodeContent({ id: generateId(), text });
     const newNodes = this.state.nodes.set(newNode.id, newNode);
 
-    const newNodeInfos = this.state.nodeInfos.set(newNode.id, new NodeInfo({ id: newNode.id }));
+    const newNodeInfos = this.state.nodeInfos.set(newNode.id, new NodeInfo());
 
     this.setState(() => ({
       nodes: newNodes,
@@ -42,7 +43,7 @@ class List extends PureComponent {
   _onToggle = id => {
     const newNodeInfos = this.state.nodeInfos.update(
       id,
-      node => new NodeInfo({ id, isBeingEdited: !node.isBeingEdited })
+      node => new NodeInfo({ isBeingEdited: !node.isBeingEdited })
     );
 
     this.setState(() => ({
@@ -68,19 +69,44 @@ class List extends PureComponent {
 
   render() {
     const nodes = this.state.nodes
-      .valueSeq()
-      .map((node, index) =>
-        <li className="list-group-item" key={node.id}>
+      .keySeq()
+      .map((key, index) => {
+        const nodeContent = this.state.nodes.get(key);
+        const nodeInfo = this.state.nodeInfos.get(key);
+        const nodeViewModel = new NodeViewModel({
+          id: key,
+          isBeingEdited: nodeInfo.isBeingEdited,
+          text: nodeContent.text,
+          index: index + 1,
+        });
+        return (<li className="list-group-item" key={nodeViewModel.id}>
           <Node
-            id={node.id}
-            index={index + 1}
-            text={node.text}
-            isBeingEdited={node.isBeingEdited}
+            id={nodeViewModel.id}
+            index={nodeViewModel.index}
+            text={nodeViewModel.text}
+            isBeingEdited={nodeViewModel.isBeingEdited}
             onSave={this._onSave}
             onToggle={this._onToggle}
             onDelete={this._deleteNode}
           />
         </li>);
+      });
+    //
+    // const nodes = this.state.nodes
+    //   .valueSeq()
+    //   .map((node, index) => {
+    //     return (<li className="list-group-item" key={node.id}>
+    //       <Node
+    //         id={node.id}
+    //         index={index + 1}
+    //         text={node.text}
+    //         isBeingEdited={node.isBeingEdited}
+    //         onSave={this._onSave}
+    //         onToggle={this._onToggle}
+    //         onDelete={this._deleteNode}
+    //       />
+    //     </li>); }
+    // );
 
     return (
       <div className="row">
