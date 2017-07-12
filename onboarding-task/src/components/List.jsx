@@ -7,13 +7,13 @@ import { AddNode } from './AddNode';
 import { createNodeViewModel } from '../models/NodeViewModel';
 import { generateId } from '../utils/generateId';
 import { Node } from './Node';
-import { nodesList } from '../actions/reducers';
+import { rootReducer } from '../actions/reducers';
 import { NodeContent } from '../models/NodeContent';
 import { NodeInfo } from '../models/NodeInfo';
 
 const createMemoizedViewModel = memoize(createNodeViewModel);
 
-const store = createStore(nodesList);
+const store = createStore(rootReducer);
 
 class List extends PureComponent {
   static displayName = 'List';

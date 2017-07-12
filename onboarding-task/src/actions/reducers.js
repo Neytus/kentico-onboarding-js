@@ -9,12 +9,7 @@ import { OrderedMap } from 'immutable';
 import { NodeContent } from '../models/NodeContent';
 import { NodeInfo } from '../models/NodeInfo';
 
-const initialState = {
-  nodes: OrderedMap(),
-  nodesInfos: OrderedMap(),
-};
-
-const nodes = (state = initialState, action) => {
+const nodesReducer = (state = OrderedMap(), action) => {
   switch (action.type) {
     case ADD_NODE: {
       const newNode = new NodeContent({
@@ -33,7 +28,7 @@ const nodes = (state = initialState, action) => {
   }
 };
 
-const nodesInfos = (state = initialState, action) => {
+const nodesInfosReducer = (state = OrderedMap(), action) => {
   switch (action.type) {
     case ADD_NODE:
       return state.set(action.id, new NodeInfo());
@@ -54,9 +49,13 @@ const nodesInfos = (state = initialState, action) => {
   }
 };
 
-const nodesList = combineReducers({
-  nodes,
-  nodesInfos,
+const nodesListReducer = combineReducers({
+  nodes: nodesReducer,
+  nodesInfos: nodesInfosReducer,
 });
 
-export { nodesList };
+const rootReducer = combineReducers({
+  nodesList: nodesListReducer,
+});
+
+export { rootReducer };
