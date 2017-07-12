@@ -67,16 +67,18 @@ class List extends PureComponent {
   };
 
   _createNodes = () =>
-    this.state.nodes.keySeq().map((id, index) => (
-      <li className="list-group-item" key={id}>
-        <Node
-          nodeModel={createMemoizedViewModel(this.state.nodes.get(id), this.state.nodesInfos.get(id), index)}
-          onSave={this._onSave}
-          onToggle={this._onToggle}
-          onDelete={this._deleteNode}
-        />
-      </li>)
-    );
+    this.state.nodes
+      .keySeq()
+      .map((id, index) => (
+        <li className="list-group-item" key={id}>
+          <Node
+            nodeModel={createMemoizedViewModel(this.state.nodes.get(id), this.state.nodesInfos.get(id), index)}
+            onSave={this._onSave}
+            onToggle={this._onToggle}
+            onDelete={this._deleteNode}
+          />
+        </li>)
+      );
 
   render() {
     const nodes = this._createNodes();
