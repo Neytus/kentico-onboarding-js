@@ -4,6 +4,7 @@ import {
   SAVE_NODE,
   DELETE_NODE,
 } from './actionTypes';
+import { combineReducers } from 'redux';
 import { OrderedMap } from 'immutable';
 import { NodeContent } from '../models/NodeContent';
 import { NodeInfo } from '../models/NodeInfo';
@@ -23,6 +24,10 @@ const nodes = (state = initialState, action) => {
 
       return state.set(newNode.id, newNode);
     }
+    case DELETE_NODE:
+      return state.delete(action.id);
+    case SAVE_NODE:
+      return state.setIn([action.id, 'text'], action.text);
     default:
       return state;
   }
@@ -32,7 +37,26 @@ const nodesInfos = (state = initialState, action) => {
   switch (action.type) {
     case ADD_NODE:
       return state.set(action.id, new NodeInfo());
+    case DELETE_NODE:
+      return state.delete(action.id);
+    case TOGGLE_NODE:
+      return state.updateIn(
+        [action.id, 'isBeingEdited'],
+        isBeingEdited => !isBeingEdited
+      );
+    case SAVE_NODE:
+      return state.updateIn(
+        [action.id, 'isBeingEdited'],
+        false,
+      );
     default:
       return state;
   }
 };
+
+const nodesList = combineReducers({
+  nodes,
+  nodesInfos,
+});
+
+export { nodesList };
