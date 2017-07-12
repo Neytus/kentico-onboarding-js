@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { createStore } from 'redux';
 import { OrderedMap } from 'immutable';
 const memoize = require('memoizee');
 
@@ -10,6 +11,8 @@ import { NodeContent } from '../models/NodeContent';
 import { NodeInfo } from '../models/NodeInfo';
 
 const createMemoizedViewModel = memoize(createNodeViewModel);
+
+// let store = createStore( combineReducers );
 
 class List extends PureComponent {
   static displayName = 'List';
