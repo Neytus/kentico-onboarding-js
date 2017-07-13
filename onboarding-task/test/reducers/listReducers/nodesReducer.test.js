@@ -26,6 +26,10 @@ describe('nodesInfosReducer', () => {
     expect(nodesReducer(nonEmptyState, actions.deleteNode(id))).toEqual(initialState);
   });
 
+  it('handles deleting a nonexistent node', () => {
+    expect(nodesReducer(initialState, actions.deleteNode(id))).toEqual(initialState);
+  });
+
   it('handles saving a new node text', () => {
     const newText = 'changed text';
     const updatedNode = new NodeContent({

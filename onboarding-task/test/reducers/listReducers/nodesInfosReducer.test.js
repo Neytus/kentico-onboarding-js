@@ -26,8 +26,16 @@ describe('nodesInfosReducer', () => {
     expect(nodesInfosReducer(nonEmptyState, actions.deleteNode(id))).toEqual(initialState);
   });
 
-  it('handles toggling a node', () => {
+  it('handles deleting a nonexistent node', () => {
+    expect(nodesInfosReducer(initialState, actions.deleteNode(id))).toEqual(initialState);
+  });
+
+  it('handles toggling a node property to true', () => {
     expect(nodesInfosReducer(nonEmptyState, actions.toggleNode(id))).toEqual(stateWithToggledNode);
+  });
+
+  it('handles toggling a node property to false', () => {
+    expect(nodesInfosReducer(stateWithToggledNode, actions.toggleNode(id))).toEqual(nonEmptyState);
   });
 
   it('handles saving a new node text', () => {
