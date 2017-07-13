@@ -13,7 +13,7 @@ const node = new NodeContent({
 });
 const nonEmptyState = initialState.set(id, node);
 
-describe('nodesReducer', () => {
+describe('nodesInfosReducer', () => {
   it('returns initial state', () => {
     expect(nodesReducer(undefined, {})).toEqual(OrderedMap());
   });

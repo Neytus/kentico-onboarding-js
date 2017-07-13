@@ -21,7 +21,7 @@ export const nodesInfosReducer = (state = OrderedMap(), action) => {
     case SAVE_NODE:
       return state.updateIn(
         [action.payload.id, 'isBeingEdited'],
-        false,
+        isBeingEdited => false,
       );
     default:
       return state;
