@@ -10,16 +10,16 @@ export const nodesReducer = (state = OrderedMap(), action) => {
   switch (action.type) {
     case ADD_NODE: {
       const newNode = new NodeContent({
-        id: action.id,
-        text: action.text,
+        id: action.payload.id,
+        text: action.payload.text,
       });
 
       return state.set(newNode.id, newNode);
     }
     case DELETE_NODE:
-      return state.delete(action.id);
+      return state.delete(action.payload.id);
     case SAVE_NODE:
-      return state.setIn([action.id, 'text'], action.text);
+      return state.setIn([action.payload.id, 'text'], action.payload.text);
     default:
       return state;
   }

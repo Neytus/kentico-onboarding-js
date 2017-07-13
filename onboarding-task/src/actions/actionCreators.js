@@ -4,13 +4,12 @@ import {
   SAVE_NODE,
   DELETE_NODE,
 } from './actionTypes';
-import { generateId } from '../utils/generateId';
 
-export const addNode = text => {
+export const addNode = (id, text) => {
   return {
     type: ADD_NODE,
     payload: {
-      id: generateId(),
+      id,
       text,
     },
   };
