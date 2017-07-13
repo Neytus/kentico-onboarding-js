@@ -7,7 +7,7 @@ import { AddNode } from './AddNode';
 import { createNodeViewModel } from '../models/NodeViewModel';
 import { generateId } from '../utils/generateId';
 import { Node } from './Node';
-import { rootReducer } from '../actions/reducers';
+import { rootReducer } from '../reducers/rootReducer';
 import { NodeContent } from '../models/NodeContent';
 import { NodeInfo } from '../models/NodeInfo';
 
