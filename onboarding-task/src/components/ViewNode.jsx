@@ -9,7 +9,11 @@ const viewNodePropTypes = {
   }).isRequired,
 };
 
-const ViewNode = ({ nodeModel, onEdit }) => <div onClick={onEdit}>{nodeModel.index}. {nodeModel.text}</div>;
+const ViewNode = ({ onEdit, nodeModel }) => {
+  const toggleNode = () => onEdit(nodeModel.id);
+
+  return <div onClick={toggleNode}>{nodeModel.index}. {nodeModel.text}</div>;
+};
 
 ViewNode.displayName = 'ViewNode';
 ViewNode.propTypes = viewNodePropTypes;

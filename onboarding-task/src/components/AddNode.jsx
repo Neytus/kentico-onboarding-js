@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { isNullOrWhitespace } from '../utils/validation';
 
 class AddNode extends PureComponent {
   static displayName = 'AddNode';
 
   static propTypes = {
     onAdd: PropTypes.func.isRequired,
+    disabled: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -16,7 +16,8 @@ class AddNode extends PureComponent {
     };
   }
 
-  _onClickAdd = () => {
+  _onClickAdd = e => {
+    e.preventDefault();
     this.props.onAdd(this.state.text);
     this.setState(() => ({ text: '' }));
   };
@@ -38,7 +39,7 @@ class AddNode extends PureComponent {
           className="btn btn-default"
           onClick={this._onClickAdd}
           onSubmit={this._onClickAdd}
-          disabled={isNullOrWhitespace(this.state.text)}
+          disabled={this.props.disabled(this.state.text)}
         >Add
         </button>
       </form>

@@ -13,11 +13,12 @@ export const nodesInfosReducer = (state = OrderedMap(), action) => {
       return state.set(action.payload.id, new NodeInfo());
     case DELETE_NODE:
       return state.delete(action.payload.id);
-    case TOGGLE_NODE:
+    case TOGGLE_NODE: {
       return state.updateIn(
-        [action.payload.id, 'isBeingEdited'],
-        isBeingEdited => !isBeingEdited
+        [action.payload.id.toString(), 'isBeingEdited'],
+        nodeBeingEdited => !nodeBeingEdited
       );
+    }
     case SAVE_NODE:
       return state.updateIn(
         [action.payload.id, 'isBeingEdited'],
