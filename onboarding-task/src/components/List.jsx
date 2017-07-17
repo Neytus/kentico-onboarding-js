@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { OrderedMap } from 'immutable';
 
 import { AddNode } from './AddNode';
-import { createMemoizedNodeViewModels } from '../models/NodeViewModel';
+import { createMemoizedNodeViewModel } from '../models/NodeViewModel';
 import { generateId } from '../utils/generateId';
 import { Node } from './Node';
 import { NodeContent } from '../models/NodeContent';
@@ -64,24 +64,26 @@ class List extends PureComponent {
     }));
   };
 
+  _createNodeViewModels = () =>
+    this.state.nodes.keySeq().map((id, index) => (
+      <li className="list-group-item" key={index}>
+        <Node
+          nodeModel={createMemoizedNodeViewModel(this.state.nodes.get(id), this.state.nodesInfo.get(id), index)}
+          onSave={this._saveNode}
+          onToggle={this._toggleNode}
+          onDelete={this._deleteNode}
+        />
+      </li>
+    ));
+
   render() {
-    const nodeViewModels = createMemoizedNodeViewModels(this.state.nodes, this.state.nodesInfo);
+    const nodeViewModels = this._createNodeViewModels();
 
     return (
       <div className="row">
         <div className="col-sm-12 col-md-offset-2 col-md-8 ">
           <ul className="list-group">
-            {nodeViewModels.valueSeq().map((viewModel, index) =>
-              (<li className="list-group-item" key={index}>
-                <Node
-                  nodeModel={viewModel}
-                  onSave={this._saveNode}
-                  onToggle={this._toggleNode}
-                  onDelete={this._deleteNode}
-                />
-              </li>)
-            )}
-
+            {nodeViewModels}
             <li className="list-group-item">
               <AddNode onAdd={this._addNode} />
             </li>

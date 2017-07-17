@@ -1,8 +1,6 @@
-import { OrderedMap } from 'immutable';
-
 import { NodeContent } from '../../src/models/NodeContent';
 import { NodeInfo } from '../../src/models/NodeInfo';
-import { createMemoizedNodeViewModels, createNodeViewModels } from '../../src/models/NodeViewModel';
+import { createMemoizedNodeViewModel, createNodeViewModel } from '../../src/models/NodeViewModel';
 import { generateId } from '../../src/utils/generateId';
 
 describe('NodeViewModel', () => {
@@ -11,19 +9,17 @@ describe('NodeViewModel', () => {
     text: 'test text',
   });
   const nodeInfo = new NodeInfo();
-  const nonEmptyNodes = new OrderedMap().set(node.id, node);
-  const nonEmptyNodeInfos = new OrderedMap().set(node.id, nodeInfo);
 
-  describe('createMemoizedNodeViewModels', () => {
+  describe('createMemoizedNodeViewModel', () => {
     it('is really memoized', () => {
-      const memoizedNodeViewModel = createMemoizedNodeViewModels(nonEmptyNodes, nonEmptyNodeInfos);
-      expect(memoizedNodeViewModel).toBe(createMemoizedNodeViewModels(nonEmptyNodes, nonEmptyNodeInfos));
+      const memoizedNodeViewModel = createMemoizedNodeViewModel(node, nodeInfo, 0);
+      expect(memoizedNodeViewModel).toBe(createMemoizedNodeViewModel(node, nodeInfo, 0));
     });
   });
-  describe('createNodeViewModels', () => {
+  describe('createNodeViewModel', () => {
     it('creates a new instance of the model every time when called', () => {
-      const nodeViewModel = createNodeViewModels(nonEmptyNodes, nonEmptyNodeInfos);
-      expect(nodeViewModel).not.toBe(createNodeViewModels(nonEmptyNodes, nonEmptyNodeInfos));
+      const nodeViewModel = createNodeViewModel(node, nodeInfo, 0);
+      expect(nodeViewModel).not.toBe(createNodeViewModel(node, nodeInfo, 0));
     });
   });
 });

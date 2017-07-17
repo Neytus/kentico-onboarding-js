@@ -1,5 +1,5 @@
 import memoize from 'memoizee';
-import { Record, OrderedMap } from 'immutable';
+import { Record } from 'immutable';
 
 const NodeViewModel = Record({
   id: '00000000000000000000000000000000',
@@ -11,24 +11,10 @@ const NodeViewModel = Record({
 const createNodeViewModel = (nodeContent, nodeInfo, index) => new NodeViewModel({
   ...nodeContent.toObject(),
   ...nodeInfo.toObject(),
-  index,
+  index: index + 1,
 });
 
-const createNodeViewModels = (nodes, nodesInfo) => {
-  let nodeViewModels = new OrderedMap();
-  let index = 1;
+const createMemoizedNodeViewModel = memoize(createNodeViewModel);
 
-  return nodes.map((value, key) => {
-    const nodeViewModel = createNodeViewModel(
-      nodes.get(key),
-      nodesInfo.get(key),
-      index++);
-    nodeViewModels = nodeViewModels.set(key, nodeViewModel);
-    return nodeViewModel;
-  });
-};
-
-const createMemoizedNodeViewModels = memoize(createNodeViewModels);
-
-export { createMemoizedNodeViewModels, createNodeViewModels };
+export { createMemoizedNodeViewModel, createNodeViewModel };
 
