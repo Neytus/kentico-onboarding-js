@@ -7,12 +7,12 @@ class Node extends PureComponent {
   static displayName = 'Node';
 
   static propTypes = {
-    onSave: PropTypes.func.isRequired,
-    onDelete: PropTypes.func.isRequired,
     nodeModel: PropTypes.shape({
       id: PropTypes.string.isRequired,
       isBeingEdited: PropTypes.bool.isRequired,
     }).isRequired,
+    onSave: PropTypes.func.isRequired,
+    onDelete: PropTypes.func.isRequired,
   };
 
   _onSave = text => this.props.onSave(this.props.nodeModel.id, text);

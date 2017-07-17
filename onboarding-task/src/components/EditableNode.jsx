@@ -6,13 +6,13 @@ class EditableNode extends PureComponent {
   static displayName = 'EditableNode';
 
   static propTypes = {
-    onSave: PropTypes.func.isRequired,
-    onCancel: PropTypes.func.isRequired,
-    onDelete: PropTypes.func.isRequired,
     nodeModel: PropTypes.shape({
       text: PropTypes.string.isRequired,
       index: PropTypes.number.isRequired,
     }).isRequired,
+    onSave: PropTypes.func.isRequired,
+    onCancel: PropTypes.func.isRequired,
+    onDelete: PropTypes.func.isRequired,
   };
 
   constructor(props) {
