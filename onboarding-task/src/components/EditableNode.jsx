@@ -24,14 +24,10 @@ class EditableNode extends PureComponent {
 
   _save = event => {
     event.preventDefault();
-    if (!isNullOrWhitespace(this.state.text)) {
+    if (!this.refs.saveButton.disabled) {
       this.props.onSave(this.state.text);
     }
   };
-
-  _cancel = () => this.props.onCancel();
-
-  _delete = () => this.props.onDelete();
 
   _onUpdateText = event => {
     const text = event.target.value;
@@ -52,8 +48,9 @@ class EditableNode extends PureComponent {
 
         <button
           type="button"
+          ref="saveButton"
           className="btn btn-primary"
-          // disabled={isNullOrWhitespace(this.state.text)}
+          disabled={isNullOrWhitespace(this.state.text)}
           onClick={this._save}
         >
           Save
@@ -62,7 +59,7 @@ class EditableNode extends PureComponent {
         <button
           type="button"
           className="btn btn-default"
-          onClick={this._cancel}
+          onClick={this.props.onCancel}
         >
           Cancel
         </button>
@@ -70,7 +67,7 @@ class EditableNode extends PureComponent {
         <button
           type="button"
           className="btn btn-danger"
-          onClick={this._delete}
+          onClick={this.props.onDelete}
         >
           Delete
         </button>
