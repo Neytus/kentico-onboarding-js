@@ -1,15 +1,11 @@
 import React, { PureComponent } from 'react';
 import { OrderedMap } from 'immutable';
-const memoize = require('memoizee');
-
 import { AddNode } from './AddNode';
-import { createNodeViewModel } from '../models/NodeViewModel';
+import { createMemoizedNodeViewModels } from '../models/NodeViewModel';
 import { generateId } from '../utils/generateId';
 import { Node } from './Node';
 import { NodeContent } from '../models/NodeContent';
 import { NodeInfo } from '../models/NodeInfo';
-
-const createMemoizedViewModel = memoize(createNodeViewModel);
 
 class List extends PureComponent {
   static displayName = 'List';
@@ -28,7 +24,7 @@ class List extends PureComponent {
       text,
     });
     const newNodes = this.state.nodes.set(newNode.id, newNode);
-    const newNodeInfos = this.state.nodesInfos.set(newNode.id, new NodeInfo());
+    const newNodeInfos = this.state.nodesInfos.set(newNode.id, new NodeInfo({ isBeingEdited: false }));
 
     this.setState(() => ({
       nodes: newNodes,
@@ -46,7 +42,7 @@ class List extends PureComponent {
     }));
   };
 
-  _onToggle = id => {
+  _toggleNode = id => {
     const newNodeInfos = this.state.nodesInfos.updateIn(
       [id, 'isBeingEdited'],
       isBeingEdited => !isBeingEdited
@@ -57,8 +53,8 @@ class List extends PureComponent {
     }));
   };
 
-  _onSave = (id, text) => {
-    this._onToggle(id);
+  _saveNode = (id, text) => {
+    this._toggleNode(id);
     const newNodes = this.state.nodes.setIn([id, 'text'], text);
 
     this.setState(() => ({
@@ -66,26 +62,23 @@ class List extends PureComponent {
     }));
   };
 
-  _createNodes = () =>
-    this.state.nodes.keySeq().map((id, index) => (
-      <li className="list-group-item" key={id}>
-        <Node
-          nodeModel={createMemoizedViewModel(this.state.nodes.get(id), this.state.nodesInfos.get(id), index)}
-          onSave={this._onSave}
-          onToggle={this._onToggle}
-          onDelete={this._deleteNode}
-        />
-      </li>)
-    );
-
   render() {
-    const nodes = this._createNodes();
+    const nodeViewModels = createMemoizedNodeViewModels(this.state.nodes, this.state.nodesInfos);
 
     return (
       <div className="row">
         <div className="col-sm-12 col-md-offset-2 col-md-8 ">
           <ul className="list-group">
-            {nodes}
+            {nodeViewModels.valueSeq().map((viewModel, index) =>
+              (<li className="list-group-item" key={index}>
+                <Node
+                  nodeModel={viewModel}
+                  onSave={this._saveNode}
+                  onToggle={this._toggleNode}
+                  onDelete={this._deleteNode}
+                />
+              </li>)
+            )}
             <li className="list-group-item">
               <AddNode onAdd={this._addNode} />
             </li>

@@ -21,19 +21,21 @@ class AddNode extends PureComponent {
     this.setState(() => ({ text: '' }));
   };
 
-  _onUpdateText = e => {
-    const text = e.target.value;
+  _onUpdateText = event => {
+    const text = event.target.value;
     this.setState(() => ({ text }));
   };
 
   render() {
     return (
       <form className="form-inline" >
+
         <input
           className="form-control"
           value={this.state.text}
           onChange={this._onUpdateText}
         />
+
         <button
           className="btn btn-default"
           onClick={this._onClickAdd}
@@ -41,6 +43,7 @@ class AddNode extends PureComponent {
           disabled={isNullOrWhitespace(this.state.text)}
         >Add
         </button>
+
       </form>
     );
   }
