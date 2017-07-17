@@ -12,12 +12,6 @@ nodeInfos.set(node.id, nodeInfo);
 
 describe('createMemoizedNodeViewModels', () => {
   it('is really memoized', () => {
-    const timeStart = Date.now();
-    createMemoizedNodeViewModels(nodes, nodeInfos);
-    const timeAfterMemoize = Date.now();
-    createMemoizedNodeViewModels(nodes, nodeInfos);
-    createMemoizedNodeViewModels(nodes, nodeInfos);
-    const timeAfterCacheHits = Date.now();
-    expect(timeAfterMemoize - timeStart).toBeGreaterThan(timeAfterCacheHits - timeAfterMemoize);
+    expect(createMemoizedNodeViewModels(nodes, nodeInfos)).toBe(createMemoizedNodeViewModels(nodes, nodeInfos));
   });
 });

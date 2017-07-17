@@ -28,7 +28,7 @@ const createNodeViewModels = (nodes, nodeInfos) => {
   });
 };
 
-const createMemoizedNodeViewModels = memoize(createNodeViewModels, { refCounter: true });
+const createMemoizedNodeViewModels = memoize(createNodeViewModels);
 
 export { createMemoizedNodeViewModels };
 
