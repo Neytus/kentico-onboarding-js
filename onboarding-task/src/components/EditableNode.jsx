@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+
 import { isNullOrWhitespace } from '../utils/validation';
 
 class EditableNode extends PureComponent {

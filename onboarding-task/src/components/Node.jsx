@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+
 import { EditableNode } from './EditableNode';
 import { ViewNode } from './ViewNode';
 

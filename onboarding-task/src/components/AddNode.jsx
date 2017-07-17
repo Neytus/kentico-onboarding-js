@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+
 import { isNullOrWhitespace } from '../utils/validation';
 
 class AddNode extends PureComponent {
@@ -37,6 +38,7 @@ class AddNode extends PureComponent {
         />
 
         <button
+          autoFocus
           className="btn btn-default"
           onClick={this._onClickAdd}
           onSubmit={this._onClickAdd}

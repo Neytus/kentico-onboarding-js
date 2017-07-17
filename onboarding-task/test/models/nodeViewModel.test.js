@@ -1,4 +1,5 @@
 import { OrderedMap } from 'immutable';
+
 import { NodeContent } from '../../src/models/NodeContent';
 import { NodeInfo } from '../../src/models/NodeInfo';
 import { createMemoizedNodeViewModels } from '../../src/models/NodeViewModel';

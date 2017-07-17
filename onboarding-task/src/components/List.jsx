@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { OrderedMap } from 'immutable';
+
 import { AddNode } from './AddNode';
 import { createMemoizedNodeViewModels } from '../models/NodeViewModel';
 import { generateId } from '../utils/generateId';
