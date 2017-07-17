@@ -30,5 +30,5 @@ const createNodeViewModels = (nodes, nodeInfos) => {
 
 const createMemoizedNodeViewModels = memoize(createNodeViewModels);
 
-export { createMemoizedNodeViewModels };
+export { createMemoizedNodeViewModels, createNodeViewModels };
 

@@ -30,7 +30,7 @@ class EditableNode extends PureComponent {
     }
   };
 
-  _onUpdateText = event => {
+  _updateText = event => {
     const text = event.target.value;
     this.setState(() => ({ text }));
   };
@@ -44,7 +44,7 @@ class EditableNode extends PureComponent {
           autoFocus
           className="form-control"
           value={this.state.text}
-          onChange={this._onUpdateText}
+          onChange={this._updateText}
         />
 
         <button

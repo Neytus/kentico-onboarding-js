@@ -17,12 +17,12 @@ class AddNode extends PureComponent {
     };
   }
 
-  _onClickAdd = () => {
+  _clickAdd = () => {
     this.props.onAdd(this.state.text);
     this.setState(() => ({ text: '' }));
   };
 
-  _onUpdateText = event => {
+  _updateText = event => {
     const text = event.target.value;
     this.setState(() => ({ text }));
   };
@@ -34,14 +34,14 @@ class AddNode extends PureComponent {
         <input
           className="form-control"
           value={this.state.text}
-          onChange={this._onUpdateText}
+          onChange={this._updateText}
         />
 
         <button
           autoFocus
           className="btn btn-default"
-          onClick={this._onClickAdd}
-          onSubmit={this._onClickAdd}
+          onClick={this._clickAdd}
+          onSubmit={this._clickAdd}
           disabled={isNullOrWhitespace(this.state.text)}
         >Add
         </button>
