@@ -17,7 +17,6 @@ describe('createMemoizedNodeViewModels', () => {
     const timeAfterMemoize = Date.now();
     createMemoizedNodeViewModels(nodes, nodeInfos);
     createMemoizedNodeViewModels(nodes, nodeInfos);
-    createMemoizedNodeViewModels(nodes, nodeInfos);
     const timeAfterCacheHits = Date.now();
     expect(timeAfterMemoize - timeStart).toBeGreaterThan(timeAfterCacheHits - timeAfterMemoize);
   });
