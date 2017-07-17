@@ -12,8 +12,8 @@ const node = new NodeContent({
 const nodeInfo = new NodeInfo();
 const nodes = new OrderedMap();
 const nonEmptyNodes = nodes.set(node.id, node);
-const nodeInfos = new OrderedMap();
-const nonEmptyNodeInfos = nodeInfos.set(node.id, nodeInfo);
+const nodesInfo = new OrderedMap();
+const nonEmptyNodeInfos = nodesInfo.set(node.id, nodeInfo);
 
 describe('NodeViewModel', () => {
   describe('createMemoizedNodeViewModels', () => {

@@ -15,7 +15,7 @@ class List extends PureComponent {
     super(props);
     this.state = {
       nodes: OrderedMap(),
-      nodesInfos: OrderedMap(),
+      nodesInfo: OrderedMap(),
     };
   }
 
@@ -24,33 +24,34 @@ class List extends PureComponent {
       id: generateId(),
       text,
     });
+    const newNodeInfo = new NodeInfo({ isBeingEdited: false });
     const newNodes = this.state.nodes.set(newNode.id, newNode);
-    const newNodeInfos = this.state.nodesInfos.set(newNode.id, new NodeInfo({ isBeingEdited: false }));
+    const newNodeInfos = this.state.nodesInfo.set(newNode.id, newNodeInfo);
 
     this.setState(() => ({
       nodes: newNodes,
-      nodesInfos: newNodeInfos,
+      nodesInfo: newNodeInfos,
     }));
   };
 
   _deleteNode = id => {
     const newNodes = this.state.nodes.delete(id);
-    const newNodeInfos = this.state.nodesInfos.delete(id);
+    const newNodeInfos = this.state.nodesInfo.delete(id);
 
     this.setState(() => ({
       nodes: newNodes,
-      nodesInfos: newNodeInfos,
+      nodesInfo: newNodeInfos,
     }));
   };
 
   _toggleNode = id => {
-    const newNodeInfos = this.state.nodesInfos.updateIn(
+    const newNodeInfos = this.state.nodesInfo.updateIn(
       [id, 'isBeingEdited'],
       isBeingEdited => !isBeingEdited
     );
 
     this.setState(() => ({
-      nodesInfos: newNodeInfos,
+      nodesInfo: newNodeInfos,
     }));
   };
 
@@ -64,7 +65,7 @@ class List extends PureComponent {
   };
 
   render() {
-    const nodeViewModels = createMemoizedNodeViewModels(this.state.nodes, this.state.nodesInfos);
+    const nodeViewModels = createMemoizedNodeViewModels(this.state.nodes, this.state.nodesInfo);
 
     return (
       <div className="row">
@@ -72,16 +73,20 @@ class List extends PureComponent {
           <ul className="list-group">
             {nodeViewModels.valueSeq().map((viewModel, index) =>
               (<li className="list-group-item" key={index}>
+
                 <Node
                   nodeModel={viewModel}
                   onSave={this._saveNode}
                   onToggle={this._toggleNode}
                   onDelete={this._deleteNode}
                 />
+
               </li>)
             )}
             <li className="list-group-item">
+
               <AddNode onAdd={this._addNode} />
+
             </li>
           </ul>
         </div>

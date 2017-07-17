@@ -14,14 +14,14 @@ const createNodeViewModel = (nodeContent, nodeInfo, index) => new NodeViewModel(
   index,
 });
 
-const createNodeViewModels = (nodes, nodeInfos) => {
+const createNodeViewModels = (nodes, nodesInfo) => {
   let nodeViewModels = new OrderedMap();
   let index = 1;
 
   return nodes.map((value, key) => {
     const nodeViewModel = createNodeViewModel(
       nodes.get(key),
-      nodeInfos.get(key),
+      nodesInfo.get(key),
       index++);
     nodeViewModels = nodeViewModels.set(key, nodeViewModel);
     return nodeViewModel;
