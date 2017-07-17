@@ -5,17 +5,15 @@ import { NodeInfo } from '../../src/models/NodeInfo';
 import { createMemoizedNodeViewModels, createNodeViewModels } from '../../src/models/NodeViewModel';
 import { generateId } from '../../src/utils/generateId';
 
-const node = new NodeContent({
-  id: generateId(),
-  text: 'test text',
-});
-const nodeInfo = new NodeInfo();
-const nodes = new OrderedMap();
-const nonEmptyNodes = nodes.set(node.id, node);
-const nodesInfo = new OrderedMap();
-const nonEmptyNodeInfos = nodesInfo.set(node.id, nodeInfo);
-
 describe('NodeViewModel', () => {
+  const node = new NodeContent({
+    id: generateId(),
+    text: 'test text',
+  });
+  const nodeInfo = new NodeInfo();
+  const nonEmptyNodes = new OrderedMap().set(node.id, node);
+  const nonEmptyNodeInfos = new OrderedMap().set(node.id, nodeInfo);
+
   describe('createMemoizedNodeViewModels', () => {
     it('is really memoized', () => {
       const memoizedNodeViewModel = createMemoizedNodeViewModels(nonEmptyNodes, nonEmptyNodeInfos);

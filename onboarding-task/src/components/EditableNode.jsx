@@ -25,7 +25,7 @@ class EditableNode extends PureComponent {
 
   _save = event => {
     event.preventDefault();
-    if (!this.refs.saveButton.disabled) {
+    if (!isNullOrWhitespace(this.state.text)) {
       this.props.onSave(this.state.text);
     }
   };
@@ -48,11 +48,10 @@ class EditableNode extends PureComponent {
         />
 
         <button
-          type="button"
+          type="submit"
           ref="saveButton"
           className="btn btn-primary"
           disabled={isNullOrWhitespace(this.state.text)}
-          onClick={this._save}
         >
           Save
         </button>

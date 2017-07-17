@@ -73,20 +73,17 @@ class List extends PureComponent {
           <ul className="list-group">
             {nodeViewModels.valueSeq().map((viewModel, index) =>
               (<li className="list-group-item" key={index}>
-
                 <Node
                   nodeModel={viewModel}
                   onSave={this._saveNode}
                   onToggle={this._toggleNode}
                   onDelete={this._deleteNode}
                 />
-
               </li>)
             )}
+
             <li className="list-group-item">
-
               <AddNode onAdd={this._addNode} />
-
             </li>
           </ul>
         </div>
