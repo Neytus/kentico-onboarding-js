@@ -2,16 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { AddNode } from '../containers/AddNode';
-import { createMemoizedNodeViewModel } from '../models/NodeViewModel';
-import { Node } from './Node';
+import { Node } from '../containers/Node.js';
 
-const List = state => {
-  const nodes = state.nodesList.nodes
-    .keySeq()
+const List = props => {
+  const nodes = props.nodeIds
     .map((id, index) => (
       <li className="list-group-item" key={id}>
         <Node
-          nodeModel={createMemoizedNodeViewModel(state.nodesList.nodes.get(id), state.nodesList.nodesInfos.get(id), index)}
+          id={id}
+          index={index}
         />
       </li>
     ));
@@ -31,7 +30,7 @@ const List = state => {
 };
 
 List.propTypes = {
-  nodesList: PropTypes.object.isRequired,
+  nodeIds: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export { List };

@@ -1,60 +1,84 @@
 import { OrderedMap } from 'immutable';
 
 import * as actions from '../../../src/actions/actionCreators';
-import { generateId } from '../../../src/utils/generateId';
 import { NodeInfo } from '../../../src/models/NodeInfo';
 import { nodesInfosReducer } from '../../../src/reducers/listReducers/nodesInfosReducer';
+import { addNodeFactory } from '../../../src/actions/addNodeFactory';
 
 describe('nodesInfosReducer', () => {
 
-  const initialState = OrderedMap();
-  const id = generateId();
+  const emptyState = OrderedMap();
+  const id = '80149842-a624-b66b-5d3c-37c24523ba46';
+  const addNode = addNodeFactory(() => id);
   const defaultNode = new NodeInfo();
   const toggledNode = new NodeInfo({
     isBeingEdited: true,
   });
-  const nonEmptyState = initialState.set(id, defaultNode);
-  const stateWithToggledNode = initialState.set(id, toggledNode);
+  const nonEmptyState = emptyState.set(id, defaultNode);
+  const stateWithToggledNode = emptyState.set(id, toggledNode);
 
   it('returns initial state', () => {
-    expect(nodesInfosReducer(undefined, {})).toEqual(OrderedMap());
+    const initialState = undefined;
+    const action = { type: 'UNKNOWN' };
+
+    const actualState = nodesInfosReducer(initialState, action);
+
+    expect(actualState).toEqual(emptyState);
   });
 
   describe('ADD_NODE', () => {
     it('handles adding a node', () => {
-      expect(nodesInfosReducer(initialState, actions.addNode(id))).toEqual(nonEmptyState);
+      const action = addNode();
+
+      const actualState = nodesInfosReducer(emptyState, action);
+
+      expect(actualState).toEqual(nonEmptyState);
     });
   });
 
   describe('DELETE_NODE', () => {
     it('handles deleting a node', () => {
-      expect(nodesInfosReducer(nonEmptyState, actions.deleteNode(id))).toEqual(initialState);
+      const action = actions.deleteNode(id);
+
+      const actualState = nodesInfosReducer(nonEmptyState, action);
+
+      expect(actualState).toEqual(emptyState);
     });
 
     it('handles deleting a nonexistent node', () => {
-      expect(nodesInfosReducer(initialState, actions.deleteNode(id))).toEqual(initialState);
+      const action = actions.deleteNode(id);
+
+      const actualState = nodesInfosReducer(emptyState, action);
+
+      expect(actualState).toEqual(emptyState);
     });
   });
 
   describe('TOGGLE_NODE', () => {
     it('handles toggling a node property to true', () => {
-      expect(nodesInfosReducer(nonEmptyState, actions.toggleNode(id))).toEqual(stateWithToggledNode);
+      const action = actions.toggleNode(id);
+
+      const actualState = nodesInfosReducer(nonEmptyState, action);
+
+      expect(actualState).toEqual(stateWithToggledNode);
     });
 
     it('handles toggling a node property to false', () => {
-      expect(nodesInfosReducer(stateWithToggledNode, actions.toggleNode(id))).toEqual(nonEmptyState);
-    });
-  });
+      const action = actions.toggleNode(id);
 
-  describe('CANCEL_NODE', () => {
-    it('handles cancelling a node', () => {
-      expect(nodesInfosReducer(stateWithToggledNode, actions.cancelNode(id))).toEqual(nonEmptyState);
+      const actualState = nodesInfosReducer(stateWithToggledNode, action);
+
+      expect(actualState).toEqual(nonEmptyState);
     });
   });
 
   describe('SAVE_NODE', () => {
     it('handles saving a new node text', () => {
-      expect(nodesInfosReducer(stateWithToggledNode, actions.saveNode(id))).toEqual(nonEmptyState);
+      const action = actions.saveNode(id);
+
+      const actualState = nodesInfosReducer(stateWithToggledNode, action);
+
+      expect(actualState).toEqual(nonEmptyState);
     });
   });
 });

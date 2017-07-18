@@ -1,21 +1,23 @@
 import * as actions from '../../src/actions/actionCreators';
 import * as types from '../../src/actions/actionTypes';
 import { generateId } from '../../src/utils/generateId';
+import { addNodeFactory } from '../../src/actions/addNodeFactory';
 
+const generateNewId = () => '80149842-a624-b66b-5d3c-37c24523ba46';
+const addNode = addNodeFactory(generateNewId);
 
 describe('actionCreators', () => {
   describe('addNode', () => {
     it('returns a correct new action', () => {
       const text = 'New action test';
-      const id = generateId();
       const expectedAction = {
         type: types.ADD_NODE,
         payload: {
-          id,
+          id: '80149842-a624-b66b-5d3c-37c24523ba46',
           text,
         },
       };
-      expect(actions.addNode(id, text)).toEqual(expectedAction);
+      expect(addNode(text)).toEqual(expectedAction);
     });
   });
 

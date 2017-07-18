@@ -1,33 +1,16 @@
 import {
-  ADD_NODE,
   TOGGLE_NODE,
   SAVE_NODE,
   DELETE_NODE,
-  CANCEL_NODE,
 } from './actionTypes';
+import { addNodeFactory } from './addNodeFactory';
+import { generateId } from '../utils/generateId';
 
-export const addNode = (id, text) => {
-  return {
-    type: ADD_NODE,
-    payload: {
-      id,
-      text,
-    },
-  };
-};
+export const addNode = addNodeFactory(generateId);
 
 export const toggleNode = id => {
   return {
     type: TOGGLE_NODE,
-    payload: {
-      id,
-    },
-  };
-};
-
-export const cancelNode = id => {
-  return {
-    type: CANCEL_NODE,
     payload: {
       id,
     },

@@ -4,11 +4,9 @@ import { List as ListComponent } from '../components/List';
 
 const mapStateToProps = state => {
   return {
-    nodesList: state.nodesList,
+    nodeIds: state.nodesList.nodes.keySeq().toArray(),
   };
 };
 
-export const List = connect(
-  mapStateToProps,
-)(ListComponent);
+export const List = connect(mapStateToProps)(ListComponent);
 

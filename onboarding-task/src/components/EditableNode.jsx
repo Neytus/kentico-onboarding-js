@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
+import { isNullOrWhitespace } from '../utils/validation';
+
 class EditableNode extends PureComponent {
   static displayName = 'EditableNode';
 
   static propTypes = {
-    disabled: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired,
@@ -25,12 +26,8 @@ class EditableNode extends PureComponent {
 
   _saveNode = event => {
     event.preventDefault();
-    this.props.onSave(this.props.nodeModel.id, this.state.text);
+    this.props.onSave(this.state.text);
   };
-
-  _cancelNode = () => this.props.onCancel(this.props.nodeModel.id);
-
-  _deleteNode = () => this.props.onDelete(this.props.nodeModel.id);
 
   _updateText = event => {
     const text = event.target.value;
@@ -38,6 +35,8 @@ class EditableNode extends PureComponent {
   };
 
   render() {
+    const { text } = this.state;
+
     return (
       <form className="form-inline" onSubmit={this._saveNode}>
         {this.props.nodeModel.index}.
@@ -45,14 +44,14 @@ class EditableNode extends PureComponent {
         <input
           autoFocus
           className="form-control"
-          value={this.state.text}
+          value={text}
           onChange={this._updateText}
         />
 
         <button
           type="submit"
           className="btn btn-primary"
-          disabled={this.props.disabled(this.state.text)}
+          disabled={isNullOrWhitespace(text)}
           onClick={this._saveNode}
         >
           Save
@@ -61,7 +60,7 @@ class EditableNode extends PureComponent {
         <button
           type="button"
           className="btn btn-default"
-          onClick={this._cancelNode}
+          onClick={this.props.onCancel}
         >
           Cancel
         </button>
@@ -69,7 +68,7 @@ class EditableNode extends PureComponent {
         <button
           type="button"
           className="btn btn-danger"
-          onClick={this._deleteNode}
+          onClick={this.props.onDelete}
         >
           Delete
         </button>

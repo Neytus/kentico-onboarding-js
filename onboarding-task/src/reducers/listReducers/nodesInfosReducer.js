@@ -3,7 +3,6 @@ import {
   TOGGLE_NODE,
   SAVE_NODE,
   DELETE_NODE,
-  CANCEL_NODE,
 } from '../../actions/actionTypes';
 import { OrderedMap } from 'immutable';
 
@@ -19,12 +18,6 @@ export const nodesInfosReducer = (state = OrderedMap(), action) => {
       return state.updateIn(
         [action.payload.id.toString(), 'isBeingEdited'],
         nodeBeingEdited => !nodeBeingEdited
-      );
-    }
-    case CANCEL_NODE: {
-      return state.updateIn(
-        [action.payload.id.toString(), 'isBeingEdited'],
-        () => false
       );
     }
     case SAVE_NODE:

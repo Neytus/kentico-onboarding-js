@@ -1,37 +1,55 @@
 import { OrderedMap } from 'immutable';
 
 import * as actions from '../../../src/actions/actionCreators';
-import { generateId } from '../../../src/utils/generateId';
 import { NodeContent } from '../../../src/models/NodeContent';
 import { nodesReducer } from '../../../src/reducers/listReducers/nodesReducer';
+import { addNodeFactory } from '../../../src/actions/addNodeFactory';
 
 describe('nodesReducer', () => {
-  const initialState = OrderedMap();
-  const id = generateId();
+  const emptyState = OrderedMap();
+  const id = '80149842-a624-b66b-5d3c-37c24523ba46';
+  const addNode = addNodeFactory(() => id);
   const text = 'testing text';
   const node = new NodeContent({
     id,
     text,
   });
-  const nonEmptyState = initialState.set(id, node);
+  const nonEmptyState = emptyState.set(id, node);
 
   it('returns initial state', () => {
-    expect(nodesReducer(undefined, {})).toEqual(OrderedMap());
+    const initialState = undefined;
+    const action = { type: 'UNKNOWN' };
+
+    const actualState = nodesReducer(initialState, action);
+
+    expect(actualState).toEqual(emptyState);
   });
 
   describe('ADD_NODE', () => {
     it('handles adding a node', () => {
-      expect(nodesReducer(initialState, actions.addNode(id, text))).toEqual(nonEmptyState);
+      const action = addNode(text);
+
+      const actualState = nodesReducer(emptyState, action);
+
+      expect(actualState).toEqual(nonEmptyState);
     });
   });
 
   describe('DELETE_NODE', () => {
     it('handles deleting a node', () => {
-      expect(nodesReducer(nonEmptyState, actions.deleteNode(id))).toEqual(initialState);
+      const action = actions.deleteNode(id);
+
+      const actualState = nodesReducer(nonEmptyState, action);
+
+      expect(actualState).toEqual(emptyState);
     });
 
     it('handles deleting a nonexistent node', () => {
-      expect(nodesReducer(initialState, actions.deleteNode(id))).toEqual(initialState);
+      const action = actions.deleteNode(id);
+
+      const actualState = nodesReducer(emptyState, action);
+
+      expect(actualState).toEqual(emptyState);
     });
   });
 
@@ -42,8 +60,12 @@ describe('nodesReducer', () => {
         id,
         text: newText,
       });
-      const newNonEmptyState = initialState.set(id, updatedNode);
-      expect(nodesReducer(nonEmptyState, actions.saveNode(id, newText))).toEqual(newNonEmptyState);
+      const newNonEmptyState = emptyState.set(id, updatedNode);
+      const action = actions.saveNode(id, newText);
+
+      const actualState = nodesReducer(nonEmptyState, action);
+
+      expect(actualState).toEqual(newNonEmptyState);
     });
   });
 });
