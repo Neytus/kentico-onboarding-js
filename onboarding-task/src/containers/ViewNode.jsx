@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { toggleNode } from '../actions/actionCreators';
-import { ViewNode } from '../components/ViewNode';
+import { ViewNode as ViewNodeComponent } from '../components/ViewNode';
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -8,7 +8,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export const ViewNodeContainer = connect(
+export const ViewNode = connect(
   null,
   mapDispatchToProps,
-)(ViewNode);
+)(ViewNodeComponent);

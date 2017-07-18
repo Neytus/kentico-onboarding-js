@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { addNode } from '../actions/actionCreators';
-import { AddNode } from '../components/AddNode';
+import { AddNode as AddNodeComponent } from '../components/AddNode';
 import { generateId } from '../utils/generateId';
 import { isNullOrWhitespace } from '../utils/validation';
 
@@ -16,9 +16,8 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-const AddNodeContainer = connect(
+export const AddNode = connect(
   null,
   mapDispatchToProps,
-)(AddNode);
+)(AddNodeComponent);
 
-export { AddNodeContainer };

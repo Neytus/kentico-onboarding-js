@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import * as actions from '../actions/actionCreators';
-import { EditableNode } from '../components/EditableNode';
+import { EditableNode as EditableNodeComponent } from '../components/EditableNode';
 import { isNullOrWhitespace } from '../utils/validation';
 
 const mapDispatchToProps = (dispatch) => {
@@ -20,9 +20,8 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-const EditableNodeContainer = connect(
+export const EditableNode = connect(
   null,
   mapDispatchToProps,
-)(EditableNode);
+)(EditableNodeComponent);
 
-export { EditableNodeContainer };

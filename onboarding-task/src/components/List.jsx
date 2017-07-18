@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 const memoize = require('memoizee');
 
-import { AddNodeContainer } from '../containers/AddNode';
+import { AddNode } from '../containers/AddNode';
 import { createNodeViewModel } from '../models/NodeViewModel';
 import { Node } from './Node';
 
@@ -25,7 +25,7 @@ const List = state => {
         <ul className="list-group">
           {nodes}
           <li className="list-group-item">
-            <AddNodeContainer />
+            <AddNode />
           </li>
         </ul>
       </div>

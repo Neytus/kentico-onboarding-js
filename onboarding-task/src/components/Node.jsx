@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { EditableNodeContainer } from '../containers/EditableNode';
-import { ViewNodeContainer } from '../containers/ViewNode';
+import { EditableNode } from '../containers/EditableNode';
+import { ViewNode } from '../containers/ViewNode';
 
 const Node = nodeModel => {
   return nodeModel.nodeModel.isBeingEdited ? (
-    <EditableNodeContainer
+    <EditableNode
       nodeModel={nodeModel.nodeModel}
     />
   ) : (
-    <ViewNodeContainer
+    <ViewNode
       nodeModel={nodeModel.nodeModel}
     />
   );
