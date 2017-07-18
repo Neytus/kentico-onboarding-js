@@ -22,14 +22,17 @@ class EditableNode extends PureComponent {
     };
   }
 
-  _saveNode = () => this.props.onSave(this.props.nodeModel.id, this.state.text);
+  _saveNode = event => {
+    event.preventDefault();
+    this.props.onSave(this.props.nodeModel.id, this.state.text);
+  };
 
   _cancelNode = () => this.props.onCancel(this.props.nodeModel.id);
 
   _deleteNode = () => this.props.onDelete(this.props.nodeModel.id);
 
-  _onUpdateText = e => {
-    const text = e.target.value;
+  _updateText = event => {
+    const text = event.target.value;
     this.setState(() => ({ text }));
   };
 
@@ -37,14 +40,16 @@ class EditableNode extends PureComponent {
     return (
       <form className="form-inline" onSubmit={this._saveNode}>
         {this.props.nodeModel.index}.
+
         <input
           autoFocus
           className="form-control"
           value={this.state.text}
-          onChange={this._onUpdateText}
+          onChange={this._updateText}
         />
+
         <button
-          type="button"
+          type="submit"
           className="btn btn-primary"
           disabled={this.props.disabled(this.state.text)}
           onClick={this._saveNode}

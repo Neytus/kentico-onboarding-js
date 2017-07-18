@@ -22,26 +22,31 @@ class AddNode extends PureComponent {
     this.setState(() => ({ text: '' }));
   };
 
-  _onUpdateText = e => {
-    const text = e.target.value;
+  _updateText = event => {
+    const text = event.target.value;
     this.setState(() => ({ text }));
   };
 
   render() {
     return (
       <form className="form-inline" >
+
         <input
           className="form-control"
           value={this.state.text}
-          onChange={this._onUpdateText}
+          onChange={this._updateText}
         />
+
         <button
+          autoFocus
           className="btn btn-default"
           onClick={this._onClickAdd}
           onSubmit={this._onClickAdd}
           disabled={this.props.disabled(this.state.text)}
+
         >Add
         </button>
+
       </form>
     );
   }

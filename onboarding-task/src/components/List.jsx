@@ -1,12 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-const memoize = require('memoizee');
-
 import { AddNode } from '../containers/AddNode';
-import { createNodeViewModel } from '../models/NodeViewModel';
+import { createMemoizedNodeViewModel } from '../models/NodeViewModel';
 import { Node } from './Node';
-
-const createMemoizedViewModel = memoize(createNodeViewModel);
 
 const List = state => {
   const nodes = state.nodesList.nodes
@@ -14,10 +10,10 @@ const List = state => {
     .map((id, index) => (
       <li className="list-group-item" key={id}>
         <Node
-          nodeModel={createMemoizedViewModel(state.nodesList.nodes.get(id), state.nodesList.nodesInfos.get(id), index)}
+          nodeModel={createMemoizedNodeViewModel(state.nodesList.nodes.get(id), state.nodesList.nodesInfos.get(id), index)}
         />
-      </li>)
-    );
+      </li>
+    ));
 
   return (
     <div className="row">
