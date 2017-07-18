@@ -43,8 +43,8 @@ class AddNode extends PureComponent {
           onClick={this._onClickAdd}
           onSubmit={this._onClickAdd}
           disabled={this.props.disabled(this.state.text)}
-
-        >Add
+        >
+          Add
         </button>
 
       </form>

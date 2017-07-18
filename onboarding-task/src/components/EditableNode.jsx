@@ -17,6 +17,7 @@ class EditableNode extends PureComponent {
 
   constructor(props) {
     super(props);
+
     this.state = {
       text: this.props.nodeModel.text,
     };
