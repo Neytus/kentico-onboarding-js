@@ -6,6 +6,7 @@ import {
   CANCEL_NODE,
 } from '../../actions/actionTypes';
 import { OrderedMap } from 'immutable';
+
 import { NodeInfo } from '../../models/NodeInfo';
 
 export const nodesInfosReducer = (state = OrderedMap(), action) => {

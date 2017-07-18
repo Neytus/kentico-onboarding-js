@@ -1,6 +1,7 @@
+import { OrderedMap } from 'immutable';
+
 import * as actions from '../../../src/actions/actionCreators';
 import { generateId } from '../../../src/utils/generateId';
-import { OrderedMap } from 'immutable';
 import { NodeContent } from '../../../src/models/NodeContent';
 import { nodesReducer } from '../../../src/reducers/listReducers/nodesReducer';
 

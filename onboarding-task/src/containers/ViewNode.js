@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+
 import { toggleNode } from '../actions/actionCreators';
 import { ViewNode as ViewNodeComponent } from '../components/ViewNode';
 

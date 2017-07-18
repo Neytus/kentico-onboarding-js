@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+
 import * as actions from '../actions/actionCreators';
 import { EditableNode as EditableNodeComponent } from '../components/EditableNode';
 import { isNullOrWhitespace } from '../utils/validation';

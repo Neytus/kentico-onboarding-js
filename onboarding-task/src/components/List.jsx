@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import { AddNode } from '../containers/AddNode';
 import { createMemoizedNodeViewModel } from '../models/NodeViewModel';
 import { Node } from './Node';

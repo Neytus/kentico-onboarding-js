@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import { EditableNode } from '../containers/EditableNode';
 import { ViewNode } from '../containers/ViewNode';
 

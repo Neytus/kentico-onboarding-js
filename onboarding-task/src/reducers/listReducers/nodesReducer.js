@@ -4,6 +4,7 @@ import {
   DELETE_NODE,
 } from '../../actions/actionTypes';
 import { OrderedMap } from 'immutable';
+
 import { NodeContent } from '../../models/NodeContent';
 
 export const nodesReducer = (state = OrderedMap(), action) => {

@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+
 import { addNode } from '../actions/actionCreators';
 import { AddNode as AddNodeComponent } from '../components/AddNode';
 import { generateId } from '../utils/generateId';
