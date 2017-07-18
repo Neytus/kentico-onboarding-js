@@ -4,7 +4,7 @@ import { OrderedMap } from 'immutable';
 import { NodeContent } from '../../../src/models/NodeContent';
 import { nodesReducer } from '../../../src/reducers/listReducers/nodesReducer';
 
-describe('nodesInfosReducer', () => {
+describe('nodesReducer', () => {
   const initialState = OrderedMap();
   const id = generateId();
   const text = 'testing text';
@@ -34,7 +34,7 @@ describe('nodesInfosReducer', () => {
     });
   });
 
-  describe('DELETE_NODE', () => {
+  describe('SAVE_NODE', () => {
     it('handles saving a new node text', () => {
       const newText = 'changed text';
       const updatedNode = new NodeContent({

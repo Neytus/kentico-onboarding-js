@@ -3,6 +3,7 @@ import {
   TOGGLE_NODE,
   SAVE_NODE,
   DELETE_NODE,
+  CANCEL_NODE,
 } from './actionTypes';
 
 export const addNode = (id, text) => {
@@ -18,6 +19,15 @@ export const addNode = (id, text) => {
 export const toggleNode = id => {
   return {
     type: TOGGLE_NODE,
+    payload: {
+      id,
+    },
+  };
+};
+
+export const cancelNode = id => {
+  return {
+    type: CANCEL_NODE,
     payload: {
       id,
     },

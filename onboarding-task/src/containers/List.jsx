@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import { List as ListComponent } from '../components/List';
 
-const mapStateToProps = state => {
+const mapStateToProps = store => {
   return {
-    nodesList: state.nodesList,
+    nodesList: store.nodesList,
   };
 };
 

@@ -45,6 +45,12 @@ describe('nodesInfosReducer', () => {
     });
   });
 
+  describe('CANCEL_NODE', () => {
+    it('handles cancelling a node', () => {
+      expect(nodesInfosReducer(stateWithToggledNode, actions.cancelNode(id))).toEqual(nonEmptyState);
+    });
+  });
+
   describe('SAVE_NODE', () => {
     it('handles saving a new node text', () => {
       expect(nodesInfosReducer(stateWithToggledNode, actions.saveNode(id))).toEqual(nonEmptyState);

@@ -8,13 +8,13 @@ import { Node } from './Node';
 
 const createMemoizedViewModel = memoize(createNodeViewModel);
 
-const List = store => {
-  const nodes = store.nodesList.nodes
+const List = state => {
+  const nodes = state.nodesList.nodes
     .keySeq()
     .map((id, index) => (
       <li className="list-group-item" key={id}>
         <Node
-          nodeModel={createMemoizedViewModel(store.nodesList.nodes.get(id), store.nodesList.nodesInfos.get(id), index)}
+          nodeModel={createMemoizedViewModel(state.nodesList.nodes.get(id), state.nodesList.nodesInfos.get(id), index)}
         />
       </li>)
     );

@@ -9,7 +9,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(actions.saveNode(id, text));
     },
     onCancel: id => {
-      dispatch(actions.toggleNode(id));
+      dispatch(actions.cancelNode(id));
     },
     onDelete: id => {
       dispatch(actions.deleteNode(id));
