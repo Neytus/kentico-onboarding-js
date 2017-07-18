@@ -66,7 +66,7 @@ class List extends PureComponent {
 
   _createNodeViewModels = () =>
     this.state.nodes.valueSeq().map((node, index) => (
-      <li className="list-group-item" key={index}>
+      <li className="list-group-item" key={node.id}>
         <Node
           nodeModel={createMemoizedNodeViewModel(node, this.state.nodesInfo.get(node.id), index)}
           onSave={this._saveNode}
