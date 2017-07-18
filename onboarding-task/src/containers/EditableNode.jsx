@@ -3,7 +3,7 @@ import * as actions from '../actions/actionCreators';
 import { EditableNode as EditableNodeComponent } from '../components/EditableNode';
 import { isNullOrWhitespace } from '../utils/validation';
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     onSave: (id, text) => {
       dispatch(actions.saveNode(id, text));

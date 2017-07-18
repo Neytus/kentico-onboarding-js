@@ -4,7 +4,7 @@ import { AddNode as AddNodeComponent } from '../components/AddNode';
 import { generateId } from '../utils/generateId';
 import { isNullOrWhitespace } from '../utils/validation';
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     onAdd: text => {
       const id = generateId();
