@@ -11,10 +11,11 @@ describe('NodeViewModel', () => {
         text: 'test text',
       });
       const nodeInfo = new NodeInfo();
+      const createdNodeViewModel = createMemoizedNodeViewModel(node, nodeInfo, 0);
 
-      const expectedNodeViewModel = createMemoizedNodeViewModel(node, nodeInfo, 0);
+      const theSameNodeViewModel = createMemoizedNodeViewModel(node, nodeInfo, 0);
 
-      expect(expectedNodeViewModel).toBe(createMemoizedNodeViewModel(node, nodeInfo, 0));
+      expect(createdNodeViewModel).toBe(theSameNodeViewModel);
     });
   });
 });
