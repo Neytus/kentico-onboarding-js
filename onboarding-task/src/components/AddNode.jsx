@@ -17,8 +17,7 @@ class AddNode extends PureComponent {
     };
   }
 
-  _onClickAdd = e => {
-    e.preventDefault();
+  _clickAdd = () => {
     this.props.onAdd(this.state.text);
     this.setState(() => ({ text: '' }));
   };
@@ -41,8 +40,8 @@ class AddNode extends PureComponent {
         <button
           autoFocus
           className="btn btn-default"
-          onClick={this._onClickAdd}
-          onSubmit={this._onClickAdd}
+          onClick={this._clickAdd}
+          onSubmit={this._clickAdd}
           disabled={isNullOrWhitespace(this.state.text)}
         >
           Add

@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import * as ImmutablePropTypes from 'react-immutable-proptypes';
 
 const viewNodePropTypes = {
-  nodeModel: PropTypes.shape({
+  nodeModel: ImmutablePropTypes.recordOf({
+    id: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     index: PropTypes.number.isRequired,
   }).isRequired,

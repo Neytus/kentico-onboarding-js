@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 
 import { isNullOrWhitespace } from '../utils/validation';
 
@@ -10,7 +11,7 @@ class EditableNode extends PureComponent {
     onSave: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired,
-    nodeModel: PropTypes.shape({
+    nodeModel: ImmutablePropTypes.recordOf({
       text: PropTypes.string.isRequired,
       index: PropTypes.number.isRequired,
     }).isRequired,

@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 
 import { EditableNode } from './EditableNode';
 import { ViewNode } from './ViewNode';
+
 
 const Node = props => {
   const { nodeModel } = props;
@@ -22,7 +24,7 @@ const Node = props => {
 };
 
 Node.propTypes = {
-  nodeModel: PropTypes.shape({
+  nodeModel: ImmutablePropTypes.recordOf({
     id: PropTypes.string.isRequired,
     isBeingEdited: PropTypes.bool.isRequired,
     text: PropTypes.string.isRequired,

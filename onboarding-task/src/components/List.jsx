@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 
 import { AddNode } from '../containers/AddNode';
 import { Node } from '../containers/Node.js';
@@ -30,7 +30,7 @@ const List = props => {
 };
 
 List.propTypes = {
-  nodeIds: PropTypes.arrayOf(PropTypes.string).isRequired,
+  nodeIds: ImmutablePropTypes.seq.isRequired,
 };
 
 export { List };
