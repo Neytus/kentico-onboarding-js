@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
 import { nodesReducer } from './nodesReducer';
-import { nodesInfosReducer } from './nodesInfosReducer';
+import { nodesInfoReducer } from './nodesInfosReducer';
 
 export const nodesListReducer = combineReducers({
   nodes: nodesReducer,
-  nodesInfos: nodesInfosReducer,
+  nodesInfo: nodesInfoReducer,
 });

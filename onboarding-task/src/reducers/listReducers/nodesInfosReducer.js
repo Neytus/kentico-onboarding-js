@@ -8,7 +8,7 @@ import {
 } from '../../actions/actionTypes';
 import { NodeInfo } from '../../models/NodeInfo';
 
-export const nodesInfosReducer = (state = OrderedMap(), action) => {
+export const nodesInfoReducer = (state = OrderedMap(), action) => {
   switch (action.type) {
     case ADD_NODE:
       return state.set(action.payload.id, new NodeInfo());

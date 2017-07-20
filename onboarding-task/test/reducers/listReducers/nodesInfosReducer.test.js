@@ -2,10 +2,10 @@ import { OrderedMap } from 'immutable';
 
 import * as actions from '../../../src/actions/actionCreators';
 import { NodeInfo } from '../../../src/models/NodeInfo';
-import { nodesInfosReducer } from '../../../src/reducers/listReducers/nodesInfosReducer';
+import { nodesInfoReducer } from '../../../src/reducers/listReducers/nodesInfosReducer';
 import { addNodeFactory } from '../../../src/actions/addNodeFactory';
 
-describe('nodesInfosReducer', () => {
+describe('nodesInfoReducer', () => {
 
   const emptyState = OrderedMap();
   const id = '80149842-a624-b66b-5d3c-37c24523ba46';
@@ -21,7 +21,7 @@ describe('nodesInfosReducer', () => {
     const initialState = undefined;
     const action = { type: 'UNKNOWN' };
 
-    const actualState = nodesInfosReducer(initialState, action);
+    const actualState = nodesInfoReducer(initialState, action);
 
     expect(actualState).toEqual(emptyState);
   });
@@ -30,7 +30,7 @@ describe('nodesInfosReducer', () => {
     it('handles adding a node', () => {
       const action = addNode();
 
-      const actualState = nodesInfosReducer(emptyState, action);
+      const actualState = nodesInfoReducer(emptyState, action);
 
       expect(actualState).toEqual(nonEmptyState);
     });
@@ -40,7 +40,7 @@ describe('nodesInfosReducer', () => {
     it('handles deleting a node', () => {
       const action = actions.deleteNode(id);
 
-      const actualState = nodesInfosReducer(nonEmptyState, action);
+      const actualState = nodesInfoReducer(nonEmptyState, action);
 
       expect(actualState).toEqual(emptyState);
     });
@@ -48,7 +48,7 @@ describe('nodesInfosReducer', () => {
     it('handles deleting a nonexistent node', () => {
       const action = actions.deleteNode(id);
 
-      const actualState = nodesInfosReducer(emptyState, action);
+      const actualState = nodesInfoReducer(emptyState, action);
 
       expect(actualState).toEqual(emptyState);
     });
@@ -58,7 +58,7 @@ describe('nodesInfosReducer', () => {
     it('handles toggling a node property to true', () => {
       const action = actions.toggleNode(id);
 
-      const actualState = nodesInfosReducer(nonEmptyState, action);
+      const actualState = nodesInfoReducer(nonEmptyState, action);
 
       expect(actualState).toEqual(stateWithToggledNode);
     });
@@ -66,7 +66,7 @@ describe('nodesInfosReducer', () => {
     it('handles toggling a node property to false', () => {
       const action = actions.toggleNode(id);
 
-      const actualState = nodesInfosReducer(stateWithToggledNode, action);
+      const actualState = nodesInfoReducer(stateWithToggledNode, action);
 
       expect(actualState).toEqual(nonEmptyState);
     });
@@ -76,7 +76,7 @@ describe('nodesInfosReducer', () => {
     it('handles saving a new node text', () => {
       const action = actions.saveNode(id);
 
-      const actualState = nodesInfosReducer(stateWithToggledNode, action);
+      const actualState = nodesInfoReducer(stateWithToggledNode, action);
 
       expect(actualState).toEqual(nonEmptyState);
     });
