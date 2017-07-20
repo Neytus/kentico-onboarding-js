@@ -2,7 +2,7 @@ import { OrderedMap } from 'immutable';
 
 import * as actions from '../../../src/actions/actionCreators';
 import { NodeInfo } from '../../../src/models/NodeInfo';
-import { nodesInfoReducer } from '../../../src/reducers/listReducers/nodesInfosReducer';
+import { nodesInfoReducer } from '../../../src/reducers/listReducers/nodesInfoReducer';
 import { addNodeFactory } from '../../../src/actions/addNodeFactory';
 
 describe('nodesInfoReducer', () => {
