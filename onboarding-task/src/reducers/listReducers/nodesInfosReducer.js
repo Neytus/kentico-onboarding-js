@@ -1,11 +1,11 @@
+import { OrderedMap } from 'immutable';
+
 import {
   ADD_NODE,
   TOGGLE_NODE,
   SAVE_NODE,
   DELETE_NODE,
 } from '../../actions/actionTypes';
-import { OrderedMap } from 'immutable';
-
 import { NodeInfo } from '../../models/NodeInfo';
 
 export const nodesInfosReducer = (state = OrderedMap(), action) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import * as ImmutablePropTypes from 'react-immutable-proptypes';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 
 const viewNodePropTypes = {
   nodeModel: ImmutablePropTypes.recordOf({

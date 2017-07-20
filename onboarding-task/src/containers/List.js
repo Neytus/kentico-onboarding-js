@@ -7,4 +7,3 @@ const mapStateToProps = state => ({
 });
 
 export const List = connect(mapStateToProps)(ListComponent);
-
