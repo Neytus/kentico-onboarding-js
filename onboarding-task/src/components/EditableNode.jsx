@@ -53,7 +53,6 @@ class EditableNode extends PureComponent {
           type="submit"
           className="btn btn-primary"
           disabled={isNullOrWhitespace(text)}
-          onClick={this._saveNode}
         >
           Save
         </button>
