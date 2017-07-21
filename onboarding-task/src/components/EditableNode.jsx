@@ -11,7 +11,7 @@ class EditableNode extends PureComponent {
     onSave: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired,
-    nodeModel: ImmutablePropTypes.recordOf({
+    nodeViewModel: ImmutablePropTypes.recordOf({
       text: PropTypes.string.isRequired,
       index: PropTypes.number.isRequired,
     }).isRequired,
@@ -21,7 +21,7 @@ class EditableNode extends PureComponent {
     super(props);
 
     this.state = {
-      text: this.props.nodeModel.text,
+      text: this.props.nodeViewModel.text,
     };
   }
 
@@ -40,7 +40,7 @@ class EditableNode extends PureComponent {
 
     return (
       <form className="form-inline" onSubmit={this._saveNode}>
-        {this.props.nodeModel.index}.
+        {this.props.nodeViewModel.index}.
 
         <input
           autoFocus

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
 const viewNodePropTypes = {
-  nodeModel: ImmutablePropTypes.recordOf({
+  nodeViewModel: ImmutablePropTypes.recordOf({
     id: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     index: PropTypes.number.isRequired,
@@ -11,7 +11,7 @@ const viewNodePropTypes = {
   onEdit: PropTypes.func.isRequired,
 };
 
-const ViewNode = ({ onEdit, nodeModel }) => <div onClick={onEdit}>{nodeModel.index}. {nodeModel.text}</div>;
+const ViewNode = ({ onEdit, nodeViewModel }) => <div onClick={onEdit}>{nodeViewModel.index}. {nodeViewModel.text}</div>;
 
 ViewNode.displayName = 'ViewNode';
 ViewNode.propTypes = viewNodePropTypes;

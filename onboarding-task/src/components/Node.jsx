@@ -6,17 +6,17 @@ import { EditableNode } from './EditableNode';
 import { ViewNode } from './ViewNode';
 
 const Node = props => {
-  const { nodeModel } = props;
-  return nodeModel.isBeingEdited ? (
+  const { nodeViewModel } = props;
+  return nodeViewModel.isBeingEdited ? (
     <EditableNode
-      nodeModel={nodeModel}
+      nodeViewModel={nodeViewModel}
       onCancel={props.onCancel}
       onSave={props.onSave}
       onDelete={props.onDelete}
     />
   ) : (
     <ViewNode
-      nodeModel={nodeModel}
+      nodeViewModel={nodeViewModel}
       onEdit={props.onEdit}
     />
   );
@@ -24,7 +24,7 @@ const Node = props => {
 
 Node.displayName = 'Node';
 Node.propTypes = {
-  nodeModel: ImmutablePropTypes.recordOf({
+  nodeViewModel: ImmutablePropTypes.recordOf({
     id: PropTypes.string.isRequired,
     isBeingEdited: PropTypes.bool.isRequired,
     text: PropTypes.string.isRequired,

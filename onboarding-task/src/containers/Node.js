@@ -5,7 +5,7 @@ import { createMemoizedNodeViewModel } from '../models/NodeViewModel.js';
 import * as actions from '../actions/actionCreators';
 
 const mapStateToProps = ({ nodesList: { nodes, nodesInfo } }, { id, index }) => ({
-  nodeModel: createMemoizedNodeViewModel(nodes.get(id), nodesInfo.get(id), index),
+  nodeViewModel: createMemoizedNodeViewModel(nodes.get(id), nodesInfo.get(id), index),
 });
 
 const mapDispatchToProps = (dispatch, { id }) => ({
