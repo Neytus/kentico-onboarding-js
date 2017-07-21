@@ -3,9 +3,7 @@ import memoize from 'memoizee';
 
 import { List as ListComponent } from '../components/List';
 
-const getSequence = nodes => {
-  return nodes.keySeq();
-};
+const getSequence = nodes => nodes.keySeq();
 export const getMemoizedSequence = memoize(getSequence);
 
 const mapStateToProps = state => ({

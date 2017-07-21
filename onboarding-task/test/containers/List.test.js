@@ -1,4 +1,5 @@
 import { OrderedMap } from 'immutable';
+
 import { NodeContent } from '../../src/models/NodeContent';
 import { getMemoizedSequence } from '../../src/containers/List';
 

@@ -17,7 +17,7 @@ class AddNode extends PureComponent {
     };
   }
 
-  _onAdd = (event) => {
+  _onAdd = event => {
     event.preventDefault();
     this.props.onAdd(this.state.text);
     this.setState(() => ({ text: '' }));

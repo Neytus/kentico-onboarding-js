@@ -11,4 +11,3 @@ export const AddNode = connect(
   null,
   mapDispatchToProps,
 )(AddNodeComponent);
-
