@@ -3,11 +3,13 @@ import memoize from 'memoizee';
 
 import { List as ListComponent } from '../components/List';
 
-const getNodes = state => state.nodesList.nodes;
-export const getMemoizedNodes = memoize(getNodes);
+const getSequence = nodes => {
+  return nodes.keySeq();
+};
+export const getMemoizedSequence = memoize(getSequence);
 
 const mapStateToProps = state => ({
-  nodeIds: getMemoizedNodes(state).keySeq(),
+  nodeIds: getMemoizedSequence(state.nodesList.nodes),
 });
 
 export const List = connect(mapStateToProps)(ListComponent);
