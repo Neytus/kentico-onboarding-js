@@ -5,12 +5,11 @@ import { AddNode } from '../containers/AddNode';
 import { Node } from '../containers/Node.js';
 
 const List = props => {
-  const nodes = props.nodeIds
-    .map((id, index) => (
+  const nodes = props.nodesIds
+    .map(id => (
       <li className="list-group-item" key={id}>
         <Node
           id={id}
-          index={index}
         />
       </li>
     ));
@@ -31,7 +30,7 @@ const List = props => {
 
 List.displayName = 'List';
 List.propTypes = {
-  nodeIds: ImmutablePropTypes.seq.isRequired,
+  nodesIds: ImmutablePropTypes.list.isRequired,
 };
 
 export { List };
