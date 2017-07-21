@@ -29,6 +29,7 @@ const List = props => {
   );
 };
 
+List.displayName = 'List';
 List.propTypes = {
   nodeIds: ImmutablePropTypes.seq.isRequired,
 };

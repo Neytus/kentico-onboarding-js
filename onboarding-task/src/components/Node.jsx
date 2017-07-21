@@ -5,7 +5,6 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { EditableNode } from './EditableNode';
 import { ViewNode } from './ViewNode';
 
-
 const Node = props => {
   const { nodeModel } = props;
   return nodeModel.isBeingEdited ? (
@@ -23,6 +22,7 @@ const Node = props => {
   );
 };
 
+Node.displayName = 'Node';
 Node.propTypes = {
   nodeModel: ImmutablePropTypes.recordOf({
     id: PropTypes.string.isRequired,
