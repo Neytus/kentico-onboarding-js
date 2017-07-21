@@ -4,7 +4,7 @@ import memoize from 'memoizee';
 import { List as ListComponent } from '../components/List';
 
 const getNodes = state => state.nodesList.nodes;
-const getMemoizedNodes = memoize(getNodes);
+export const getMemoizedNodes = memoize(getNodes);
 
 const mapStateToProps = state => ({
   nodeIds: getMemoizedNodes(state).keySeq(),
