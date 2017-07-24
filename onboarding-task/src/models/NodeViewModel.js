@@ -17,6 +17,7 @@ const createNodeViewModel = (nodeContent, nodeInfo, index) => new NodeViewModel(
 const createMemoizedNodeViewModel = memoize(createNodeViewModel);
 
 export {
+  NodeViewModel,
   createMemoizedNodeViewModel,
 };
 
