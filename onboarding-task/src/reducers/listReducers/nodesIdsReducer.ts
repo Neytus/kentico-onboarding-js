@@ -4,8 +4,13 @@ import {
   ADD_NODE,
   DELETE_NODE,
 } from '../../actions/actionTypes';
+import { IAction } from '../../actions/actionCreators';
 
-export const nodesIdsReducer = (state = List(), action) => {
+interface INodesIdsReducer {
+  (state: List<string>, action: IAction): List<string>;
+}
+
+export const nodesIdsReducer: INodesIdsReducer = (state = List(), action) => {
   switch (action.type) {
     case ADD_NODE:
       return state.push(action.payload.id);

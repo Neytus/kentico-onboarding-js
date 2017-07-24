@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { addNode } from '../actions/actionCreators';
+import { addNode } from '../actions/actionCreators.ts';
 import { AddNode as AddNodeComponent } from '../components/AddNode';
 
 const mapDispatchToProps = dispatch => ({

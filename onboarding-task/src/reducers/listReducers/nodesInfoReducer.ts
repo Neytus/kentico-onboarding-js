@@ -7,8 +7,13 @@ import {
   DELETE_NODE,
 } from '../../actions/actionTypes';
 import { NodeInfo } from '../../models/NodeInfo';
+import { IAction } from '../../actions/actionCreators';
 
-export const nodesInfoReducer = (state = OrderedMap(), action) => {
+interface INodesInfoReducer {
+  (state: OrderedMap<string, NodeInfo>, action: IAction): OrderedMap<string, NodeInfo>;
+}
+
+export const nodesInfoReducer: INodesInfoReducer = (state = OrderedMap(), action) => {
   switch (action.type) {
     case ADD_NODE:
       return state.set(action.payload.id, new NodeInfo());
