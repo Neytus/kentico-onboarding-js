@@ -6,10 +6,11 @@ import { Node } from '../containers/Node.js';
 
 const List = props => {
   const nodes = props.nodesIds
-    .map(id => (
+    .map((id, index) => (
       <li className="list-group-item" key={id}>
         <Node
           id={id}
+          index={index}
         />
       </li>
     ));

@@ -5,19 +5,18 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { EditableNode } from './EditableNode';
 import { ViewNode } from './ViewNode';
 
-const Node = props => {
-  const { nodeViewModel } = props;
+const Node = ({ nodeViewModel, onEdit, onSave, onCancel, onDelete }) => {
   return nodeViewModel.isBeingEdited ? (
     <EditableNode
       nodeViewModel={nodeViewModel}
-      onCancel={props.onCancel}
-      onSave={props.onSave}
-      onDelete={props.onDelete}
+      onCancel={onCancel}
+      onSave={onSave}
+      onDelete={onDelete}
     />
   ) : (
     <ViewNode
       nodeViewModel={nodeViewModel}
-      onEdit={props.onEdit}
+      onEdit={onEdit}
     />
   );
 };

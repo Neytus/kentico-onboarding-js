@@ -6,7 +6,6 @@ import { nodesInfoReducer } from '../../../src/reducers/listReducers/nodesInfoRe
 import { addNodeFactory } from '../../../src/actions/addNodeFactory';
 
 describe('nodesInfoReducer', () => {
-
   const emptyState = OrderedMap();
   const id = '80149842-a624-b66b-5d3c-37c24523ba46';
   const addNode = addNodeFactory(() => id);
