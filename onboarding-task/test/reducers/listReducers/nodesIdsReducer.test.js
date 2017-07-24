@@ -3,11 +3,11 @@ import { List } from 'immutable';
 import * as actions from '../../../src/actions/actionCreators';
 import { nodesIdsReducer } from '../../../src/reducers/listReducers/nodesIdsReducer';
 import { addNodeFactory } from '../../../src/actions/addNodeFactory';
-import * as idGenerator from '../../../src/utils/generateId';
 
 describe('nodesIdsReducer', () => {
   const emptyState = List();
   const id = '80149842-a624-b66b-5d3c-37c24523ba46';
+  const addNode = addNodeFactory(() => id);
   const nonEmptyState = emptyState.push(id);
 
   it('returns initial state', () => {
@@ -21,22 +21,11 @@ describe('nodesIdsReducer', () => {
 
   describe('ADD_NODE', () => {
     it('handles adding a node', () => {
-      const generateId = spyOn(idGenerator, 'generateId').and.callFake(() => id);
-      const addNode = addNodeFactory(generateId);
       const action = addNode('text');
 
       const actualState = nodesIdsReducer(emptyState, action);
 
       expect(actualState).toEqual(nonEmptyState);
-    });
-
-    it('really calls injected generateId correctly', () => {
-      const generateId = spyOn(idGenerator, 'generateId').and.callFake(() => id);
-      const addNode = addNodeFactory(generateId);
-      const action = addNode('text');
-      nodesIdsReducer(emptyState, action);
-
-      expect(generateId).toHaveBeenCalled();
     });
   });
 

@@ -4,11 +4,11 @@ import * as actions from '../../../src/actions/actionCreators';
 import { NodeInfo } from '../../../src/models/NodeInfo';
 import { nodesInfoReducer } from '../../../src/reducers/listReducers/nodesInfoReducer';
 import { addNodeFactory } from '../../../src/actions/addNodeFactory';
-import * as idGenerator from '../../../src/utils/generateId';
 
 describe('nodesInfoReducer', () => {
   const emptyState = OrderedMap();
   const id = '80149842-a624-b66b-5d3c-37c24523ba46';
+  const addNode = addNodeFactory(() => id);
   const defaultNode = new NodeInfo();
   const toggledNode = new NodeInfo({
     isBeingEdited: true,
@@ -27,22 +27,11 @@ describe('nodesInfoReducer', () => {
 
   describe('ADD_NODE', () => {
     it('handles adding a node', () => {
-      const generateId = spyOn(idGenerator, 'generateId').and.callFake(() => id);
-      const addNode = addNodeFactory(generateId);
       const action = addNode('text');
 
       const actualState = nodesInfoReducer(emptyState, action);
 
       expect(actualState).toEqual(nonEmptyState);
-    });
-
-    it('really calls injected generateId correctly', () => {
-      const generateId = spyOn(idGenerator, 'generateId').and.callFake(() => id);
-      const addNode = addNodeFactory(generateId);
-      const action = addNode('text');
-      nodesInfoReducer(emptyState, action);
-
-      expect(generateId).toHaveBeenCalled();
     });
   });
 
