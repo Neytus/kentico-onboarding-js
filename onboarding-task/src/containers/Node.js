@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import { Node as NodeComponent } from '../components/Node';
-import { createMemoizedNodeViewModel } from '../models/NodeViewModel.js';
+import { createMemoizedNodeViewModel } from '../models/NodeViewModel.ts';
 import * as actions from '../actions/actionCreators';
 
 const mapStateToProps = ({ nodesList: { nodes, nodesInfo } }, { id, index }) => ({
