@@ -19,11 +19,9 @@ const store: Store<AppState> = createStore(
   applyMiddleware(logger)
 );
 
-const AppHome = () => (
-  <Provider store = {store} >
-    <App / >
-    < / Provider >
-);
-
-ReactDOM.render(<AppHome />, document.getElementById('app-root'));
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('app-root'));
 
