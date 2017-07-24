@@ -1,7 +1,16 @@
 import { Record } from 'immutable';
 
-const defaultNodeInfo = {
+
+interface INodeInfo {
+  isBeingEdited: boolean;
+}
+
+const defaultNodeInfo: INodeInfo = {
   isBeingEdited: false,
 };
 
-export const NodeInfo = Record(defaultNodeInfo, 'NodeInfo');
+class NodeInfo extends Record(defaultNodeInfo) implements INodeInfo {
+  isBeingEdited: boolean;
+}
+
+export { NodeInfo }

@@ -1,9 +1,18 @@
 import { Record } from 'immutable';
 
-const defaultNodeContent = {
+interface INodeContent {
+  id: string;
+  text: string;
+}
+
+const defaultNodeContent: INodeContent = {
   id: '00000000-0000-0000-0000-000000000000',
   text: '',
 };
 
-export const NodeContent = Record(defaultNodeContent, 'NodeContent');
+class NodeContent extends Record(defaultNodeContent) implements INodeContent {
+  id: string;
+  text: string;
+}
 
+export { NodeContent };
