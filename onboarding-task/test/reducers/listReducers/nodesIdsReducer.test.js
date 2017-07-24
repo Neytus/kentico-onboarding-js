@@ -45,5 +45,13 @@ describe('nodesIdsReducer', () => {
 
       expect(actualState).toEqual(emptyState);
     });
+
+    it('handles deleting a nonexistent node from non empty state', () => {
+      const action = actions.deleteNode('80185242-d624-b669-5d3c-37c11523ba85');
+
+      const actualState = nodesIdsReducer(nonEmptyState, action);
+
+      expect(actualState).toEqual(nonEmptyState);
+    });
   });
 });

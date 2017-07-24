@@ -51,6 +51,14 @@ describe('nodesReducer', () => {
 
       expect(actualState).toEqual(emptyState);
     });
+
+    it('handles deleting a nonexistent node from non empty state', () => {
+      const action = actions.deleteNode('44005242-d624-b669-5d3c-37c11523ba85');
+
+      const actualState = nodesReducer(nonEmptyState, action);
+
+      expect(actualState).toEqual(nonEmptyState);
+    });
   });
 
   describe('SAVE_NODE', () => {
