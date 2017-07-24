@@ -4,11 +4,12 @@ import * as actions from '../../../src/actions/actionCreators';
 import { NodeContent } from '../../../src/models/NodeContent';
 import { nodesReducer } from '../../../src/reducers/listReducers/nodesReducer';
 import { addNodeFactory } from '../../../src/actions/addNodeFactory';
+import * as idGenerator from '../../../src/utils/generateId';
+
 
 describe('nodesReducer', () => {
   const emptyState = OrderedMap();
   const id = '80149842-a624-b66b-5d3c-37c24523ba46';
-  const addNode = addNodeFactory(() => id);
   const text = 'testing text';
   const node = new NodeContent({
     id,
@@ -27,11 +28,22 @@ describe('nodesReducer', () => {
 
   describe('ADD_NODE', () => {
     it('handles adding a node', () => {
+      const generateId = spyOn(idGenerator, 'generateId').and.callFake(() => id);
+      const addNode = addNodeFactory(generateId);
       const action = addNode(text);
 
       const actualState = nodesReducer(emptyState, action);
 
       expect(actualState).toEqual(nonEmptyState);
+    });
+
+    it('really calls injected generateId correctly', () => {
+      const generateId = spyOn(idGenerator, 'generateId').and.callFake(() => id);
+      const addNode = addNodeFactory(generateId);
+      const action = addNode(text);
+      nodesReducer(nonEmptyState, action);
+
+      expect(generateId).toHaveBeenCalled();
     });
   });
 
