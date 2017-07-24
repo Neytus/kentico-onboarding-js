@@ -17,6 +17,7 @@ describe('actionCreators', () => {
           text,
         },
       };
+
       expect(addNode(text)).toEqual(expectedAction);
     });
   });
@@ -30,6 +31,7 @@ describe('actionCreators', () => {
           id,
         },
       };
+
       expect(actions.toggleNode(id)).toEqual(expectedAction);
     });
   });
@@ -45,6 +47,7 @@ describe('actionCreators', () => {
           text,
         },
       };
+
       expect(actions.saveNode(id, text)).toEqual(expectedAction);
     });
   });
@@ -58,6 +61,7 @@ describe('actionCreators', () => {
           id,
         },
       };
+
       expect(actions.deleteNode(id)).toEqual(expectedAction);
     });
   });

@@ -8,30 +8,24 @@ import { generateId } from '../utils/generateId';
 
 export const addNode = addNodeFactory(generateId);
 
-export const toggleNode = id => {
-  return {
-    type: TOGGLE_NODE,
-    payload: {
-      id,
-    },
-  };
-};
+export const toggleNode = id => ({
+  type: TOGGLE_NODE,
+  payload: {
+    id,
+  },
+});
 
-export const deleteNode = id => {
-  return {
-    type: DELETE_NODE,
-    payload: {
-      id,
-    },
-  };
-};
+export const deleteNode = id => ({
+  type: DELETE_NODE,
+  payload: {
+    id,
+  },
+});
 
-export const saveNode = (id, text) => {
-  return {
-    type: SAVE_NODE,
-    payload: {
-      id,
-      text,
-    },
-  };
-};
+export const saveNode = (id, text) => ({
+  type: SAVE_NODE,
+  payload: {
+    id,
+    text,
+  },
+});

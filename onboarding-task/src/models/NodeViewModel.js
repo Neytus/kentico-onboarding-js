@@ -8,13 +8,11 @@ const NodeViewModel = Record({
   index: 0,
 }, 'NodeViewModel');
 
-const createNodeViewModel = (nodeContent, nodeInfo, index) => {
-  return new NodeViewModel({
-    ...nodeContent.toObject(),
-    ...nodeInfo.toObject(),
-    index: index + 1,
-  });
-};
+const createNodeViewModel = (nodeContent, nodeInfo, index) => new NodeViewModel({
+  ...nodeContent.toObject(),
+  ...nodeInfo.toObject(),
+  index: index + 1,
+});
 
 const createMemoizedNodeViewModel = memoize(createNodeViewModel);
 
