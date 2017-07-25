@@ -1,3 +1,5 @@
+import { INodesList } from './reducers/listReducers/NodesList';
+
 export interface AppState {
-  nodesList: any;
+  nodesList: INodesList;
 }
