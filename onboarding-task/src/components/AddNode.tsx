@@ -1,29 +1,42 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
 
-import { isNullOrWhitespace } from '../utils/validation.ts';
+import { isNullOrWhitespace } from '../utils/validation';
+import { INodeViewModel } from '../models/NodeViewModel';
 
-class AddNode extends PureComponent {
+export interface IAddNodeDataProps {
+  nodeViewModel: INodeViewModel;
+}
+
+export interface IAddNodeCallbacksProps {
+  onAdd: (text: string) => void;
+}
+
+interface IAddNodeState {
+  text: string;
+}
+
+class AddNode extends React.PureComponent<IAddNodeDataProps & IAddNodeCallbacksProps, IAddNodeState> {
   static displayName = 'AddNode';
 
   static propTypes = {
     onAdd: PropTypes.func.isRequired,
   };
 
-  constructor(props) {
+  constructor(props: IAddNodeDataProps & IAddNodeCallbacksProps) {
     super(props);
     this.state = {
       text: '',
     };
   }
 
-  _onAdd = event => {
+  _onAdd = (event: React.SyntheticEvent<any>): void => {
     event.preventDefault();
     this.props.onAdd(this.state.text);
     this.setState(() => ({ text: '' }));
   };
 
-  _updateText = event => {
+  _updateText = (event: React.ChangeEvent<any>): void => {
     const text = event.target.value;
     this.setState(() => ({ text }));
   };

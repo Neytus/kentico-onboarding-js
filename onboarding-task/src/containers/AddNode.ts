@@ -1,10 +1,11 @@
 import { connect } from 'react-redux';
 
-import { addNode } from '../actions/actionCreators.ts';
-import { AddNode as AddNodeComponent } from '../components/AddNode';
+import { addNode } from '../actions/actionCreators';
+import { AddNode as AddNodeComponent, IAddNodeCallbacksProps } from '../components/AddNode';
+import { Dispatch } from 'redux';
 
-const mapDispatchToProps = dispatch => ({
-  onAdd: text => dispatch(addNode(text)),
+const mapDispatchToProps = (dispatch: Dispatch): IAddNodeCallbacksProps => ({
+  onAdd: (text: string): void => dispatch(addNode(text)),
 });
 
 export const AddNode = connect(

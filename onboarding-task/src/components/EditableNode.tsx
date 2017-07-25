@@ -46,7 +46,7 @@ export class EditableNode extends React.PureComponent<IEditableNodeDataProps & I
   };
 
   _updateText = (event: React.ChangeEvent<any>): void => {
-    const text = (event.target as any).value;
+    const text = event.target.value;
     this.setState(() => ({ text }));
   };
 
