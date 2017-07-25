@@ -1,7 +1,8 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { INodeViewModel } from '../models/NodeViewModel';
 const ImmutablePropTypes = require('react-immutable-proptypes');
+
+import { INodeViewModel } from '../models/NodeViewModel';
 
 interface IViewNodeDataProps {
   nodeViewModel: INodeViewModel;

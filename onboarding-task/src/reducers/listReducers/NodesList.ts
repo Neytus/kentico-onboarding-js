@@ -2,6 +2,7 @@ import {
   OrderedMap,
   List
 } from 'immutable';
+
 import { NodeContent } from '../../models/NodeContent';
 import { NodeInfo } from '../../models/NodeInfo';
 

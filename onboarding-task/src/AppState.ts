@@ -1,5 +1,5 @@
 import { INodesList } from './reducers/listReducers/NodesList';
 
-export interface AppState {
+export interface IAppState {
   nodesList: INodesList;
 }

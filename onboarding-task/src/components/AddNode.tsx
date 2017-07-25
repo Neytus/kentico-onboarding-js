@@ -16,7 +16,7 @@ interface IAddNodeState {
   text: string;
 }
 
-class AddNode extends React.PureComponent<IAddNodeDataProps & IAddNodeCallbacksProps, IAddNodeState> {
+export class AddNode extends React.PureComponent<IAddNodeDataProps & IAddNodeCallbacksProps, IAddNodeState> {
   static displayName = 'AddNode';
 
   static propTypes = {
@@ -65,5 +65,3 @@ class AddNode extends React.PureComponent<IAddNodeDataProps & IAddNodeCallbacksP
     );
   }
 }
-
-export { AddNode };

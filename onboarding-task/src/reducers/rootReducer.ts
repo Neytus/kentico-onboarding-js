@@ -1,8 +1,8 @@
 import { nodesListReducer } from './listReducers/nodesListReducer';
-import { AppState } from '../AppState';
+import { IAppState } from '../AppState';
 import { IAction } from '../actions/actionCreators';
 
-export const rootReducer = (state: AppState = {} as AppState, action: IAction): AppState => ({
+export const rootReducer = (state: IAppState = {} as IAppState, action: IAction): IAppState => ({
   nodesList: nodesListReducer(state.nodesList, action),
 });
 

@@ -13,8 +13,8 @@ const listPropTypes = {
   nodesIds: ImmutablePropTypes.list.isRequired,
 };
 
-export const List: React.StatelessComponent<IListDataProps> = props => {
-  const nodes = props.nodesIds
+export const List: React.StatelessComponent<IListDataProps> = ({ nodesIds }) => {
+  const nodes = nodesIds
     .map((id: string, index: number) => (
       <li className="list-group-item" key={id}>
         <Node

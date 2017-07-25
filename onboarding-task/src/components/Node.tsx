@@ -17,18 +17,18 @@ export interface INodeCallbacksProps {
   onDelete: () => void;
 }
 
-export const Node: React.StatelessComponent<INodeDataProps & INodeCallbacksProps> = props => {
-  return props.nodeViewModel.isBeingEdited ? (
+export const Node: React.StatelessComponent<INodeDataProps & INodeCallbacksProps> = ({ nodeViewModel, onEdit, onCancel, onDelete, onSave }) => {
+  return nodeViewModel.isBeingEdited ? (
     <EditableNode
-      nodeViewModel={props.nodeViewModel}
-      onCancel={props.onCancel}
-      onSave={props.onSave}
-      onDelete={props.onDelete}
+      nodeViewModel={nodeViewModel}
+      onCancel={onCancel}
+      onSave={onSave}
+      onDelete={onDelete}
     />
   ) : (
     <ViewNode
-      nodeViewModel={props.nodeViewModel}
-      onEdit={props.onEdit}
+      nodeViewModel={nodeViewModel}
+      onEdit={onEdit}
     />
   );
 };
