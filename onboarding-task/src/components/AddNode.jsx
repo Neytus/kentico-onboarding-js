@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import { isNullOrWhitespace } from '../utils/validation';
+import { isNullOrWhitespace } from '../utils/validation.ts';
 
 class AddNode extends PureComponent {
   static displayName = 'AddNode';

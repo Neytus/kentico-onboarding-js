@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
-import { isNullOrWhitespace } from '../utils/validation';
+import { isNullOrWhitespace } from '../utils/validation.ts';
 
 class EditableNode extends PureComponent {
   static displayName = 'EditableNode';
