@@ -1,5 +1,5 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import {
   applyMiddleware,
@@ -10,7 +10,7 @@ import logger from 'redux-logger';
 import { App } from './App.tsx';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
-import { rootReducer } from './reducers/rootReducer';
+import { rootReducer } from './reducers/rootReducer.ts';
 
 const store = createStore(
   rootReducer,

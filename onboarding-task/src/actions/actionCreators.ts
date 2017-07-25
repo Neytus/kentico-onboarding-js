@@ -5,9 +5,8 @@ import {
 } from './actionTypes';
 import { addNodeFactory } from './addNodeFactory';
 import { generateId } from '../utils/generateId';
-import { Action } from 'redux';
 
-export interface IAction extends Action {
+export interface IAction {
   type: string;
   payload: any;
 }

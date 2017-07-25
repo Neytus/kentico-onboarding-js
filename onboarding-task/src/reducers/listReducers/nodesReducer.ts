@@ -8,7 +8,7 @@ import {
 import { NodeContent } from '../../models/NodeContent';
 import { IAction } from '../../actions/actionCreators';
 
-export const nodesReducer = (state: OrderedMap<string, NodeContent> = OrderedMap(), action: IAction): OrderedMap<string, NodeContent> => {
+export const nodesReducer = (state = OrderedMap<string, NodeContent>(), action: IAction): OrderedMap<string, NodeContent> => {
   switch (action.type) {
     case ADD_NODE: {
       const newNode = new NodeContent({
