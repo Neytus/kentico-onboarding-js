@@ -1,6 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import ImmutablePropTypes from 'react-immutable-proptypes';
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
+import { INodeViewModel } from '../models/NodeViewModel';
+const ImmutablePropTypes = require('react-immutable-proptypes');
+
+interface IViewNodeDataProps {
+  nodeViewModel: INodeViewModel;
+}
+
+interface IViewNodeCallbackProps {
+  onEdit: () => void;
+}
 
 const viewNodePropTypes = {
   nodeViewModel: ImmutablePropTypes.recordOf({
@@ -11,9 +20,9 @@ const viewNodePropTypes = {
   onEdit: PropTypes.func.isRequired,
 };
 
-const ViewNode = ({ onEdit, nodeViewModel }) => <div onClick={onEdit}>{nodeViewModel.index}. {nodeViewModel.text}</div>;
+export const ViewNode: React.StatelessComponent<IViewNodeDataProps & IViewNodeCallbackProps> = ({ onEdit, nodeViewModel }) =>
+  <div onClick={onEdit}>{nodeViewModel.index}. {nodeViewModel.text}</div>;
 
 ViewNode.displayName = 'ViewNode';
 ViewNode.propTypes = viewNodePropTypes;
 
-export { ViewNode };
