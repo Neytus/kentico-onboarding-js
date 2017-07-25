@@ -5,6 +5,7 @@ import { AppState } from '../AppState';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import * as React from 'react';
+import { IAction } from '../actions/actionCreators';
 
 interface INodeContainerProps {
   id: string;
@@ -18,7 +19,7 @@ const mapStateToProps = (state: AppState, ownProps: INodeContainerProps): INodeD
     ownProps.index),
 });
 
-const mapDispatchToProps = (dispatch: Dispatch, ownProps: INodeContainerProps): INodeCallbacksProps => ({
+const mapDispatchToProps = (dispatch: Dispatch<IAction>, ownProps: INodeContainerProps): INodeCallbacksProps => ({
   onEdit: () => dispatch(actions.toggleNode(ownProps.id)),
   onSave: (text: string) => dispatch(actions.saveNode(ownProps.id, text)),
   onCancel: () => dispatch(actions.toggleNode(ownProps.id)),
