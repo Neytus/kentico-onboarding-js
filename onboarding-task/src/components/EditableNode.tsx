@@ -1,10 +1,25 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import ImmutablePropTypes from 'react-immutable-proptypes';
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
+const ImmutablePropTypes = require('react-immutable-proptypes');
 
-import { isNullOrWhitespace } from '../utils/validation.ts';
+import { isNullOrWhitespace } from '../utils/validation';
+import { INodeViewModel } from '../models/NodeViewModel';
 
-class EditableNode extends PureComponent {
+export interface IEditableNodeDataProps {
+  nodeViewModel: INodeViewModel;
+}
+
+export interface IEditableNodeCallbacksProps {
+  onSave: (text: string) => void;
+  onCancel: () => void;
+  onDelete: () => void;
+}
+
+interface IEditableNodeState {
+  text: string;
+}
+
+export class EditableNode extends React.PureComponent<IEditableNodeDataProps & IEditableNodeCallbacksProps, IEditableNodeState> {
   static displayName = 'EditableNode';
 
   static propTypes = {
@@ -17,21 +32,21 @@ class EditableNode extends PureComponent {
     }).isRequired,
   };
 
-  constructor(props) {
+  constructor(props: IEditableNodeDataProps & IEditableNodeCallbacksProps) {
     super(props);
 
     this.state = {
-      text: this.props.nodeViewModel.text,
+      text: props.nodeViewModel.text,
     };
   }
 
-  _saveNode = event => {
+  _saveNode = (event: React.SyntheticEvent<any>): void => {
     event.preventDefault();
     this.props.onSave(this.state.text);
   };
 
-  _updateText = event => {
-    const text = event.target.value;
+  _updateText = (event: React.ChangeEvent<any>): void => {
+    const text = (event.target as any).value;
     this.setState(() => ({ text }));
   };
 
@@ -77,5 +92,3 @@ class EditableNode extends PureComponent {
     );
   }
 }
-
-export { EditableNode };
