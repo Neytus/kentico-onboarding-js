@@ -4,7 +4,7 @@ import { Record } from 'immutable';
 import { NodeContent } from './NodeContent';
 import { NodeInfo } from './NodeInfo';
 
-interface INodeViewModel {
+export interface INodeViewModel {
   readonly id: string;
   readonly text: string;
   readonly isBeingEdited: boolean;
@@ -37,6 +37,4 @@ const createNodeViewModel: ICreateNodeViewModel = (nodeContent, nodeInfo, index)
   });
 };
 
-const createMemoizedNodeViewModel = memoize(createNodeViewModel);
-
-export { createMemoizedNodeViewModel };
+export const createMemoizedNodeViewModel = memoize(createNodeViewModel);

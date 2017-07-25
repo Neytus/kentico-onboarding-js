@@ -1,22 +1,34 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import ImmutablePropTypes from 'react-immutable-proptypes';
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
+const ImmutablePropTypes = require('react-immutable-proptypes');
 
 import { EditableNode } from './EditableNode';
 import { ViewNode } from './ViewNode';
+import { INodeViewModel } from '../models/NodeViewModel';
 
-const Node = ({ nodeViewModel, onEdit, onSave, onCancel, onDelete }) => {
-  return nodeViewModel.isBeingEdited ? (
+export interface INodeDataProps {
+  nodeViewModel: INodeViewModel;
+}
+
+export interface INodeCallbacksProps {
+  onEdit: () => void;
+  onSave: (text: string) => void;
+  onCancel: () => void;
+  onDelete: () => void;
+}
+
+export const Node: React.StatelessComponent<INodeDataProps & INodeCallbacksProps> = props => {
+  return props.nodeViewModel.isBeingEdited ? (
     <EditableNode
-      nodeViewModel={nodeViewModel}
-      onCancel={onCancel}
-      onSave={onSave}
-      onDelete={onDelete}
+      nodeViewModel={props.nodeViewModel}
+      onCancel={props.onCancel}
+      onSave={props.onSave}
+      onDelete={props.onDelete}
     />
   ) : (
     <ViewNode
-      nodeViewModel={nodeViewModel}
-      onEdit={onEdit}
+      nodeViewModel={props.nodeViewModel}
+      onEdit={props.onEdit}
     />
   );
 };
@@ -29,12 +41,8 @@ Node.propTypes = {
     text: PropTypes.string.isRequired,
     index: PropTypes.number.isRequired,
   }).isRequired,
-  // id: PropTypes.string.isRequired,
-  // index: PropTypes.number.isRequired,
   onEdit: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
 };
-
-export { Node };

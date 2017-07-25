@@ -15,16 +15,14 @@ const listPropTypes = {
 
 export const List: React.StatelessComponent<IListDataProps> = props => {
   const nodes = props.nodesIds
-    .map((id: string, index: number) => {
-    const propToPass = { id, index };
-    return (
+    .map((id: string, index: number) => (
       <li className="list-group-item" key={id}>
         <Node
-          listProp={propToPass}
+          id={id}
+          index={index}
         />
       </li>
-    );
-  });
+    ));
 
   return (
     <div className="row">

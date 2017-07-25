@@ -1,18 +1,28 @@
+import { INodeCallbacksProps, INodeDataProps, Node as NodeComponent } from '../components/Node';
+import { createMemoizedNodeViewModel } from '../models/NodeViewModel';
+import * as actions from '../actions/actionCreators';
+import { AppState } from '../AppState';
+import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import * as React from 'react';
 
-import { Node as NodeComponent } from '../components/Node';
-import { createMemoizedNodeViewModel } from '../models/NodeViewModel.ts';
-import * as actions from '../actions/actionCreators.ts';
+interface INodeContainerProps {
+  id: string;
+  index: number;
+}
 
-const mapStateToProps = ({ nodesList: { nodes, nodesInfo } }, { listProp: { id, index } }) => ({
-  nodeViewModel: createMemoizedNodeViewModel(nodes.get(id), nodesInfo.get(id), index),
+const mapStateToProps = (state: AppState, ownProps: INodeContainerProps): INodeDataProps => ({
+  nodeViewModel: createMemoizedNodeViewModel(
+    state.nodesList.nodes.get(ownProps.id),
+    state.nodesList.nodesInfo.get(ownProps.id),
+    ownProps.index),
 });
 
-const mapDispatchToProps = (dispatch, { listProp: { id } }) => ({
-  onEdit: () => dispatch(actions.toggleNode(id)),
-  onSave: text => dispatch(actions.saveNode(id, text)),
-  onCancel: () => dispatch(actions.toggleNode(id)),
-  onDelete: () => dispatch(actions.deleteNode(id)),
+const mapDispatchToProps = (dispatch: Dispatch, ownProps: INodeContainerProps): INodeCallbacksProps => ({
+  onEdit: () => dispatch(actions.toggleNode(ownProps.id)),
+  onSave: (text: string) => dispatch(actions.saveNode(ownProps.id, text)),
+  onCancel: () => dispatch(actions.toggleNode(ownProps.id)),
+  onDelete: () => dispatch(actions.deleteNode(ownProps.id)),
 });
 
-export const Node = connect(mapStateToProps, mapDispatchToProps)(NodeComponent);
+export const Node: React.ComponentClass<INodeContainerProps> = connect(mapStateToProps, mapDispatchToProps)(NodeComponent);
