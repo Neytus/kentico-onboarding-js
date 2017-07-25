@@ -1,1 +1,1 @@
-export const isNullOrWhitespace = text => !text || !text.trim().length;
+export const isNullOrWhitespace = (text: string): boolean => !text || !text.trim().length;
