@@ -3,7 +3,7 @@ import { List as ImmutableList } from 'immutable';
 const ImmutablePropTypes = require('react-immutable-proptypes');
 
 import { AddNode } from '../containers/AddNode';
-import { Node } from '../containers/Node.js';
+import { Node } from '../containers/Node';
 
 export interface IListDataProps {
   nodesIds: ImmutableList<string>;
