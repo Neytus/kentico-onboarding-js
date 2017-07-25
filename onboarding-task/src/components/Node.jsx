@@ -29,6 +29,8 @@ Node.propTypes = {
     text: PropTypes.string.isRequired,
     index: PropTypes.number.isRequired,
   }).isRequired,
+  // id: PropTypes.string.isRequired,
+  // index: PropTypes.number.isRequired,
   onEdit: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,

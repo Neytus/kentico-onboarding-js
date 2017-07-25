@@ -1,19 +1,30 @@
-import React from 'react';
-import ImmutablePropTypes from 'react-immutable-proptypes';
+import * as React from 'react';
+import { List as ImmutableList } from 'immutable';
+const ImmutablePropTypes = require('react-immutable-proptypes');
 
 import { AddNode } from '../containers/AddNode';
 import { Node } from '../containers/Node.js';
 
-const List = props => {
+export interface IListDataProps {
+  nodesIds: ImmutableList<string>;
+}
+
+const listPropTypes = {
+  nodesIds: ImmutablePropTypes.list.isRequired,
+};
+
+export const List: React.StatelessComponent<IListDataProps> = props => {
   const nodes = props.nodesIds
-    .map((id, index) => (
+    .map((id: string, index: number) => {
+    const propToPass = { id, index };
+    return (
       <li className="list-group-item" key={id}>
         <Node
-          id={id}
-          index={index}
+          listProp={propToPass}
         />
       </li>
-    ));
+    );
+  });
 
   return (
     <div className="row">
@@ -30,8 +41,4 @@ const List = props => {
 };
 
 List.displayName = 'List';
-List.propTypes = {
-  nodesIds: ImmutablePropTypes.list.isRequired,
-};
-
-export { List };
+List.propTypes = listPropTypes;

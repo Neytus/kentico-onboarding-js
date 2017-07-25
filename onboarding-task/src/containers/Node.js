@@ -4,11 +4,11 @@ import { Node as NodeComponent } from '../components/Node';
 import { createMemoizedNodeViewModel } from '../models/NodeViewModel.ts';
 import * as actions from '../actions/actionCreators.ts';
 
-const mapStateToProps = ({ nodesList: { nodes, nodesInfo } }, { id, index }) => ({
+const mapStateToProps = ({ nodesList: { nodes, nodesInfo } }, { listProp: { id, index } }) => ({
   nodeViewModel: createMemoizedNodeViewModel(nodes.get(id), nodesInfo.get(id), index),
 });
 
-const mapDispatchToProps = (dispatch, { id }) => ({
+const mapDispatchToProps = (dispatch, { listProp: { id } }) => ({
   onEdit: () => dispatch(actions.toggleNode(id)),
   onSave: text => dispatch(actions.saveNode(id, text)),
   onCancel: () => dispatch(actions.toggleNode(id)),
