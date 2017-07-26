@@ -1,4 +1,4 @@
-import { isNullOrWhitespace } from '../../src/utils/validation';
+import { isNullOrWhitespace } from '../../src/utils/validation.ts';
 
 describe('validation', () => {
   describe('isNullOrWhitespace', () => {
