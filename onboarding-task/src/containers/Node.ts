@@ -5,7 +5,7 @@ import * as React from 'react';
 import { INodeCallbacksProps, INodeDataProps, Node as NodeComponent } from '../components/Node';
 import { createMemoizedNodeViewModel } from '../models/NodeViewModel';
 import * as actions from '../actions/actionCreators';
-import { IAppState } from '../AppState';
+import { IAppState } from '../reducers/AppState';
 import { IAction } from '../actions/actionCreators';
 
 interface INodeContainerProps {

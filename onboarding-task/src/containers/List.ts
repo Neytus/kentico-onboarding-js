@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import * as React from 'react';
 
 import { List as ListComponent, IListDataProps } from '../components/List';
-import { IAppState } from '../AppState';
+import { IAppState } from '../reducers/AppState';
 
 const mapStateToProps = ({ nodesList: {nodesIds} }: IAppState): IListDataProps => ({
   nodesIds,
