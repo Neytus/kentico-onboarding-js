@@ -6,7 +6,9 @@ import {
 } from '../../actions/actionTypes';
 import { IAction } from '../../actions/actionCreators';
 
-export const nodesIdsReducer = (state = List<string>(), action: IAction): List<string> => {
+export type INodesIds = List<string>;
+
+export const nodesIdsReducer = (state: INodesIds = List<string>(), action: IAction): INodesIds => {
   switch (action.type) {
     case ADD_NODE:
       return state.push(action.payload.id);
