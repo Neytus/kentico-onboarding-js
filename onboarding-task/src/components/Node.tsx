@@ -16,33 +16,43 @@ export interface INodeCallbacksProps {
   onCancel: () => void;
   onDelete: () => void;
 }
-// TODO reformat props
-export const Node: React.StatelessComponent<INodeDataProps & INodeCallbacksProps> = ({nodeViewModel, onEdit, onCancel, onDelete, onSave}) => {
-  return nodeViewModel.isBeingEdited ? (
-    <EditableNode
-      nodeViewModel={nodeViewModel}
-      onCancel={onCancel}
-      onSave={onSave}
-      onDelete={onDelete}
-    />
-  ) : (
-    <ViewNode
-      nodeViewModel={nodeViewModel}
-      onEdit={onEdit}
-    />
-  );
-};
 
-Node.displayName = 'Node';
-Node.propTypes = {
+const nodePropTypes = {
   nodeViewModel: ImmutablePropTypes.recordOf({
     id: PropTypes.string.isRequired,
     isBeingEdited: PropTypes.bool.isRequired,
     text: PropTypes.string.isRequired,
     index: PropTypes.number.isRequired,
   }).isRequired,
-  onEdit: PropTypes.func.isRequired,
-  onSave: PropTypes.func.isRequired,
-  onCancel: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
+    onEdit: PropTypes.func.isRequired,
+    onSave: PropTypes.func.isRequired,
+    onCancel: PropTypes.func.isRequired,
+    onDelete: PropTypes.func.isRequired,
 };
+
+export const Node: React.StatelessComponent<INodeDataProps & INodeCallbacksProps> =
+  ({
+     nodeViewModel,
+     onEdit,
+     onCancel,
+     onDelete,
+     onSave
+   }) => {
+
+    return nodeViewModel.isBeingEdited ? (
+      <EditableNode
+        nodeViewModel={nodeViewModel}
+        onCancel={onCancel}
+        onSave={onSave}
+        onDelete={onDelete}
+      />
+    ) : (
+      <ViewNode
+        nodeViewModel={nodeViewModel}
+        onEdit={onEdit}
+      />
+    );
+  };
+
+Node.displayName = 'Node';
+Node.propTypes = nodePropTypes;
