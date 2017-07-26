@@ -3,7 +3,6 @@ import * as React from 'react';
 
 import { addNode } from '../actions/actionCreators';
 import { AddNode as AddNodeComponent, IAddNodeCallbacksProps } from '../components/AddNode';
-import { Dispatch } from '../reducers/IAppState';
 
 const mapDispatchToProps = (dispatch: Dispatch): IAddNodeCallbacksProps => ({
   onAdd: (text: string) => dispatch(addNode(text)),

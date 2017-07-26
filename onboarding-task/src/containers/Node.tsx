@@ -5,7 +5,6 @@ import { INodeCallbacksProps, INodeDataProps, Node as NodeComponent } from '../c
 import { createMemoizedNodeViewModel } from '../models/NodeViewModel';
 import * as actions from '../actions/actionCreators';
 import { IAppState } from '../reducers/IAppState';
-import { Dispatch } from '../reducers/IAppState';
 
 interface INodeContainerProps {
   id: string;
