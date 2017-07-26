@@ -12,11 +12,11 @@ interface INodeContainerProps {
   index: number;
 }
 
-const mapStateToProps = ({nodesList: { nodes, nodesInfo } }: IAppState, {id, index}: INodeContainerProps): INodeDataProps => ({
+const mapStateToProps = ({nodesList: {nodes, nodesInfo}}: IAppState, {id, index}: INodeContainerProps): INodeDataProps => ({
   nodeViewModel: createMemoizedNodeViewModel(nodes.get(id), nodesInfo.get(id), index),
 });
 
-const mapDispatchToProps = (dispatch: Dispatch, { id }: INodeContainerProps): INodeCallbacksProps => ({
+const mapDispatchToProps = (dispatch: Dispatch, {id}: INodeContainerProps): INodeCallbacksProps => ({
   onEdit: () => dispatch(actions.toggleNode(id)),
   onSave: (text: string) => dispatch(actions.saveNode(id, text)),
   onCancel: () => dispatch(actions.toggleNode(id)),
