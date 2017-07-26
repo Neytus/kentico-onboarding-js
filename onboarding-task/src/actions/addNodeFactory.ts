@@ -1,11 +1,7 @@
 import { ADD_NODE } from './actionTypes';
 import { IAction } from './actionCreators';
 
-interface IAddNodeFactory {
-  (generateId: (() => string)): ((text: string) => IAction);
-}
-
-export const addNodeFactory: IAddNodeFactory = generateId => text => ({
+export const addNodeFactory = (generateId: () => string) => (text: string): IAction => ({
   type: ADD_NODE,
   payload: {
     id: generateId(),
