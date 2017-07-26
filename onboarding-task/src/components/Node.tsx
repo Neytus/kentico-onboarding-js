@@ -16,8 +16,8 @@ export interface INodeCallbacksProps {
   onCancel: () => void;
   onDelete: () => void;
 }
-
-export const Node: React.StatelessComponent<INodeDataProps & INodeCallbacksProps> = ({ nodeViewModel, onEdit, onCancel, onDelete, onSave }) => {
+// TODO reformat props
+export const Node: React.StatelessComponent<INodeDataProps & INodeCallbacksProps> = ({nodeViewModel, onEdit, onCancel, onDelete, onSave}) => {
   return nodeViewModel.isBeingEdited ? (
     <EditableNode
       nodeViewModel={nodeViewModel}

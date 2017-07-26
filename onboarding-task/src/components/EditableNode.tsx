@@ -40,12 +40,12 @@ export class EditableNode extends React.PureComponent<IEditableNodeDataProps & I
     };
   }
 
-  _saveNode = (event: React.SyntheticEvent<any>): void => {
+  _saveNode = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     this.props.onSave(this.state.text);
   };
 
-  _updateText = (event: React.ChangeEvent<any>): void => {
+  _updateText = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const text = event.target.value;
     this.setState(() => ({ text }));
   };

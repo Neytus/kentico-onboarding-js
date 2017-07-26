@@ -30,13 +30,13 @@ export class AddNode extends React.PureComponent<IAddNodeDataProps & IAddNodeCal
     };
   }
 
-  _onAdd = (event: React.SyntheticEvent<any>): void => {
+  _onAdd = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     this.props.onAdd(this.state.text);
     this.setState(() => ({ text: '' }));
   };
 
-  _updateText = (event: React.ChangeEvent<any>): void => {
+  _updateText = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const text = event.target.value;
     this.setState(() => ({ text }));
   };

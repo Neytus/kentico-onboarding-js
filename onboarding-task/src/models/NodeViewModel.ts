@@ -11,10 +11,6 @@ export interface INodeViewModel {
   readonly index: number;
 }
 
-interface ICreateNodeViewModel {
-  (content: NodeContent, info: NodeInfo, index: number): INodeViewModel;
-}
-
 const defaultNodeViewModel: INodeViewModel = {
   id: '00000000-0000-0000-0000-000000000000',
   text: '',
@@ -22,17 +18,17 @@ const defaultNodeViewModel: INodeViewModel = {
   index: 0,
 };
 
-class NodeViewModel extends Record(defaultNodeViewModel) implements INodeViewModel {
+export class NodeViewModel extends Record(defaultNodeViewModel) implements INodeViewModel {
   readonly id: string;
   readonly text: string;
   readonly isBeingEdited: boolean;
   readonly index: number;
 }
 
-const createNodeViewModel: ICreateNodeViewModel = (nodeContent, nodeInfo, index) => {
+const createNodeViewModel = (content: NodeContent, info: NodeInfo, index: number): INodeViewModel => {
   return new NodeViewModel({
-    ...nodeContent.toObject(),
-    ...nodeInfo.toObject(),
+    ...content.toObject(),
+    ...info.toObject(),
     index: index + 1,
   });
 };

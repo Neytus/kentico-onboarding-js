@@ -1,4 +1,4 @@
-import { INodesList } from './listReducers/NodesList';
+import { INodesList } from './listReducers/INodesList';
 import { IAction } from '../actions/actionCreators';
 
 export interface IAppState {
