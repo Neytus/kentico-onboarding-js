@@ -1,4 +1,3 @@
-import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import * as React from 'react';
 
@@ -6,7 +5,7 @@ import { INodeCallbacksProps, INodeDataProps, Node as NodeComponent } from '../c
 import { createMemoizedNodeViewModel } from '../models/NodeViewModel';
 import * as actions from '../actions/actionCreators';
 import { IAppState } from '../reducers/AppState';
-import { IAction } from '../actions/actionCreators';
+import { Dispatch } from '../reducers/AppState';
 
 interface INodeContainerProps {
   id: string;
@@ -17,7 +16,7 @@ const mapStateToProps = ({nodesList: { nodes, nodesInfo } }: IAppState, {id, ind
   nodeViewModel: createMemoizedNodeViewModel(nodes.get(id), nodesInfo.get(id), index),
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<IAction>, { id }: INodeContainerProps): INodeCallbacksProps => ({
+const mapDispatchToProps = (dispatch: Dispatch, { id }: INodeContainerProps): INodeCallbacksProps => ({
   onEdit: () => dispatch(actions.toggleNode(id)),
   onSave: (text: string) => dispatch(actions.saveNode(id, text)),
   onCancel: () => dispatch(actions.toggleNode(id)),

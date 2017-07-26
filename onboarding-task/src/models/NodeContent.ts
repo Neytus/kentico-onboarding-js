@@ -1,8 +1,8 @@
 import { Record } from 'immutable';
 
 interface INodeContent {
-  id: string;
-  text: string;
+  readonly id: string;
+  readonly text: string;
 }
 
 const defaultNodeContent: INodeContent = {
@@ -11,8 +11,8 @@ const defaultNodeContent: INodeContent = {
 };
 
 class NodeContent extends Record(defaultNodeContent) implements INodeContent {
-  id: string;
-  text: string;
+  readonly id: string;
+  readonly text: string;
 }
 
 export { NodeContent };

@@ -2,7 +2,7 @@ import { Record } from 'immutable';
 
 
 interface INodeInfo {
-  isBeingEdited: boolean;
+  readonly isBeingEdited: boolean;
 }
 
 const defaultNodeInfo: INodeInfo = {
@@ -10,7 +10,7 @@ const defaultNodeInfo: INodeInfo = {
 };
 
 class NodeInfo extends Record(defaultNodeInfo) implements INodeInfo {
-  isBeingEdited: boolean;
+  readonly isBeingEdited: boolean;
 }
 
 export { NodeInfo }
