@@ -14,7 +14,7 @@ export type INodesInfo = OrderedMap<string, NodeInfo>;
 export const nodesInfoReducer = (state: INodesInfo = OrderedMap<string, NodeInfo>(), action: IAction): INodesInfo => {
   switch (action.type) {
     case ADD_NODE:
-      return state.set(action.payload.id, new NodeInfo());
+      return state.set(action.payload.id, new NodeInfo({}));
     case DELETE_NODE:
       return state.delete(action.payload.id);
     case TOGGLE_NODE: {
