@@ -13,17 +13,16 @@ export type INodes = OrderedMap<string, NodeContent>;
 export const nodesReducer = (state: INodes = OrderedMap<string, NodeContent>(), action: IAction): INodes => {
   switch (action.type) {
     case ADD_NODE: {
-      const newNode = new NodeContent({
-        id: action.payload.id,
-        text: action.payload.text,
-      });
+      const newNode = new NodeContent(action.payload);
 
       return state.set(newNode.id, newNode);
     }
     case DELETE_NODE:
       return state.delete(action.payload.id);
-    case SAVE_NODE:
-      return state.setIn([action.payload.id, 'text'], action.payload.text);
+    case SAVE_NODE: {
+      const newNode = state.get(action.payload.id).with(action.payload);
+      return state.set(newNode.id, newNode);
+    }
     default:
       return state;
   }
