@@ -40,6 +40,12 @@ export class EditableNode extends React.PureComponent<IEditableNodeDataProps & I
     };
   }
 
+  _cancelNode = (event: React.KeyboardEvent<HTMLFormElement>): void => {
+    if (event.keyCode === 27) {
+      this.props.onCancel();
+    }
+  };
+
   _saveNode = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     this.props.onSave(this.state.text);
@@ -54,7 +60,7 @@ export class EditableNode extends React.PureComponent<IEditableNodeDataProps & I
     const { text } = this.state;
 
     return (
-      <form className="form-inline" onSubmit={this._saveNode}>
+      <form className="form-inline" onSubmit={this._saveNode} onKeyDown={this._cancelNode}>
         {this.props.nodeViewModel.index}.
 
         <input
