@@ -11,5 +11,3 @@ export const TypedRecord = <ClassType, ContentType>(defaultStuff: ContentType) =
     }
   };
 };
-
-

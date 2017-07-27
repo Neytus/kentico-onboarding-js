@@ -21,7 +21,7 @@ const viewNodePropTypes = {
   onEdit: PropTypes.func.isRequired,
 };
 
-export const ViewNode: React.StatelessComponent<IViewNodeDataProps & IViewNodeCallbackProps> = ({ onEdit, nodeViewModel }) =>
+export const ViewNode: React.StatelessComponent<IViewNodeDataProps & IViewNodeCallbackProps> = ({onEdit, nodeViewModel}) =>
   <div onClick={onEdit}>{nodeViewModel.index}. {nodeViewModel.text}</div>;
 
 ViewNode.displayName = 'ViewNode';

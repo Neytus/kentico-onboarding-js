@@ -53,11 +53,11 @@ export class EditableNode extends React.PureComponent<IEditableNodeDataProps & I
 
   _updateText = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const text = event.target.value;
-    this.setState(() => ({ text }));
+    this.setState(() => ({text}));
   };
 
   render() {
-    const { text } = this.state;
+    const {text} = this.state;
 
     return (
       <form className="form-inline" onSubmit={this._saveNode} onKeyDown={this._cancelNode}>

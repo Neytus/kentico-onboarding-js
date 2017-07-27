@@ -21,6 +21,7 @@ export const nodesReducer = (state: INodes = OrderedMap<string, NodeContent>(), 
       return state.delete(action.payload.id);
     case SAVE_NODE: {
       const newNode = state.get(action.payload.id).with(action.payload);
+
       return state.set(newNode.id, newNode);
     }
     default:

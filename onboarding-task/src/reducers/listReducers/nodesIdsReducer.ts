@@ -17,6 +17,7 @@ export const nodesIdsReducer = (state: INodesIds = List<string>(), action: IActi
       if (index === -1) {
         return state;
       }
+
       return state.delete(index);
     }
     default:

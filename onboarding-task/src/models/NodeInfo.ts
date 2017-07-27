@@ -1,6 +1,5 @@
 import { TypedRecord } from './TypedRecord';
 
-
 interface INodeInfo {
   readonly isBeingEdited: boolean;
 }
@@ -13,4 +12,4 @@ class NodeInfo extends TypedRecord<NodeInfo, INodeInfo>(defaultNodeInfo) impleme
   readonly isBeingEdited: boolean;
 }
 
-export { NodeInfo }
+export { NodeInfo };

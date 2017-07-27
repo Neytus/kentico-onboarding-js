@@ -4,7 +4,7 @@ import * as React from 'react';
 import { List as ListComponent, IListDataProps } from '../components/List';
 import { IAppState } from '../reducers/IAppState';
 
-const mapStateToProps = ({ nodesList: {nodesIds} }: IAppState): IListDataProps => ({
+const mapStateToProps = ({nodesList: {nodesIds}}: IAppState): IListDataProps => ({
   nodesIds,
 });
 

@@ -24,10 +24,10 @@ const nodePropTypes = {
     text: PropTypes.string.isRequired,
     index: PropTypes.number.isRequired,
   }).isRequired,
-    onEdit: PropTypes.func.isRequired,
-    onSave: PropTypes.func.isRequired,
-    onCancel: PropTypes.func.isRequired,
-    onDelete: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onSave: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export const Node: React.StatelessComponent<INodeDataProps & INodeCallbacksProps> =

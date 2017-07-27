@@ -20,11 +20,13 @@ export const nodesInfoReducer = (state: INodesInfo = OrderedMap<string, NodeInfo
     case TOGGLE_NODE: {
       const oldNode = state.get(action.payload.id);
       const newNode = oldNode.with({isBeingEdited: !oldNode.isBeingEdited});
+
       return state.set(action.payload.id, newNode);
     }
     case SAVE_NODE: {
       const oldNode = state.get(action.payload.id);
       const newNode = oldNode.with({isBeingEdited: !oldNode.isBeingEdited});
+
       return state.set(action.payload.id, newNode);
     }
     default:
