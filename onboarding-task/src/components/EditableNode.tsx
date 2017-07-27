@@ -41,7 +41,7 @@ export class EditableNode extends React.PureComponent<IEditableNodeDataProps & I
   }
 
   _cancelNode = (event: React.KeyboardEvent<HTMLFormElement>): void => {
-    if (event.keyCode === 27) {
+    if (event.key === 'Escape') {
       this.props.onCancel();
     }
   };
