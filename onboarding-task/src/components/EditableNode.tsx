@@ -5,21 +5,23 @@ import * as PropTypes from 'prop-types';
 import { isNullOrWhitespace } from '../utils/validation';
 import { INodeViewModel } from '../models/NodeViewModel';
 
-export interface IEditableNodeDataProps {
+interface IEditableNodeDataProps {
   nodeViewModel: INodeViewModel;
 }
 
-export interface IEditableNodeCallbacksProps {
+interface IEditableNodeCallbacksProps {
   onSave: (text: string) => void;
   onCancel: () => void;
   onDelete: () => void;
 }
 
+type IEditableNodeProps = IEditableNodeDataProps & IEditableNodeCallbacksProps;
+
 interface IEditableNodeState {
   text: string;
 }
 
-export class EditableNode extends React.PureComponent<IEditableNodeDataProps & IEditableNodeCallbacksProps, IEditableNodeState> {
+export class EditableNode extends React.PureComponent<IEditableNodeProps, IEditableNodeState> {
   static displayName = 'EditableNode';
 
   static propTypes = {
@@ -32,7 +34,7 @@ export class EditableNode extends React.PureComponent<IEditableNodeDataProps & I
     }).isRequired,
   };
 
-  constructor(props: IEditableNodeDataProps & IEditableNodeCallbacksProps) {
+  constructor(props: IEditableNodeProps) {
     super(props);
 
     this.state = {

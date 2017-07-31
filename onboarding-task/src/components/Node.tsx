@@ -31,7 +31,6 @@ const nodePropTypes = {
 };
 
 export const Node: React.StatelessComponent<INodeDataProps & INodeCallbacksProps> = props => {
-
   return props.nodeViewModel.isBeingEdited ? (
     <EditableNode
       nodeViewModel={props.nodeViewModel}
