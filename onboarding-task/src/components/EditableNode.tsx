@@ -1,6 +1,7 @@
 const ImmutablePropTypes = require('react-immutable-proptypes');
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import { HotKeys } from 'react-hotkeys';
 
 import { isNullOrWhitespace } from '../utils/validation';
 import { INodeViewModel } from '../models/NodeViewModel';
@@ -34,6 +35,14 @@ export class EditableNode extends React.PureComponent<IEditableNodeProps, IEdita
     }).isRequired,
   };
 
+  private keyMap = {
+    'cancelNode': 'esc',
+  };
+
+  private keyHandlers = {
+    'cancelNode': this.props.onCancel,
+  };
+
   constructor(props: IEditableNodeProps) {
     super(props);
 
@@ -42,13 +51,7 @@ export class EditableNode extends React.PureComponent<IEditableNodeProps, IEdita
     };
   }
 
-  _cancelNode = (event: React.KeyboardEvent<HTMLFormElement>): void => {
-    if (event.key === 'Escape') {
-      this.props.onCancel();
-    }
-  };
-
-  _saveNode = (event: React.FormEvent<HTMLFormElement>): void => {
+  _saveNode = (event: React.KeyboardEvent<HTMLFormElement>) => {
     event.preventDefault();
     this.props.onSave(this.state.text);
   };
@@ -62,41 +65,43 @@ export class EditableNode extends React.PureComponent<IEditableNodeProps, IEdita
     const {text} = this.state;
 
     return (
-      <form className="form-inline" onSubmit={this._saveNode} onKeyDown={this._cancelNode}>
-        {this.props.nodeViewModel.index}.
+      <HotKeys keyMap={this.keyMap} handlers={this.keyHandlers}>
+        <form className="form-inline" onSubmit={this._saveNode}>
+          {this.props.nodeViewModel.index}.
 
-        <input
-          autoFocus
-          className="form-control"
-          value={text}
-          onChange={this._updateText}
-        />
+          <input
+            autoFocus
+            className="form-control"
+            value={text}
+            onChange={this._updateText}
+          />
 
-        <button
-          type="submit"
-          className="btn btn-primary"
-          disabled={isNullOrWhitespace(text)}
-        >
-          Save
-        </button>
+          <button
+            type="submit"
+            className="btn btn-primary"
+            disabled={isNullOrWhitespace(text)}
+          >
+            Save
+          </button>
 
-        <button
-          type="button"
-          className="btn btn-default"
-          onClick={this.props.onCancel}
-        >
-          Cancel
-        </button>
+          <button
+            type="button"
+            className="btn btn-default"
+            onClick={this.props.onCancel}
+          >
+            Cancel
+          </button>
 
-        <button
-          type="button"
-          className="btn btn-danger"
-          onClick={this.props.onDelete}
-        >
-          Delete
-        </button>
+          <button
+            type="button"
+            className="btn btn-danger"
+            onClick={this.props.onDelete}
+          >
+            Delete
+          </button>
 
-      </form>
+        </form>
+      </HotKeys>
     );
   }
 }
