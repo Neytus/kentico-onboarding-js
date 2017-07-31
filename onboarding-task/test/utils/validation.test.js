@@ -3,23 +3,38 @@ import { isNullOrWhitespace } from '../../src/utils/validation.ts';
 describe('validation', () => {
   describe('isNullOrWhitespace', () => {
     it('returns true on null input', () => {
-      expect(isNullOrWhitespace(null)).toBe(true);
+      const expectedValue = true;
+      const actualValue = isNullOrWhitespace(null);
+
+      expect(actualValue).toBe(expectedValue);
     });
 
     it('returns true on undefined', () => {
-      expect(isNullOrWhitespace(undefined)).toBe(true);
+      const expectedValue = true;
+      const actualValue = isNullOrWhitespace(undefined);
+
+      expect(actualValue).toBe(expectedValue);
     });
 
     it('returns true on whitespace', () => {
-      expect(isNullOrWhitespace(' ')).toBe(true);
+      const expectedValue = true;
+      const actualValue = isNullOrWhitespace(' ');
+
+      expect(actualValue).toBe(expectedValue);
     });
 
     it('returns true on empty string', () => {
-      expect(isNullOrWhitespace('')).toBe(true);
+      const expectedValue = true;
+      const actualValue = isNullOrWhitespace('');
+
+      expect(actualValue).toBe(expectedValue);
     });
 
     it('returns false on a valid string', () => {
-      expect(isNullOrWhitespace('abc')).toBe(false);
+      const expectedValue = false;
+      const actualValue = isNullOrWhitespace('abc');
+
+      expect(actualValue).toBe(expectedValue);
     });
   });
 });
