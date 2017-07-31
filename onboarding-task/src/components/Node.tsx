@@ -17,7 +17,9 @@ export interface INodeCallbacksProps {
   onDelete: () => void;
 }
 
-const nodePropTypes = {
+type INodeProps = INodeDataProps & INodeCallbacksProps;
+
+const nodePropTypes: React.ValidationMap<INodeProps> = {
   nodeViewModel: ImmutablePropTypes.recordOf({
     id: PropTypes.string.isRequired,
     isBeingEdited: PropTypes.bool.isRequired,
@@ -30,7 +32,7 @@ const nodePropTypes = {
   onDelete: PropTypes.func.isRequired,
 };
 
-export const Node: React.StatelessComponent<INodeDataProps & INodeCallbacksProps> = props => {
+export const Node: React.StatelessComponent<INodeProps> = props => {
   return props.nodeViewModel.isBeingEdited ? (
     <EditableNode
       nodeViewModel={props.nodeViewModel}

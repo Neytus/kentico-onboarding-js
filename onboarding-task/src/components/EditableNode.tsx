@@ -25,7 +25,7 @@ interface IEditableNodeState {
 export class EditableNode extends React.PureComponent<IEditableNodeProps, IEditableNodeState> {
   static displayName = 'EditableNode';
 
-  static propTypes = {
+  static propTypes: React.ValidationMap<IEditableNodeProps> = {
     onSave: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired,

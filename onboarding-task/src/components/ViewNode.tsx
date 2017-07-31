@@ -12,7 +12,9 @@ interface IViewNodeCallbackProps {
   onEdit: () => void;
 }
 
-const viewNodePropTypes = {
+type IViewNodeProps = IViewNodeDataProps & IViewNodeCallbackProps;
+
+const viewNodePropTypes: React.ValidationMap<IViewNodeProps> = {
   nodeViewModel: ImmutablePropTypes.recordOf({
     id: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
@@ -21,7 +23,7 @@ const viewNodePropTypes = {
   onEdit: PropTypes.func.isRequired,
 };
 
-export const ViewNode: React.StatelessComponent<IViewNodeDataProps & IViewNodeCallbackProps> = ({onEdit, nodeViewModel}) =>
+export const ViewNode: React.StatelessComponent<IViewNodeProps> = ({onEdit, nodeViewModel}) =>
   <div onClick={onEdit}>{nodeViewModel.index}. {nodeViewModel.text}</div>;
 
 ViewNode.displayName = 'ViewNode';

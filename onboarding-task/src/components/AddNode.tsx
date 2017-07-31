@@ -14,7 +14,7 @@ interface IAddNodeState {
 export class AddNode extends React.PureComponent<IAddNodeCallbacksProps, IAddNodeState> {
   static displayName = 'AddNode';
 
-  static propTypes = {
+  static propTypes: React.ValidationMap<IAddNodeCallbacksProps> = {
     onAdd: PropTypes.func.isRequired,
   };
 

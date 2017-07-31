@@ -9,7 +9,7 @@ export interface IListDataProps {
   nodesIds: ImmutableList<IdType>;
 }
 
-const listPropTypes = {
+const listPropTypes: React.ValidationMap<IListDataProps> = {
   nodesIds: ImmutablePropTypes.list.isRequired,
 };
 
