@@ -2,7 +2,7 @@ import { NodeContent } from '../../src/models/NodeContent.ts';
 import { NodeInfo } from '../../src/models/NodeInfo.ts';
 import {
   createMemoizedNodeViewModel,
-  NodeViewModel
+  NodeViewModel,
 } from '../../src/models/NodeViewModel.ts';
 import { generateId } from '../../src/utils/generateId.ts';
 

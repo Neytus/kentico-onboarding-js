@@ -5,9 +5,9 @@ import {
   DELETE_NODE,
 } from '../../actions/actionTypes';
 
-export type INodesIds = List<string>;
+export type INodesIds = List<IdType>;
 
-export const nodesIdsReducer = (state: INodesIds = List<string>(), action: IAction): INodesIds => {
+export const nodesIdsReducer = (state: INodesIds = List<IdType>(), action: IAction): INodesIds => {
   switch (action.type) {
     case ADD_NODE:
       return state.push(action.payload.id);

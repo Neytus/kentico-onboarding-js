@@ -7,9 +7,9 @@ import {
 } from '../../actions/actionTypes';
 import { NodeContent } from '../../models/NodeContent';
 
-export type INodes = OrderedMap<string, NodeContent>;
+export type INodes = OrderedMap<IdType, NodeContent>;
 
-export const nodesReducer = (state: INodes = OrderedMap<string, NodeContent>(), action: IAction): INodes => {
+export const nodesReducer = (state: INodes = OrderedMap<IdType, NodeContent>(), action: IAction): INodes => {
   switch (action.type) {
     case ADD_NODE: {
       const newNode = new NodeContent(action.payload);

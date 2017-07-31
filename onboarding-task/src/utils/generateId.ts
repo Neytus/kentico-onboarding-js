@@ -6,7 +6,7 @@ const generateIdPart = (): string => {
   return sGuid;
 };
 
-const generateId = (): string => (
+const generateId = (): IdType => (
   generateIdPart() + generateIdPart() + '-'
   + generateIdPart() + '-'
   + generateIdPart() + '-'

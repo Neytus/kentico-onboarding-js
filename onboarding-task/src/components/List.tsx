@@ -6,7 +6,7 @@ import { AddNode } from '../containers/AddNode';
 import { Node } from '../containers/Node';
 
 export interface IListDataProps {
-  nodesIds: ImmutableList<string>;
+  nodesIds: ImmutableList<IdType>;
 }
 
 const listPropTypes = {
@@ -15,7 +15,7 @@ const listPropTypes = {
 
 export const List: React.StatelessComponent<IListDataProps> = ({nodesIds}) => {
   const nodes = nodesIds
-    .map((id: string, index: number) => (
+    .map((id: IdType, index: number) => (
       <li className="list-group-item" key={id}>
         <Node
           id={id}
