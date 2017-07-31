@@ -6,4 +6,11 @@ describe('generateId', () => {
 
     expect(generateId()).toMatch(guidRegex);
   });
+
+  it('generates a unique ID', () => {
+    const generatedId = generateId();
+    const anotherId = generateId();
+
+    expect(generatedId).not.toBe(anotherId);
+  });
 });
