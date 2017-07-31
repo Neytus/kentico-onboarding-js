@@ -1,6 +1,6 @@
+const ImmutablePropTypes = require('react-immutable-proptypes');
 import * as React from 'react';
 import { List as ImmutableList } from 'immutable';
-const ImmutablePropTypes = require('react-immutable-proptypes');
 
 import { AddNode } from '../containers/AddNode';
 import { Node } from '../containers/Node';

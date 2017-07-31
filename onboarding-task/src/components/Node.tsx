@@ -1,6 +1,6 @@
+const ImmutablePropTypes = require('react-immutable-proptypes');
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-const ImmutablePropTypes = require('react-immutable-proptypes');
 
 import { EditableNode } from './EditableNode';
 import { ViewNode } from './ViewNode';
@@ -30,29 +30,22 @@ const nodePropTypes = {
   onDelete: PropTypes.func.isRequired,
 };
 
-export const Node: React.StatelessComponent<INodeDataProps & INodeCallbacksProps> =
-  ({
-     nodeViewModel,
-     onEdit,
-     onCancel,
-     onDelete,
-     onSave
-   }) => {
+export const Node: React.StatelessComponent<INodeDataProps & INodeCallbacksProps> = props => {
 
-    return nodeViewModel.isBeingEdited ? (
-      <EditableNode
-        nodeViewModel={nodeViewModel}
-        onCancel={onCancel}
-        onSave={onSave}
-        onDelete={onDelete}
-      />
-    ) : (
-      <ViewNode
-        nodeViewModel={nodeViewModel}
-        onEdit={onEdit}
-      />
-    );
-  };
+  return props.nodeViewModel.isBeingEdited ? (
+    <EditableNode
+      nodeViewModel={props.nodeViewModel}
+      onCancel={props.onCancel}
+      onSave={props.onSave}
+      onDelete={props.onDelete}
+    />
+  ) : (
+    <ViewNode
+      nodeViewModel={props.nodeViewModel}
+      onEdit={props.onEdit}
+    />
+  );
+};
 
 Node.displayName = 'Node';
 Node.propTypes = nodePropTypes;

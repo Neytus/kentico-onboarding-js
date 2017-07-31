@@ -1,6 +1,6 @@
+const ImmutablePropTypes = require('react-immutable-proptypes');
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-const ImmutablePropTypes = require('react-immutable-proptypes');
 
 import { INodeViewModel } from '../models/NodeViewModel';
 

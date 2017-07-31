@@ -2,8 +2,8 @@ import { Record } from 'immutable';
 
 export const TypedRecord = <ClassType, ContentType>(defaultStuff: ContentType) => {
   return class extends Record(defaultStuff) {
-    constructor(params?: Partial<ContentType>) {
-      params ? super(params) : super();
+    constructor(defaultValues?: Partial<ContentType>) {
+      defaultValues ? super(defaultValues) : super();
     }
 
     with(values: Partial<ContentType>): ClassType {
