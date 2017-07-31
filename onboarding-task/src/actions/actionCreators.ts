@@ -6,12 +6,7 @@ import {
 import { addNodeFactory } from './addNodeFactory';
 import { generateId } from '../utils/generateId';
 
-interface IAddNode {
-  (text: string): IAction;
-}
-
-// TODO
-export const addNode: IAddNode = addNodeFactory(generateId);
+export const addNode = addNodeFactory(generateId);
 
 export const toggleNode = (id: IdType): IAction => ({
   type: TOGGLE_NODE,
