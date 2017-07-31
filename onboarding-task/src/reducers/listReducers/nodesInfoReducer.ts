@@ -7,7 +7,6 @@ import {
   DELETE_NODE,
 } from '../../actions/actionTypes';
 import { NodeInfo } from '../../models/NodeInfo';
-import { IAction } from '../../actions/actionCreators';
 
 export type INodesInfo = OrderedMap<string, NodeInfo>;
 

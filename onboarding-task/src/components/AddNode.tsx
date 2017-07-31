@@ -2,11 +2,6 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
 import { isNullOrWhitespace } from '../utils/validation';
-import { INodeViewModel } from '../models/NodeViewModel';
-
-export interface IAddNodeDataProps {
-  nodeViewModel: INodeViewModel;
-}
 
 export interface IAddNodeCallbacksProps {
   onAdd: (text: string) => void;
@@ -16,14 +11,14 @@ interface IAddNodeState {
   text: string;
 }
 
-export class AddNode extends React.PureComponent<IAddNodeDataProps & IAddNodeCallbacksProps, IAddNodeState> {
+export class AddNode extends React.PureComponent<IAddNodeCallbacksProps, IAddNodeState> {
   static displayName = 'AddNode';
 
   static propTypes = {
     onAdd: PropTypes.func.isRequired,
   };
 
-  constructor(props: IAddNodeDataProps & IAddNodeCallbacksProps) {
+  constructor(props: IAddNodeCallbacksProps) {
     super(props);
     this.state = {
       text: '',

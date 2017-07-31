@@ -6,11 +6,6 @@ import {
 import { addNodeFactory } from './addNodeFactory';
 import { generateId } from '../utils/generateId';
 
-export interface IAction {
-  type: string;
-  payload: any;
-}
-
 interface IAddNode {
   (text: string): IAction;
 }
