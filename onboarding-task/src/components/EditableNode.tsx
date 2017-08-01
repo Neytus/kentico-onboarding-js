@@ -35,14 +35,6 @@ export class EditableNode extends React.PureComponent<IEditableNodeProps, IEdita
     }).isRequired,
   };
 
-  private keyMap = {
-    'cancelNode': 'esc',
-  };
-
-  private keyHandlers = {
-    'cancelNode': this.props.onCancel,
-  };
-
   constructor(props: IEditableNodeProps) {
     super(props);
 
@@ -51,9 +43,11 @@ export class EditableNode extends React.PureComponent<IEditableNodeProps, IEdita
     };
   }
 
-  _saveNode = (event: React.KeyboardEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    this.props.onSave(this.state.text);
+  _saveNode = (event: React.KeyboardEvent<HTMLFormElement>): void => {
+    if (!isNullOrWhitespace(this.state.text)) {
+      event.preventDefault();
+      this.props.onSave(this.state.text);
+    }
   };
 
   _updateText = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -64,9 +58,14 @@ export class EditableNode extends React.PureComponent<IEditableNodeProps, IEdita
   render() {
     const {text} = this.state;
 
+    const keyHandlers = {
+      'cancelNode': this.props.onCancel,
+      'saveNode': (event: React.KeyboardEvent<HTMLFormElement>) => this._saveNode(event),
+    };
+
     return (
-      <HotKeys keyMap={this.keyMap} handlers={this.keyHandlers}>
-        <form className="form-inline" onSubmit={this._saveNode}>
+      <HotKeys handlers={keyHandlers}>
+        <form className="form-inline">
           {this.props.nodeViewModel.index}.
 
           <input

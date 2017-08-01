@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
 import { isNullOrWhitespace } from '../utils/validation';
+import { HotKeys } from 'react-hotkeys';
 
 export interface IAddNodeCallbacksProps {
   onAdd: (text: string) => void;
@@ -26,9 +27,11 @@ export class AddNode extends React.PureComponent<IAddNodeCallbacksProps, IAddNod
   }
 
   _onAdd = (event: React.FormEvent<HTMLFormElement>): void => {
-    event.preventDefault();
-    this.props.onAdd(this.state.text);
-    this.setState(() => ({text: ''}));
+    if (!isNullOrWhitespace(this.state.text)) {
+      event.preventDefault();
+      this.props.onAdd(this.state.text);
+      this.setState(() => ({text: ''}));
+    }
   };
 
   _updateText = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -37,26 +40,32 @@ export class AddNode extends React.PureComponent<IAddNodeCallbacksProps, IAddNod
   };
 
   render() {
+    const keyHandlers = {
+      'saveNode': (event: React.KeyboardEvent<HTMLFormElement>) => this._onAdd(event),
+    };
+
     return (
-      <form className="form-inline" onSubmit={this._onAdd}>
+      <HotKeys handlers={keyHandlers}>
+        <form className="form-inline" onSubmit={this._onAdd}>
 
-        <input
-          autoFocus
-          className="form-control"
-          value={this.state.text}
-          onChange={this._updateText}
-        />
+          <input
+            autoFocus
+            className="form-control"
+            value={this.state.text}
+            onChange={this._updateText}
+          />
 
-        <button
-          autoFocus
-          type="submit"
-          className="btn btn-default"
-          disabled={isNullOrWhitespace(this.state.text)}
-        >
-          Add
-        </button>
+          <button
+            autoFocus
+            type="submit"
+            className="btn btn-default"
+            disabled={isNullOrWhitespace(this.state.text)}
+          >
+            Add
+          </button>
 
-      </form>
+        </form>
+      </HotKeys>
     );
   }
 }

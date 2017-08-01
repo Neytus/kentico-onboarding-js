@@ -1,6 +1,7 @@
 const ImmutablePropTypes = require('react-immutable-proptypes');
 import * as React from 'react';
 import { List as ImmutableList } from 'immutable';
+import { HotKeys } from 'react-hotkeys';
 
 import { AddNode } from '../containers/AddNode';
 import { Node } from '../containers/Node';
@@ -11,6 +12,11 @@ export interface IListDataProps {
 
 const listPropTypes: React.ValidationMap<IListDataProps> = {
   nodesIds: ImmutablePropTypes.list.isRequired,
+};
+
+const keyMap: IKeyMap = {
+  'cancelNode': 'esc',
+  'saveNode': 'enter'
 };
 
 export const List: React.StatelessComponent<IListDataProps> = ({nodesIds}) => {
@@ -28,10 +34,12 @@ export const List: React.StatelessComponent<IListDataProps> = ({nodesIds}) => {
     <div className="row">
       <div className="col-sm-12 col-md-offset-2 col-md-8 ">
         <ul className="list-group">
-          {nodes}
-          <li className="list-group-item">
-            <AddNode />
-          </li>
+          <HotKeys keyMap={keyMap}>
+            {nodes}
+            <li className="list-group-item">
+              <AddNode />
+            </li>
+          </HotKeys>
         </ul>
       </div>
     </div>

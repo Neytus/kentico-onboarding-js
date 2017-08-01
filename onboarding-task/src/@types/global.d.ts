@@ -9,6 +9,13 @@ declare global {
     type: string;
     payload: any;
   }
+
+  interface IKeyMap {
+    cancelNode: KeyCommands;
+    saveNode: KeyCommands;
+  }
+
+  type KeyCommands = 'esc' | 'enter';
 }
 
 export {};
