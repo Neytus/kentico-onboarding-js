@@ -6,12 +6,11 @@ const generateIdPart = (): string => {
   return sGuid;
 };
 
-const generateId = (): IdType => (
-  generateIdPart() + generateIdPart() + '-'
-  + generateIdPart() + '-'
-  + generateIdPart() + '-'
-  + generateIdPart() + '-'
-  + generateIdPart() + generateIdPart() + generateIdPart()
-);
+const generateId = (): IdType =>
+generateIdPart() + generateIdPart() + '-'
++ generateIdPart() + '-'
++ generateIdPart() + '-'
++ generateIdPart() + '-'
++ generateIdPart() + generateIdPart() + generateIdPart();
 
 export { generateId };

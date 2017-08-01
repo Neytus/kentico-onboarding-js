@@ -32,8 +32,8 @@ const nodePropTypes: React.ValidationMap<INodeProps> = {
   onDelete: PropTypes.func.isRequired,
 };
 
-export const Node: React.StatelessComponent<INodeProps> = props => {
-  return props.nodeViewModel.isBeingEdited ? (
+export const Node: React.StatelessComponent<INodeProps> = props =>
+  props.nodeViewModel.isBeingEdited ? (
     <EditableNode
       nodeViewModel={props.nodeViewModel}
       onCancel={props.onCancel}
@@ -46,7 +46,7 @@ export const Node: React.StatelessComponent<INodeProps> = props => {
       onEdit={props.onEdit}
     />
   );
-};
+
 
 Node.displayName = 'Node';
 Node.propTypes = nodePropTypes;
