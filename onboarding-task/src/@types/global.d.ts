@@ -16,6 +16,8 @@ declare global {
   }
 
   type KeyCommands = 'esc' | 'enter';
+
+  type IKeyHandler = {[key in keyof IKeyMap]: Function};
 }
 
 export {};

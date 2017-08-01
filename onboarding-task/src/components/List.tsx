@@ -16,7 +16,7 @@ const listPropTypes: React.ValidationMap<IListDataProps> = {
 
 const keyMap: IKeyMap = {
   'cancelNode': 'esc',
-  'saveNode': 'enter'
+  'saveNode': 'enter',
 };
 
 export const List: React.StatelessComponent<IListDataProps> = ({nodesIds}) => {

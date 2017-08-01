@@ -58,7 +58,7 @@ export class EditableNode extends React.PureComponent<IEditableNodeProps, IEdita
   render() {
     const {text} = this.state;
 
-    const keyHandlers = {
+    const keyHandlers: Partial<IKeyHandler> = {
       'cancelNode': this.props.onCancel,
       'saveNode': (event: React.KeyboardEvent<HTMLFormElement>) => this._saveNode(event),
     };
