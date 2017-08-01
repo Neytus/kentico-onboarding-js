@@ -65,7 +65,7 @@ export class EditableNode extends React.PureComponent<IEditableNodeProps, IEdita
 
     return (
       <HotKeys handlers={keyHandlers}>
-        <form className="form-inline">
+        <form className="form-inline" onSubmit={this._saveNode}>
           {this.props.nodeViewModel.index}.
 
           <input
