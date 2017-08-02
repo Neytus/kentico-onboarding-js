@@ -5,6 +5,7 @@ import { HotKeys } from 'react-hotkeys';
 
 import { AddNode } from '../containers/AddNode';
 import { Node } from '../containers/Node';
+import { IKeyMap } from '../@types/IKeyMap';
 
 export interface IListDataProps {
   nodesIds: ImmutableList<IdType>;

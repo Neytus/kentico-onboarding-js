@@ -3,6 +3,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { HotKeys } from 'react-hotkeys';
 
+import { KeyHandler } from '../@types/IKeyMap';
 import { isNullOrWhitespace } from '../utils/validation';
 import { INodeViewModel } from '../models/NodeViewModel';
 

@@ -3,6 +3,7 @@ import * as PropTypes from 'prop-types';
 
 import { isNullOrWhitespace } from '../utils/validation';
 import { HotKeys } from 'react-hotkeys';
+import { KeyHandler } from '../@types/IKeyMap';
 
 export interface IAddNodeCallbacksProps {
   onAdd: (text: string) => void;
