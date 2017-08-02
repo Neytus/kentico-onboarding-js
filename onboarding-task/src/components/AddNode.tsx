@@ -10,6 +10,7 @@ export interface IAddNodeCallbacksProps {
 
 interface IAddNodeState {
   text: string;
+  keyHandlers: KeyHandler;
 }
 
 export class AddNode extends React.PureComponent<IAddNodeCallbacksProps, IAddNodeState> {
@@ -23,10 +24,13 @@ export class AddNode extends React.PureComponent<IAddNodeCallbacksProps, IAddNod
     super(props);
     this.state = {
       text: '',
+      keyHandlers: {
+        saveNode: this._onAdd,
+      }
     };
   }
 
-  _onAdd = (event: React.FormEvent<HTMLFormElement>): void => {
+  _onAdd = (event: React.KeyboardEvent<HTMLFormElement>): void => {
     if (!isNullOrWhitespace(this.state.text)) {
       event.preventDefault();
       this.props.onAdd(this.state.text);
@@ -40,12 +44,8 @@ export class AddNode extends React.PureComponent<IAddNodeCallbacksProps, IAddNod
   };
 
   render() {
-    const keyHandlers: KeyHandler = {
-      saveNode: this._onAdd,
-    };
-
     return (
-      <HotKeys handlers={keyHandlers}>
+      <HotKeys handlers={this.state.keyHandlers}>
         <form className="form-inline" onSubmit={this._onAdd}>
 
           <input

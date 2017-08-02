@@ -14,7 +14,7 @@ declare global {
 
   type KeyCommands = 'esc' | 'enter';
 
-  type KeyHandler = Partial<{[key in keyof IKeyMap]: Function}>;
+  type KeyHandler = Partial<{[key in keyof IKeyMap]: (event: React.KeyboardEvent<HTMLElement>) => void}>;
 }
 
 export {};

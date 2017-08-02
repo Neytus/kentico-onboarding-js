@@ -20,6 +20,7 @@ type IEditableNodeProps = IEditableNodeDataProps & IEditableNodeCallbacksProps;
 
 interface IEditableNodeState {
   text: string;
+  keyHandlers: KeyHandler;
 }
 
 export class EditableNode extends React.PureComponent<IEditableNodeProps, IEditableNodeState> {
@@ -40,12 +41,15 @@ export class EditableNode extends React.PureComponent<IEditableNodeProps, IEdita
 
     this.state = {
       text: props.nodeViewModel.text,
+      keyHandlers: {
+        cancelNode: this.props.onCancel,
+        saveNode: this._saveNode,
+      }
     };
   }
 
-  _saveNode = (event: React.KeyboardEvent<HTMLFormElement>): void => {
+  _saveNode = (): void => {
     if (!isNullOrWhitespace(this.state.text)) {
-      event.preventDefault();
       this.props.onSave(this.state.text);
     }
   };
@@ -58,13 +62,8 @@ export class EditableNode extends React.PureComponent<IEditableNodeProps, IEdita
   render() {
     const {text} = this.state;
 
-    const keyHandlers: KeyHandler = {
-      cancelNode: this.props.onCancel,
-      saveNode: (event: React.KeyboardEvent<HTMLFormElement>) => this._saveNode(event),
-    };
-
     return (
-      <HotKeys handlers={keyHandlers}>
+      <HotKeys handlers={this.state.keyHandlers}>
         <form className="form-inline" onSubmit={this._saveNode}>
           {this.props.nodeViewModel.index}.
 
