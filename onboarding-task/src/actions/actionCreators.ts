@@ -5,6 +5,7 @@ import {
 } from './actionTypes';
 import { addNodeFactory } from './addNodeFactory';
 import { generateId } from '../utils/generateId';
+import { IAction } from './IAction';
 
 export const addNode = addNodeFactory(generateId);
 

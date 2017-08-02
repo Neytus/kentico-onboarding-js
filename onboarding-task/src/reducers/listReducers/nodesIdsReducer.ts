@@ -4,6 +4,7 @@ import {
   ADD_NODE,
   DELETE_NODE,
 } from '../../actions/actionTypes';
+import { IAction } from '../../actions/IAction';
 
 export type INodesIds = List<IdType>;
 
