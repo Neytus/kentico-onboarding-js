@@ -40,8 +40,8 @@ export class AddNode extends React.PureComponent<IAddNodeCallbacksProps, IAddNod
   };
 
   render() {
-    const keyHandlers: Partial<KeyHandler> = {
-      'saveNode': (event: React.KeyboardEvent<HTMLFormElement>) => this._onAdd(event),
+    const keyHandlers: KeyHandler = {
+      saveNode: this._onAdd,
     };
 
     return (
