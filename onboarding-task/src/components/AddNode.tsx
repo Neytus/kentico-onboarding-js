@@ -3,7 +3,6 @@ import * as PropTypes from 'prop-types';
 
 import { isNullOrWhitespace } from '../utils/validation';
 import { HotKeys } from 'react-hotkeys';
-import { KeyHandler } from '../@types/IKeyMap';
 
 export interface IAddNodeCallbacksProps {
   onAdd: (text: string) => void;
@@ -11,7 +10,6 @@ export interface IAddNodeCallbacksProps {
 
 interface IAddNodeState {
   text: string;
-  keyHandlers: KeyHandler;
 }
 
 export class AddNode extends React.PureComponent<IAddNodeCallbacksProps, IAddNodeState> {
@@ -25,9 +23,6 @@ export class AddNode extends React.PureComponent<IAddNodeCallbacksProps, IAddNod
     super(props);
     this.state = {
       text: '',
-      keyHandlers: {
-        saveNode: this._onAdd,
-      }
     };
   }
 
@@ -46,7 +41,7 @@ export class AddNode extends React.PureComponent<IAddNodeCallbacksProps, IAddNod
 
   render() {
     return (
-      <HotKeys handlers={this.state.keyHandlers}>
+      <HotKeys handlers={{saveNode: this._onAdd}}>
         <form className="form-inline" onSubmit={this._onAdd}>
 
           <input

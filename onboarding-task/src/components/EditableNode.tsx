@@ -3,7 +3,6 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { HotKeys } from 'react-hotkeys';
 
-import { KeyHandler } from '../@types/IKeyMap';
 import { isNullOrWhitespace } from '../utils/validation';
 import { INodeViewModel } from '../models/NodeViewModel';
 
@@ -21,7 +20,6 @@ type IEditableNodeProps = IEditableNodeDataProps & IEditableNodeCallbacksProps;
 
 interface IEditableNodeState {
   text: string;
-  keyHandlers: KeyHandler;
 }
 
 export class EditableNode extends React.PureComponent<IEditableNodeProps, IEditableNodeState> {
@@ -42,10 +40,6 @@ export class EditableNode extends React.PureComponent<IEditableNodeProps, IEdita
 
     this.state = {
       text: props.nodeViewModel.text,
-      keyHandlers: {
-        cancelNode: this.props.onCancel,
-        saveNode: this._saveNode,
-      }
     };
   }
 
@@ -65,7 +59,10 @@ export class EditableNode extends React.PureComponent<IEditableNodeProps, IEdita
     const {text} = this.state;
 
     return (
-      <HotKeys handlers={this.state.keyHandlers}>
+      <HotKeys handlers={{
+        cancelNode: this.props.onCancel,
+        saveNode: this._saveNode,
+      }}>
         <form className="form-inline" onSubmit={this._saveNode}>
           {this.props.nodeViewModel.index}.
 
