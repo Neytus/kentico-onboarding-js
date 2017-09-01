@@ -30,6 +30,10 @@ export class List extends React.PureComponent<IListDataProps & IListCallbacksPro
     super(props);
   }
 
+  componentDidMount() {
+    this.props.fetchNodes();
+  }
+
   render() {
     const
       nodes = this.props.nodesIds

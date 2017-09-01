@@ -49,7 +49,8 @@ export class EditableNode extends React.PureComponent<IEditableNodeProps, IEdita
     };
   }
 
-  _saveNode = (): void => {
+  _saveNode = (event: React.KeyboardEvent<HTMLFormElement>): void => {
+    event.preventDefault();
     if (!isNullOrWhitespace(this.state.text)) {
       this.props.onSave(this.state.text);
     }
