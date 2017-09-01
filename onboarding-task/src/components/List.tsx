@@ -11,6 +11,10 @@ export interface IListDataProps {
   nodesIds: ImmutableList<IdType>;
 }
 
+export interface  IListCallbacksProps {
+  fetchNodes: any;
+}
+
 const listPropTypes: React.ValidationMap<IListDataProps> = {
   nodesIds: ImmutablePropTypes.list.isRequired,
 };
@@ -20,7 +24,7 @@ const keyMap: IKeyMap = {
   'saveNode': 'enter',
 };
 
-export const List: React.StatelessComponent<IListDataProps> = ({nodesIds}) => {
+export const List: React.StatelessComponent<IListDataProps & IListCallbacksProps> = ({nodesIds, fetchNodes}) => {
   const nodes = nodesIds
     .map((id: IdType, index: number) => (
       <li className="list-group-item" key={id}>
@@ -41,6 +45,7 @@ export const List: React.StatelessComponent<IListDataProps> = ({nodesIds}) => {
               <AddNode />
             </li>
           </HotKeys>
+          <button onClick={fetchNodes} />
         </ul>
       </div>
     </div>

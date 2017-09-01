@@ -30,3 +30,13 @@ export const saveNode = (id: IdType, text: string): IAction => ({
     text,
   },
 });
+
+export const fetchNodes = (): any =>
+  (dispatch: any) => {
+    dispatch(addNode('weeeee'));
+    return fetch('api/v1/nodes')
+      .then((response) => response.json())
+      .then((json) => console.log(json))
+      .catch((error) => console.log(error));
+  };
+
