@@ -15,42 +15,48 @@ export interface  IListCallbacksProps {
   fetchNodes: any;
 }
 
-const listPropTypes: React.ValidationMap<IListDataProps> = {
-  nodesIds: ImmutablePropTypes.list.isRequired,
-};
-
 const keyMap: IKeyMap = {
   'cancelNode': 'esc',
   'saveNode': 'enter',
 };
 
-export const List: React.StatelessComponent<IListDataProps & IListCallbacksProps> = ({nodesIds, fetchNodes}) => {
-  const nodes = nodesIds
-    .map((id: IdType, index: number) => (
-      <li className="list-group-item" key={id}>
-        <Node
-          id={id}
-          index={index}
-        />
-      </li>
-    ));
+export class List extends React.PureComponent<IListDataProps & IListCallbacksProps> {
+  static displayName = 'List';
+  static propTypes = {
+    nodesIds: ImmutablePropTypes.list.isRequired,
+  };
 
-  return (
-    <div className="row">
-      <div className="col-sm-12 col-md-offset-2 col-md-8 ">
-        <ul className="list-group">
-          <HotKeys keyMap={keyMap}>
-            {nodes}
-            <li className="list-group-item">
-              <AddNode />
-            </li>
-          </HotKeys>
-          <button onClick={fetchNodes} />
-        </ul>
+  constructor(props: IListDataProps & IListCallbacksProps) {
+    super(props);
+  }
+
+  render() {
+    const
+      nodes = this.props.nodesIds
+        .map((id: IdType, index: number) => (
+          <li className="list-group-item" key={id}>
+            <Node
+              id={id}
+              index={index}
+            />
+          </li>
+        ));
+
+    return (
+
+      <div className="row">
+        <div className="col-sm-12 col-md-offset-2 col-md-8 ">
+          <ul className="list-group">
+            <HotKeys keyMap={keyMap}>
+              {nodes}
+              <li className="list-group-item">
+                <AddNode />
+              </li>
+            </HotKeys>
+            <button onClick={this.props.fetchNodes} />
+          </ul>
+        </div>
       </div>
-    </div>
-  );
-};
-
-List.displayName = 'List';
-List.propTypes = listPropTypes;
+    );
+  }
+}
