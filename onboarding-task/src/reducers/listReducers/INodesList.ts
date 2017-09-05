@@ -1,8 +1,7 @@
-import { List } from 'immutable';
-
 import { INodesIds } from './nodesIdsReducer';
 import { INodesInfo } from './nodesInfoReducer';
 import { INodes } from './nodesReducer';
+import { IErrorsMap } from './errorReducer';
 
 
 export interface INodesList {
@@ -10,5 +9,5 @@ export interface INodesList {
   nodesInfo: INodesInfo;
   nodesIds: INodesIds;
   isFetching: boolean;
-  errors: List<string>;
+  errors: IErrorsMap;
 }

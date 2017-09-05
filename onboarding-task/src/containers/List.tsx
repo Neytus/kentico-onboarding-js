@@ -5,9 +5,10 @@ import { List as ListComponent, IListDataProps } from '../components/List';
 import { IAppState } from '../reducers/IAppState';
 import { fetchNodes } from '../actions/actionCreators';
 
-const mapStateToProps = ({nodesList: {nodesIds, isFetching}}: IAppState): IListDataProps => ({
+const mapStateToProps = ({nodesList: {nodesIds, isFetching, errors}}: IAppState): IListDataProps => ({
   nodesIds,
-  isFetching
+  isFetching,
+  errors
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

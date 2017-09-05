@@ -1,9 +1,10 @@
 const ImmutablePropTypes = require('react-immutable-proptypes');
 const Loading = require('react-loading-animation');
 import * as React from 'react';
-import { List as ImmutableList } from 'immutable';
+import { List as ImmutableList, OrderedMap } from 'immutable';
 import { HotKeys } from 'react-hotkeys';
 
+import { Error } from '../containers/Error';
 import { AddNode } from '../containers/AddNode';
 import { Node } from '../containers/Node';
 import { IKeyMap } from '../@types/IKeyMap';
@@ -11,6 +12,7 @@ import { IKeyMap } from '../@types/IKeyMap';
 export interface IListDataProps {
   nodesIds: ImmutableList<IdType>;
   isFetching: boolean;
+  errors: OrderedMap<IdType, string>;
 }
 
 export interface  IListCallbacksProps {
@@ -48,6 +50,14 @@ export class List extends React.PureComponent<IListDataProps & IListCallbacksPro
           </li>
         ));
 
+    const
+      errors = this.props.errors.valueSeq()
+        .map((id: IdType) => (
+          <li className="list-group-item-danger" key={id}>
+            <Error id={id}/>
+          </li>
+        ));
+
     return (
       <div className="row">
         <div className="col-sm-12 col-md-offset-2 col-md-8 ">
@@ -55,6 +65,7 @@ export class List extends React.PureComponent<IListDataProps & IListCallbacksPro
             <ul className="list-group">
               <HotKeys keyMap={keyMap}>
                 {nodes}
+                {errors}
                 <li className="list-group-item">
                   <AddNode />
                 </li>

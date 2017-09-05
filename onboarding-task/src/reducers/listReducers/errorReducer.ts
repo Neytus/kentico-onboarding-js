@@ -1,13 +1,13 @@
-import { List } from 'immutable';
+import { OrderedMap } from 'immutable';
 import { IAction } from '../../actions/IAction';
 import { FETCH_NODES_FAILURE } from '../../actions/actionTypes';
 
-export type IErrorList = List<string>;
+export type IErrorsMap = OrderedMap<IdType, string>;
 
-export const errorReducer = (state: IErrorList = List<string>(), action: IAction): IErrorList => {
+export const errorReducer = (state: IErrorsMap = OrderedMap<IdType, string>(), action: IAction): IErrorsMap => {
   switch (action.type) {
     case (FETCH_NODES_FAILURE):
-      return state.set(state.count(), action.payload.text);
+      return state.set(state.count().toString(), action.payload.text);
     default:
       return state;
   }

@@ -4,7 +4,7 @@ import {
   DELETE_NODE,
   FETCH_NODES_REQUEST,
   FETCH_NODES_SUCCESS,
-  FETCH_NODES_FAILURE
+  FETCH_NODES_FAILURE, REMOVE_ERROR
 } from './actionTypes';
 import { addNodeFactory } from './addNodeFactory';
 import { generateId } from '../utils/generateId';
@@ -52,6 +52,11 @@ export const fetchNodesFailure = (text: string): IAction => ({
   }
 });
 
+export const removeError = () : IAction => ({
+  type: REMOVE_ERROR,
+  payload: {}
+});
+
 const parseNodes = (nodes: Array<object>, dispatch: Dispatch): void => {
   for (const node of nodes) {
     let text = (new NodeContent(node)).text;
@@ -65,5 +70,7 @@ export const fetchNodes = (): any =>
       .then((response) => response.json())
       .then((json) => parseNodes(json, dispatch))
       .then(() => dispatch(fetchNodesSuccess()))
-      .catch((error) => dispatch(fetchNodesFailure(error)));
+      .catch((error) => {
+        return dispatch(fetchNodesFailure(error.toString()));
+      });
   };
