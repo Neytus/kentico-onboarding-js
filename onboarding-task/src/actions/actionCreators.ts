@@ -52,15 +52,20 @@ export const fetchNodesFailure = (text: string): IAction => ({
   }
 });
 
-export const removeError = () : IAction => ({
+export const deleteError = (id: IdType) : IAction => ({
   type: REMOVE_ERROR,
-  payload: {}
+  payload: {
+    id
+  }
 });
+
+const parseNode = (node: NodeContent, dispatch: Dispatch): void => {
+  dispatch(addNode(node.text));
+};
 
 const parseNodes = (nodes: Array<object>, dispatch: Dispatch): void => {
   for (const node of nodes) {
-    let text = (new NodeContent(node)).text;
-    dispatch(addNode(text));
+    parseNode(node as NodeContent, dispatch);
   }
 };
 
@@ -70,7 +75,7 @@ export const fetchNodes = (): any =>
       .then((response) => response.json())
       .then((json) => parseNodes(json, dispatch))
       .then(() => dispatch(fetchNodesSuccess()))
-      .catch((error) => {
-        return dispatch(fetchNodesFailure(error.toString()));
+      .catch(() => {
+        return dispatch(fetchNodesFailure('Error: Are you connected to the database?'));
       });
   };

@@ -5,6 +5,7 @@ import * as PropTypes from 'prop-types';
 
 export interface IErrorDataProps {
   id: IdType;
+  errorText: string;
 }
 
 export interface IErrorCallbacksProps {
@@ -19,7 +20,7 @@ const errorPropTypes: React.ValidationMap<IErrorProps> = {
 };
 
 export const Error: React.StatelessComponent<IErrorProps> = (props) =>
-   <div className="alert-danger" onClick={props.onClick}/>;
+   <div className="alert-danger" onClick={props.onClick}> {props.errorText} </div>;
 
 Error.displayName = 'Error';
 Error.propTypes = errorPropTypes;
