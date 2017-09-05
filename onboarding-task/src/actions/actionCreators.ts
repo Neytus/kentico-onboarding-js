@@ -45,9 +45,11 @@ export const fetchNodesSuccess = (): IAction => ({
   payload: {}
 });
 
-export const fetchNodesFailure = (): IAction => ({
+export const fetchNodesFailure = (text: string): IAction => ({
   type: FETCH_NODES_FAILURE,
-  payload: {}
+  payload: {
+    text
+  }
 });
 
 const parseNodes = (nodes: Array<object>, dispatch: Dispatch): void => {
@@ -62,5 +64,6 @@ export const fetchNodes = (): any =>
     return fetch('api/v1/nodes')
       .then((response) => response.json())
       .then((json) => parseNodes(json, dispatch))
-      .catch((error) => console.log(error));
+      .then(() => dispatch(fetchNodesSuccess()))
+      .catch((error) => dispatch(fetchNodesFailure(error)));
   };

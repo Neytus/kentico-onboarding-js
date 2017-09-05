@@ -59,7 +59,6 @@ export class List extends React.PureComponent<IListDataProps & IListCallbacksPro
                   <AddNode />
                 </li>
               </HotKeys>
-              <button onClick={this.props.fetchNodes} />
             </ul>
           </Loading>
         </div>

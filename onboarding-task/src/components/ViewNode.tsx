@@ -28,4 +28,3 @@ export const ViewNode: React.StatelessComponent<IViewNodeProps> = ({onEdit, node
 
 ViewNode.displayName = 'ViewNode';
 ViewNode.propTypes = viewNodePropTypes;
-
