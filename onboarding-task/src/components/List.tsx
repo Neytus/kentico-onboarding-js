@@ -1,4 +1,5 @@
 const ImmutablePropTypes = require('react-immutable-proptypes');
+const Loading = require('react-loading-animation');
 import * as React from 'react';
 import { List as ImmutableList } from 'immutable';
 import { HotKeys } from 'react-hotkeys';
@@ -9,11 +10,11 @@ import { IKeyMap } from '../@types/IKeyMap';
 
 export interface IListDataProps {
   nodesIds: ImmutableList<IdType>;
+  isFetching: boolean;
 }
 
 export interface  IListCallbacksProps {
   fetchNodes: any;
-  fetchRequest: any;
 }
 
 const keyMap: IKeyMap = {
@@ -33,7 +34,6 @@ export class List extends React.PureComponent<IListDataProps & IListCallbacksPro
 
   componentDidMount() {
     this.props.fetchNodes();
-    this.props.fetchRequest();
   }
 
   render() {
@@ -49,18 +49,19 @@ export class List extends React.PureComponent<IListDataProps & IListCallbacksPro
         ));
 
     return (
-
       <div className="row">
         <div className="col-sm-12 col-md-offset-2 col-md-8 ">
-          <ul className="list-group">
-            <HotKeys keyMap={keyMap}>
-              {nodes}
-              <li className="list-group-item">
-                <AddNode />
-              </li>
-            </HotKeys>
-            <button onClick={this.props.fetchNodes} />
-          </ul>
+          <Loading isLoading={this.props.isFetching}>
+            <ul className="list-group">
+              <HotKeys keyMap={keyMap}>
+                {nodes}
+                <li className="list-group-item">
+                  <AddNode />
+                </li>
+              </HotKeys>
+              <button onClick={this.props.fetchNodes} />
+            </ul>
+          </Loading>
         </div>
       </div>
     );
