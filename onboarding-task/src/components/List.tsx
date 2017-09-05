@@ -13,6 +13,7 @@ export interface IListDataProps {
 
 export interface  IListCallbacksProps {
   fetchNodes: any;
+  fetchRequest: any;
 }
 
 const keyMap: IKeyMap = {
@@ -32,6 +33,7 @@ export class List extends React.PureComponent<IListDataProps & IListCallbacksPro
 
   componentDidMount() {
     this.props.fetchNodes();
+    this.props.fetchRequest();
   }
 
   render() {

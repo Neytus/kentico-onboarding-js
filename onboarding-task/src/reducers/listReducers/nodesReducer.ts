@@ -4,6 +4,7 @@ import {
   ADD_NODE,
   SAVE_NODE,
   DELETE_NODE,
+  FETCH_NODES_REQUEST,
 } from '../../actions/actionTypes';
 import { NodeContent } from '../../models/NodeContent';
 import { IAction } from '../../actions/IAction';
@@ -23,6 +24,9 @@ export const nodesReducer = (state: INodes = OrderedMap<IdType, NodeContent>(), 
       const newNode = state.get(action.payload.id).with(action.payload);
 
       return state.set(newNode.id, newNode);
+    }
+    case FETCH_NODES_REQUEST: {
+      return state;
     }
     default:
       return state;

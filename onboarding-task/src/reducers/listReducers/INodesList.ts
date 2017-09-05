@@ -6,4 +6,5 @@ export interface INodesList {
   nodes: INodes;
   nodesInfo: INodesInfo;
   nodesIds: INodesIds;
+  isFetching: boolean;
 }
