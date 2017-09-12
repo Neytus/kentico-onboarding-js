@@ -4,7 +4,8 @@ import {
   DELETE_NODE,
   FETCH_NODES_REQUEST,
   FETCH_NODES_SUCCESS,
-  FETCH_NODES_FAILURE, REMOVE_ERROR
+  FETCH_NODES_FAILURE,
+  DELETE_ERROR
 } from './actionTypes';
 import { addNodeFactory } from './addNodeFactory';
 import { generateId } from '../utils/generateId';
@@ -52,8 +53,8 @@ export const fetchNodesFailure = (text: string): IAction => ({
   }
 });
 
-export const deleteError = (id: IdType) : IAction => ({
-  type: REMOVE_ERROR,
+export const deleteError = (id: IdType): IAction => ({
+  type: DELETE_ERROR,
   payload: {
     id
   }
@@ -76,6 +77,6 @@ export const fetchNodes = (): any =>
       .then((json) => parseNodes(json, dispatch))
       .then(() => dispatch(fetchNodesSuccess()))
       .catch(() => {
-        return dispatch(fetchNodesFailure('Error: Are you connected to the database?'));
+        return dispatch(fetchNodesFailure('Error: Cannot fetch data from the database.'));
       });
   };

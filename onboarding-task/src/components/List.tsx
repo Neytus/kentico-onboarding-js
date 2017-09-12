@@ -53,7 +53,7 @@ export class List extends React.PureComponent<IListDataProps & IListCallbacksPro
     const
       errors = this.props.errors.keySeq()
         .map((id: IdType) => (
-          <li className="list-group-item-danger" key={id}>
+          <li className="list-group-item" key={id}>
             <Error id={id}/>
           </li>
         ));
