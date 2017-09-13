@@ -1,13 +1,11 @@
 import { List } from 'immutable';
 
 import * as actions from '../../../src/actions/actionCreators.ts';
-import { nodesIdsReducer } from '../../../src/reducers/listReducers/nodesIdsReducer.ts';
-import { addNodeFactory } from '../../../src/actions/addNodeFactory.ts';
+import { nodesIdsReducer } from '../../../src/reducers/nodesListReducers/nodesIdsReducer.ts';
 
 describe('nodesIdsReducer', () => {
   const emptyState = List();
   const id = '80149842-a624-b66b-5d3c-37c24523ba46';
-  const addNode = addNodeFactory(() => id);
   const nonEmptyState = emptyState.push(id);
 
   it('returns initial state', () => {
@@ -19,9 +17,9 @@ describe('nodesIdsReducer', () => {
     expect(actualState).toEqual(emptyState);
   });
 
-  describe('ADD_NODE', () => {
+  describe('POST_NODE_SUCCESS', () => {
     it('handles adding a node', () => {
-      const action = addNode('text');
+      const action = actions.postNodeSuccess({ id, text: 'text' });
 
       const actualState = nodesIdsReducer(emptyState, action);
 

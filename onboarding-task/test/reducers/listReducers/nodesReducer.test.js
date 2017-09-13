@@ -2,13 +2,11 @@ import { OrderedMap } from 'immutable';
 
 import * as actions from '../../../src/actions/actionCreators.ts';
 import { NodeContent } from '../../../src/models/NodeContent.ts';
-import { nodesReducer } from '../../../src/reducers/listReducers/nodesReducer.ts';
-import { addNodeFactory } from '../../../src/actions/addNodeFactory.ts';
+import { nodesReducer } from '../../../src/reducers/nodesListReducers/nodesReducer.ts';
 
 describe('nodesReducer', () => {
   const emptyState = OrderedMap();
   const id = '80149842-a624-b66b-5d3c-37c24523ba46';
-  const addNode = addNodeFactory(() => id);
   const text = 'testing text';
   const node = new NodeContent({
     id,
@@ -25,9 +23,9 @@ describe('nodesReducer', () => {
     expect(actualState).toEqual(emptyState);
   });
 
-  describe('ADD_NODE', () => {
+  describe('POST_NODE_SUCCESS', () => {
     it('handles adding a node', () => {
-      const action = addNode(text);
+      const action = actions.postNodeSuccess({ id, text });
 
       const actualState = nodesReducer(emptyState, action);
 
