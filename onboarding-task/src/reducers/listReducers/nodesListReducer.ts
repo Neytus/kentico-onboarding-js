@@ -3,7 +3,7 @@ import { nodesInfoReducer } from './nodesInfoReducer';
 import { nodesIdsReducer } from './nodesIdsReducer';
 import { INodesList } from './INodesList';
 import { IAction } from '../../actions/IAction';
-import { isFetchingReducer } from './fetchNodesReducer';
+import { isFetchingReducer } from './isFetchingReducer';
 import { errorReducer } from './errorReducer';
 
 export const nodesListReducer = (state: INodesList = {} as INodesList, action: IAction): INodesList => ({
