@@ -1,4 +1,4 @@
-import { nodesListReducer } from './listReducers/nodesListReducer';
+import { nodesListReducer } from './nodesListReducers/nodesListReducer';
 import { IAppState } from './IAppState';
 import { IAction } from '../actions/IAction';
 
