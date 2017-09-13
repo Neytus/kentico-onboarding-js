@@ -10,6 +10,7 @@ import {
 import { addNodeFactory } from './addNodeFactory';
 import { generateId } from '../utils/generateId';
 import { IAction } from './IAction';
+import { DEFAULT_ROUTE } from '../constants/routes';
 
 export const addNode = addNodeFactory(generateId);
 
@@ -73,7 +74,7 @@ const parseNodes = (nodes: Array<IFetchedNode>): Array<IFetchedNode> => {
 export const fetchNodes = (): any =>
   (dispatch: Dispatch) => {
     dispatch(fetchNodesRequest());
-    return fetch('api/v1/nodes')
+    return fetch(DEFAULT_ROUTE)
       .then((response) => response.json())
       .then((json) => parseNodes(json))
       .then((nodes) => dispatch(fetchNodesSuccess(nodes)))
