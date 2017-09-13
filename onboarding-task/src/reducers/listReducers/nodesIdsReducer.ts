@@ -4,6 +4,7 @@ import {
   ADD_NODE,
   DELETE_NODE,
   FETCH_NODES_SUCCESS,
+  POST_NODE_SUCCESS,
 } from '../../actions/actionTypes';
 import { IAction } from '../../actions/IAction';
 import { IFetchedNode } from '../../actions/actionCreators';
@@ -29,6 +30,8 @@ export const nodesIdsReducer = (state: INodesIds = List<IdType>(), action: IActi
           List<IdType>()
         );
     }
+    case POST_NODE_SUCCESS:
+      return state.push(action.payload.id);
     default:
       return state;
   }

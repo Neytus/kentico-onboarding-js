@@ -5,6 +5,7 @@ import {
   SAVE_NODE,
   DELETE_NODE,
   FETCH_NODES_SUCCESS,
+  POST_NODE_SUCCESS,
 } from '../../actions/actionTypes';
 import { NodeContent } from '../../models/NodeContent';
 import { IAction } from '../../actions/IAction';
@@ -32,6 +33,11 @@ export const nodesReducer = (state: INodes = OrderedMap<IdType, NodeContent>(), 
           (map: INodes, node: IFetchedNode) => map.set(node.id, new NodeContent(node)),
           OrderedMap<IdType, NodeContent>()
         );
+    }
+    case POST_NODE_SUCCESS: {
+      const newNode = new NodeContent(action.payload);
+
+      return state.set(newNode.id, newNode);
     }
     default:
       return state;

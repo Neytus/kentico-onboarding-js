@@ -12,5 +12,3 @@ export const POST_NODE_FAILURE = 'POST_NODE_FAILURE';
 export const POST_NODE_SUCCESS = 'POST_NODE_SUCCESS';
 
 export const DELETE_ERROR = 'DELETE_ERROR';
-
-

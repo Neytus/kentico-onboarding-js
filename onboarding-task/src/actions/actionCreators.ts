@@ -6,7 +6,9 @@ import {
   FETCH_NODES_SUCCESS,
   FETCH_NODES_FAILURE,
   DELETE_ERROR,
-  POST_NODE_REQUEST
+  POST_NODE_REQUEST,
+  POST_NODE_SUCCESS,
+  POST_NODE_FAILURE
 } from './actionTypes';
 import { addNodeFactory } from './addNodeFactory';
 import { generateId } from '../utils/generateId';
@@ -61,6 +63,21 @@ export const postNodeRequest = (): IAction => ({
   payload: {}
 });
 
+export const postNodeSuccess = ({id, text}: IFetchedNode): IAction => ({
+  type: POST_NODE_SUCCESS,
+  payload: {
+    id,
+    text
+  }
+});
+
+export const postNodeFailure = (text: string): IAction => ({
+  type: POST_NODE_FAILURE,
+  payload: {
+    text
+  }
+});
+
 export const deleteError = (id: IdType): IAction => ({
   type: DELETE_ERROR,
   payload: {
@@ -73,9 +90,7 @@ export interface IFetchedNode {
   text: string;
 }
 
-const parseFetchedNodes = (nodes: Array<IFetchedNode>): Array<IFetchedNode> => {
-  return nodes.map(({id, text}) => ({id, text}));
-};
+const parseFetchedNodes = (nodes: Array<IFetchedNode>): Array<IFetchedNode> => nodes.map(({id, text}) => ({id, text}));
 
 export const fetchNodes = (): any =>
   (dispatch: Dispatch) => {
@@ -98,5 +113,10 @@ export const postNode = (text: string): any =>
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({text}),
-    });
+    })
+      .then((response) => response.json())
+      .then((json: IFetchedNode) => dispatch(postNodeSuccess({id: json.id, text: json.text})))
+      .catch(() => {
+        return dispatch(postNodeFailure('Cannot post data to the database.'));
+      });
   };
