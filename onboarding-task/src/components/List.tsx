@@ -63,10 +63,10 @@ export class List extends React.PureComponent<IListDataProps & IListCallbacksPro
             <ul className="list-group">
               <HotKeys keyMap={keyMap}>
                 {nodes}
-                {errors}
                 <li className="list-group-item">
                   <AddNode />
                 </li>
+                {errors}
               </HotKeys>
             </ul>
           </Loading>

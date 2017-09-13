@@ -92,16 +92,16 @@ export const fetchNodes = (): any =>
   (dispatch: Dispatch) => {
     dispatch(fetchNodesRequest());
     return fetch(DEFAULT_ROUTE)
-      .then((response) => response.json())
-      .then((json) => parseFetchedNodes(json))
-      .then((nodes) => dispatch(fetchNodesSuccess(nodes)))
-      .catch(() => {
-        return dispatch(fetchNodesFailure('Error: Cannot fetch data from the database.'));
+      .then(response => response.json())
+      .then(json => parseFetchedNodes(json))
+      .then(nodes => dispatch(fetchNodesSuccess(nodes)))
+      .catch(error => {
+        return dispatch(fetchNodesFailure(error.message));
       });
   };
 
 export const postNode = (text: string): any =>
-  (dispatch: any) => {
+  (dispatch: Dispatch) => {
     dispatch(postNodeRequest());
     return fetch(DEFAULT_ROUTE, {
       method: 'POST',
@@ -110,9 +110,9 @@ export const postNode = (text: string): any =>
       },
       body: JSON.stringify({text}),
     })
-      .then((response) => response.json())
-      .then((json: IFetchedNode) => dispatch(postNodeSuccess({id: json.id, text: json.text})))
-      .catch(() => {
-        return dispatch(postNodeFailure('Cannot post data to the database.'));
+      .then(response => response.json())
+      .then(json => dispatch(postNodeSuccess({id: json.id, text: json.text})))
+      .catch(error => {
+        return dispatch(postNodeFailure(error.message));
       });
   };

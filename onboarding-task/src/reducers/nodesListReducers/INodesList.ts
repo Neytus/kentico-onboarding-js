@@ -3,7 +3,6 @@ import { INodesInfo } from './nodesInfoReducer';
 import { INodes } from './nodesReducer';
 import { IErrorsMap } from './errorReducer';
 
-
 export interface INodesList {
   nodes: INodes;
   nodesInfo: INodesInfo;
