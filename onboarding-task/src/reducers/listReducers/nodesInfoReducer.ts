@@ -4,10 +4,12 @@ import {
   ADD_NODE,
   TOGGLE_NODE,
   SAVE_NODE,
-  DELETE_NODE, FETCH_NODES_REQUEST,
+  DELETE_NODE,
+  FETCH_NODES_SUCCESS,
 } from '../../actions/actionTypes';
 import { NodeInfo } from '../../models/NodeInfo';
 import { IAction } from '../../actions/IAction';
+import { IFetchedNode } from '../../actions/actionCreators';
 
 export type INodesInfo = OrderedMap<IdType, NodeInfo>;
 
@@ -29,10 +31,10 @@ export const nodesInfoReducer = (state: INodesInfo = OrderedMap<IdType, NodeInfo
 
       return state.set(action.payload.id, newNode);
     }
-    case FETCH_NODES_REQUEST: {
+    case FETCH_NODES_SUCCESS: {
       return action.payload.nodes
         .reduce(
-          (map: any, node: any) => map.set(node.id, new NodeInfo({})),
+          (map: INodesInfo, node: IFetchedNode) => map.set(node.id, new NodeInfo({})),
           OrderedMap<IdType, NodeInfo>()
         );
     }

@@ -35,16 +35,16 @@ export const saveNode = (id: IdType, text: string): IAction => ({
   },
 });
 
-export const fetchNodesRequest = (nodes: Array<object>): IAction => ({
+export const fetchNodesRequest = (): IAction => ({
   type: FETCH_NODES_REQUEST,
+  payload: {}
+});
+
+export const fetchNodesSuccess = (nodes: Array<object>): IAction => ({
+  type: FETCH_NODES_SUCCESS,
   payload: {
     nodes
   }
-});
-
-export const fetchNodesSuccess = (): IAction => ({
-  type: FETCH_NODES_SUCCESS,
-  payload: {}
 });
 
 export const fetchNodesFailure = (text: string): IAction => ({
@@ -61,26 +61,22 @@ export const deleteError = (id: IdType): IAction => ({
   }
 });
 
-interface IFetchedNode {
+export interface IFetchedNode {
   id: IdType;
   text: string;
 }
 
-const parseNodes = (nodes: Array<IFetchedNode>, dispatch: Dispatch): void => {
-  let nodesToAdd = Array();
-  for (const node of nodes) {
-    const picked = (({id, text}) => ({id, text}))(node);
-    nodesToAdd.push(picked);
-  }
-  dispatch(fetchNodesRequest(nodesToAdd));
+const parseNodes = (nodes: Array<IFetchedNode>): Array<IFetchedNode> => {
+  return nodes.map(({id, text}) => ({id, text}));
 };
 
 export const fetchNodes = (): any =>
-  (dispatch: any) => {
+  (dispatch: Dispatch) => {
+    dispatch(fetchNodesRequest());
     return fetch('api/v1/nodes')
       .then((response) => response.json())
-      .then((json) => parseNodes(json, dispatch))
-      .then(() => dispatch(fetchNodesSuccess()))
+      .then((json) => parseNodes(json))
+      .then((nodes) => dispatch(fetchNodesSuccess(nodes)))
       .catch(() => {
         return dispatch(fetchNodesFailure('Error: Cannot fetch data from the database.'));
       });
