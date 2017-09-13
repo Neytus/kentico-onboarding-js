@@ -10,7 +10,6 @@ import {
 import { addNodeFactory } from './addNodeFactory';
 import { generateId } from '../utils/generateId';
 import { IAction } from './IAction';
-import { NodeContent } from '../models/NodeContent';
 
 export const addNode = addNodeFactory(generateId);
 
@@ -36,9 +35,11 @@ export const saveNode = (id: IdType, text: string): IAction => ({
   },
 });
 
-export const fetchNodesRequest = (): IAction => ({
+export const fetchNodesRequest = (nodes: Array<object>): IAction => ({
   type: FETCH_NODES_REQUEST,
-  payload: {}
+  payload: {
+    nodes
+  }
 });
 
 export const fetchNodesSuccess = (): IAction => ({
@@ -60,14 +61,18 @@ export const deleteError = (id: IdType): IAction => ({
   }
 });
 
-const parseNode = (node: NodeContent, dispatch: Dispatch): void => {
-  dispatch(addNode(node.text));
-};
+interface IFetchedNode {
+  id: IdType;
+  text: string;
+}
 
-const parseNodes = (nodes: Array<object>, dispatch: Dispatch): void => {
+const parseNodes = (nodes: Array<IFetchedNode>, dispatch: Dispatch): void => {
+  let nodesToAdd = Array();
   for (const node of nodes) {
-    parseNode(node as NodeContent, dispatch);
+    const picked = (({id, text}) => ({id, text}))(node);
+    nodesToAdd.push(picked);
   }
+  dispatch(fetchNodesRequest(nodesToAdd));
 };
 
 export const fetchNodes = (): any =>

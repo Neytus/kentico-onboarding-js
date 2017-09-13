@@ -19,7 +19,7 @@ const errorPropTypes: React.ValidationMap<IErrorProps> = {
 };
 
 export const Error: React.StatelessComponent<IErrorProps> = (props) =>
-  <div className="list-group-item-danger" onClick={props.onClick}> {props.errorText} </div>;
+  <div className="alert alert-danger" onClick={props.onClick}> {props.errorText} </div>;
 
 Error.displayName = 'Error';
 Error.propTypes = errorPropTypes;

@@ -4,7 +4,7 @@ import {
   ADD_NODE,
   TOGGLE_NODE,
   SAVE_NODE,
-  DELETE_NODE,
+  DELETE_NODE, FETCH_NODES_REQUEST,
 } from '../../actions/actionTypes';
 import { NodeInfo } from '../../models/NodeInfo';
 import { IAction } from '../../actions/IAction';
@@ -28,6 +28,13 @@ export const nodesInfoReducer = (state: INodesInfo = OrderedMap<IdType, NodeInfo
       const newNode = oldNode.with({isBeingEdited: !oldNode.isBeingEdited});
 
       return state.set(action.payload.id, newNode);
+    }
+    case FETCH_NODES_REQUEST: {
+      return action.payload.nodes
+        .reduce(
+          (map: any, node: any) => map.set(node.id, new NodeInfo({})),
+          OrderedMap<IdType, NodeInfo>()
+        );
     }
     default:
       return state;

@@ -6,7 +6,6 @@ export const fetchNodesReducer = (state = true, action: IAction): boolean => {
     case FETCH_NODES_REQUEST:
       return true;
     case FETCH_NODES_FAILURE: {
-      console.log(action.payload.text);
       return false;
     }
     case FETCH_NODES_SUCCESS:

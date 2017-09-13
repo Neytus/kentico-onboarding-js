@@ -2,7 +2,7 @@ import { List } from 'immutable';
 
 import {
   ADD_NODE,
-  DELETE_NODE,
+  DELETE_NODE, FETCH_NODES_REQUEST,
 } from '../../actions/actionTypes';
 import { IAction } from '../../actions/IAction';
 
@@ -19,6 +19,13 @@ export const nodesIdsReducer = (state: INodesIds = List<IdType>(), action: IActi
       }
 
       return state.delete(index);
+    }
+    case FETCH_NODES_REQUEST: {
+      let nodesIds = Array();
+      for (const node of action.payload.nodes) {
+        nodesIds.push(node.id);
+      }
+      return state.push(...nodesIds);
     }
     default:
       return state;

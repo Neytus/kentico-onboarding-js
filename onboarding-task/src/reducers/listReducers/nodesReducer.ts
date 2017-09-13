@@ -26,7 +26,11 @@ export const nodesReducer = (state: INodes = OrderedMap<IdType, NodeContent>(), 
       return state.set(newNode.id, newNode);
     }
     case FETCH_NODES_REQUEST: {
-      return state;
+      return action.payload.nodes
+        .reduce(
+          (map: any, node: any) => map.set(node.id, new NodeContent(node)),
+          OrderedMap<IdType, NodeContent>()
+        );
     }
     default:
       return state;
