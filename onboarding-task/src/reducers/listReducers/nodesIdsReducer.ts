@@ -1,7 +1,6 @@
 import { List } from 'immutable';
 
 import {
-  ADD_NODE,
   DELETE_NODE,
   FETCH_NODES_SUCCESS,
   POST_NODE_SUCCESS,
@@ -13,8 +12,6 @@ export type INodesIds = List<IdType>;
 
 export const nodesIdsReducer = (state: INodesIds = List<IdType>(), action: IAction): INodesIds => {
   switch (action.type) {
-    case ADD_NODE:
-      return state.push(action.payload.id);
     case DELETE_NODE: {
       const index = state.indexOf(action.payload.id);
       if (index === -1) {

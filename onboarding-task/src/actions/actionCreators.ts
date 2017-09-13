@@ -10,12 +10,8 @@ import {
   POST_NODE_SUCCESS,
   POST_NODE_FAILURE
 } from './actionTypes';
-import { addNodeFactory } from './addNodeFactory';
-import { generateId } from '../utils/generateId';
 import { IAction } from './IAction';
 import { DEFAULT_ROUTE } from '../constants/routes';
-
-export const addNode = addNodeFactory(generateId);
 
 export const toggleNode = (id: IdType): IAction => ({
   type: TOGGLE_NODE,

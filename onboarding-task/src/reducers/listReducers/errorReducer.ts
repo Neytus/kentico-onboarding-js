@@ -1,6 +1,10 @@
 import { OrderedMap } from 'immutable';
 import { IAction } from '../../actions/IAction';
-import { FETCH_NODES_FAILURE, DELETE_ERROR, POST_NODE_FAILURE } from '../../actions/actionTypes';
+import {
+  FETCH_NODES_FAILURE,
+  DELETE_ERROR,
+  POST_NODE_FAILURE
+} from '../../actions/actionTypes';
 
 export type IErrorsMap = OrderedMap<IdType, string>;
 
