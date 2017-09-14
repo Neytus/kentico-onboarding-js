@@ -12,6 +12,7 @@ import {
 } from './actionTypes';
 import { IAction } from './IAction';
 import { DEFAULT_ROUTE } from '../constants/routes';
+import { fetchNodesFactory } from './fetchNodesFactory';
 
 export const toggleNode = (id: IdType): IAction => ({
   type: TOGGLE_NODE,
@@ -88,17 +89,13 @@ export interface IFetchedNode {
 
 const parseFetchedNodes = (nodes: Array<IFetchedNode>): Array<IFetchedNode> => nodes.map(({id, text}) => ({id, text}));
 
-export const fetchNodes = (): any =>
-  (dispatch: Dispatch) => {
-    dispatch(fetchNodesRequest());
-    return fetch(DEFAULT_ROUTE)
-      .then(response => response.json())
-      .then(json => parseFetchedNodes(json))
-      .then(nodes => dispatch(fetchNodesSuccess(nodes)))
-      .catch(error => {
-        return dispatch(fetchNodesFailure(error.message));
-      });
-  };
+export const fetchNodes = fetchNodesFactory({
+  route: DEFAULT_ROUTE,
+  fetchRequest: fetchNodesRequest,
+  fetchSuccess: fetchNodesSuccess,
+  fetchFailure: fetchNodesFailure,
+  parseFetchedNodes,
+});
 
 export const postNode = (text: string): any =>
   (dispatch: Dispatch) => {
