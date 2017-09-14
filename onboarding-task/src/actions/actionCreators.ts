@@ -13,6 +13,7 @@ import {
 import { IAction } from './IAction';
 import { DEFAULT_ROUTE } from '../constants/routes';
 import { fetchNodesFactory } from './fetchNodesFactory';
+import { postNodeFactory } from './postNodeFactory';
 
 export const toggleNode = (id: IdType): IAction => ({
   type: TOGGLE_NODE,
@@ -97,19 +98,9 @@ export const fetchNodes = fetchNodesFactory({
   parseFetchedNodes,
 });
 
-export const postNode = (text: string): any =>
-  (dispatch: Dispatch) => {
-    dispatch(postNodeRequest());
-    return fetch(DEFAULT_ROUTE, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({text}),
-    })
-      .then(response => response.json())
-      .then(json => dispatch(postNodeSuccess({id: json.id, text: json.text})))
-      .catch(error => {
-        return dispatch(postNodeFailure(error.message));
-      });
-  };
+export const postNode = (text: string): any => postNodeFactory(text ,{
+  route: DEFAULT_ROUTE,
+  postRequest: postNodeRequest,
+  postSuccess: postNodeSuccess,
+  postFailure: postNodeFailure,
+});
