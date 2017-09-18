@@ -4,16 +4,18 @@ import {
   DELETE_NODE,
   FETCH_NODES_REQUEST,
   FETCH_NODES_SUCCESS,
-  FETCH_NODES_FAILURE,
   DELETE_ERROR,
   POST_NODE_REQUEST,
   POST_NODE_SUCCESS,
-  POST_NODE_FAILURE
+  POST_NODE_FAILURE,
+  FETCH_NODES_FAILURE
 } from './actionTypes';
 import { IAction } from './IAction';
 import { DEFAULT_ROUTE } from '../constants/routes';
 import { fetchNodesFactory } from './fetchNodesFactory';
 import { postNodeFactory } from './postNodeFactory';
+import { addErrorFactory } from './addNodeFactory';
+import { generateId } from '../utils/generateId';
 
 export const toggleNode = (id: IdType): IAction => ({
   type: TOGGLE_NODE,
@@ -49,12 +51,7 @@ export const fetchNodesSuccess = (nodes: Array<object>): IAction => ({
   }
 });
 
-export const fetchNodesFailure = (text: string): IAction => ({
-  type: FETCH_NODES_FAILURE,
-  payload: {
-    text
-  }
-});
+export const fetchNodesFailure = addErrorFactory(FETCH_NODES_FAILURE, generateId);
 
 export const postNodeRequest = (): IAction => ({
   type: POST_NODE_REQUEST,
@@ -69,12 +66,7 @@ export const postNodeSuccess = ({id, text}: IFetchedNode): IAction => ({
   }
 });
 
-export const postNodeFailure = (text: string): IAction => ({
-  type: POST_NODE_FAILURE,
-  payload: {
-    text
-  }
-});
+export const postNodeFailure = addErrorFactory(POST_NODE_FAILURE, generateId);
 
 export const deleteError = (id: IdType): IAction => ({
   type: DELETE_ERROR,

@@ -1,8 +1,7 @@
-import { ADD_NODE } from './actionTypes';
 import { IAction } from './IAction';
 
-export const addNodeFactory = (generateId: () => IdType) => (text: string): IAction => ({
-  type: ADD_NODE,
+export const addErrorFactory = (type: string, generateId: () => IdType) => (text: string): IAction => ({
+  type,
   payload: {
     id: generateId(),
     text,

@@ -14,9 +14,9 @@ export const errorReducer = (state: IErrorsMap = OrderedMap<IdType, string>(), a
       return state.delete(action.payload.id);
     }
     case (FETCH_NODES_FAILURE):
-      return state.set(state.count().toString(), action.payload.text);
+      return state.set(action.payload.id, action.payload.text);
     case (POST_NODE_FAILURE):
-      return state.set(state.count().toString(), action.payload.text);
+      return state.set(action.payload.id, action.payload.text);
     default:
       return state;
   }
