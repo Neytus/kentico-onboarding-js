@@ -12,7 +12,7 @@ import { IAction } from './IAction';
 import { DEFAULT_ROUTE } from '../constants/routes';
 import { fetchNodesFactory } from './fetchNodesFactory';
 import { postNodeFactory } from './postNodeFactory';
-import { addFetchErrorFactory, addPostErrorFactory } from './addNodeFactory';
+import { addFetchErrorFactory, addPostErrorFactory } from './addErrorFactory';
 import { generateId } from '../utils/generateId';
 
 export const toggleNode = (id: IdType): IAction => ({

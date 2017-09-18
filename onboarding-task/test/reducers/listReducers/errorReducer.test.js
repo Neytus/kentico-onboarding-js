@@ -5,7 +5,7 @@ import { errorReducer } from '../../../src/reducers/nodesListReducers/errorReduc
 import {
   addFetchErrorFactory,
   addPostErrorFactory,
-} from '../../../dist/src/actions/addNodeFactory';
+} from '../../../dist/src/actions/addErrorFactory';
 
 describe('errorReducer', () => {
   const emptyState = OrderedMap();
