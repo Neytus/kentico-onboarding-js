@@ -78,14 +78,11 @@ export interface IFetchedNode {
   text: string;
 }
 
-const parseFetchedNodes = (nodes: Array<IFetchedNode>): Array<IFetchedNode> => nodes.map(({id, text}) => ({id, text}));
-
 export const fetchNodes = fetchNodesFactory({
   route: DEFAULT_ROUTE,
   fetchRequest: fetchNodesRequest,
   fetchSuccess: fetchNodesSuccess,
   fetchFailure: fetchNodesFailure,
-  parseFetchedNodes,
 });
 
 export const postNode = (text: string): ((dispatch: Dispatch) => Promise<IAction>) => postNodeFactory(text , {

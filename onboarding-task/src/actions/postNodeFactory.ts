@@ -1,9 +1,10 @@
 import { IAction } from './IAction';
+import { IFetchedNode } from './actionCreators';
 interface IPostNodeDependencies {
   route: string;
-  postRequest: any;
-  postSuccess: any;
-  postFailure: any;
+  postRequest: () => IAction;
+  postSuccess: (node: IFetchedNode) => IAction;
+  postFailure: (text: string) => IAction;
 }
 
 export const postNodeFactory = (text: string, dependencies: IPostNodeDependencies): ((dispatch: Dispatch) => Promise<IAction>) => {

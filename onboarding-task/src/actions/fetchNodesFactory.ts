@@ -1,18 +1,20 @@
 import { IAction } from './IAction';
+import { IFetchedNode } from './actionCreators';
 interface IFetchNodesDependencies {
   route: string;
-  fetchRequest: any;
-  fetchSuccess: any;
-  fetchFailure: any;
-  parseFetchedNodes: any;
+  fetchRequest: () => IAction;
+  fetchSuccess: (nodes: Array<IFetchedNode>) => IAction;
+  fetchFailure: (text: string) => IAction;
 }
+
+const parseFetchedNodes = (nodes: Array<IFetchedNode>): Array<IFetchedNode> => nodes.map(({id, text}) => ({id, text}));
 
 export const fetchNodesFactory = (dependencies: IFetchNodesDependencies): ((dispatch: Dispatch) => Promise<IAction>) => {
     return (dispatch: Dispatch): Promise<IAction> => {
       dispatch(dependencies.fetchRequest());
       return fetch(dependencies.route)
         .then(response => response.json())
-        .then(json => dependencies.parseFetchedNodes(json))
+        .then(json => parseFetchedNodes(json))
         .then(nodes => dispatch(dependencies.fetchSuccess(nodes)))
         .catch(error => {
           return dispatch(dependencies.fetchFailure(error.message));
