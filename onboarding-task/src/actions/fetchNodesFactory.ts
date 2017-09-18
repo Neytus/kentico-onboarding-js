@@ -7,7 +7,7 @@ interface IFetchNodesDependencies {
   parseFetchedNodes: any;
 }
 
-export const fetchNodesFactory = (dependencies: IFetchNodesDependencies) => {
+export const fetchNodesFactory = (dependencies: IFetchNodesDependencies): ((dispatch: Dispatch) => Promise<IAction>) => {
     return (dispatch: Dispatch): Promise<IAction> => {
       dispatch(dependencies.fetchRequest());
       return fetch(dependencies.route)

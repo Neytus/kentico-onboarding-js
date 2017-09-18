@@ -98,7 +98,7 @@ export const fetchNodes = fetchNodesFactory({
   parseFetchedNodes,
 });
 
-export const postNode = (text: string): any => postNodeFactory(text ,{
+export const postNode = (text: string): ((dispatch: Dispatch) => Promise<IAction>) => postNodeFactory(text , {
   route: DEFAULT_ROUTE,
   postRequest: postNodeRequest,
   postSuccess: postNodeSuccess,

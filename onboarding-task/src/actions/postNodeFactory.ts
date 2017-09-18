@@ -6,7 +6,7 @@ interface IPostNodeDependencies {
   postFailure: any;
 }
 
-export const postNodeFactory = (text: string, dependencies: IPostNodeDependencies) => {
+export const postNodeFactory = (text: string, dependencies: IPostNodeDependencies): ((dispatch: Dispatch) => Promise<IAction>) => {
   return (dispatch: Dispatch): Promise<IAction> => {
     dispatch(dependencies.postRequest());
     return fetch(dependencies.route, {
