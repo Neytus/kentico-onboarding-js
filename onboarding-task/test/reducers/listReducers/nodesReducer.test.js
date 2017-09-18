@@ -7,10 +7,15 @@ import { nodesReducer } from '../../../src/reducers/nodesListReducers/nodesReduc
 describe('nodesReducer', () => {
   const emptyState = OrderedMap();
   const id = '80149842-a624-b66b-5d3c-37c24523ba46';
+  const anotherId = '05012399-087d-4944-a742-7cf698e01b85';
   const text = 'testing text';
   const node = new NodeContent({
     id,
     text,
+  });
+  const anotherNode = new NodeContent({
+    id: anotherId,
+    text: 'another testing text',
   });
   const nonEmptyState = emptyState.set(id, node);
 
@@ -25,11 +30,33 @@ describe('nodesReducer', () => {
 
   describe('POST_NODE_SUCCESS', () => {
     it('handles adding a node', () => {
-      const action = actions.postNodeSuccess({ id, text });
+      const action = actions.postNodeSuccess({
+        id,
+        text,
+      });
 
       const actualState = nodesReducer(emptyState, action);
 
       expect(actualState).toEqual(nonEmptyState);
+    });
+  });
+
+  describe('FETCH_NODES_SUCCESS', () => {
+    it('handles fetching multiple nodes at once', () => {
+      const action = actions.fetchNodesSuccess([{ id, text }, { id: anotherId, text: 'another testing text' }]);
+      const expectedState = nonEmptyState.set(anotherId, anotherNode);
+
+      const actualState = nodesReducer(emptyState, action);
+
+      expect(expectedState).toEqual(actualState);
+    });
+
+    it('handles fetching 0 nodes', () => {
+      const action = actions.fetchNodesSuccess([]);
+
+      const actualState = nodesReducer(emptyState, action);
+
+      expect(emptyState).toEqual(actualState);
     });
   });
 
