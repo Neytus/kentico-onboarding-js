@@ -1,8 +1,9 @@
 import { IAction } from './IAction';
 import { IFetchedNode } from './actionCreators';
 import { DEFAULT_ROUTE } from '../constants/routes';
+
 interface IPostNodeDependencies {
-  fetch: (input: RequestInfo, init?: RequestInit) => Promise<Response>;
+  fetch: Fetch;
   postRequest: () => IAction;
   postSuccess: (node: IFetchedNode) => IAction;
   postFailure: (text: string) => IAction;

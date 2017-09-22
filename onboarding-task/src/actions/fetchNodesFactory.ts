@@ -1,8 +1,9 @@
 import { IAction } from './IAction';
 import { IFetchedNode } from './actionCreators';
 import { DEFAULT_ROUTE } from '../constants/routes';
+
 interface IFetchNodesDependencies {
-  fetch: (input: RequestInfo, init?: RequestInit) => Promise<Response>;
+  fetch: Fetch;
   fetchRequest: () => IAction;
   fetchSuccess: (nodes: Array<IFetchedNode>) => IAction;
   fetchFailure: (text: string) => IAction;
