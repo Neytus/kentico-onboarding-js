@@ -9,7 +9,6 @@ import {
   POST_NODE_SUCCESS,
 } from './actionTypes';
 import { IAction } from './IAction';
-import { DEFAULT_ROUTE } from '../constants/routes';
 import { fetchNodesFactory } from './fetchNodesFactory';
 import { postNodeFactory } from './postNodeFactory';
 import { addFetchErrorFactory, addPostErrorFactory } from './addErrorFactory';
@@ -79,14 +78,14 @@ export interface IFetchedNode {
 }
 
 export const fetchNodes = fetchNodesFactory({
-  route: DEFAULT_ROUTE,
+  fetch,
   fetchRequest: fetchNodesRequest,
   fetchSuccess: fetchNodesSuccess,
   fetchFailure: fetchNodesFailure,
 });
 
 export const postNode = (text: string): ((dispatch: Dispatch) => Promise<IAction>) => postNodeFactory(text , {
-  route: DEFAULT_ROUTE,
+  fetch,
   postRequest: postNodeRequest,
   postSuccess: postNodeSuccess,
   postFailure: postNodeFailure,

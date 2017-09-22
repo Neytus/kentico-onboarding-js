@@ -1,7 +1,8 @@
 import { IAction } from './IAction';
 import { IFetchedNode } from './actionCreators';
+import { DEFAULT_ROUTE } from '../constants/routes';
 interface IFetchNodesDependencies {
-  route: string;
+  fetch: (input: RequestInfo, init?: RequestInit) => Promise<Response>;
   fetchRequest: () => IAction;
   fetchSuccess: (nodes: Array<IFetchedNode>) => IAction;
   fetchFailure: (text: string) => IAction;
@@ -12,7 +13,7 @@ const parseFetchedNodes = (nodes: Array<IFetchedNode>): Array<IFetchedNode> => n
 export const fetchNodesFactory = (dependencies: IFetchNodesDependencies): ((dispatch: Dispatch) => Promise<IAction>) => {
     return (dispatch: Dispatch): Promise<IAction> => {
       dispatch(dependencies.fetchRequest());
-      return fetch(dependencies.route)
+      return fetch(DEFAULT_ROUTE)
         .then(response => response.json())
         .then(json => parseFetchedNodes(json))
         .then(nodes => dispatch(dependencies.fetchSuccess(nodes)))
@@ -21,5 +22,3 @@ export const fetchNodesFactory = (dependencies: IFetchNodesDependencies): ((disp
         });
     };
 };
-
-

@@ -1,7 +1,8 @@
 import { IAction } from './IAction';
 import { IFetchedNode } from './actionCreators';
+import { DEFAULT_ROUTE } from '../constants/routes';
 interface IPostNodeDependencies {
-  route: string;
+  fetch: (input: RequestInfo, init?: RequestInit) => Promise<Response>;
   postRequest: () => IAction;
   postSuccess: (node: IFetchedNode) => IAction;
   postFailure: (text: string) => IAction;
@@ -10,7 +11,7 @@ interface IPostNodeDependencies {
 export const postNodeFactory = (text: string, dependencies: IPostNodeDependencies): ((dispatch: Dispatch) => Promise<IAction>) => {
   return (dispatch: Dispatch): Promise<IAction> => {
     dispatch(dependencies.postRequest());
-    return fetch(dependencies.route, {
+    return fetch(DEFAULT_ROUTE, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
