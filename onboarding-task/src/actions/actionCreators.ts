@@ -13,6 +13,7 @@ import { fetchNodesFactory } from './fetchNodesFactory';
 import { postNodeFactory } from './postNodeFactory';
 import { addFetchErrorFactory, addPostErrorFactory } from './addErrorFactory';
 import { generateId } from '../utils/generateId';
+import { DEFAULT_ROUTE } from '../constants/routes';
 
 export const toggleNode = (id: IdType): IAction => ({
   type: TOGGLE_NODE,
@@ -78,14 +79,14 @@ export interface IFetchedNode {
 }
 
 export const fetchNodes = fetchNodesFactory({
-  fetch,
+  fetch: () => fetch(DEFAULT_ROUTE),
   fetchRequest: fetchNodesRequest,
   fetchSuccess: fetchNodesSuccess,
   fetchFailure: fetchNodesFailure,
 });
 
 export const postNode = (text: string): ((dispatch: Dispatch) => Promise<IAction>) => postNodeFactory(text , {
-  fetch,
+  fetch: () => fetch(DEFAULT_ROUTE),
   postRequest: postNodeRequest,
   postSuccess: postNodeSuccess,
   postFailure: postNodeFailure,
