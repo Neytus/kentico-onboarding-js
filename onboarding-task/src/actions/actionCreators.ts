@@ -49,7 +49,7 @@ export const fetchNodesSuccess = (nodes: Array<object>): IAction => ({
   }
 });
 
-export const fetchNodesFailure = addPostErrorFactory(generateId);
+export const fetchNodesFailure = addFetchErrorFactory(generateId);
 
 export const postNodeRequest = (): IAction => ({
   type: POST_NODE_REQUEST,
@@ -64,7 +64,7 @@ export const postNodeSuccess = ({id, text}: IFetchedNode): IAction => ({
   }
 });
 
-export const postNodeFailure = addFetchErrorFactory(generateId);
+export const postNodeFailure = addPostErrorFactory(generateId);
 
 export const deleteError = (id: IdType): IAction => ({
   type: DELETE_ERROR,

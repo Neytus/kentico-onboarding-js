@@ -1,7 +1,12 @@
 import * as actions from '../../src/actions/actionCreators.ts';
 import * as types from '../../src/actions/actionTypes.ts';
+import {
+  addFetchErrorFactory,
+  addPostErrorFactory,
+} from '../../src/actions/addErrorFactory.ts';
 
 const id = '80149842-a624-b66b-5d3c-37c24523ba46';
+const generateId = () => id;
 
 describe('actionCreators', () => {
   describe('POST_NODE_SUCCESS', () => {
@@ -59,6 +64,38 @@ describe('actionCreators', () => {
       };
 
       expect(actions.deleteNode(id)).toEqual(expectedAction);
+    });
+  });
+
+  describe('fetchNodesFailure', () => {
+    it('returns a correct new action', () => {
+      const text = 'Never be like you.';
+      const expectedAction = {
+        type: types.FETCH_NODES_FAILURE,
+        payload: {
+          id,
+          text,
+        },
+      };
+      const fetchNodesFailure = addFetchErrorFactory(generateId);
+
+      expect(fetchNodesFailure(text)).toEqual(expectedAction);
+    });
+  });
+
+  describe('postNodeFailure', () => {
+    it('returns a correct new action', () => {
+      const text = 'Never be like you.';
+      const expectedAction = {
+        type: types.POST_NODE_FAILURE,
+        payload: {
+          id,
+          text,
+        },
+      };
+      const postNodeFailure = addPostErrorFactory(generateId);
+
+      expect(postNodeFailure(text)).toEqual(expectedAction);
     });
   });
 });
