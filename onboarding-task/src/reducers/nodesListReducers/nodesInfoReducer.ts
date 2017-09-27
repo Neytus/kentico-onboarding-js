@@ -9,7 +9,7 @@ import {
 } from '../../actions/actionTypes';
 import { NodeInfo } from '../../models/NodeInfo';
 import { IAction } from '../../actions/IAction';
-import { IFetchedNode } from '../../actions/actionCreators';
+import { INodeContent } from '../../models/NodeContent';
 
 export type INodesInfo = OrderedMap<IdType, NodeInfo>;
 
@@ -35,7 +35,7 @@ export const nodesInfoReducer = (state: INodesInfo = OrderedMap<IdType, NodeInfo
     case FETCH_NODES_SUCCESS:
       return action.payload.nodes
         .reduce(
-          (map: INodesInfo, node: IFetchedNode) => map.set(node.id, new NodeInfo({})),
+          (map: INodesInfo, node: INodeContent) => map.set(node.id, new NodeInfo({})),
           OrderedMap<IdType, NodeInfo>()
         );
 

@@ -1,10 +1,10 @@
 import { IAction } from './IAction';
-import { IFetchedNode } from './actionCreators';
+import { INodeContent } from '../models/NodeContent';
 
 interface IPostNodeDependencies {
   fetch: any;
   postRequest: () => IAction;
-  postSuccess: (node: IFetchedNode) => IAction;
+  postSuccess: (node: INodeContent) => IAction;
   postFailure: (text: string) => IAction;
 }
 

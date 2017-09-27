@@ -16,6 +16,8 @@ import { postNodeFactory } from './postNodeFactory';
 import { errorFactory } from './addErrorFactory';
 import { generateId } from '../utils/generateId';
 import { DEFAULT_ROUTE } from '../constants/routes';
+import { parseFetchedNodes } from '../utils/parseFetchedNodes';
+import { INodeContent } from '../models/NodeContent';
 
 export const toggleNode = (id: IdType): IAction => ({
   type: TOGGLE_NODE,
@@ -56,7 +58,7 @@ export const postNodeRequest = (): IAction => ({
   type: POST_NODE_REQUEST,
 });
 
-export const postNodeSuccess = ({id, text}: IFetchedNode): IAction => ({
+export const postNodeSuccess = ({id, text}: INodeContent): IAction => ({
   type: POST_NODE_SUCCESS,
   payload: {
     id,
@@ -72,13 +74,6 @@ export const deleteError = (id: IdType): IAction => ({
     id
   }
 });
-
-export interface IFetchedNode {
-  id: IdType;
-  text: string;
-}
-
-const parseFetchedNodes = (nodes: Array<IFetchedNode>): Array<IFetchedNode> => nodes.map(({id, text}) => ({id, text}));
 
 export const fetchNodes = fetchNodesFactory({
   fetch: () => fetch(DEFAULT_ROUTE),

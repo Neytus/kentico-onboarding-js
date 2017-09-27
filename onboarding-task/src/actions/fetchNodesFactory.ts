@@ -1,12 +1,12 @@
 import { IAction } from './IAction';
-import { IFetchedNode } from './actionCreators';
+import { INodeContent, IServerNode } from '../models/NodeContent';
 
 interface IFetchNodesDependencies {
   fetch: () => Promise<Response>;
   fetchRequest: () => IAction;
-  fetchSuccess: (nodes: Array<IFetchedNode>) => IAction;
+  fetchSuccess: (nodes: Array<INodeContent>) => IAction;
   fetchFailure: (text: string) => IAction;
-  parseFetchedNodes: (nodes: Array<IFetchedNode>)  => Array<IFetchedNode>;
+  parseFetchedNodes: (nodes: Array<IServerNode>) => Array<INodeContent>;
 }
 
 export const fetchNodesFactory = (dependencies: IFetchNodesDependencies) => () => {

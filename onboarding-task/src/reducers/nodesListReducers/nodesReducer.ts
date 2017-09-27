@@ -6,9 +6,8 @@ import {
   FETCH_NODES_SUCCESS,
   POST_NODE_SUCCESS,
 } from '../../actions/actionTypes';
-import { NodeContent } from '../../models/NodeContent';
+import { INodeContent, NodeContent } from '../../models/NodeContent';
 import { IAction } from '../../actions/IAction';
-import { IFetchedNode } from '../../actions/actionCreators';
 
 export type INodes = OrderedMap<IdType, NodeContent>;
 
@@ -26,7 +25,7 @@ export const nodesReducer = (state: INodes = OrderedMap<IdType, NodeContent>(), 
     case FETCH_NODES_SUCCESS:
       return action.payload.nodes
         .reduce(
-          (map: INodes, node: IFetchedNode) => map.set(node.id, new NodeContent(node)),
+          (map: INodes, node: INodeContent) => map.set(node.id, new NodeContent(node)),
           OrderedMap<IdType, NodeContent>()
         );
 

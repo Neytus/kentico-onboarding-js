@@ -6,7 +6,7 @@ import {
   POST_NODE_SUCCESS,
 } from '../../actions/actionTypes';
 import { IAction } from '../../actions/IAction';
-import { IFetchedNode } from '../../actions/actionCreators';
+import { INodeContent } from '../../models/NodeContent';
 
 export type INodesIds = List<IdType>;
 
@@ -18,7 +18,7 @@ export const nodesIdsReducer = (state: INodesIds = List<IdType>(), action: IActi
     case FETCH_NODES_SUCCESS:
       return action.payload.nodes
         .reduce(
-          (list: INodesIds, node: IFetchedNode) => list.push(node.id),
+          (list: INodesIds, node: INodeContent) => list.push(node.id),
           List<IdType>()
         );
 
