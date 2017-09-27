@@ -12,7 +12,7 @@ const mapStateToProps = ({nodesList: {nodesIds, isFetching, errors}}: IAppState)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  fetchNodes: () => setTimeout(() => dispatch(fetchNodes as any), 2500),
+  fetchNodes: () => setTimeout(() => dispatch(fetchNodes()), 2500),
 });
 
 export const List: React.ComponentClass = connect(mapStateToProps, mapDispatchToProps)(ListComponent);

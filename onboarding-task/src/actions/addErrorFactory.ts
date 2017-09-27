@@ -19,3 +19,11 @@ export const addFetchErrorFactory = (generateId: () => IdType) => (text: string)
     text,
   },
 });
+
+export const errorFactory = (generateId: () => IdType, actionType: string) => (text: string): IAction => ({
+  type: actionType,
+  payload: {
+    id: generateId(),
+    text,
+  },
+});

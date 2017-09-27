@@ -1,9 +1,5 @@
 import { fetchNodesFactory } from '../../src/actions/fetchNodesFactory.ts';
-import {
-  FETCH_NODES_SUCCESS,
-  FETCH_NODES_REQUEST,
-} from '../../src/actions/actionTypes.ts';
-import { fetchNodesRequest } from '../../dist/src/actions/actionCreators';
+import { fetchNodesSuccess } from '../../src/actions/actionCreators.ts';
 
 describe('fetchNodesFactory', () => {
   const id = 'bf2c5661-bd00-4e10-9d2a-2562823041e3';
@@ -12,26 +8,41 @@ describe('fetchNodesFactory', () => {
     id,
     text,
   };
-  const nodesArray = new Array(node);
+  const nodesArray = [node];
+  const fetchRequest = jest.fn(() => ({ type: 'FETCH_HAS_BEEN_REQUESTED' }));
   const fetchFailure = jest.fn(input => input);
-  const parseFetchedNodes = jest.fn(input => input);
 
-  it('dispatches fetched data correctly', () => {
-    const myFetch = () => Promise.resolve(nodesArray);
+  it('dispatches fetch request action', () => {
+    const myFetch = jest.fn(() => Promise.resolve(nodesArray));
     const fetchSuccess = jest.fn(input => input);
     const dispatch = jest.fn(input => input);
 
     const fetchNodes = fetchNodesFactory({
       fetch: myFetch,
-      fetchRequest: fetchNodesRequest,
+      fetchRequest,
       fetchFailure,
       fetchSuccess,
-      parseFetchedNodes,
     });
 
-    return fetchNodes(dispatch).then(() => {
-      expect(dispatch.mock.calls[0][0].type).toEqual(FETCH_NODES_REQUEST);
+    return fetchNodes()(dispatch).then(() => {
+      expect(fetchRequest.mock.calls.length).toEqual(1);
+      expect(dispatch.mock.calls[0][0]).toEqual({ type: 'FETCH_HAS_BEEN_REQUESTED' });
     });
+  });
+
+  it('fetch method has been called', () => {
+    const myFetch = jest.fn(() => Promise.resolve(nodesArray));
+    const fetchSuccess = jest.fn(input => input);
+    const dispatch = jest.fn(input => input);
+
+    const fetchNodes = fetchNodesFactory({
+      fetch: myFetch,
+      fetchRequest,
+      fetchFailure,
+      fetchSuccess,
+    });
+
+    return fetchNodes()(dispatch).then(() => expect(myFetch.mock.calls.length).toEqual(1));
   });
 
   it('performs successful fetch and returns correct data ', () => {
@@ -39,26 +50,21 @@ describe('fetchNodesFactory', () => {
       response: { ok: true },
       then: () => Promise.resolve(nodesArray),
     });
-    const fetchSuccess = jest.fn(input => ({
-      type: FETCH_NODES_SUCCESS,
-      payload: {
-        nodes: input,
-      },
-    }));
+    const fetchSuccess = jest.fn(fetchNodesSuccess);
     const dispatch = jest.fn(input => input);
 
     const fetchNodes = fetchNodesFactory({
       fetch: myFetch,
-      fetchRequest: fetchNodesRequest,
+      fetchRequest: () => null,
       fetchFailure,
       fetchSuccess,
-      parseFetchedNodes,
     });
 
-    return fetchNodes(dispatch).then(() => {
+    return fetchNodes()(dispatch).then(() => {
+      expect(fetchSuccess.mock.calls.length).toBe(1);
       const actualOutput = dispatch.mock.calls[1][0];
 
-      expect(actualOutput.type).toEqual(FETCH_NODES_SUCCESS);
+      expect(actualOutput).toEqual(fetchNodesSuccess(nodesArray));
       expect(actualOutput.payload.nodes).toEqual(nodesArray);
     });
   });

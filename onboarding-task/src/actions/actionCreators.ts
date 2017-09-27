@@ -38,8 +38,7 @@ export const saveNode = (id: IdType, text: string): IAction => ({
 });
 
 export const fetchNodesRequest = (): IAction => ({
-  type: FETCH_NODES_REQUEST,
-  payload: {}
+  type: FETCH_NODES_REQUEST
 });
 
 export const fetchNodesSuccess = (nodes: Array<object>): IAction => ({
@@ -53,7 +52,6 @@ export const fetchNodesFailure = addFetchErrorFactory(generateId);
 
 export const postNodeRequest = (): IAction => ({
   type: POST_NODE_REQUEST,
-  payload: {}
 });
 
 export const postNodeSuccess = ({id, text}: IFetchedNode): IAction => ({
@@ -85,8 +83,8 @@ export const fetchNodes = fetchNodesFactory({
   fetchFailure: fetchNodesFailure,
 });
 
-export const postNode = (text: string): ((dispatch: Dispatch) => Promise<IAction>) => postNodeFactory(text , {
-  fetch: () => fetch(DEFAULT_ROUTE),
+export const postNode = postNodeFactory({
+  fetch: (body: object) => fetch(DEFAULT_ROUTE, body),
   postRequest: postNodeRequest,
   postSuccess: postNodeSuccess,
   postFailure: postNodeFailure,

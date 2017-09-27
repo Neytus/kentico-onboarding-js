@@ -12,23 +12,19 @@ export type INodesIds = List<IdType>;
 
 export const nodesIdsReducer = (state: INodesIds = List<IdType>(), action: IAction): INodesIds => {
   switch (action.type) {
-    case DELETE_NODE: {
-      const index = state.indexOf(action.payload.id);
-      if (index === -1) {
-        return state;
-      }
+    case DELETE_NODE:
+      return state.filter(nodeId => nodeId !== action.payload.id).toList();
 
-      return state.delete(index);
-    }
-    case FETCH_NODES_SUCCESS: {
+    case FETCH_NODES_SUCCESS:
       return action.payload.nodes
         .reduce(
           (list: INodesIds, node: IFetchedNode) => list.push(node.id),
           List<IdType>()
         );
-    }
+
     case POST_NODE_SUCCESS:
       return state.push(action.payload.id);
+
     default:
       return state;
   }

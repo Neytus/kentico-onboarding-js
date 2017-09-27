@@ -10,6 +10,7 @@ import thunk from 'redux-thunk';
 
 import { App } from './App.tsx';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/fonts/glyphicons-halflings-regular.woff2';
 import './index.css';
 import { rootReducer } from './reducers/rootReducer.ts';
 

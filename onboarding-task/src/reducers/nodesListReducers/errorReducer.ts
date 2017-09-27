@@ -10,13 +10,13 @@ export type IErrorsMap = OrderedMap<IdType, string>;
 
 export const errorReducer = (state: IErrorsMap = OrderedMap<IdType, string>(), action: IAction): IErrorsMap => {
   switch (action.type) {
-    case (DELETE_ERROR): {
+    case (DELETE_ERROR):
       return state.delete(action.payload.id);
-    }
+
     case (FETCH_NODES_FAILURE):
-      return state.set(action.payload.id, action.payload.text);
     case (POST_NODE_FAILURE):
       return state.set(action.payload.id, action.payload.text);
+
     default:
       return state;
   }

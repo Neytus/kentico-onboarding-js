@@ -16,23 +16,26 @@ export const nodesReducer = (state: INodes = OrderedMap<IdType, NodeContent>(), 
   switch (action.type) {
     case DELETE_NODE:
       return state.delete(action.payload.id);
+
     case SAVE_NODE: {
       const newNode = state.get(action.payload.id).with(action.payload);
 
       return state.set(newNode.id, newNode);
     }
-    case FETCH_NODES_SUCCESS: {
+
+    case FETCH_NODES_SUCCESS:
       return action.payload.nodes
         .reduce(
           (map: INodes, node: IFetchedNode) => map.set(node.id, new NodeContent(node)),
           OrderedMap<IdType, NodeContent>()
         );
-    }
+
     case POST_NODE_SUCCESS: {
       const newNode = new NodeContent(action.payload);
 
       return state.set(newNode.id, newNode);
     }
+
     default:
       return state;
   }
