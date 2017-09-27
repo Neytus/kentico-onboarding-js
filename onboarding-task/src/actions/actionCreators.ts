@@ -16,7 +16,7 @@ import { postNodeFactory } from './postNodeFactory';
 import { errorFactory } from './addErrorFactory';
 import { generateId } from '../utils/generateId';
 import { DEFAULT_ROUTE } from '../constants/routes';
-import { parseFetchedNodes } from '../utils/parseFetchedNodes';
+import { parseFetchedNode, parseFetchedNodes } from '../utils/parseFetchedNodes';
 import { INodeContent } from '../models/NodeContent';
 
 export const toggleNode = (id: IdType): IAction => ({
@@ -88,4 +88,5 @@ export const postNode = postNodeFactory({
   postRequest: postNodeRequest,
   postSuccess: postNodeSuccess,
   postFailure: postNodeFailure,
+  parseFetchedNode
 });

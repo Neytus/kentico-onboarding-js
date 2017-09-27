@@ -14,6 +14,7 @@ describe('postNodeFactory', () => {
   };
   const postFailure = jest.fn(input => input);
   const postRequest = jest.fn(() => 'REQUEST_HAS_BEEN_CALLED');
+  const parseFetchedNode = jest.fn(() => node)
 
   it('dispatches post request action', () => {
     const myFetch = () => Promise.resolve(node);
@@ -25,6 +26,7 @@ describe('postNodeFactory', () => {
       postRequest,
       postSuccess,
       postFailure,
+      parseFetchedNode,
     });
 
     return postNode(text)(dispatch).then(() => {
@@ -43,6 +45,7 @@ describe('postNodeFactory', () => {
       postRequest,
       postFailure,
       postSuccess,
+      parseFetchedNode,
     });
 
     return postNode(text)(dispatch).then(() => expect(myFetch.mock.calls.length).toEqual(1));
@@ -70,6 +73,7 @@ describe('postNodeFactory', () => {
       postRequest: postNodeRequest,
       postSuccess,
       postFailure,
+      parseFetchedNode,
     });
 
     return postNode(text)(dispatch).then(() => {
@@ -93,7 +97,8 @@ describe('postNodeFactory', () => {
       fetch: myFetch,
       postRequest: postNodeRequest,
       postSuccess,
-      postFailure: newPostFailure
+      postFailure: newPostFailure,
+      parseFetchedNode,
     });
 
     return postNode(text)(dispatch).then(() => {

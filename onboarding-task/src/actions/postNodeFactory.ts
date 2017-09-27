@@ -1,11 +1,12 @@
 import { IAction } from './IAction';
-import { INodeContent } from '../models/NodeContent';
+import { INodeContent, IServerNode } from '../models/NodeContent';
 
 interface IPostNodeDependencies {
   fetch: any;
   postRequest: () => IAction;
   postSuccess: (node: INodeContent) => IAction;
   postFailure: (text: string) => IAction;
+  parseFetchedNode: (node: IServerNode) => INodeContent;
 }
 
 export const postNodeFactory = (dependencies: IPostNodeDependencies) => (text: string) => {
@@ -19,7 +20,8 @@ export const postNodeFactory = (dependencies: IPostNodeDependencies) => (text: s
       body: JSON.stringify({text}),
     })
       .then((response: any) => response.json())
-      .then((json: any) => dispatch(dependencies.postSuccess({id: json.id, text: json.text})))
+      .then((json: any) => dependencies.parseFetchedNode(json))
+      .then((node: any) => dispatch(dependencies.postSuccess(node)))
       .catch((error: any) => dispatch(dependencies.postFailure(error.message)));
   };
 };
