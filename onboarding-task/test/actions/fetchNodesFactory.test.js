@@ -1,5 +1,5 @@
 import { fetchNodesFactory } from '../../src/actions/fetchNodesFactory.ts';
-import { fetchNodesSuccess } from '../../src/actions/actionCreators.ts';
+import { fetchNodesSuccess, fetchNodesFailure } from '../../src/actions/actionCreators.ts';
 
 describe('fetchNodesFactory', () => {
   const id = 'bf2c5661-bd00-4e10-9d2a-2562823041e3';
@@ -61,11 +61,31 @@ describe('fetchNodesFactory', () => {
     });
 
     return fetchNodes()(dispatch).then(() => {
-      expect(fetchSuccess.mock.calls.length).toBe(1);
+      expect(fetchSuccess.mock.calls.length).toEqual(1);
       const actualOutput = dispatch.mock.calls[1][0];
 
       expect(actualOutput).toEqual(fetchNodesSuccess(nodesArray));
       expect(actualOutput.payload.nodes).toEqual(nodesArray);
+    });
+  });
+
+  it('returns fetch failure action after failing to fetch', () => {
+    const myFetch = () => ({
+      response: { ok: false },
+      then: () => Promise.reject(text),
+    });
+    const newFetchFailure = jest.fn(fetchNodesFailure);
+    const dispatch = jest.fn(input => input);
+
+    const fetchNodes = fetchNodesFactory({
+      fetch: myFetch,
+      fetchRequest: jest.fn(() => null),
+      fetchFailure: newFetchFailure,
+      fetchSuccess: jest.fn(() => null),
+    });
+
+    return fetchNodes()(dispatch).then(() => {
+      expect(newFetchFailure.mock.calls.length).toEqual(1);
     });
   });
 });

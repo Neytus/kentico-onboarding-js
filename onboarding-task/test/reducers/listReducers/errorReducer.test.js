@@ -2,10 +2,11 @@ import { OrderedMap } from 'immutable';
 
 import * as actions from '../../../src/actions/actionCreators.ts';
 import { errorReducer } from '../../../src/reducers/nodesListReducers/errorReducer.ts';
+import { errorFactory } from '../../../src/actions/addErrorFactory.ts';
 import {
-  addFetchErrorFactory,
-  addPostErrorFactory,
-} from '../../../dist/src/actions/addErrorFactory';
+  FETCH_NODES_FAILURE,
+  POST_NODE_FAILURE,
+} from '../../../src/actions/actionTypes.ts';
 
 describe('errorReducer', () => {
   const emptyState = OrderedMap();
@@ -44,7 +45,7 @@ describe('errorReducer', () => {
 
   describe('POST_NODE_FAILURE', () => {
     it('handles adding a new error call', () => {
-      const postNodeFailure = addPostErrorFactory(generateNewId);
+      const postNodeFailure = errorFactory(generateNewId, POST_NODE_FAILURE);
       const action = postNodeFailure(text);
 
       const actualState = errorReducer(emptyState, action);
@@ -55,7 +56,7 @@ describe('errorReducer', () => {
 
   describe('FETCH_NODES_FAILURE', () => {
     it('handles adding a new error call', () => {
-      const fetchNodesFailure = addFetchErrorFactory(generateNewId);
+      const fetchNodesFailure = errorFactory(generateNewId, FETCH_NODES_FAILURE);
       const action = fetchNodesFailure(text);
 
       const actualState = errorReducer(emptyState, action);

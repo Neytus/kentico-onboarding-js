@@ -1,5 +1,8 @@
 import { postNodeFactory } from '../../src/actions/postNodeFactory';
-import { postNodeRequest } from '../../src/actions/actionCreators';
+import {
+  postNodeFailure,
+  postNodeRequest
+} from '../../src/actions/actionCreators';
 import {
   POST_NODE_SUCCESS,
 } from '../../src/actions/actionTypes';
@@ -27,13 +30,29 @@ describe('postNodeFactory', () => {
     });
 
     return postNode(text)(dispatch).then(() => {
+      expect(postRequest.mock.calls.length).toEqual(1);
       expect(dispatch.mock.calls[0][0]).toEqual('REQUEST_HAS_BEEN_CALLED');
     });
   });
 
-  it('performs successful fetch and returns correct data ', () => {
+  it('fetch method has been called', () => {
+    const myFetch = jest.fn(() => Promise.resolve(node));
+    const postSuccess = jest.fn(input => input);
+    const dispatch = jest.fn(input => input);
+
+    const postNode = postNodeFactory({
+      fetch: myFetch,
+      postRequest,
+      postFailure,
+      postSuccess,
+    });
+
+    return postNode(text)(dispatch).then(() => expect(myFetch.mock.calls.length).toEqual(1));
+  });
+
+  it('performs successful post action and returns correct data ', () => {
     const myFetch = () => ({
-      response: { ok: true },
+      response: {ok: true},
       then: () => Promise.resolve({
         id,
         text,
@@ -60,6 +79,27 @@ describe('postNodeFactory', () => {
 
       expect(dispatchCallArguments.type).toEqual(POST_NODE_SUCCESS);
       expect(dispatchCallArguments.payload.text).toEqual(node.text);
+    });
+  });
+
+  it('returns correct error message after failing to post', () => {
+    const myFetch = () => ({
+      response: {ok: false},
+      then: () => Promise.reject(text)
+    });
+    const newPostFailure = jest.fn(postNodeFailure);
+    const postSuccess = jest.fn(input => input);
+    const dispatch = jest.fn(input => input);
+
+    const postNode = postNodeFactory({
+      fetch: myFetch,
+      postRequest: postNodeRequest,
+      postSuccess,
+      postFailure: newPostFailure
+    });
+
+    return postNode(text)(dispatch).then(() => {
+      expect(newPostFailure.mock.calls.length).toEqual(1);
     });
   });
 });

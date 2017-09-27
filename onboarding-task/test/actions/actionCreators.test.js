@@ -1,12 +1,9 @@
 import * as actions from '../../src/actions/actionCreators.ts';
 import * as types from '../../src/actions/actionTypes.ts';
-import {
-  addFetchErrorFactory,
-  addPostErrorFactory,
-} from '../../src/actions/addErrorFactory.ts';
+import { errorFactory } from '../../src/actions/addErrorFactory.ts';
 
 const id = '80149842-a624-b66b-5d3c-37c24523ba46';
-const generateId = () => id;
+const generateId = jest.fn(() => id);
 
 describe('actionCreators', () => {
   describe('POST_NODE_SUCCESS', () => {
@@ -77,7 +74,7 @@ describe('actionCreators', () => {
           text,
         },
       };
-      const fetchNodesFailure = addFetchErrorFactory(generateId);
+      const fetchNodesFailure = errorFactory(generateId, types.FETCH_NODES_FAILURE);
 
       expect(fetchNodesFailure(text)).toEqual(expectedAction);
     });
@@ -93,7 +90,7 @@ describe('actionCreators', () => {
           text,
         },
       };
-      const postNodeFailure = addPostErrorFactory(generateId);
+      const postNodeFailure = errorFactory(generateId, types.POST_NODE_FAILURE);
 
       expect(postNodeFailure(text)).toEqual(expectedAction);
     });

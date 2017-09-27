@@ -7,11 +7,13 @@ import {
   DELETE_ERROR,
   POST_NODE_REQUEST,
   POST_NODE_SUCCESS,
+  POST_NODE_FAILURE,
+  FETCH_NODES_FAILURE,
 } from './actionTypes';
 import { IAction } from './IAction';
 import { fetchNodesFactory } from './fetchNodesFactory';
 import { postNodeFactory } from './postNodeFactory';
-import { addFetchErrorFactory, addPostErrorFactory } from './addErrorFactory';
+import { errorFactory } from './addErrorFactory';
 import { generateId } from '../utils/generateId';
 import { DEFAULT_ROUTE } from '../constants/routes';
 
@@ -48,7 +50,7 @@ export const fetchNodesSuccess = (nodes: Array<object>): IAction => ({
   }
 });
 
-export const fetchNodesFailure = addFetchErrorFactory(generateId);
+export const fetchNodesFailure = errorFactory(generateId, FETCH_NODES_FAILURE);
 
 export const postNodeRequest = (): IAction => ({
   type: POST_NODE_REQUEST,
@@ -62,7 +64,7 @@ export const postNodeSuccess = ({id, text}: IFetchedNode): IAction => ({
   }
 });
 
-export const postNodeFailure = addPostErrorFactory(generateId);
+export const postNodeFailure = errorFactory(generateId, POST_NODE_FAILURE);
 
 export const deleteError = (id: IdType): IAction => ({
   type: DELETE_ERROR,
