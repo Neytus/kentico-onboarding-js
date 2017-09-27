@@ -19,10 +19,7 @@ export const postNodeFactory = (dependencies: IPostNodeDependencies) => (text: s
       body: JSON.stringify({text}),
     })
       .then((response: any) => response.json())
-      .then((json: any) => {
-      console.log(json);
-      return dispatch(dependencies.postSuccess({id: json.id, text: json.text}));
-    })
+      .then((json: any) => dispatch(dependencies.postSuccess({id: json.id, text: json.text})))
       .catch((error: any) => dispatch(dependencies.postFailure(error.message)));
   };
 };
