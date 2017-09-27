@@ -1,5 +1,5 @@
-import { fetchNodesFactory } from '../../src/actions/fetchNodesFactory.ts';
-import { fetchNodesSuccess, fetchNodesFailure } from '../../src/actions/actionCreators.ts';
+import { fetchNodesFactory } from '../../src/actions/fetchNodesFactory';
+import { fetchNodesFailure } from '../../src/actions/actionCreators';
 
 describe('fetchNodesFactory', () => {
   const id = 'bf2c5661-bd00-4e10-9d2a-2562823041e3';
@@ -22,6 +22,7 @@ describe('fetchNodesFactory', () => {
       fetchRequest,
       fetchFailure,
       fetchSuccess,
+      parseFetchedNodes: jest.fn(input => input)
     });
 
     return fetchNodes()(dispatch).then(() => {
@@ -40,40 +41,35 @@ describe('fetchNodesFactory', () => {
       fetchRequest,
       fetchFailure,
       fetchSuccess,
+      parseFetchedNodes: jest.fn(input => input)
     });
 
     return fetchNodes()(dispatch).then(() => expect(myFetch.mock.calls.length).toEqual(1));
   });
 
   it('performs successful fetch and returns correct data ', () => {
-    const myFetch = () => ({
-      response: { ok: true },
-      then: () => Promise.resolve(nodesArray),
-    });
-    const fetchSuccess = jest.fn(fetchNodesSuccess);
+    const myFetch = jest.fn(() => Promise.resolve(new Response(JSON.stringify({ ok: true }))));
+    const fetchSuccess = jest.fn(input => input);
     const dispatch = jest.fn(input => input);
 
     const fetchNodes = fetchNodesFactory({
       fetch: myFetch,
-      fetchRequest: () => null,
+      fetchRequest: jest.fn(() => null),
       fetchFailure,
       fetchSuccess,
+      parseFetchedNodes: jest.fn(() => nodesArray)
     });
 
     return fetchNodes()(dispatch).then(() => {
       expect(fetchSuccess.mock.calls.length).toEqual(1);
-      const actualOutput = dispatch.mock.calls[1][0];
+      const dispatchCallArguments = dispatch.mock.calls[1][0];
 
-      expect(actualOutput).toEqual(fetchNodesSuccess(nodesArray));
-      expect(actualOutput.payload.nodes).toEqual(nodesArray);
+      expect(dispatchCallArguments).toEqual(nodesArray);
     });
   });
 
   it('returns fetch failure action after failing to fetch', () => {
-    const myFetch = () => ({
-      response: { ok: false },
-      then: () => Promise.reject(text),
-    });
+    const myFetch = jest.fn(() => Promise.reject(new Response(JSON.stringify({ ok: false }))));
     const newFetchFailure = jest.fn(fetchNodesFailure);
     const dispatch = jest.fn(input => input);
 
@@ -82,6 +78,7 @@ describe('fetchNodesFactory', () => {
       fetchRequest: jest.fn(() => null),
       fetchFailure: newFetchFailure,
       fetchSuccess: jest.fn(() => null),
+      parseFetchedNodes: jest.fn(() => nodesArray)
     });
 
     return fetchNodes()(dispatch).then(() => {

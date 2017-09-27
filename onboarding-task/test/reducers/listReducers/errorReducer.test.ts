@@ -1,15 +1,15 @@
 import { OrderedMap } from 'immutable';
 
-import * as actions from '../../../src/actions/actionCreators.ts';
-import { errorReducer } from '../../../src/reducers/nodesListReducers/errorReducer.ts';
-import { errorFactory } from '../../../src/actions/addErrorFactory.ts';
+import * as actions from '../../../src/actions/actionCreators';
+import { errorReducer } from '../../../src/reducers/nodesListReducers/errorReducer';
+import { errorFactory } from '../../../src/actions/addErrorFactory';
 import {
   FETCH_NODES_FAILURE,
   POST_NODE_FAILURE,
-} from '../../../src/actions/actionTypes.ts';
+} from '../../../src/actions/actionTypes';
 
 describe('errorReducer', () => {
-  const emptyState = OrderedMap();
+  const emptyState = OrderedMap<IdType, string>();
   const id = '80149842-a624-b66b-5d3c-37c24523ba46';
   const anotherId = '05012399-087d-4944-a742-7cf698e01b85';
   const generateNewId = jest.fn(() => id);
@@ -18,7 +18,7 @@ describe('errorReducer', () => {
 
   it('returns initial state', () => {
     const initialState = undefined;
-    const action = { type: 'UNKNOWN' };
+    const action = {type: 'UNKNOWN'};
 
     const actualState = errorReducer(initialState, action);
 

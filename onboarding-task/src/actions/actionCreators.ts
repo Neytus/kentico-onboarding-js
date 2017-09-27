@@ -78,11 +78,14 @@ export interface IFetchedNode {
   text: string;
 }
 
+const parseFetchedNodes = (nodes: Array<IFetchedNode>): Array<IFetchedNode> => nodes.map(({id, text}) => ({id, text}));
+
 export const fetchNodes = fetchNodesFactory({
   fetch: () => fetch(DEFAULT_ROUTE),
   fetchRequest: fetchNodesRequest,
   fetchSuccess: fetchNodesSuccess,
   fetchFailure: fetchNodesFailure,
+  parseFetchedNodes
 });
 
 export const postNode = postNodeFactory({

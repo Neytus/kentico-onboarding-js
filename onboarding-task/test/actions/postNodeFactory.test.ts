@@ -3,9 +3,7 @@ import {
   postNodeFailure,
   postNodeRequest
 } from '../../src/actions/actionCreators';
-import {
-  POST_NODE_SUCCESS,
-} from '../../src/actions/actionTypes';
+import { POST_NODE_SUCCESS } from '../../src/actions/actionTypes';
 
 describe('postNodeFactory', () => {
   const id = 'bf2c5661-bd00-4e10-9d2a-2562823041e3';
