@@ -2,7 +2,7 @@ import { IAction } from './IAction';
 import { INodeContent, IServerNode } from '../models/NodeContent';
 
 interface IFetchNodesDependencies {
-  fetch: () => Promise<Response>;
+  getNodes: () => Promise<Response>;
   fetchRequest: () => IAction;
   fetchSuccess: (nodes: Array<INodeContent>) => IAction;
   fetchFailure: (text: string) => IAction;
@@ -13,7 +13,7 @@ export const fetchNodesFactory = (dependencies: IFetchNodesDependencies) => () =
   return (dispatch: Dispatch): Promise<IAction> => {
     dispatch(dependencies.fetchRequest());
 
-    return dependencies.fetch()
+    return dependencies.getNodes()
       .then(response => response.json())
       .then(json => dependencies.parseFetchedNodes(json))
       .then(nodes => dispatch(dependencies.fetchSuccess(nodes)))

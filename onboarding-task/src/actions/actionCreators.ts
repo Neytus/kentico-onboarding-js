@@ -18,6 +18,7 @@ import { generateId } from '../utils/generateId';
 import { DEFAULT_ROUTE } from '../constants/routes';
 import { parseFetchedNode, parseFetchedNodes } from '../utils/parseFetchedNodes';
 import { INodeContent } from '../models/NodeContent';
+import { checkStatus } from '../utils/checkStatus';
 
 export const toggleNode = (id: IdType): IAction => ({
   type: TOGGLE_NODE,
@@ -75,16 +76,34 @@ export const deleteError = (id: IdType): IAction => ({
   }
 });
 
+const getNodesFetch = () => fetch(DEFAULT_ROUTE)
+    .catch(() => {
+      throw new Error('Database is disconnected, could not postNodeFetch data. ');
+    })
+    .then(response => checkStatus(response));
+
 export const fetchNodes = fetchNodesFactory({
-  fetch: () => fetch(DEFAULT_ROUTE),
+  getNodes: getNodesFetch,
   fetchRequest: fetchNodesRequest,
   fetchSuccess: fetchNodesSuccess,
   fetchFailure: fetchNodesFailure,
   parseFetchedNodes
 });
 
+const postNodeFetch = (text: string) => fetch(DEFAULT_ROUTE, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({text}),
+})
+  .catch(() => {
+    throw new Error('Database is disconnected, could not save node. ');
+  })
+  .then(response => checkStatus(response));
+
 export const postNode = postNodeFactory({
-  fetch: (body: object) => fetch(DEFAULT_ROUTE, body),
+  postNodeFetch,
   postRequest: postNodeRequest,
   postSuccess: postNodeSuccess,
   postFailure: postNodeFailure,

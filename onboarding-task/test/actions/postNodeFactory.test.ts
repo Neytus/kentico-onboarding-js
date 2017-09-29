@@ -14,7 +14,7 @@ describe('postNodeFactory', () => {
   };
   const postFailure = jest.fn(input => input);
   const postRequest = jest.fn(() => 'REQUEST_HAS_BEEN_CALLED');
-  const parseFetchedNode = jest.fn(() => node)
+  const parseFetchedNode = jest.fn(() => node);
 
   it('dispatches post request action', () => {
     const myFetch = () => Promise.resolve(node);
@@ -22,7 +22,7 @@ describe('postNodeFactory', () => {
     const dispatch = jest.fn(input => input);
 
     const postNode = postNodeFactory({
-      fetch: myFetch,
+      postNodeFetch: myFetch,
       postRequest,
       postSuccess,
       postFailure,
@@ -35,13 +35,13 @@ describe('postNodeFactory', () => {
     });
   });
 
-  it('fetch method has been called', () => {
+  it('postNodeFetch method has been called', () => {
     const myFetch = jest.fn(() => Promise.resolve(node));
     const postSuccess = jest.fn(input => input);
     const dispatch = jest.fn(input => input);
 
     const postNode = postNodeFactory({
-      fetch: myFetch,
+      postNodeFetch: myFetch,
       postRequest,
       postFailure,
       postSuccess,
@@ -69,7 +69,7 @@ describe('postNodeFactory', () => {
     const dispatch = jest.fn(input => input);
 
     const postNode = postNodeFactory({
-      fetch: myFetch,
+      postNodeFetch: myFetch,
       postRequest: postNodeRequest,
       postSuccess,
       postFailure,
@@ -94,7 +94,7 @@ describe('postNodeFactory', () => {
     const dispatch = jest.fn(input => input);
 
     const postNode = postNodeFactory({
-      fetch: myFetch,
+      postNodeFetch: myFetch,
       postRequest: postNodeRequest,
       postSuccess,
       postFailure: newPostFailure,

@@ -9,16 +9,16 @@ describe('fetchNodesFactory', () => {
     text,
   };
   const nodesArray = [node];
-  const fetchRequest = jest.fn(() => ({ type: 'FETCH_HAS_BEEN_REQUESTED' }));
+  const fetchRequest = jest.fn(() => ({type: 'FETCH_HAS_BEEN_REQUESTED'}));
   const fetchFailure = jest.fn(input => input);
 
-  it('dispatches fetch request action', () => {
+  it('dispatches getNodes fetch request action', () => {
     const myFetch = jest.fn(() => Promise.resolve(nodesArray));
     const fetchSuccess = jest.fn(input => input);
     const dispatch = jest.fn(input => input);
 
     const fetchNodes = fetchNodesFactory({
-      fetch: myFetch,
+      getNodes: myFetch,
       fetchRequest,
       fetchFailure,
       fetchSuccess,
@@ -27,17 +27,17 @@ describe('fetchNodesFactory', () => {
 
     return fetchNodes()(dispatch).then(() => {
       expect(fetchRequest.mock.calls.length).toEqual(1);
-      expect(dispatch.mock.calls[0][0]).toEqual({ type: 'FETCH_HAS_BEEN_REQUESTED' });
+      expect(dispatch.mock.calls[0][0]).toEqual({type: 'FETCH_HAS_BEEN_REQUESTED'});
     });
   });
 
-  it('fetch method has been called', () => {
+  it('getNodesFetch method has been called', () => {
     const myFetch = jest.fn(() => Promise.resolve(nodesArray));
     const fetchSuccess = jest.fn(input => input);
     const dispatch = jest.fn(input => input);
 
     const fetchNodes = fetchNodesFactory({
-      fetch: myFetch,
+      getNodes: myFetch,
       fetchRequest,
       fetchFailure,
       fetchSuccess,
@@ -47,13 +47,13 @@ describe('fetchNodesFactory', () => {
     return fetchNodes()(dispatch).then(() => expect(myFetch.mock.calls.length).toEqual(1));
   });
 
-  it('performs successful fetch and returns correct data ', () => {
-    const myFetch = jest.fn(() => Promise.resolve(new Response(JSON.stringify({ ok: true }))));
+  it('performs successful getNodesFetch and returns correct data ', () => {
+    const myFetch = jest.fn(() => Promise.resolve(new Response(JSON.stringify({ok: true}))));
     const fetchSuccess = jest.fn(input => input);
     const dispatch = jest.fn(input => input);
 
     const fetchNodes = fetchNodesFactory({
-      fetch: myFetch,
+      getNodes: myFetch,
       fetchRequest: jest.fn(() => null),
       fetchFailure,
       fetchSuccess,
@@ -68,13 +68,13 @@ describe('fetchNodesFactory', () => {
     });
   });
 
-  it('returns fetch failure action after failing to fetch', () => {
-    const myFetch = jest.fn(() => Promise.reject(new Response(JSON.stringify({ ok: false }))));
+  it('returns getNodesFetch failure action after failing to fetch', () => {
+    const myFetch = jest.fn(() => Promise.reject(new Response(JSON.stringify({ok: false}))));
     const newFetchFailure = jest.fn(fetchNodesFailure);
     const dispatch = jest.fn(input => input);
 
     const fetchNodes = fetchNodesFactory({
-      fetch: myFetch,
+      getNodes: myFetch,
       fetchRequest: jest.fn(() => null),
       fetchFailure: newFetchFailure,
       fetchSuccess: jest.fn(() => null),
