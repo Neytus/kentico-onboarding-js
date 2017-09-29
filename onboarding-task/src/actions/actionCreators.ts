@@ -77,10 +77,11 @@ export const deleteError = (id: IdType): IAction => ({
 });
 
 const getNodesFetch = () => fetch(DEFAULT_ROUTE)
-    .catch(() => {
-      throw new Error('Database is disconnected, could not postNodeFetch data. ');
-    })
-    .then(response => checkStatus(response));
+  .catch(() => {
+    throw new Error('Server is disconnected, could not fetch data. ');
+  })
+  .then(response => checkStatus(response))
+  .then(response => response.json());
 
 export const fetchNodes = fetchNodesFactory({
   getNodes: getNodesFetch,
@@ -98,7 +99,7 @@ const postNodeFetch = (text: string) => fetch(DEFAULT_ROUTE, {
   body: JSON.stringify({text}),
 })
   .catch(() => {
-    throw new Error('Database is disconnected, could not save node. ');
+    throw new Error('Server is disconnected, could not save text: ' + text + '. ');
   })
   .then(response => checkStatus(response));
 
