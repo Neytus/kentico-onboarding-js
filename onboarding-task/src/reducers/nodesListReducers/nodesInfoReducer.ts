@@ -3,9 +3,9 @@ import { OrderedMap } from 'immutable';
 import {
   TOGGLE_NODE,
   SAVE_NODE,
-  DELETE_NODE,
   FETCH_NODES_SUCCESS,
   POST_NODE_SUCCESS,
+  DELETE_NODE_SUCCESS,
 } from '../../actions/actionTypes';
 import { NodeInfo } from '../../models/NodeInfo';
 import { IAction } from '../../actions/IAction';
@@ -15,7 +15,7 @@ export type INodesInfo = OrderedMap<IdType, NodeInfo>;
 
 export const nodesInfoReducer = (state: INodesInfo = OrderedMap<IdType, NodeInfo>(), action: IAction): INodesInfo => {
   switch (action.type) {
-    case DELETE_NODE:
+    case DELETE_NODE_SUCCESS:
       return state.delete(action.payload.id);
 
     case TOGGLE_NODE: {

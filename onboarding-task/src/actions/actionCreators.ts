@@ -8,7 +8,7 @@ import {
   POST_NODE_REQUEST,
   POST_NODE_SUCCESS,
   POST_NODE_FAILURE,
-  FETCH_NODES_FAILURE,
+  FETCH_NODES_FAILURE, DELETE_NODE_REQUEST, DELETE_NODE_SUCCESS, DELETE_NODE_FAILURE,
 } from './actionTypes';
 import { IAction } from './IAction';
 import { fetchNodesFactory } from './fetchNodesFactory';
@@ -110,3 +110,30 @@ export const postNode = postNodeFactory({
   postFailure: postNodeFailure,
   parseFetchedNode
 });
+
+const deleteNodeFetch = (id: IdType) => fetch(DEFAULT_ROUTE + '/' + id, {
+  method: 'DELETE',
+  body: JSON.stringify(id),
+});
+
+export const deleteNodeRequest = (): IAction => ({
+  type: DELETE_NODE_REQUEST,
+});
+
+export const deleteNodeSuccess = (id: IdType): IAction => ({
+  type: DELETE_NODE_SUCCESS,
+  payload: {
+    id,
+  },
+});
+
+export const deleteNodeFailure = errorFactory(generateId, DELETE_NODE_FAILURE);
+
+export const deleteNodeThunk = (id: IdType) => {
+  return (dispatch: Dispatch): Promise<IAction> => {
+    dispatch(deleteNodeRequest());
+    return deleteNodeFetch(id)
+      .then(() => dispatch(deleteNodeSuccess(id)))
+      .catch(error => dispatch(deleteNodeFailure(error.message)));
+  };
+};

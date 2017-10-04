@@ -19,7 +19,7 @@ const mapDispatchToProps = (dispatch: Dispatch, {id}: INodeContainerProps): INod
   onEdit: () => dispatch(actions.toggleNode(id)),
   onSave: (text: string) => dispatch(actions.saveNode(id, text)),
   onCancel: () => dispatch(actions.toggleNode(id)),
-  onDelete: () => dispatch(actions.deleteNode(id)),
+  onDelete: () => dispatch(actions.deleteNodeThunk(id)),
 });
 
 export const Node: React.ComponentClass<INodeContainerProps> = connect(mapStateToProps, mapDispatchToProps)(NodeComponent);
