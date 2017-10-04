@@ -19,6 +19,7 @@ import { DEFAULT_ROUTE } from '../constants/routes';
 import { parseFetchedNode, parseFetchedNodes } from '../utils/parseFetchedNodes';
 import { INodeContent } from '../models/NodeContent';
 import { checkStatus } from '../utils/checkStatus';
+import { deleteNodeFactory } from './deleteNodeFactory';
 
 export const toggleNode = (id: IdType): IAction => ({
   type: TOGGLE_NODE,
@@ -101,7 +102,8 @@ const postNodeFetch = (text: string) => fetch(DEFAULT_ROUTE, {
   .catch(() => {
     throw new Error('Server is disconnected, could not save text: ' + text + '. ');
   })
-  .then(response => checkStatus(response));
+  .then(response => checkStatus(response))
+  .then((response: any) => response.json());
 
 export const postNode = postNodeFactory({
   postNodeFetch,
@@ -114,7 +116,11 @@ export const postNode = postNodeFactory({
 const deleteNodeFetch = (id: IdType) => fetch(DEFAULT_ROUTE + '/' + id, {
   method: 'DELETE',
   body: JSON.stringify(id),
-});
+})
+  .catch(() => {
+    throw new Error('Server is disconnected, could not delete selected node.');
+  })
+  .then(response => checkStatus(response));
 
 export const deleteNodeRequest = (): IAction => ({
   type: DELETE_NODE_REQUEST,
@@ -129,11 +135,9 @@ export const deleteNodeSuccess = (id: IdType): IAction => ({
 
 export const deleteNodeFailure = errorFactory(generateId, DELETE_NODE_FAILURE);
 
-export const deleteNodeThunk = (id: IdType) => {
-  return (dispatch: Dispatch): Promise<IAction> => {
-    dispatch(deleteNodeRequest());
-    return deleteNodeFetch(id)
-      .then(() => dispatch(deleteNodeSuccess(id)))
-      .catch(error => dispatch(deleteNodeFailure(error.message)));
-  };
-};
+export const deleteNodeThunk = deleteNodeFactory({
+  deleteNodeRequest,
+  deleteNodeFailure,
+  deleteNodeSuccess,
+  deleteNodeFetch
+});

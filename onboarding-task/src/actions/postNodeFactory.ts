@@ -13,7 +13,6 @@ export const postNodeFactory = (dependencies: IPostNodeDependencies) => (text: s
   return (dispatch: Dispatch): Promise<IAction> => {
     dispatch(dependencies.postRequest());
     return dependencies.postNodeFetch(text)
-      .then((response: any) => response.json())
       .then((json: any) => dependencies.parseFetchedNode(json))
       .then((node: any) => dispatch(dependencies.postSuccess(node)))
       .catch((error: any) => dispatch(dependencies.postFailure(error.message)));
