@@ -1,14 +1,16 @@
 import {
   TOGGLE_NODE,
   SAVE_NODE,
-  DELETE_NODE,
   FETCH_NODES_REQUEST,
   FETCH_NODES_SUCCESS,
   DELETE_ERROR,
   POST_NODE_REQUEST,
   POST_NODE_SUCCESS,
   POST_NODE_FAILURE,
-  FETCH_NODES_FAILURE, DELETE_NODE_REQUEST, DELETE_NODE_SUCCESS, DELETE_NODE_FAILURE,
+  FETCH_NODES_FAILURE,
+  DELETE_NODE_REQUEST,
+  DELETE_NODE_SUCCESS,
+  DELETE_NODE_FAILURE,
 } from './actionTypes';
 import { IAction } from './IAction';
 import { fetchNodesFactory } from './fetchNodesFactory';
@@ -23,13 +25,6 @@ import { deleteNodeFactory } from './deleteNodeFactory';
 
 export const toggleNode = (id: IdType): IAction => ({
   type: TOGGLE_NODE,
-  payload: {
-    id,
-  },
-});
-
-export const deleteNode = (id: IdType): IAction => ({
-  type: DELETE_NODE,
   payload: {
     id,
   },

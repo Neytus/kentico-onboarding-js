@@ -52,9 +52,9 @@ describe('nodesIdsReducer', () => {
     });
   });
 
-  describe('DELETE_NODE', () => {
+  describe('DELETE_NODE_SUCCESS', () => {
     it('handles deleting a node', () => {
-      const action = actions.deleteNode(id);
+      const action = actions.deleteNodeSuccess(id);
 
       const actualState = nodesIdsReducer(nonEmptyState, action);
 
@@ -62,7 +62,7 @@ describe('nodesIdsReducer', () => {
     });
 
     it('handles deleting a nonexistent node', () => {
-      const action = actions.deleteNode(id);
+      const action = actions.deleteNodeSuccess(id);
 
       const actualState = nodesIdsReducer(emptyState, action);
 
@@ -70,7 +70,7 @@ describe('nodesIdsReducer', () => {
     });
 
     it('handles deleting a nonexistent node from non empty state', () => {
-      const action = actions.deleteNode('80185242-d624-b669-5d3c-37c11523ba85');
+      const action = actions.deleteNodeSuccess('80185242-d624-b669-5d3c-37c11523ba85');
 
       const actualState = nodesIdsReducer(nonEmptyState, action);
 
