@@ -18,8 +18,13 @@ const errorPropTypes: React.ValidationMap<IErrorProps> = {
   onClick: PropTypes.func.isRequired
 };
 
-export const Error: React.StatelessComponent<IErrorProps> = (props) =>
-  <div className="alert alert-danger"> {props.errorText} <i className="pull-right glyphicon glyphicon-remove" onClick={props.onClick} /></div>;
+export const Error: React.StatelessComponent<IErrorProps> = ({errorText, onClick}) =>
+  <div className="alert alert-danger">
+    <b> {errorText} </b>
+    <button onClick={onClick} type="button" className="pull-right btn btn-default btn-xs">
+      <span className="glyphicon glyphicon-remove" hidden={true}/>
+    </button>
+  </div>;
 
 Error.displayName = 'Error';
 Error.propTypes = errorPropTypes;
