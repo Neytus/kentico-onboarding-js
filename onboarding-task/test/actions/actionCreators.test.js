@@ -51,16 +51,13 @@ describe('actionCreators', () => {
     });
   });
 
-  describe('deleteNode', () => {
+  describe('deleteNodeRequest', () => {
     it('returns a correct new action', () => {
       const expectedAction = {
-        type: types.DELETE_NODE,
-        payload: {
-          id,
-        },
+        type: types.DELETE_NODE_REQUEST,
       };
 
-      expect(actions.deleteNode(id)).toEqual(expectedAction);
+      expect(actions.deleteNodeRequest()).toEqual(expectedAction);
     });
   });
 

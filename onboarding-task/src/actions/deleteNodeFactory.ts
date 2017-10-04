@@ -1,11 +1,10 @@
-
 import { IAction } from './IAction';
 
 interface IDeleteNodeDependencies {
   deleteNodeRequest: () => IAction;
   deleteNodeSuccess: (id: IdType) => IAction;
   deleteNodeFailure: (text: string) => IAction;
-  deleteNodeFetch: (id: IdType) => Promise<IAction>;
+  deleteNodeFetch: any;
 }
 
 export const deleteNodeFactory = (dependencies: IDeleteNodeDependencies) => (id: IdType) => {
