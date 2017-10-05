@@ -22,6 +22,7 @@ export interface  IListCallbacksProps {
 const keyMap: IKeyMap = {
   'cancelNode': 'esc',
   'saveNode': 'enter',
+  'deleteNode': 'ctrl+del',
 };
 
 export class List extends React.PureComponent<IListDataProps & IListCallbacksProps> {
