@@ -20,6 +20,7 @@ type IEditableNodeProps = IEditableNodeDataProps & IEditableNodeCallbacksProps;
 
 interface IEditableNodeState {
   text: string;
+  isSavingDisabled: boolean;
 }
 
 export class EditableNode extends React.PureComponent<IEditableNodeProps, IEditableNodeState> {
@@ -40,19 +41,20 @@ export class EditableNode extends React.PureComponent<IEditableNodeProps, IEdita
 
     this.state = {
       text: props.nodeViewModel.text,
+      isSavingDisabled: false,
     };
   }
 
   _saveNode = (event: React.KeyboardEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    if (!isNullOrWhitespace(this.state.text)) {
+    if (!this.state.isSavingDisabled) {
       this.props.onSave(this.state.text);
     }
   };
 
   _updateText = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const text = event.target.value;
-    this.setState(() => ({text}));
+    this.setState(() => ({text, isDisabled: isNullOrWhitespace(text)}));
   };
 
   render() {
@@ -77,7 +79,7 @@ export class EditableNode extends React.PureComponent<IEditableNodeProps, IEdita
           <button
             type="submit"
             className="btn btn-primary"
-            disabled={isNullOrWhitespace(text)}
+            disabled={this.state.isSavingDisabled}
           >
             Save
           </button>
