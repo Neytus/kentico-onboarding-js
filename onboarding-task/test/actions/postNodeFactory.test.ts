@@ -11,7 +11,7 @@ describe('postNodeFactory', () => {
   const postRequest = jest.fn(() => 'REQUEST_HAS_BEEN_CALLED');
 
   it('dispatches post request action', () => {
-    const myFetch = () => Promise.resolve(node);
+    const myFetch = () => Promise.resolve(new Response(JSON.stringify({ok: true})));
     const dispatch = identityFunction;
 
     const postNode = postNodeFactory({
@@ -44,13 +44,7 @@ describe('postNodeFactory', () => {
   });
 
   it('performs successful post action and returns correct data ', () => {
-    const myFetch = () => ({
-      response: {ok: true},
-      then: () => Promise.resolve({
-        id,
-        text,
-      }),
-    });
+    const myFetch = jest.fn(() => Promise.resolve(new Response(JSON.stringify({ok: true}))));
     const postSuccess = jest.fn(input => ({
       type: 'POST_NODE_SUCCESS',
       payload: {
@@ -65,7 +59,7 @@ describe('postNodeFactory', () => {
       postNodeRequest: identityFunction,
       postNodeSuccess: postSuccess,
       postNodeFailure: identityFunction,
-      parseFetchedNode: identityFunction,
+      parseFetchedNode: jest.fn(() => ({id, text})),
     });
 
     return postNode(text)(dispatch).then(() => {
@@ -77,10 +71,7 @@ describe('postNodeFactory', () => {
   });
 
   it('returns correct error message after failing to post', () => {
-    const myFetch = () => ({
-      response: {ok: false},
-      then: () => Promise.reject(text)
-    });
+    const myFetch = jest.fn(() => Promise.reject(new Response(JSON.stringify({ok: false}))));
     const newPostFailure = jest.fn(() => 'Posting a node has failed.');
     const dispatch = identityFunction;
 
