@@ -5,7 +5,7 @@ import {
   SAVE_NODE,
   FETCH_NODES_SUCCESS,
   POST_NODE_SUCCESS,
-  DELETE_NODE_SUCCESS,
+  DELETE_NODE_SUCCESS, POST_NODE_OPTIMISTIC,
 } from '../../actions/actionTypes';
 import { NodeInfo } from '../../models/NodeInfo';
 import { IAction } from '../../actions/IAction';
@@ -39,8 +39,12 @@ export const nodesInfoReducer = (state: INodesInfo = OrderedMap<Guid, NodeInfo>(
           OrderedMap<Guid, NodeInfo>()
         );
 
-    case POST_NODE_SUCCESS: {
+    case POST_NODE_OPTIMISTIC:
       return state.set(action.payload.id, new NodeInfo({}));
+
+    case POST_NODE_SUCCESS: {
+      const temporaryState = state.delete(action.payload.temporaryId);
+      return temporaryState.set(action.payload.id, new NodeInfo({}));
     }
 
     default:
