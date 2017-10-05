@@ -41,5 +41,3 @@ describe('parseFetchedNodes', () => {
     expect(expectedOutput).toEqual(actualOutput);
   });
 });
-
-

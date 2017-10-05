@@ -3,18 +3,18 @@ import { INodeContent, IServerNode } from '../models/NodeContent';
 
 interface IPostNodeDependencies {
   postNodeFetch: any;
-  postRequest: () => IAction;
-  postSuccess: (node: INodeContent) => IAction;
-  postFailure: (text: string) => IAction;
+  postNodeRequest: () => IAction;
+  postNodeSuccess: (node: INodeContent) => IAction;
+  postNodeFailure: (text: string) => IAction;
   parseFetchedNode: (node: IServerNode) => INodeContent;
 }
 
 export const postNodeFactory = (dependencies: IPostNodeDependencies) => (text: string) => {
   return (dispatch: Dispatch): Promise<IAction> => {
-    dispatch(dependencies.postRequest());
+    dispatch(dependencies.postNodeRequest());
     return dependencies.postNodeFetch(text)
       .then((json: any) => dependencies.parseFetchedNode(json))
-      .then((node: any) => dispatch(dependencies.postSuccess(node)))
-      .catch((error: any) => dispatch(dependencies.postFailure(error.message)));
+      .then((node: any) => dispatch(dependencies.postNodeSuccess(node)))
+      .catch((error: any) => dispatch(dependencies.postNodeFailure(error.message)));
   };
 };

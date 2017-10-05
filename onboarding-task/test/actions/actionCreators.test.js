@@ -61,7 +61,7 @@ describe('actionCreators', () => {
     });
   });
 
-  describe('fetchNodesFailure', () => {
+  describe('getNodesFailure', () => {
     it('returns a correct new action', () => {
       const text = 'Never be like you.';
       const expectedAction = {

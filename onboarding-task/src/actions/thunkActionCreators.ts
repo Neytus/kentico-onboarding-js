@@ -14,10 +14,10 @@ const getNodesFetch = () => fetch(DEFAULT_ROUTE)
   .then(response => response.json());
 
 export const fetchNodes = fetchNodesFactory({
-  getNodes: getNodesFetch,
-  fetchRequest: fetchNodesRequest,
-  fetchSuccess: fetchNodesSuccess,
-  fetchFailure: fetchNodesFailure,
+  getNodesFetch: getNodesFetch,
+  getNodesRequest: fetchNodesRequest,
+  getNodesSuccess: fetchNodesSuccess,
+  getNodesFailure: fetchNodesFailure,
   parseFetchedNodes
 });
 
@@ -36,9 +36,9 @@ const postNodeFetch = (text: string) => fetch(DEFAULT_ROUTE, {
 
 export const postNode = postNodeFactory({
   postNodeFetch,
-  postRequest: postNodeRequest,
-  postSuccess: postNodeSuccess,
-  postFailure: postNodeFailure,
+  postNodeRequest: postNodeRequest,
+  postNodeSuccess: postNodeSuccess,
+  postNodeFailure: postNodeFailure,
   parseFetchedNode
 });
 

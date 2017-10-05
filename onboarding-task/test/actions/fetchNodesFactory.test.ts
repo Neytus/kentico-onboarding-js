@@ -1,5 +1,4 @@
 import { fetchNodesFactory } from '../../src/actions/fetchNodesFactory';
-import { fetchNodesFailure } from '../../src/actions/actionCreators';
 
 describe('fetchNodesFactory', () => {
   const id = 'bf2c5661-bd00-4e10-9d2a-2562823041e3';
@@ -9,20 +8,19 @@ describe('fetchNodesFactory', () => {
     text,
   };
   const nodesArray = [node];
+  const identityFunction = jest.fn((input: any) => input);
   const fetchRequest = jest.fn(() => ({type: 'FETCH_HAS_BEEN_REQUESTED'}));
-  const fetchFailure = jest.fn(input => input);
 
-  it('dispatches getNodes fetch request action', () => {
+  it('dispatches getNodesFetch fetch request action', () => {
     const myFetch = jest.fn(() => Promise.resolve(nodesArray));
-    const fetchSuccess = jest.fn(input => input);
-    const dispatch = jest.fn(input => input);
+    const dispatch = identityFunction;
 
     const fetchNodes = fetchNodesFactory({
-      getNodes: myFetch,
-      fetchRequest,
-      fetchFailure,
-      fetchSuccess,
-      parseFetchedNodes: jest.fn(input => input)
+      getNodesFetch: myFetch,
+      getNodesRequest: fetchRequest,
+      getNodesFailure: identityFunction,
+      getNodesSuccess: identityFunction,
+      parseFetchedNodes: identityFunction
     });
 
     return fetchNodes()(dispatch).then(() => {
@@ -33,15 +31,14 @@ describe('fetchNodesFactory', () => {
 
   it('getNodesFetch method has been called', () => {
     const myFetch = jest.fn(() => Promise.resolve(nodesArray));
-    const fetchSuccess = jest.fn(input => input);
-    const dispatch = jest.fn(input => input);
+    const dispatch = identityFunction;
 
     const fetchNodes = fetchNodesFactory({
-      getNodes: myFetch,
-      fetchRequest,
-      fetchFailure,
-      fetchSuccess,
-      parseFetchedNodes: jest.fn(input => input)
+      getNodesFetch: myFetch,
+      getNodesRequest: fetchRequest,
+      getNodesFailure: identityFunction,
+      getNodesSuccess: identityFunction,
+      parseFetchedNodes: identityFunction
     });
 
     return fetchNodes()(dispatch).then(() => expect(myFetch.mock.calls.length).toEqual(1));
@@ -49,19 +46,19 @@ describe('fetchNodesFactory', () => {
 
   it('performs successful getNodesFetch and returns correct data ', () => {
     const myFetch = jest.fn(() => Promise.resolve(new Response(JSON.stringify({ok: true}))));
-    const fetchSuccess = jest.fn(input => input);
-    const dispatch = jest.fn(input => input);
+    const dispatch = identityFunction;
+    const getNodesSuccess = jest.fn(() => 'SUCCESSFUL_FETCH');
 
     const fetchNodes = fetchNodesFactory({
-      getNodes: myFetch,
-      fetchRequest: jest.fn(() => null),
-      fetchFailure,
-      fetchSuccess,
+      getNodesFetch: myFetch,
+      getNodesRequest: identityFunction,
+      getNodesFailure: identityFunction,
+      getNodesSuccess,
       parseFetchedNodes: jest.fn(() => nodesArray)
     });
 
     return fetchNodes()(dispatch).then(() => {
-      expect(fetchSuccess.mock.calls.length).toEqual(1);
+      expect(getNodesSuccess.mock.calls.length).toEqual(1);
       const dispatchCallArguments = dispatch.mock.calls[1][0];
 
       expect(dispatchCallArguments).toEqual(nodesArray);
@@ -70,16 +67,16 @@ describe('fetchNodesFactory', () => {
 
   it('returns getNodesFetch failure action after failing to fetch', () => {
     const myFetch = jest.fn(() => Promise.reject(new Response(JSON.stringify({ok: false}))));
-    const newFetchFailure = jest.fn(fetchNodesFailure);
-    const dispatch = jest.fn(input => input);
+    const newFetchFailure = jest.fn(() => 'Getting nodes has failed.');
+    const dispatch = identityFunction;
 
     const fetchNodes = fetchNodesFactory({
-      getNodes: myFetch,
-      fetchRequest: jest.fn(() => null),
-      fetchFailure: newFetchFailure,
-      fetchSuccess: jest.fn(() => null),
-      parseFetchedNodes: jest.fn(() => nodesArray)
-    });
+      getNodesFetch: myFetch,
+      getNodesRequest: identityFunction,
+      getNodesFailure: newFetchFailure,
+      getNodesSuccess: identityFunction,
+      parseFetchedNodes: identityFunction
+  });
 
     return fetchNodes()(dispatch).then(() => {
       expect(newFetchFailure.mock.calls.length).toEqual(1);
