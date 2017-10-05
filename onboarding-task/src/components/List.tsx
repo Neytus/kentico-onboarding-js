@@ -43,7 +43,7 @@ export class List extends React.PureComponent<IListDataProps & IListCallbacksPro
     const
       nodes = this.props.nodesIds
         .map((id: Guid, index: number) => (
-          <li className="list-group-item" key={id}>
+          <li className="list-group-item" key={id} >
             <Node
               id={id}
               index={index}

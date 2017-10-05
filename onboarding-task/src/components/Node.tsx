@@ -23,6 +23,7 @@ const nodePropTypes: React.ValidationMap<INodeProps> = {
   nodeViewModel: ImmutablePropTypes.recordOf({
     id: PropTypes.string.isRequired,
     isBeingEdited: PropTypes.bool.isRequired,
+    isPersisted: PropTypes.bool.isRequired,
     text: PropTypes.string.isRequired,
     index: PropTypes.number.isRequired,
   }).isRequired,

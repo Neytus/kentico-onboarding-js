@@ -8,6 +8,7 @@ export interface INodeViewModel {
   readonly id: Guid;
   readonly text: string;
   readonly isBeingEdited: boolean;
+  readonly isPersisted: boolean;
   readonly index: number;
 }
 
@@ -15,6 +16,7 @@ const defaultNodeViewModel: INodeViewModel = {
   id: '00000000-0000-0000-0000-000000000000',
   text: '',
   isBeingEdited: false,
+  isPersisted: true,
   index: 0,
 };
 
@@ -22,6 +24,7 @@ export class NodeViewModel extends Record(defaultNodeViewModel) implements INode
   readonly id: Guid;
   readonly text: string;
   readonly isBeingEdited: boolean;
+  readonly isPersisted: boolean;
   readonly index: number;
 }
 

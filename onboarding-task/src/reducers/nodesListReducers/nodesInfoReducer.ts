@@ -40,7 +40,7 @@ export const nodesInfoReducer = (state: INodesInfo = OrderedMap<Guid, NodeInfo>(
         );
 
     case POST_NODE_OPTIMISTIC:
-      return state.set(action.payload.id, new NodeInfo({}));
+      return state.set(action.payload.id, new NodeInfo({isPersisted: false}));
 
     case POST_NODE_SUCCESS: {
       const temporaryState = state.delete(action.payload.temporaryId);
