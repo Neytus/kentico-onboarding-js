@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import { List as ListComponent, IListDataProps } from '../components/List';
 import { IAppState } from '../reducers/IAppState';
-import { fetchNodes } from '../actions/actionCreators';
+import { fetchNodes } from '../actions/thunkActionCreators';
 
 const mapStateToProps = ({nodesList: {nodesIds, isFetching, errors}}: IAppState): IListDataProps => ({
   nodesIds,
