@@ -3,7 +3,7 @@ import { IAction } from '../actions/IAction';
 import * as PropTypes from 'prop-types';
 
 export interface IErrorDataProps {
-  id: IdType;
+  id: Guid;
   errorText: string;
 }
 

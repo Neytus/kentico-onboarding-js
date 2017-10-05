@@ -5,7 +5,7 @@ import { deleteError } from '../actions/actionCreators';
 import { IAppState } from '../reducers/IAppState';
 
 type IErrorContainerProps = {
-  id: IdType
+  id: Guid
 };
 
  const mapStateToProps = ({nodesList: {errors}}: IAppState, {id }: IErrorContainerProps): IErrorDataProps => ({

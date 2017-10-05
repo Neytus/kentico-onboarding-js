@@ -8,9 +8,9 @@ import {
 import { IAction } from '../../actions/IAction';
 import { INodeContent } from '../../models/NodeContent';
 
-export type INodesIds = List<IdType>;
+export type INodesIds = List<Guid>;
 
-export const nodesIdsReducer = (state: INodesIds = List<IdType>(), action: IAction): INodesIds => {
+export const nodesIdsReducer = (state: INodesIds = List<Guid>(), action: IAction): INodesIds => {
   switch (action.type) {
     case DELETE_NODE_SUCCESS:
       return state.filter(nodeId => nodeId !== action.payload.id).toList();
@@ -19,7 +19,7 @@ export const nodesIdsReducer = (state: INodesIds = List<IdType>(), action: IActi
       return action.payload.nodes
         .reduce(
           (list: INodesIds, node: INodeContent) => list.push(node.id),
-          List<IdType>()
+          List<Guid>()
         );
 
     case POST_NODE_SUCCESS:

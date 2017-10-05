@@ -9,7 +9,7 @@ import {
 } from '../../../src/actions/actionTypes';
 
 describe('errorReducer', () => {
-  const emptyState = OrderedMap<IdType, string>();
+  const emptyState = OrderedMap<Guid, string>();
   const id = '80149842-a624-b66b-5d3c-37c24523ba46';
   const anotherId = '05012399-087d-4944-a742-7cf698e01b85';
   const generateNewId = jest.fn(() => id);

@@ -8,7 +8,7 @@ declare global {
   type Dispatch = BasicDispatch & ThunkDispatch;
   type Fetch = (input: RequestInfo, init?: RequestInit) => Promise<Response>;
 
-  type IdType = string;
+  type Guid = string;
 }
 
 export {};

@@ -23,14 +23,14 @@ import { INodeContent } from '../models/NodeContent';
 import { checkStatus } from '../utils/checkStatus';
 import { deleteNodeFactory } from './deleteNodeFactory';
 
-export const toggleNode = (id: IdType): IAction => ({
+export const toggleNode = (id: Guid): IAction => ({
   type: TOGGLE_NODE,
   payload: {
     id,
   },
 });
 
-export const saveNode = (id: IdType, text: string): IAction => ({
+export const saveNode = (id: Guid, text: string): IAction => ({
   type: SAVE_NODE,
   payload: {
     id,
@@ -65,7 +65,7 @@ export const postNodeSuccess = ({id, text}: INodeContent): IAction => ({
 
 export const postNodeFailure = errorFactory(generateId, POST_NODE_FAILURE);
 
-export const deleteError = (id: IdType): IAction => ({
+export const deleteError = (id: Guid): IAction => ({
   type: DELETE_ERROR,
   payload: {
     id
@@ -108,7 +108,7 @@ export const postNode = postNodeFactory({
   parseFetchedNode
 });
 
-const deleteNodeFetch = (id: IdType) => fetch(DEFAULT_ROUTE + '/' + id, {
+const deleteNodeFetch = (id: Guid) => fetch(DEFAULT_ROUTE + '/' + id, {
   method: 'DELETE',
   body: JSON.stringify(id),
 })
@@ -121,7 +121,7 @@ export const deleteNodeRequest = (): IAction => ({
   type: DELETE_NODE_REQUEST,
 });
 
-export const deleteNodeSuccess = (id: IdType): IAction => ({
+export const deleteNodeSuccess = (id: Guid): IAction => ({
   type: DELETE_NODE_SUCCESS,
   payload: {
     id,

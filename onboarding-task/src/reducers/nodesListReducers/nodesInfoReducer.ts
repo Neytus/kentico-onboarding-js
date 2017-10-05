@@ -11,9 +11,9 @@ import { NodeInfo } from '../../models/NodeInfo';
 import { IAction } from '../../actions/IAction';
 import { INodeContent } from '../../models/NodeContent';
 
-export type INodesInfo = OrderedMap<IdType, NodeInfo>;
+export type INodesInfo = OrderedMap<Guid, NodeInfo>;
 
-export const nodesInfoReducer = (state: INodesInfo = OrderedMap<IdType, NodeInfo>(), action: IAction): INodesInfo => {
+export const nodesInfoReducer = (state: INodesInfo = OrderedMap<Guid, NodeInfo>(), action: IAction): INodesInfo => {
   switch (action.type) {
     case DELETE_NODE_SUCCESS:
       return state.delete(action.payload.id);
@@ -36,7 +36,7 @@ export const nodesInfoReducer = (state: INodesInfo = OrderedMap<IdType, NodeInfo
       return action.payload.nodes
         .reduce(
           (map: INodesInfo, node: INodeContent) => map.set(node.id, new NodeInfo({})),
-          OrderedMap<IdType, NodeInfo>()
+          OrderedMap<Guid, NodeInfo>()
         );
 
     case POST_NODE_SUCCESS: {

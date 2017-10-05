@@ -6,9 +6,9 @@ import {
   POST_NODE_FAILURE, DELETE_NODE_FAILURE
 } from '../../actions/actionTypes';
 
-export type IErrorsMap = OrderedMap<IdType, string>;
+export type IErrorsMap = OrderedMap<Guid, string>;
 
-export const errorReducer = (state: IErrorsMap = OrderedMap<IdType, string>(), action: IAction): IErrorsMap => {
+export const errorReducer = (state: IErrorsMap = OrderedMap<Guid, string>(), action: IAction): IErrorsMap => {
   switch (action.type) {
     case (DELETE_ERROR):
       return state.delete(action.payload.id);

@@ -7,7 +7,7 @@ import * as actions from '../actions/actionCreators';
 import { IAppState } from '../reducers/IAppState';
 
 interface INodeContainerProps {
-  id: IdType;
+  id: Guid;
   index: number;
 }
 

@@ -10,9 +10,9 @@ import { Node } from '../containers/Node';
 import { IKeyMap } from '../@types/IKeyMap';
 
 export interface IListDataProps {
-  nodesIds: ImmutableList<IdType>;
+  nodesIds: ImmutableList<Guid>;
   isFetching: boolean;
-  errors: OrderedMap<IdType, string>;
+  errors: OrderedMap<Guid, string>;
 }
 
 export interface  IListCallbacksProps {
@@ -41,7 +41,7 @@ export class List extends React.PureComponent<IListDataProps & IListCallbacksPro
   render() {
     const
       nodes = this.props.nodesIds
-        .map((id: IdType, index: number) => (
+        .map((id: Guid, index: number) => (
           <li className="list-group-item" key={id}>
             <Node
               id={id}
@@ -52,7 +52,7 @@ export class List extends React.PureComponent<IListDataProps & IListCallbacksPro
 
     const
       errors = this.props.errors.keySeq()
-        .map((id: IdType) => (
+        .map((id: Guid) => (
             <Error id={id} key={id}/>
         ));
 

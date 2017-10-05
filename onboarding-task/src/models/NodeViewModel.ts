@@ -5,7 +5,7 @@ import { NodeContent } from './NodeContent';
 import { NodeInfo } from './NodeInfo';
 
 export interface INodeViewModel {
-  readonly id: IdType;
+  readonly id: Guid;
   readonly text: string;
   readonly isBeingEdited: boolean;
   readonly index: number;
@@ -19,7 +19,7 @@ const defaultNodeViewModel: INodeViewModel = {
 };
 
 export class NodeViewModel extends Record(defaultNodeViewModel) implements INodeViewModel {
-  readonly id: IdType;
+  readonly id: Guid;
   readonly text: string;
   readonly isBeingEdited: boolean;
   readonly index: number;
