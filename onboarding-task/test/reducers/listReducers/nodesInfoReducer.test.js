@@ -129,9 +129,13 @@ describe('nodesInfoReducer', () => {
     });
   });
 
-  describe('SAVE_NODE', () => {
+  describe('PUT_NODE_SUCCESS', () => {
     it('handles saving a new node text', () => {
-      const action = actions.saveNode(id);
+      const text = 'any text';
+      const action = actions.putNodeSuccess({
+        id,
+        text,
+      });
 
       const actualState = nodesInfoReducer(stateWithToggledNode, action);
 

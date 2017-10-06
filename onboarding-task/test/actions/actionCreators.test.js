@@ -58,18 +58,19 @@ describe('actionCreators', () => {
     });
   });
 
-  describe('saveNode', () => {
+  describe('putNodeSuccess', () => {
     it('returns a correct new action', () => {
       const text = 'random text';
+      const nodeDataToPut = { id, text };
       const expectedAction = {
-        type: types.SAVE_NODE,
+        type: types.PUT_NODE_SUCCESS,
         payload: {
           id,
           text,
         },
       };
 
-      expect(actions.saveNode(id, text)).toEqual(expectedAction);
+      expect(actions.putNodeSuccess(nodeDataToPut)).toEqual(expectedAction);
     });
   });
 

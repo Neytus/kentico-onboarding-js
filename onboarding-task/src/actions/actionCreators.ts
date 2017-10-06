@@ -1,6 +1,5 @@
 import {
   TOGGLE_NODE,
-  SAVE_NODE,
   FETCH_NODES_REQUEST,
   FETCH_NODES_SUCCESS,
   DELETE_ERROR,
@@ -25,14 +24,6 @@ export const toggleNode = (id: Guid): IAction => ({
   type: TOGGLE_NODE,
   payload: {
     id,
-  },
-});
-
-export const saveNode = (id: Guid, text: string): IAction => ({
-  type: SAVE_NODE,
-  payload: {
-    id,
-    text,
   },
 });
 

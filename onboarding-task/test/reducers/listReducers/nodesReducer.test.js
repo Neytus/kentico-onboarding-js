@@ -115,15 +115,18 @@ describe('nodesReducer', () => {
     });
   });
 
-  describe('SAVE_NODE', () => {
-    it('handles saving a new node text', () => {
+  describe('PUT_NODE_SUCCESS', () => {
+    it('handles updating a node text', () => {
       const newText = 'changed text';
       const updatedNode = new NodeContent({
         id,
         text: newText,
       });
       const newNonEmptyState = emptyState.set(id, updatedNode);
-      const action = actions.saveNode(id, newText);
+      const action = actions.putNodeSuccess({
+        id,
+        text: newText,
+      });
 
       const actualState = nodesReducer(nonEmptyState, action);
 
