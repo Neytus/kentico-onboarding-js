@@ -6,18 +6,40 @@ const id = '80149842-a624-b66b-5d3c-37c24523ba46';
 const generateId = jest.fn(() => id);
 
 describe('actionCreators', () => {
-  describe('POST_NODE_SUCCESS', () => {
+  describe('postNodeOptimistically', () => {
     it('returns a correct new action', () => {
       const text = 'New action test';
       const expectedAction = {
-        type: types.POST_NODE_SUCCESS,
+        type: types.POST_NODE_OPTIMISTIC,
         payload: {
           id,
           text,
         },
       };
 
-      const actualAction = actions.postNodeSuccess(expectedAction.payload);
+      const actualAction = actions.postNodeOptimistically(expectedAction.payload);
+
+      expect(actualAction).toEqual(expectedAction);
+    });
+  });
+
+  describe('postNodeSuccess', () => {
+    it('returns a correct new action', () => {
+      const text = 'some text';
+      const temporaryId = '849e43f2-55de-48fe-ae4b-3510e60b17ca';
+      const expectedAction = {
+        type: types.POST_NODE_SUCCESS,
+        payload: {
+          id,
+          text,
+          temporaryId,
+        },
+      };
+
+      const actualAction = actions.postNodeSuccess(temporaryId, {
+        id,
+        text,
+      });
 
       expect(actualAction).toEqual(expectedAction);
     });

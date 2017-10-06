@@ -31,6 +31,32 @@ describe('postNodeFactory', () => {
     });
   });
 
+  it('dispatches optimistic post action with correct data', () => {
+    const myFetch = () => Promise.resolve(new Response(JSON.stringify({ok: true})));
+    const dispatch = identityFunction;
+    const optimisticPost = jest.fn(() => 'something');
+
+    const postNode = postNodeFactory({
+      postNodeFetch: myFetch,
+      postNodeRequest: postRequest,
+      postNodeOptimistically: optimisticPost,
+      postNodeSuccess: identityFunction,
+      postNodeFailure: identityFunction,
+      parseFetchedNode: identityFunction,
+      idGenerator
+    });
+
+    return postNode(text)(dispatch).then(() => {
+      expect(optimisticPost.mock.calls.length).toEqual(1);
+
+      const dispatchCallArguments = dispatch.mock.calls[1][0];
+      const expectedId = idGenerator();
+
+      expect(dispatchCallArguments.id).toEqual(expectedId);
+      expect(dispatchCallArguments.text).toEqual(text);
+    });
+  });
+
   it('postNodeFetch method has been called', () => {
     const myFetch = jest.fn(() => Promise.resolve(node));
     const dispatch = identityFunction;
@@ -48,13 +74,15 @@ describe('postNodeFactory', () => {
     return postNode(text)(dispatch).then(() => expect(myFetch.mock.calls.length).toEqual(1));
   });
 
-  it('performs successful post action and returns correct data ', () => {
+  it('performs successful post action', () => {
+    const temporaryId = idGenerator();
     const myFetch = jest.fn(() => Promise.resolve(new Response(JSON.stringify({ok: true}))));
-    const postSuccess = jest.fn(input => ({
+    const postSuccess = jest.fn(() => ({
       type: 'POST_NODE_SUCCESS',
       payload: {
-        id: input.id,
-        text: input.text,
+        id,
+        text,
+        temporaryId,
       },
     }));
     const dispatch = jest.fn(input => input);
@@ -70,10 +98,8 @@ describe('postNodeFactory', () => {
     });
 
     return postNode(text)(dispatch).then(() => {
-      const dispatchCallArguments = dispatch.mock.calls[1][0];
-
-      expect(dispatchCallArguments.type).toEqual('POST_NODE_SUCCESS');
-      expect(dispatchCallArguments.payload.text).toEqual(node.text);
+      expect(postSuccess.mock.calls.length).toEqual(1);
+      expect(dispatch.mock.calls[2][0]).toEqual(postSuccess());
     });
   });
 
