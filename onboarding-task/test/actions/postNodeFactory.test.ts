@@ -9,6 +9,7 @@ describe('postNodeFactory', () => {
   };
   const identityFunction = jest.fn((input: any) => input);
   const postRequest = jest.fn(() => 'REQUEST_HAS_BEEN_CALLED');
+  const idGenerator = jest.fn(() => '6267be54-5dbd-4ced-9c90-3a197ddb5107');
 
   it('dispatches post request action', () => {
     const myFetch = () => Promise.resolve(new Response(JSON.stringify({ok: true})));
@@ -17,9 +18,11 @@ describe('postNodeFactory', () => {
     const postNode = postNodeFactory({
       postNodeFetch: myFetch,
       postNodeRequest: postRequest,
+      postNodeOptimistically: identityFunction,
       postNodeSuccess: identityFunction,
       postNodeFailure: identityFunction,
       parseFetchedNode: identityFunction,
+      idGenerator
     });
 
     return postNode(text)(dispatch).then(() => {
@@ -35,9 +38,11 @@ describe('postNodeFactory', () => {
     const postNode = postNodeFactory({
       postNodeFetch: myFetch,
       postNodeRequest: postRequest,
+      postNodeOptimistically: identityFunction,
       postNodeFailure: identityFunction,
       postNodeSuccess: identityFunction,
       parseFetchedNode: identityFunction,
+      idGenerator,
     });
 
     return postNode(text)(dispatch).then(() => expect(myFetch.mock.calls.length).toEqual(1));
@@ -57,9 +62,11 @@ describe('postNodeFactory', () => {
     const postNode = postNodeFactory({
       postNodeFetch: myFetch,
       postNodeRequest: identityFunction,
+      postNodeOptimistically: identityFunction,
       postNodeSuccess: postSuccess,
       postNodeFailure: identityFunction,
       parseFetchedNode: jest.fn(() => ({id, text})),
+      idGenerator,
     });
 
     return postNode(text)(dispatch).then(() => {
@@ -78,9 +85,11 @@ describe('postNodeFactory', () => {
     const postNode = postNodeFactory({
       postNodeFetch: myFetch,
       postNodeRequest: identityFunction,
+      postNodeOptimistically: identityFunction,
       postNodeSuccess: identityFunction,
       postNodeFailure: newPostFailure,
       parseFetchedNode: identityFunction,
+      idGenerator,
     });
 
     return postNode(text)(dispatch).then(() => {

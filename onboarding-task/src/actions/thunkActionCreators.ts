@@ -1,10 +1,22 @@
 import { DEFAULT_ROUTE } from '../constants/routes';
 import { checkStatus } from '../utils/checkStatus';
 import { fetchNodesFactory } from './fetchNodesFactory';
-import { deleteNodeFailure, deleteNodeRequest, deleteNodeSuccess, fetchNodesFailure, fetchNodesRequest, fetchNodesSuccess, postNodeFailure, postNodeRequest, postNodeSuccess } from './actionCreators';
+import {
+  deleteNodeFailure,
+  deleteNodeRequest,
+  deleteNodeSuccess,
+  fetchNodesFailure,
+  fetchNodesRequest,
+  fetchNodesSuccess,
+  postNodeFailure,
+  postNodeOptimistically,
+  postNodeRequest,
+  postNodeSuccess
+} from './actionCreators';
 import { parseFetchedNode, parseFetchedNodes } from '../utils/parseFetchedNodes';
 import { postNodeFactory } from './postNodeFactory';
 import { deleteNodeFactory } from './deleteNodeFactory';
+import { generateId } from '../utils/generateId';
 
 const getNodesFetch = () => fetch(DEFAULT_ROUTE)
   .catch(() => {
@@ -36,10 +48,12 @@ const postNodeFetch = (text: string) => fetch(DEFAULT_ROUTE, {
 
 export const postNode = postNodeFactory({
   postNodeFetch,
-  postNodeRequest: postNodeRequest,
-  postNodeSuccess: postNodeSuccess,
-  postNodeFailure: postNodeFailure,
-  parseFetchedNode
+  postNodeRequest,
+  postNodeOptimistically,
+  postNodeSuccess,
+  postNodeFailure,
+  parseFetchedNode,
+  idGenerator: generateId,
 });
 
 const deleteNodeFetch = (id: Guid) => fetch(DEFAULT_ROUTE + '/' + id, {
