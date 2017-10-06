@@ -9,6 +9,7 @@ describe('nodesInfoReducer', () => {
   const id = '80149842-a624-b66b-5d3c-37c24523ba46';
   const anotherId = '05012399-087d-4944-a742-7cf698e01b85';
   const defaultNode = new NodeInfo();
+  const nonPersistentNode = new NodeInfo({ isPersisted: false });
   const toggledNode = new NodeInfo({
     isBeingEdited: true,
   });
@@ -24,16 +25,44 @@ describe('nodesInfoReducer', () => {
     expect(actualState).toEqual(emptyState);
   });
 
-  describe('POST_NODE_SUCCESS', () => {
+  describe('POST_NODE_OPTIMISTIC', () => {
     it('handles adding a node', () => {
-      const action = actions.postNodeSuccess({
+      const action = actions.postNodeOptimistically({
         id,
         text: 'text',
       });
+      const expectedState = emptyState.set(id, nonPersistentNode);
+
+      const actualState = nodesInfoReducer(emptyState, action);
+
+      expect(actualState).toEqual(expectedState);
+    });
+  });
+
+  describe('POST_NODE_SUCCESS', () => {
+    it('handles adding a node', () => {
+      const nodeDataToPost = {
+        id,
+        text: 'some text',
+      };
+      const action = actions.postNodeSuccess(anotherId, nodeDataToPost);
 
       const actualState = nodesInfoReducer(emptyState, action);
 
       expect(actualState).toEqual(nonEmptyState);
+    });
+
+    it('successfully replaces a non persistent node', () => {
+      const nodeDataToPost = {
+        id: anotherId,
+        text: 'some text',
+      };
+      const action = actions.postNodeSuccess(id, nodeDataToPost);
+      const expectedState = emptyState.set(anotherId, defaultNode);
+
+      const actualState = nodesInfoReducer(nonEmptyState, action);
+
+      expect(actualState).toEqual(expectedState);
     });
   });
 

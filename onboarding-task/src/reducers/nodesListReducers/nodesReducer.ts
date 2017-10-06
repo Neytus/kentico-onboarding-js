@@ -4,7 +4,8 @@ import {
   SAVE_NODE,
   FETCH_NODES_SUCCESS,
   POST_NODE_SUCCESS,
-  DELETE_NODE_SUCCESS, POST_NODE_OPTIMISTIC,
+  DELETE_NODE_SUCCESS,
+  POST_NODE_OPTIMISTIC,
 } from '../../actions/actionTypes';
 import { INodeContent, NodeContent } from '../../models/NodeContent';
 import { IAction } from '../../actions/IAction';

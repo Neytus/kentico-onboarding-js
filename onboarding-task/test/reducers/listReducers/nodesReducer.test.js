@@ -28,9 +28,9 @@ describe('nodesReducer', () => {
     expect(actualState).toEqual(emptyState);
   });
 
-  describe('POST_NODE_SUCCESS', () => {
+  describe('POST_NODE_OPTIMISTIC', () => {
     it('handles adding a node', () => {
-      const action = actions.postNodeSuccess({
+      const action = actions.postNodeOptimistically({
         id,
         text,
       });
@@ -41,9 +41,38 @@ describe('nodesReducer', () => {
     });
   });
 
+  describe('POST_NODE_SUCCESS', () => {
+    it('handles adding a node', () => {
+      const action = actions.postNodeSuccess(id, anotherNode);
+      const expectedState = emptyState.set(anotherId, anotherNode);
+
+      const actualState = nodesReducer(emptyState, action);
+
+      expect(actualState).toEqual(expectedState);
+    });
+
+    it('successfully replaces a non persistent node', () => {
+      const action = actions.postNodeSuccess(id, anotherNode);
+      const expectedState = emptyState.set(anotherId, anotherNode);
+
+      const actualState = nodesReducer(nonEmptyState, action);
+
+      expect(actualState).toEqual(expectedState);
+    });
+  });
+
   describe('FETCH_NODES_SUCCESS', () => {
     it('handles fetching multiple nodes at once', () => {
-      const action = actions.fetchNodesSuccess([{ id, text }, { id: anotherId, text: 'another testing text' }]);
+      const action = actions.fetchNodesSuccess([
+        {
+          id,
+          text,
+        },
+        {
+          id: anotherId,
+          text: 'another testing text',
+        },
+      ]);
       const expectedState = nonEmptyState.set(anotherId, anotherNode);
 
       const actualState = nodesReducer(emptyState, action);
