@@ -6,7 +6,7 @@ import {
   FETCH_NODES_SUCCESS,
   POST_NODE_SUCCESS,
   DELETE_NODE_SUCCESS,
-  POST_NODE_OPTIMISTIC,
+  POST_NODE_OPTIMISTIC, PUT_NODE_SUCCESS,
 } from '../../actions/actionTypes';
 import { NodeInfo } from '../../models/NodeInfo';
 import { IAction } from '../../actions/IAction';
@@ -26,6 +26,7 @@ export const nodesInfoReducer = (state: INodesInfo = OrderedMap<Guid, NodeInfo>(
       return state.set(action.payload.id, newNode);
     }
 
+    case PUT_NODE_SUCCESS:
     case SAVE_NODE: {
       const oldNode = state.get(action.payload.id);
       const newNode = oldNode.with({isBeingEdited: !oldNode.isBeingEdited});

@@ -5,7 +5,7 @@ import {
   FETCH_NODES_SUCCESS,
   POST_NODE_SUCCESS,
   DELETE_NODE_SUCCESS,
-  POST_NODE_OPTIMISTIC,
+  POST_NODE_OPTIMISTIC, PUT_NODE_SUCCESS,
 } from '../../actions/actionTypes';
 import { INodeContent, NodeContent } from '../../models/NodeContent';
 import { IAction } from '../../actions/IAction';
@@ -17,6 +17,7 @@ export const nodesReducer = (state: INodes = OrderedMap<Guid, NodeContent>(), ac
     case DELETE_NODE_SUCCESS:
       return state.delete(action.payload.id);
 
+    case PUT_NODE_SUCCESS:
     case SAVE_NODE: {
       const newNode = state.get(action.payload.id).with(action.payload);
 

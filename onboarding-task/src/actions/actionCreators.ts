@@ -10,7 +10,11 @@ import {
   FETCH_NODES_FAILURE,
   DELETE_NODE_REQUEST,
   DELETE_NODE_SUCCESS,
-  DELETE_NODE_FAILURE, POST_NODE_OPTIMISTIC,
+  DELETE_NODE_FAILURE,
+  POST_NODE_OPTIMISTIC,
+  PUT_NODE_REQUEST,
+  PUT_NODE_SUCCESS,
+  PUT_NODE_FAILURE,
 } from './actionTypes';
 import { IAction } from './IAction';
 import { errorFactory } from './addErrorFactory';
@@ -74,6 +78,20 @@ export const postNodeSuccess = (temporaryId: Guid, {id, text}: INodeContent): IA
 });
 
 export const postNodeFailure = errorFactory(generateId, POST_NODE_FAILURE);
+
+export const putNodeRequest = (): IAction => ({
+  type: PUT_NODE_REQUEST,
+});
+
+export const putNodeSuccess = ({id, text}: INodeContent): IAction => ({
+  type: PUT_NODE_SUCCESS,
+  payload: {
+    id,
+    text,
+  },
+});
+
+export const putNodeFailure = errorFactory(generateId, PUT_NODE_FAILURE);
 
 export const deleteNodeRequest = (): IAction => ({
   type: DELETE_NODE_REQUEST,
