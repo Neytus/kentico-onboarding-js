@@ -11,8 +11,8 @@ describe('postNodeFactory', () => {
   const postRequest = jest.fn(() => 'REQUEST_HAS_BEEN_CALLED');
   const idGenerator = jest.fn(() => '6267be54-5dbd-4ced-9c90-3a197ddb5107');
 
-  it('dispatches post request action', () => {
-    const myFetch = () => Promise.resolve(new Response(JSON.stringify({ok: true})));
+  it('dispatches postNodeRequest action', () => {
+    const myFetch = jest.fn(() => Promise.resolve(new Response(JSON.stringify({ok: true}))));
     const dispatch = identityFunction;
 
     const postNode = postNodeFactory({
@@ -32,7 +32,7 @@ describe('postNodeFactory', () => {
   });
 
   it('dispatches optimistic post action with correct data', () => {
-    const myFetch = () => Promise.resolve(new Response(JSON.stringify({ok: true})));
+    const myFetch = jest.fn(() => Promise.resolve(new Response(JSON.stringify({ok: true}))));
     const dispatch = identityFunction;
     const optimisticPost = jest.fn(() => 'something');
 
@@ -74,9 +74,10 @@ describe('postNodeFactory', () => {
     return postNode(text)(dispatch).then(() => expect(myFetch.mock.calls.length).toEqual(1));
   });
 
-  it('performs successful post action', () => {
+  it('dispatches postNodeSuccess action correctly ', () => {
     const temporaryId = idGenerator();
     const myFetch = jest.fn(() => Promise.resolve(new Response(JSON.stringify({ok: true}))));
+    const parseFetchedNode = jest.fn(() => ({id, text}));
     const postSuccess = jest.fn(() => ({
       type: 'POST_NODE_SUCCESS',
       payload: {
@@ -93,7 +94,7 @@ describe('postNodeFactory', () => {
       postNodeOptimistically: identityFunction,
       postNodeSuccess: postSuccess,
       postNodeFailure: identityFunction,
-      parseFetchedNode: jest.fn(() => ({id, text})),
+      parseFetchedNode,
       idGenerator,
     });
 
@@ -103,7 +104,7 @@ describe('postNodeFactory', () => {
     });
   });
 
-  it('returns correct error message after failing to post', () => {
+  it('dispatches postNodeFailure correctly', () => {
     const myFetch = jest.fn(() => Promise.reject(new Response(JSON.stringify({ok: false}))));
     const newPostFailure = jest.fn(() => 'Posting a node has failed.');
     const dispatch = identityFunction;

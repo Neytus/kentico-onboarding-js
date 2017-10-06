@@ -39,7 +39,7 @@ describe('deleteNodeFactory', () => {
     return deleteNode(id)(dispatch).then(() => expect(myFetch.mock.calls.length).toEqual(1));
   });
 
-  it('delete Success', () => {
+  it('dispatches deleteNodeSuccess action correctly', () => {
     const myFetch = () => Promise.resolve(new Response(JSON.stringify({ok: true})));
     const dispatch = identityFunction;
     const deleteSuccess = jest.fn(() => 'successful delete');
@@ -58,7 +58,7 @@ describe('deleteNodeFactory', () => {
       expect(dispatchCallArguments).toEqual(id);
     });
   });
-  it('delete Failure', () => {
+  it('dispatches deleteNodeFailure correctly', () => {
     const myFetch = jest.fn(() => Promise.reject(new Response(JSON.stringify({ok: false}))));
     const dispatch = identityFunction;
     const deleteFailure = jest.fn(() => 'deleting failed');

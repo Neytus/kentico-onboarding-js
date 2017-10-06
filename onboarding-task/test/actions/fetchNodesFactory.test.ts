@@ -44,7 +44,7 @@ describe('fetchNodesFactory', () => {
     return fetchNodes()(dispatch).then(() => expect(myFetch.mock.calls.length).toEqual(1));
   });
 
-  it('performs successful getNodesFetch and returns correct data ', () => {
+  it('dispatches getNodesSuccess action correctly', () => {
     const myFetch = jest.fn(() => Promise.resolve(new Response(JSON.stringify({ok: true}))));
     const dispatch = identityFunction;
     const getNodesSuccess = jest.fn(() => 'SUCCESSFUL_FETCH');
@@ -65,7 +65,7 @@ describe('fetchNodesFactory', () => {
     });
   });
 
-  it('returns getNodesFetch failure action after failing to fetch', () => {
+  it('dispatches getNodesFailure correctly', () => {
     const myFetch = jest.fn(() => Promise.reject(new Response(JSON.stringify({ok: false}))));
     const newFetchFailure = jest.fn(() => 'Getting nodes has failed.');
     const dispatch = identityFunction;
