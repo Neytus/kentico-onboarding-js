@@ -22,7 +22,7 @@ export const Error: React.StatelessComponent<IErrorProps> = ({errorText, onClick
   <div className="alert alert-danger">
     <b> {errorText} </b>
     <div onClick={onClick} className="pull-right btn btn-default btn-xs">
-      <span className="glyphicon glyphicon-remove" hidden={false}/>
+      <span className="glyphicon glyphicon-remove" aria-hidden={true}/>
     </div>
   </div>;
 
