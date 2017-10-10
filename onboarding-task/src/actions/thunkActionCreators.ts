@@ -61,15 +61,17 @@ export const postNode = postNodeFactory({
   idGenerator: generateId,
 });
 
-const putNodeFetch = (nodeToUpdate: INodeContent) => fetch(DEFAULT_ROUTE + '/' + nodeToUpdate.id, {
+const putNodeFetch = ({id, text}: INodeContent) => fetch(DEFAULT_ROUTE + '/' + id, {
   method: 'PUT',
   headers: {
     'Content-Type': 'application/json',
   },
-  body: JSON.stringify(nodeToUpdate),
+  body: JSON.stringify({
+    text
+  }),
 })
   .catch(() => {
-  throw new Error('Server is disconnected, could not update node with text: ' + nodeToUpdate.text + '. ');
+  throw new Error('Server is disconnected, could not update node with text: ' + text + '. ');
 })
   .then(response => checkStatus(response))
   .then(response => response.json());
