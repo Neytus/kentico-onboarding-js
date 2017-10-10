@@ -21,6 +21,21 @@ describe('actionCreators', () => {
     });
   });
 
+  describe('deleteError', () => {
+    it('returns a correct new action', () => {
+      const expectedAction = {
+        type: types.DELETE_ERROR,
+        payload: {
+          id,
+        },
+      };
+
+      const actualAction = actions.deleteError(id);
+
+      expect(actualAction).toEqual(expectedAction);
+    });
+  });
+
   describe('postNodeSuccess', () => {
     it('returns a correct new action', () => {
       const text = 'some text';
@@ -72,13 +87,5 @@ describe('actionCreators', () => {
     });
   });
 
-  describe('deleteNodeRequest', () => {
-    it('returns a correct new action', () => {
-      const expectedAction = {
-        type: types.DELETE_NODE_REQUEST,
-      };
 
-      expect(actions.deleteNodeRequest()).toEqual(expectedAction);
-    });
-  });
 });

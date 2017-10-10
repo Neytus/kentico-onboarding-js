@@ -12,7 +12,6 @@ import {
 describe('errorReducer', () => {
   const emptyState = OrderedMap<Guid, string>();
   const id = '80149842-a624-b66b-5d3c-37c24523ba46';
-  const anotherId = '05012399-087d-4944-a742-7cf698e01b85';
   const text = 'error text';
   const nonEmptyState = emptyState.set(id, text);
   const failureActionTypes = [
@@ -41,6 +40,7 @@ describe('errorReducer', () => {
     });
 
     it('handles deleting non-existent node correctly', () => {
+      const anotherId = '05012399-087d-4944-a742-7cf698e01b85';
       const action = actions.deleteError(anotherId);
 
       const actualState = errorReducer(nonEmptyState, action);
@@ -49,21 +49,21 @@ describe('errorReducer', () => {
     });
   });
 
-  const testFailureAction = (type: string) => {
-    const action = ({
-      type,
-      payload: {
-        id,
-        text
-      }
+  const testFailure = (type: string) => {
+    it('handles adding a new error call after a failure: ' + type, () => {
+      const action = ({
+        type,
+        payload: {
+          id,
+          text
+        }
+      });
+
+      const actualState = errorReducer(emptyState, action);
+
+      expect(actualState).toEqual(nonEmptyState);
     });
-
-    const actualState = errorReducer(emptyState, action);
-
-    expect(actualState).toEqual(nonEmptyState);
   };
 
-  it('handles adding a new error call after a failure', () => {
-    failureActionTypes.forEach(testFailureAction);
-  });
+  failureActionTypes.forEach(testFailure);
 });
