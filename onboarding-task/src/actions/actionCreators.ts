@@ -1,12 +1,12 @@
 import {
   TOGGLE_NODE,
-  FETCH_NODES_REQUEST,
-  FETCH_NODES_SUCCESS,
+  GET_NODES_REQUEST,
+  GET_NODES_SUCCESS,
   DELETE_ERROR,
   POST_NODE_REQUEST,
   POST_NODE_SUCCESS,
   POST_NODE_FAILURE,
-  FETCH_NODES_FAILURE,
+  GET_NODES_FAILURE,
   DELETE_NODE_REQUEST,
   DELETE_NODE_SUCCESS,
   DELETE_NODE_FAILURE,
@@ -35,17 +35,17 @@ export const deleteError = (id: Guid): IAction => ({
 });
 
 export const fetchNodesRequest = (): IAction => ({
-  type: FETCH_NODES_REQUEST
+  type: GET_NODES_REQUEST
 });
 
 export const fetchNodesSuccess = (nodes: Array<object>): IAction => ({
-  type: FETCH_NODES_SUCCESS,
+  type: GET_NODES_SUCCESS,
   payload: {
     nodes
   }
 });
 
-export const fetchNodesFailure = errorFactory(generateId, FETCH_NODES_FAILURE);
+export const fetchNodesFailure = errorFactory(generateId, GET_NODES_FAILURE);
 
 export const postNodeOptimistically = ({id, text }: INodeContent): IAction => ({
   type: POST_NODE_OPTIMISTIC,

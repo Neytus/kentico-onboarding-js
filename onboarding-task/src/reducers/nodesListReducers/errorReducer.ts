@@ -2,7 +2,7 @@ import { OrderedMap } from 'immutable';
 
 import { IAction } from '../../actions/IAction';
 import {
-  FETCH_NODES_FAILURE,
+  GET_NODES_FAILURE,
   DELETE_ERROR,
   POST_NODE_FAILURE,
   DELETE_NODE_FAILURE, PUT_NODE_FAILURE
@@ -17,7 +17,7 @@ export const errorReducer = (state: IErrorsMap = OrderedMap<Guid, string>(), act
 
     case PUT_NODE_FAILURE:
     case DELETE_NODE_FAILURE:
-    case FETCH_NODES_FAILURE:
+    case GET_NODES_FAILURE:
     case POST_NODE_FAILURE:
       return state.set(action.payload.id, action.payload.text);
 

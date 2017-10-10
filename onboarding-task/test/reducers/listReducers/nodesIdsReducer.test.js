@@ -56,7 +56,7 @@ describe('nodesIdsReducer', () => {
     });
   });
 
-  describe('FETCH_NODES_SUCCESS', () => {
+  describe('GET_NODES_SUCCESS', () => {
     it('handles fetching multiple nodes at once', () => {
       const firstNode = { id };
       const secondNode = { id: anotherId };

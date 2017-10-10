@@ -2,7 +2,7 @@ import { List } from 'immutable';
 
 import {
   DELETE_NODE_SUCCESS,
-  FETCH_NODES_SUCCESS,
+  GET_NODES_SUCCESS,
   POST_NODE_OPTIMISTIC,
   POST_NODE_SUCCESS,
 } from '../../actions/actionTypes';
@@ -16,7 +16,7 @@ export const nodesIdsReducer = (state: INodesIds = List<Guid>(), action: IAction
     case DELETE_NODE_SUCCESS:
       return state.filter(nodeId => nodeId !== action.payload.id).toList();
 
-    case FETCH_NODES_SUCCESS:
+    case GET_NODES_SUCCESS:
       return action.payload.nodes
         .reduce(
           (list: INodesIds, node: INodeContent) => list.push(node.id),

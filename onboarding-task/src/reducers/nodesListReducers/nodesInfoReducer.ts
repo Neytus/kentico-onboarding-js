@@ -2,7 +2,7 @@ import { OrderedMap } from 'immutable';
 
 import {
   TOGGLE_NODE,
-  FETCH_NODES_SUCCESS,
+  GET_NODES_SUCCESS,
   POST_NODE_SUCCESS,
   DELETE_NODE_SUCCESS,
   POST_NODE_OPTIMISTIC,
@@ -33,7 +33,7 @@ export const nodesInfoReducer = (state: INodesInfo = OrderedMap<Guid, NodeInfo>(
       return state.set(action.payload.id, newNode);
     }
 
-    case FETCH_NODES_SUCCESS:
+    case GET_NODES_SUCCESS:
       return action.payload.nodes
         .reduce(
           (map: INodesInfo, node: INodeContent) => map.set(node.id, new NodeInfo({})),

@@ -4,7 +4,7 @@ import * as actions from '../../../src/actions/actionCreators';
 import { errorReducer } from '../../../src/reducers/nodesListReducers/errorReducer';
 import {
   POST_NODE_FAILURE,
-  FETCH_NODES_FAILURE,
+  GET_NODES_FAILURE,
   PUT_NODE_FAILURE,
   DELETE_NODE_FAILURE
 } from '../../../src/actions/actionTypes';
@@ -16,7 +16,7 @@ describe('errorReducer', () => {
   const nonEmptyState = emptyState.set(id, text);
   const failureActionTypes = [
     POST_NODE_FAILURE,
-    FETCH_NODES_FAILURE,
+    GET_NODES_FAILURE,
     PUT_NODE_FAILURE,
     DELETE_NODE_FAILURE
   ];

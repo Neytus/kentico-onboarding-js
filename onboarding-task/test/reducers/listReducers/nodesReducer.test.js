@@ -61,7 +61,7 @@ describe('nodesReducer', () => {
     });
   });
 
-  describe('FETCH_NODES_SUCCESS', () => {
+  describe('GET_NODES_SUCCESS', () => {
     it('handles fetching multiple nodes at once', () => {
       const action = actions.fetchNodesSuccess([
         {

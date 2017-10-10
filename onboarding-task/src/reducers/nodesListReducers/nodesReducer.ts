@@ -1,7 +1,7 @@
 import { OrderedMap } from 'immutable';
 
 import {
-  FETCH_NODES_SUCCESS,
+  GET_NODES_SUCCESS,
   POST_NODE_SUCCESS,
   DELETE_NODE_SUCCESS,
   POST_NODE_OPTIMISTIC,
@@ -23,7 +23,7 @@ export const nodesReducer = (state: INodes = OrderedMap<Guid, NodeContent>(), ac
       return state.set(newNode.id, newNode);
     }
 
-    case FETCH_NODES_SUCCESS:
+    case GET_NODES_SUCCESS:
       return action.payload.nodes
         .reduce(
           (map: INodes, node: INodeContent) => map.set(node.id, new NodeContent(node)),

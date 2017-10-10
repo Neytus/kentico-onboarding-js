@@ -1,17 +1,17 @@
 import { IAction } from '../../actions/IAction';
 import {
-  FETCH_NODES_REQUEST,
-  FETCH_NODES_SUCCESS,
-  FETCH_NODES_FAILURE
+  GET_NODES_REQUEST,
+  GET_NODES_SUCCESS,
+  GET_NODES_FAILURE
 } from '../../actions/actionTypes';
 
 export const isFetchingReducer = (state = true, action: IAction): boolean => {
   switch (action.type) {
-    case FETCH_NODES_REQUEST:
+    case GET_NODES_REQUEST:
       return true;
 
-    case FETCH_NODES_FAILURE:
-    case FETCH_NODES_SUCCESS:
+    case GET_NODES_FAILURE:
+    case GET_NODES_SUCCESS:
       return false;
 
     default:
