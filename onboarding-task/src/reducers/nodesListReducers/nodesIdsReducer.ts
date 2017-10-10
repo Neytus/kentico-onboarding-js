@@ -24,8 +24,8 @@ export const nodesIdsReducer = (state: INodesIds = List<Guid>(), action: IAction
         );
 
     case POST_NODE_SUCCESS: {
-      const temporaryList = state.filter(nodeId => nodeId !== action.payload.temporaryId).toList();
-      return temporaryList.push(action.payload.id);
+      const temporaryState = state.filter(nodeId => nodeId !== action.payload.temporaryId).toList();
+      return temporaryState.push(action.payload.id);
     }
 
     case POST_NODE_OPTIMISTIC:

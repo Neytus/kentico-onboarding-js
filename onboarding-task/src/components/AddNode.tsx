@@ -38,7 +38,10 @@ export class AddNode extends React.PureComponent<IAddNodeCallbacksProps, IAddNod
 
   _updateText = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const text = event.target.value;
-    this.setState(() => ({text, isAddingDisabled: isNullOrWhitespace(text)}));
+    this.setState(() => ({
+      text,
+      isAddingDisabled: isNullOrWhitespace(text)
+    }));
   };
 
   render() {

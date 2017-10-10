@@ -8,12 +8,12 @@ type IErrorContainerProps = {
   id: Guid
 };
 
- const mapStateToProps = ({nodesList: {errors}}: IAppState, {id }: IErrorContainerProps): IErrorDataProps => ({
+const mapStateToProps = ({nodesList: {errors}}: IAppState, {id}: IErrorContainerProps): IErrorDataProps => ({
   id,
   errorText: errors.get(id)
- });
+});
 
-const mapDispatchToProps = (dispatch: Dispatch, {id }: IErrorContainerProps) => ({
+const mapDispatchToProps = (dispatch: Dispatch, {id}: IErrorContainerProps) => ({
   onClick: () => dispatch(deleteError(id))
 });
 

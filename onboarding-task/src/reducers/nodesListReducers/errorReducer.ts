@@ -1,4 +1,5 @@
 import { OrderedMap } from 'immutable';
+
 import { IAction } from '../../actions/IAction';
 import {
   FETCH_NODES_FAILURE,
@@ -24,4 +25,3 @@ export const errorReducer = (state: IErrorsMap = OrderedMap<Guid, string>(), act
       return state;
   }
 };
-

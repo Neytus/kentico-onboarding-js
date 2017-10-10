@@ -49,7 +49,7 @@ const postNodeFetch = (text: string) => fetch(DEFAULT_ROUTE, {
     throw new Error('Server is disconnected, could not save text: ' + text + '. ');
   })
   .then(response => checkStatus(response))
-  .then((response: any) => response.json());
+  .then(response => response.json());
 
 export const postNode = postNodeFactory({
   postNodeFetch,
@@ -61,7 +61,7 @@ export const postNode = postNodeFactory({
   idGenerator: generateId,
 });
 
-const putNodeFetch = (nodeToUpdate: INodeContent) => fetch(DEFAULT_ROUTE, {
+const putNodeFetch = (nodeToUpdate: INodeContent) => fetch(DEFAULT_ROUTE + '/' + nodeToUpdate.id, {
   method: 'PUT',
   headers: {
     'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ const putNodeFetch = (nodeToUpdate: INodeContent) => fetch(DEFAULT_ROUTE, {
   throw new Error('Server is disconnected, could not update node with text: ' + nodeToUpdate.text + '. ');
 })
   .then(response => checkStatus(response))
-  .then((response: any) => response.json());
+  .then(response => response.json());
 
 export const putNode = putNodeFactory({
   putNodeRequest,

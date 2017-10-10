@@ -54,7 +54,10 @@ export class EditableNode extends React.PureComponent<IEditableNodeProps, IEdita
 
   _updateText = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const text = event.target.value;
-    this.setState(() => ({text, isDisabled: isNullOrWhitespace(text)}));
+    this.setState(() => ({
+      text,
+      isDisabled: isNullOrWhitespace(text)
+    }));
   };
 
   render() {

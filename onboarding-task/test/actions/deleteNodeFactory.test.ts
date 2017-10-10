@@ -58,6 +58,7 @@ describe('deleteNodeFactory', () => {
       expect(dispatchCallArguments).toEqual(id);
     });
   });
+
   it('dispatches deleteNodeFailure correctly', () => {
     const myFetch = jest.fn(() => Promise.reject(new Response(JSON.stringify({ok: false}))));
     const dispatch = identityFunction;
