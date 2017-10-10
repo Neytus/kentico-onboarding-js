@@ -36,7 +36,7 @@ describe('actionCreators', () => {
     });
   });
 
-  describe('fetchNodesSuccess', () => {
+  describe('getNodesSuccess', () => {
     it('returns a correct new action', () => {
       const nodes = [
         {
@@ -55,7 +55,7 @@ describe('actionCreators', () => {
         },
       };
 
-      const actualAction = actions.fetchNodesSuccess(nodes);
+      const actualAction = actions.getNodesSuccess(nodes);
 
       expect(actualAction).toEqual(expectedAction);
     });

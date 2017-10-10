@@ -60,7 +60,7 @@ describe('nodesIdsReducer', () => {
     it('handles fetching multiple nodes at once', () => {
       const firstNode = { id };
       const secondNode = { id: anotherId };
-      const action = actions.fetchNodesSuccess([firstNode, secondNode]);
+      const action = actions.getNodesSuccess([firstNode, secondNode]);
       const expectedState = nonEmptyState.push(anotherId);
 
       const actualState = nodesIdsReducer(emptyState, action);
@@ -69,7 +69,7 @@ describe('nodesIdsReducer', () => {
     });
 
     it('handles fetching 0 nodes', () => {
-      const action = actions.fetchNodesSuccess([]);
+      const action = actions.getNodesSuccess([]);
 
       const actualState = nodesIdsReducer(emptyState, action);
 

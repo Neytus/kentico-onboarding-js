@@ -5,9 +5,9 @@ import {
   deleteNodeFailure,
   deleteNodeRequest,
   deleteNodeSuccess,
-  fetchNodesFailure,
-  fetchNodesRequest,
-  fetchNodesSuccess,
+  getNodesFailure,
+  getNodesRequest,
+  getNodesSuccess,
   postNodeFailure,
   postNodeOptimistically,
   postNodeRequest,
@@ -32,9 +32,9 @@ const getNodesFetch = () => fetch(DEFAULT_ROUTE)
 
 export const fetchNodes = fetchNodesFactory({
   getNodesFetch: getNodesFetch,
-  getNodesRequest: fetchNodesRequest,
-  getNodesSuccess: fetchNodesSuccess,
-  getNodesFailure: fetchNodesFailure,
+  getNodesRequest: getNodesRequest,
+  getNodesSuccess: getNodesSuccess,
+  getNodesFailure: getNodesFailure,
   parseFetchedNodes
 });
 

@@ -68,7 +68,7 @@ describe('nodesInfoReducer', () => {
 
   describe('GET_NODES_SUCCESS', () => {
     it('handles fetching multiple nodes at once', () => {
-      const action = actions.fetchNodesSuccess([{ id }, { id: anotherId }]);
+      const action = actions.getNodesSuccess([{ id }, { id: anotherId }]);
       const expectedState = nonEmptyState.set(anotherId, defaultNode);
 
       const actualState = nodesInfoReducer(emptyState, action);
@@ -77,7 +77,7 @@ describe('nodesInfoReducer', () => {
     });
 
     it('handles fetching 0 nodes', () => {
-      const action = actions.fetchNodesSuccess([]);
+      const action = actions.getNodesSuccess([]);
 
       const actualState = nodesInfoReducer(emptyState, action);
 

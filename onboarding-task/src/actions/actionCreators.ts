@@ -34,18 +34,18 @@ export const deleteError = (id: Guid): IAction => ({
   }
 });
 
-export const fetchNodesRequest = (): IAction => ({
+export const getNodesRequest = (): IAction => ({
   type: GET_NODES_REQUEST
 });
 
-export const fetchNodesSuccess = (nodes: Array<INodeContent>): IAction => ({
+export const getNodesSuccess = (nodes: Array<INodeContent>): IAction => ({
   type: GET_NODES_SUCCESS,
   payload: {
     nodes
   }
 });
 
-export const fetchNodesFailure = errorFactory(generateId, GET_NODES_FAILURE);
+export const getNodesFailure = errorFactory(generateId, GET_NODES_FAILURE);
 
 export const postNodeOptimistically = ({id, text }: INodeContent): IAction => ({
   type: POST_NODE_OPTIMISTIC,
