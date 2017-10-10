@@ -1,9 +1,7 @@
 import * as actions from '../../src/actions/actionCreators.ts';
 import * as types from '../../src/actions/actionTypes.ts';
-import { errorFactory } from '../../src/actions/addErrorFactory.ts';
 
 const id = '80149842-a624-b66b-5d3c-37c24523ba46';
-const generateId = jest.fn(() => id);
 
 describe('actionCreators', () => {
   describe('postNodeOptimistically', () => {
@@ -81,38 +79,6 @@ describe('actionCreators', () => {
       };
 
       expect(actions.deleteNodeRequest()).toEqual(expectedAction);
-    });
-  });
-
-  describe('getNodesFailure', () => {
-    it('returns a correct new action', () => {
-      const text = 'Never be like you.';
-      const expectedAction = {
-        type: types.FETCH_NODES_FAILURE,
-        payload: {
-          id,
-          text,
-        },
-      };
-      const fetchNodesFailure = errorFactory(generateId, types.FETCH_NODES_FAILURE);
-
-      expect(fetchNodesFailure(text)).toEqual(expectedAction);
-    });
-  });
-
-  describe('postNodeFailure', () => {
-    it('returns a correct new action', () => {
-      const text = 'Never be like you.';
-      const expectedAction = {
-        type: types.POST_NODE_FAILURE,
-        payload: {
-          id,
-          text,
-        },
-      };
-      const postNodeFailure = errorFactory(generateId, types.POST_NODE_FAILURE);
-
-      expect(postNodeFailure(text)).toEqual(expectedAction);
     });
   });
 });
