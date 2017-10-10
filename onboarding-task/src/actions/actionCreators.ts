@@ -38,7 +38,7 @@ export const fetchNodesRequest = (): IAction => ({
   type: GET_NODES_REQUEST
 });
 
-export const fetchNodesSuccess = (nodes: Array<object>): IAction => ({
+export const fetchNodesSuccess = (nodes: Array<INodeContent>): IAction => ({
   type: GET_NODES_SUCCESS,
   payload: {
     nodes

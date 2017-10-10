@@ -36,6 +36,31 @@ describe('actionCreators', () => {
     });
   });
 
+  describe('fetchNodesSuccess', () => {
+    it('returns a correct new action', () => {
+      const nodes = [
+        {
+          id,
+          text: 'some text',
+        },
+        {
+          id: '02461b64-98dd-4ff5-8479-aaf02bba5b16',
+          text: 'show me what you got',
+        },
+      ];
+      const expectedAction = {
+        type: types.GET_NODES_SUCCESS,
+        payload: {
+          nodes,
+        },
+      };
+
+      const actualAction = actions.fetchNodesSuccess(nodes);
+
+      expect(actualAction).toEqual(expectedAction);
+    });
+  });
+
   describe('postNodeSuccess', () => {
     it('returns a correct new action', () => {
       const text = 'some text';
@@ -58,6 +83,21 @@ describe('actionCreators', () => {
     });
   });
 
+  describe('deleteNodeSuccess', () => {
+    it('returns a correct new action', () => {
+      const expectedAction = {
+        type: types.DELETE_NODE_SUCCESS,
+        payload: {
+          id,
+        },
+      };
+
+      const actualAction = actions.deleteNodeSuccess(id);
+
+      expect(actualAction).toEqual(expectedAction);
+    });
+  });
+
   describe('toggleNode', () => {
     it('returns a correct new action', () => {
       const expectedAction = {
@@ -74,7 +114,10 @@ describe('actionCreators', () => {
   describe('putNodeSuccess', () => {
     it('returns a correct new action', () => {
       const text = 'random text';
-      const nodeDataToPut = { id, text };
+      const nodeDataToPut = {
+        id,
+        text,
+      };
       const expectedAction = {
         type: types.PUT_NODE_SUCCESS,
         payload: {
@@ -86,6 +129,4 @@ describe('actionCreators', () => {
       expect(actions.putNodeSuccess(nodeDataToPut)).toEqual(expectedAction);
     });
   });
-
-
 });
