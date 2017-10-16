@@ -12,8 +12,8 @@ interface INodeContainerProps {
   index: number;
 }
 
-const mapStateToProps = ({nodesList: {nodes, nodesInfo}}: IAppState, {id, index}: INodeContainerProps): INodeDataProps => ({
-  nodeViewModel: createMemoizedNodeViewModel(nodes.get(id), nodesInfo.get(id), index),
+const mapStateToProps = ({nodesList: {nodes, editedNodes, persistedNodes}}: IAppState, {id, index}: INodeContainerProps): INodeDataProps => ({
+  nodeViewModel: createMemoizedNodeViewModel(nodes.get(id), editedNodes.get(id), persistedNodes.get(id), index),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch, {id}: INodeContainerProps): INodeCallbacksProps => ({

@@ -1,11 +1,13 @@
 import { INodesIds } from './nodesIdsReducer';
-import { INodesInfo } from './nodesInfoReducer';
 import { INodes } from './nodesReducer';
 import { IErrorsMap } from './errorReducer';
+import { IEditedNodes } from './editedNodesReducer';
+import { IPersistedNodes } from './persistedNodesReducer';
 
 export interface INodesList {
   nodes: INodes;
-  nodesInfo: INodesInfo;
+  editedNodes: IEditedNodes;
+  persistedNodes: IPersistedNodes;
   nodesIds: INodesIds;
   isFetching: boolean;
   errors: IErrorsMap;

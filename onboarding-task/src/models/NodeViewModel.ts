@@ -2,7 +2,6 @@ import * as memoize from 'memoizee';
 import { Record } from 'immutable';
 
 import { NodeContent } from './NodeContent';
-import { NodeInfo } from './NodeInfo';
 
 export interface INodeViewModel {
   readonly id: Guid;
@@ -28,10 +27,11 @@ export class NodeViewModel extends Record(defaultNodeViewModel) implements INode
   readonly index: number;
 }
 
-const createNodeViewModel = (content: NodeContent, info: NodeInfo, index: number): INodeViewModel => {
+const createNodeViewModel = (content: NodeContent, isBeingEdited: boolean, isPersisted: boolean, index: number): INodeViewModel => {
   return new NodeViewModel({
     ...content.toObject(),
-    ...info.toObject(),
+    isBeingEdited,
+    isPersisted,
     index: index + 1,
   });
 };
