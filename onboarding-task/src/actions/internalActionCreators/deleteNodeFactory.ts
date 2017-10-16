@@ -4,7 +4,7 @@ interface IDeleteNodeDependencies {
   deleteNodeStart: () => IAction;
   deleteNodeSuccess: (id: Guid) => IAction;
   deleteNodeFailure: (text: string) => IAction;
-  deleteNodeFetch: Fetch;
+  deleteNodeFetch: (id: Guid) => Promise<IAction>;
 }
 
 export const deleteNodeFactory = (dependencies: IDeleteNodeDependencies) => (id: Guid) => {

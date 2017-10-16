@@ -3,7 +3,7 @@ import { INodeContent } from '../../models/NodeContent';
 import { IServerNode } from '../../utils/parseFetchedNodes';
 
 interface IAddNodeDependencies {
-  addNodeFetch: Fetch;
+  addNodeFetch: (text: string) => Promise<IServerNode>;
   addNodeStart: () => IAction;
   addNodeOptimistically: (node: INodeContent) => IAction;
   addNodeSuccess: (temporaryId: Guid, node: INodeContent) => IAction;
@@ -18,7 +18,7 @@ export const addNodeFactory = (dependencies: IAddNodeDependencies) => (text: str
     const temporaryId = dependencies.idGenerator();
     dispatch(dependencies.addNodeOptimistically({id: temporaryId, text}));
     return dependencies.addNodeFetch(text)
-      .then((json: any) => dependencies.parseFetchedNode(json))
+      .then(json => dependencies.parseFetchedNode(json))
       .then(node => dispatch(dependencies.addNodeSuccess(temporaryId, node)))
       .catch(() => dispatch(dependencies.addNodeFailure('Could not add the selected node.')));
   };

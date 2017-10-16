@@ -8,7 +8,7 @@ describe('addNodeFactory', () => {
     text,
   };
   const identityFunction = jest.fn((input: any) => input);
-  const postRequest = jest.fn(() => 'REQUEST_HAS_BEEN_CALLED');
+  const addNodeStart = jest.fn(() => 'REQUEST_HAS_BEEN_CALLED');
   const idGenerator = jest.fn(() => '6267be54-5dbd-4ced-9c90-3a197ddb5107');
 
   it('dispatches addNodeStart action', () => {
@@ -17,7 +17,7 @@ describe('addNodeFactory', () => {
 
     const postNode = addNodeFactory({
       addNodeFetch: myFetch,
-      addNodeStart: postRequest,
+      addNodeStart,
       addNodeOptimistically: identityFunction,
       addNodeSuccess: identityFunction,
       addNodeFailure: identityFunction,
@@ -26,7 +26,7 @@ describe('addNodeFactory', () => {
     });
 
     return postNode(text)(dispatch).then(() => {
-      expect(postRequest.mock.calls.length).toEqual(1);
+      expect(addNodeStart.mock.calls.length).toEqual(1);
       expect(dispatch.mock.calls[0][0]).toEqual('REQUEST_HAS_BEEN_CALLED');
     });
   });
@@ -34,12 +34,12 @@ describe('addNodeFactory', () => {
   it('dispatches optimistic post action with correct data', () => {
     const myFetch = jest.fn(() => Promise.resolve(new Response(JSON.stringify({ok: true}))));
     const dispatch = identityFunction;
-    const optimisticPost = jest.fn(() => 'something');
+    const addNodeOptimistically = jest.fn(() => 'something');
 
     const postNode = addNodeFactory({
       addNodeFetch: myFetch,
-      addNodeStart: postRequest,
-      addNodeOptimistically: optimisticPost,
+      addNodeStart,
+      addNodeOptimistically,
       addNodeSuccess: identityFunction,
       addNodeFailure: identityFunction,
       parseFetchedNode: identityFunction,
@@ -47,7 +47,7 @@ describe('addNodeFactory', () => {
     });
 
     return postNode(text)(dispatch).then(() => {
-      expect(optimisticPost.mock.calls.length).toEqual(1);
+      expect(addNodeOptimistically.mock.calls.length).toEqual(1);
 
       const dispatchCallArguments = dispatch.mock.calls[1][0];
       const expectedId = idGenerator();
@@ -63,7 +63,7 @@ describe('addNodeFactory', () => {
 
     const postNode = addNodeFactory({
       addNodeFetch: myFetch,
-      addNodeStart: postRequest,
+      addNodeStart,
       addNodeOptimistically: identityFunction,
       addNodeFailure: identityFunction,
       addNodeSuccess: identityFunction,
@@ -78,7 +78,7 @@ describe('addNodeFactory', () => {
     const temporaryId = idGenerator();
     const myFetch = jest.fn(() => Promise.resolve(new Response(JSON.stringify({ok: true}))));
     const parseFetchedNode = jest.fn(() => ({id, text}));
-    const postSuccess = jest.fn(() => ({
+    const addNodeSuccess = jest.fn(() => ({
       type: 'ADD_NODE_SUCCESS',
       payload: {
         id,
@@ -92,21 +92,21 @@ describe('addNodeFactory', () => {
       addNodeFetch: myFetch,
       addNodeStart: identityFunction,
       addNodeOptimistically: identityFunction,
-      addNodeSuccess: postSuccess,
+      addNodeSuccess,
       addNodeFailure: identityFunction,
       parseFetchedNode,
       idGenerator,
     });
 
     return postNode(text)(dispatch).then(() => {
-      expect(postSuccess.mock.calls.length).toEqual(1);
-      expect(dispatch.mock.calls[2][0]).toEqual(postSuccess());
+      expect(addNodeSuccess.mock.calls.length).toEqual(1);
+      expect(dispatch.mock.calls[2][0]).toEqual(addNodeSuccess());
     });
   });
 
   it('dispatches addNodeFailure correctly', () => {
     const myFetch = jest.fn(() => Promise.reject(new Response(JSON.stringify({ok: false}))));
-    const newPostFailure = jest.fn(() => 'Posting a node has failed.');
+    const addNodeFailure = jest.fn(() => 'Posting a node has failed.');
     const dispatch = identityFunction;
 
     const postNode = addNodeFactory({
@@ -114,13 +114,13 @@ describe('addNodeFactory', () => {
       addNodeStart: identityFunction,
       addNodeOptimistically: identityFunction,
       addNodeSuccess: identityFunction,
-      addNodeFailure: newPostFailure,
+      addNodeFailure,
       parseFetchedNode: identityFunction,
       idGenerator,
     });
 
     return postNode(text)(dispatch).then(() => {
-      expect(newPostFailure.mock.calls.length).toEqual(1);
+      expect(addNodeFailure.mock.calls.length).toEqual(1);
     });
   });
 });

@@ -2,7 +2,7 @@ import { IAction } from '../../@types/global';
 import { INodeContent } from '../../models/NodeContent';
 
 interface IUpdateNodeDependencies {
-  updateNodeFetch: Fetch;
+  updateNodeFetch: (node: INodeContent) => Promise<IAction>;
   updateNodeStart: () => IAction;
   updateNodeSuccess: (node: INodeContent) => IAction;
   updateNodeFailure: (text: string) => IAction;

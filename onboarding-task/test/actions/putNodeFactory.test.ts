@@ -7,8 +7,8 @@ describe('updateNodeFactory', () => {
   const nodeDataToPut = {id, text};
   const identityFunction = jest.fn((input: any) => input);
 
-  const putRequest = jest.fn(() => ({
-    type: 'PUT_REQUEST'
+  const updateNodeStart = jest.fn(() => ({
+    type: 'UPDATE_START'
   }));
 
   it('dispatches updateNodeStart action', () => {
@@ -16,15 +16,15 @@ describe('updateNodeFactory', () => {
     const dispatch = identityFunction;
 
     const putNode = updateNodeFactory({
-      updateNodeStart: putRequest,
+      updateNodeStart,
       updateNodeFetch: myFetch,
       updateNodeSuccess: identityFunction,
       updateNodeFailure: identityFunction,
     });
 
     return putNode(nodeDataToPut)(dispatch).then(() => {
-      expect(putRequest.mock.calls.length).toEqual(1);
-      expect(dispatch.mock.calls[0][0]).toEqual({type: 'PUT_REQUEST'});
+      expect(updateNodeStart.mock.calls.length).toEqual(1);
+      expect(dispatch.mock.calls[0][0]).toEqual({type: 'UPDATE_START'});
     });
   });
 
@@ -33,7 +33,7 @@ describe('updateNodeFactory', () => {
     const dispatch = identityFunction;
 
     const putNode = updateNodeFactory({
-      updateNodeStart: putRequest,
+      updateNodeStart,
       updateNodeFetch: myFetch,
       updateNodeSuccess: identityFunction,
       updateNodeFailure: identityFunction,
@@ -45,17 +45,17 @@ describe('updateNodeFactory', () => {
   it('dispatches updateNodeSuccess action correctly', () => {
     const myFetch = jest.fn(() => Promise.resolve(new Response(JSON.stringify({ok: true}))));
     const dispatch = identityFunction;
-    const putNodeSuccess = jest.fn(() => 'SUCCESSFUL_UPDATE');
+    const updateNodeSuccess = jest.fn(() => 'SUCCESSFUL_UPDATE');
 
     const putNode = updateNodeFactory({
-      updateNodeStart: putRequest,
+      updateNodeStart,
       updateNodeFetch: myFetch,
-      updateNodeSuccess: putNodeSuccess,
+      updateNodeSuccess,
       updateNodeFailure: identityFunction,
     });
 
     return putNode(nodeDataToPut)(dispatch).then(() => {
-      expect(putNodeSuccess.mock.calls.length).toEqual(1);
+      expect(updateNodeSuccess.mock.calls.length).toEqual(1);
       const dispatchCallArguments = dispatch.mock.calls[1][0];
 
       expect(dispatchCallArguments).toEqual(nodeDataToPut);
@@ -65,16 +65,16 @@ describe('updateNodeFactory', () => {
   it('dispatches updateNodeFailure correctly', () => {
     const myFetch = jest.fn(() => Promise.reject(new Response(JSON.stringify({ok: false}))));
     const dispatch = identityFunction;
-    const putNodeFailure = jest.fn(() => 'deleting failed');
+    const updateNodeFailure = jest.fn(() => 'deleting failed');
 
     const putNode = updateNodeFactory({
-      updateNodeStart: putRequest,
+      updateNodeStart,
       updateNodeFetch: myFetch,
       updateNodeSuccess: identityFunction,
-      updateNodeFailure: putNodeFailure,
+      updateNodeFailure,
     });
 
     return putNode(nodeDataToPut)(dispatch).then(() =>
-      expect(putNodeFailure.mock.calls.length).toEqual(1));
+      expect(updateNodeFailure.mock.calls.length).toEqual(1));
   });
 });
