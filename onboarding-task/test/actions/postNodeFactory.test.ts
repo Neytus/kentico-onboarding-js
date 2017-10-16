@@ -11,13 +11,13 @@ describe('addNodeFactory', () => {
   const postRequest = jest.fn(() => 'REQUEST_HAS_BEEN_CALLED');
   const idGenerator = jest.fn(() => '6267be54-5dbd-4ced-9c90-3a197ddb5107');
 
-  it('dispatches addNodeRequest action', () => {
+  it('dispatches addNodeStart action', () => {
     const myFetch = jest.fn(() => Promise.resolve(new Response(JSON.stringify({ok: true}))));
     const dispatch = identityFunction;
 
     const postNode = addNodeFactory({
       addNodeFetch: myFetch,
-      addNodeRequest: postRequest,
+      addNodeStart: postRequest,
       addNodeOptimistically: identityFunction,
       addNodeSuccess: identityFunction,
       addNodeFailure: identityFunction,
@@ -38,7 +38,7 @@ describe('addNodeFactory', () => {
 
     const postNode = addNodeFactory({
       addNodeFetch: myFetch,
-      addNodeRequest: postRequest,
+      addNodeStart: postRequest,
       addNodeOptimistically: optimisticPost,
       addNodeSuccess: identityFunction,
       addNodeFailure: identityFunction,
@@ -63,7 +63,7 @@ describe('addNodeFactory', () => {
 
     const postNode = addNodeFactory({
       addNodeFetch: myFetch,
-      addNodeRequest: postRequest,
+      addNodeStart: postRequest,
       addNodeOptimistically: identityFunction,
       addNodeFailure: identityFunction,
       addNodeSuccess: identityFunction,
@@ -90,7 +90,7 @@ describe('addNodeFactory', () => {
 
     const postNode = addNodeFactory({
       addNodeFetch: myFetch,
-      addNodeRequest: identityFunction,
+      addNodeStart: identityFunction,
       addNodeOptimistically: identityFunction,
       addNodeSuccess: postSuccess,
       addNodeFailure: identityFunction,
@@ -111,7 +111,7 @@ describe('addNodeFactory', () => {
 
     const postNode = addNodeFactory({
       addNodeFetch: myFetch,
-      addNodeRequest: identityFunction,
+      addNodeStart: identityFunction,
       addNodeOptimistically: identityFunction,
       addNodeSuccess: identityFunction,
       addNodeFailure: newPostFailure,

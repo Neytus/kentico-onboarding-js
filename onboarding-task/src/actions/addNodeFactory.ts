@@ -3,7 +3,7 @@ import { INodeContent, IServerNode } from '../models/NodeContent';
 
 interface IAddNodeDependencies {
   addNodeFetch: Fetch;
-  addNodeRequest: () => IAction;
+  addNodeStart: () => IAction;
   addNodeOptimistically: (node: INodeContent) => IAction;
   addNodeSuccess: (temporaryId: Guid, node: INodeContent) => IAction;
   addNodeFailure: (text: string) => IAction;
@@ -13,7 +13,7 @@ interface IAddNodeDependencies {
 
 export const addNodeFactory = (dependencies: IAddNodeDependencies) => (text: string) => {
   return (dispatch: Dispatch): Promise<IAction> => {
-    dispatch(dependencies.addNodeRequest());
+    dispatch(dependencies.addNodeStart());
     const temporaryId = dependencies.idGenerator();
     dispatch(dependencies.addNodeOptimistically({id: temporaryId, text}));
     return dependencies.addNodeFetch(text)

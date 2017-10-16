@@ -1,19 +1,19 @@
 import {
   TOGGLE_NODE,
-  GET_NODES_REQUEST,
   GET_NODES_SUCCESS,
   DISMISS_ERROR,
-  ADD_NODE_REQUEST,
+  ADD_NODE_START,
   ADD_NODE_SUCCESS,
   ADD_NODE_FAILURE,
   GET_NODES_FAILURE,
-  DELETE_NODE_REQUEST,
+  DELETE_NODE_START,
   DELETE_NODE_SUCCESS,
   DELETE_NODE_FAILURE,
   ADD_NODE_OPTIMISTIC,
-  UPDATE_NODE_REQUEST,
+  UPDATE_NODE_START,
   UPDATE_NODE_SUCCESS,
   UPDATE_NODE_FAILURE,
+  GET_NODES_START,
 } from './actionTypes';
 import { IAction } from './IAction';
 import { errorFactory } from './addErrorFactory';
@@ -34,8 +34,8 @@ export const dismissError = (id: Guid): IAction => ({
   }
 });
 
-export const getNodesRequest = (): IAction => ({
-  type: GET_NODES_REQUEST
+export const getNodesStart = (): IAction => ({
+  type: GET_NODES_START
 });
 
 export const getNodesSuccess = (nodes: Array<INodeContent>): IAction => ({
@@ -55,8 +55,8 @@ export const addNodeOptimistically = ({id, text }: INodeContent): IAction => ({
   }
 });
 
-export const addNodeRequest = (): IAction => ({
-  type: ADD_NODE_REQUEST,
+export const addNodeStart = (): IAction => ({
+  type: ADD_NODE_START,
 });
 
 export const addNodeSuccess = (temporaryId: Guid, {id, text}: INodeContent): IAction => ({
@@ -70,8 +70,8 @@ export const addNodeSuccess = (temporaryId: Guid, {id, text}: INodeContent): IAc
 
 export const addNodeFailure = errorFactory(generateId, ADD_NODE_FAILURE);
 
-export const updateNodeRequest = (): IAction => ({
-  type: UPDATE_NODE_REQUEST,
+export const updateNodeStart = (): IAction => ({
+  type: UPDATE_NODE_START,
 });
 
 export const updateNodeSuccess = ({id, text}: INodeContent): IAction => ({
@@ -84,8 +84,8 @@ export const updateNodeSuccess = ({id, text}: INodeContent): IAction => ({
 
 export const updateNodeFailure = errorFactory(generateId, UPDATE_NODE_FAILURE);
 
-export const deleteNodeRequest = (): IAction => ({
-  type: DELETE_NODE_REQUEST,
+export const deleteNodeStart = (): IAction => ({
+  type: DELETE_NODE_START,
 });
 
 export const deleteNodeSuccess = (id: Guid): IAction => ({

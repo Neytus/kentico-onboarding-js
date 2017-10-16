@@ -11,12 +11,12 @@ describe('updateNodeFactory', () => {
     type: 'PUT_REQUEST'
   }));
 
-  it('dispatches updateNodeRequest action', () => {
+  it('dispatches updateNodeStart action', () => {
     const myFetch = jest.fn(() => Promise.resolve(nodeDataToPut));
     const dispatch = identityFunction;
 
     const putNode = updateNodeFactory({
-      updateNodeRequest: putRequest,
+      updateNodeStart: putRequest,
       updateNodeFetch: myFetch,
       updateNodeSuccess: identityFunction,
       updateNodeFailure: identityFunction,
@@ -33,7 +33,7 @@ describe('updateNodeFactory', () => {
     const dispatch = identityFunction;
 
     const putNode = updateNodeFactory({
-      updateNodeRequest: putRequest,
+      updateNodeStart: putRequest,
       updateNodeFetch: myFetch,
       updateNodeSuccess: identityFunction,
       updateNodeFailure: identityFunction,
@@ -48,7 +48,7 @@ describe('updateNodeFactory', () => {
     const putNodeSuccess = jest.fn(() => 'SUCCESSFUL_UPDATE');
 
     const putNode = updateNodeFactory({
-      updateNodeRequest: putRequest,
+      updateNodeStart: putRequest,
       updateNodeFetch: myFetch,
       updateNodeSuccess: putNodeSuccess,
       updateNodeFailure: identityFunction,
@@ -68,7 +68,7 @@ describe('updateNodeFactory', () => {
     const putNodeFailure = jest.fn(() => 'deleting failed');
 
     const putNode = updateNodeFactory({
-      updateNodeRequest: putRequest,
+      updateNodeStart: putRequest,
       updateNodeFetch: myFetch,
       updateNodeSuccess: identityFunction,
       updateNodeFailure: putNodeFailure,

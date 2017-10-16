@@ -8,12 +8,12 @@ describe('deleteNodeFactory', () => {
     type: 'DELETE_REQUEST'
   }));
 
-  it('dispatches deleteNodeRequest action', () => {
+  it('dispatches deleteNodeStart action', () => {
     const myFetch = jest.fn(() => Promise.resolve(id));
     const dispatch = identityFunction;
 
     const deleteNode = deleteNodeFactory({
-      deleteNodeRequest: deleteRequest,
+      deleteNodeStart: deleteRequest,
       deleteNodeSuccess: identityFunction,
       deleteNodeFailure: identityFunction,
       deleteNodeFetch: myFetch,
@@ -30,7 +30,7 @@ describe('deleteNodeFactory', () => {
     const dispatch = identityFunction;
 
     const deleteNode = deleteNodeFactory({
-      deleteNodeRequest: deleteRequest,
+      deleteNodeStart: deleteRequest,
       deleteNodeSuccess: identityFunction,
       deleteNodeFailure: identityFunction,
       deleteNodeFetch: myFetch,
@@ -45,7 +45,7 @@ describe('deleteNodeFactory', () => {
     const deleteSuccess = jest.fn(() => 'successful delete');
 
     const deleteNode = deleteNodeFactory({
-      deleteNodeRequest: deleteRequest,
+      deleteNodeStart: deleteRequest,
       deleteNodeSuccess: deleteSuccess,
       deleteNodeFailure: identityFunction,
       deleteNodeFetch: myFetch,
@@ -65,7 +65,7 @@ describe('deleteNodeFactory', () => {
     const deleteFailure = jest.fn(() => 'deleting failed');
 
     const deleteNode = deleteNodeFactory({
-      deleteNodeRequest: deleteRequest,
+      deleteNodeStart: deleteRequest,
       deleteNodeSuccess: identityFunction,
       deleteNodeFailure: deleteFailure,
       deleteNodeFetch: myFetch,

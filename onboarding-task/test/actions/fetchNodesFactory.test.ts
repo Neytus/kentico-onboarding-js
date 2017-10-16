@@ -17,7 +17,7 @@ describe('getNodesFactory', () => {
 
     const fetchNodes = getNodesFactory({
       getNodesFetch: myFetch,
-      getNodesRequest: fetchRequest,
+      getNodesStart: fetchRequest,
       getNodesFailure: identityFunction,
       getNodesSuccess: identityFunction,
       parseFetchedNodes: identityFunction
@@ -35,7 +35,7 @@ describe('getNodesFactory', () => {
 
     const fetchNodes = getNodesFactory({
       getNodesFetch: myFetch,
-      getNodesRequest: fetchRequest,
+      getNodesStart: fetchRequest,
       getNodesFailure: identityFunction,
       getNodesSuccess: identityFunction,
       parseFetchedNodes: identityFunction
@@ -51,7 +51,7 @@ describe('getNodesFactory', () => {
 
     const fetchNodes = getNodesFactory({
       getNodesFetch: myFetch,
-      getNodesRequest: identityFunction,
+      getNodesStart: identityFunction,
       getNodesFailure: identityFunction,
       getNodesSuccess,
       parseFetchedNodes: jest.fn(() => nodesArray)
@@ -72,7 +72,7 @@ describe('getNodesFactory', () => {
 
     const fetchNodes = getNodesFactory({
       getNodesFetch: myFetch,
-      getNodesRequest: identityFunction,
+      getNodesStart: identityFunction,
       getNodesFailure: newFetchFailure,
       getNodesSuccess: identityFunction,
       parseFetchedNodes: identityFunction

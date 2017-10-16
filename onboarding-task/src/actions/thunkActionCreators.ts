@@ -3,17 +3,17 @@ import { checkStatus } from '../utils/checkStatus';
 import { getNodesFactory } from './getNodesFactory';
 import {
   deleteNodeFailure,
-  deleteNodeRequest,
+  deleteNodeStart,
   deleteNodeSuccess,
   getNodesFailure,
-  getNodesRequest,
+  getNodesStart,
   getNodesSuccess,
   addNodeFailure,
   addNodeOptimistically,
-  addNodeRequest,
+  addNodeStart,
   addNodeSuccess,
   updateNodeFailure,
-  updateNodeRequest,
+  updateNodeStart,
   updateNodeSuccess
 } from './actionCreators';
 import { parseFetchedNode, parseFetchedNodes } from '../utils/parseFetchedNodes';
@@ -32,7 +32,7 @@ const getNodesFetch = () => fetch(API_ROUTE)
 
 export const getNodes = getNodesFactory({
   getNodesFetch,
-  getNodesRequest,
+  getNodesStart,
   getNodesSuccess,
   getNodesFailure,
   parseFetchedNodes
@@ -53,7 +53,7 @@ const addNodeFetch = (text: string) => fetch(API_ROUTE, {
 
 export const addNode = addNodeFactory({
   addNodeFetch,
-  addNodeRequest,
+  addNodeStart,
   addNodeOptimistically,
   addNodeSuccess,
   addNodeFailure,
@@ -77,7 +77,7 @@ const updateNodeFetch = ({id, text}: INodeContent) => fetch(API_ROUTE + '/' + id
   .then(response => response.json());
 
 export const updateNode = updateNodeFactory({
-  updateNodeRequest,
+  updateNodeStart,
   updateNodeFetch,
   updateNodeSuccess,
   updateNodeFailure,
@@ -93,7 +93,7 @@ const deleteNodeFetch = (id: Guid) => fetch(API_ROUTE + '/' + id, {
   .then(response => checkStatus(response));
 
 export const deleteNode = deleteNodeFactory({
-  deleteNodeRequest,
+  deleteNodeStart,
   deleteNodeFailure,
   deleteNodeSuccess,
   deleteNodeFetch
