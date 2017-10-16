@@ -6,7 +6,7 @@ import {
   DISMISS_ERROR,
   ADD_NODE_FAILURE,
   DELETE_NODE_FAILURE, UPDATE_NODE_FAILURE
-} from '../../actions/actionTypes';
+} from '../../constants/actionTypes';
 
 export type IErrorsMap = OrderedMap<Guid, string>;
 

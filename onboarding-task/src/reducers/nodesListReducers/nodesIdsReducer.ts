@@ -5,7 +5,7 @@ import {
   GET_NODES_SUCCESS,
   ADD_NODE_OPTIMISTIC,
   ADD_NODE_SUCCESS,
-} from '../../actions/actionTypes';
+} from '../../constants/actionTypes';
 import { IAction } from '../../actions/IAction';
 import { INodeContent } from '../../models/NodeContent';
 

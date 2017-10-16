@@ -7,7 +7,7 @@ import {
   DELETE_NODE_SUCCESS,
   ADD_NODE_OPTIMISTIC,
   UPDATE_NODE_SUCCESS,
-} from '../../actions/actionTypes';
+} from '../../constants/actionTypes';
 import { NodeInfo } from '../../models/NodeInfo';
 import { IAction } from '../../actions/IAction';
 import { INodeContent } from '../../models/NodeContent';

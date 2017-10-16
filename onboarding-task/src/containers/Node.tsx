@@ -3,9 +3,9 @@ import * as React from 'react';
 
 import { INodeCallbacksProps, INodeDataProps, Node as NodeComponent } from '../components/Node';
 import { createMemoizedNodeViewModel } from '../models/NodeViewModel';
-import { toggleNode } from '../actions/actionCreators';
+import { toggleNode } from '../actions/baseActionCreators';
 import { IAppState } from '../reducers/IAppState';
-import { deleteNode, updateNode } from '../actions/thunkActionCreators';
+import { deleteNode, updateNode } from '../actions/publicActionCreators';
 
 interface INodeContainerProps {
   id: Guid;

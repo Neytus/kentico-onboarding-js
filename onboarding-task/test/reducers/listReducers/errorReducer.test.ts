@@ -1,13 +1,13 @@
 import { OrderedMap } from 'immutable';
 
-import * as actions from '../../../src/actions/actionCreators';
+import * as actions from '../../../src/actions/baseActionCreators';
 import { errorReducer } from '../../../src/reducers/nodesListReducers/errorReducer';
 import {
   ADD_NODE_FAILURE,
   GET_NODES_FAILURE,
   UPDATE_NODE_FAILURE,
   DELETE_NODE_FAILURE
-} from '../../../src/actions/actionTypes';
+} from '../../../src/constants/actionTypes';
 
 describe('errorReducer', () => {
   const emptyState = OrderedMap<Guid, string>();

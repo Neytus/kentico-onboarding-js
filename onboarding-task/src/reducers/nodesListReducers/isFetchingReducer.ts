@@ -3,7 +3,7 @@ import {
   GET_NODES_SUCCESS,
   GET_NODES_FAILURE,
   GET_NODES_START,
-} from '../../actions/actionTypes';
+} from '../../constants/actionTypes';
 
 export const isFetchingReducer = (state = true, action: IAction): boolean => {
   switch (action.type) {

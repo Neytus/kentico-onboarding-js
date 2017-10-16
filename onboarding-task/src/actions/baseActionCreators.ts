@@ -14,7 +14,7 @@ import {
   UPDATE_NODE_SUCCESS,
   UPDATE_NODE_FAILURE,
   GET_NODES_START,
-} from './actionTypes';
+} from '../constants/actionTypes';
 import { IAction } from './IAction';
 import { errorFactory } from './addErrorFactory';
 import { generateId } from '../utils/generateId';
