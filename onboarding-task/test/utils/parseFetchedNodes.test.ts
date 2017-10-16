@@ -1,5 +1,5 @@
-import { INodeContent, IServerNode } from '../../src/models/NodeContent';
-import { parseFetchedNode, parseFetchedNodes } from '../../src/utils/parseFetchedNodes';
+import { INodeContent } from '../../src/models/NodeContent';
+import { IServerNode, parseFetchedNode, parseFetchedNodes } from '../../src/utils/parseFetchedNodes';
 
 describe('parseFetchedNodes', () => {
   const firstId = '4a032b91-a564-4589-b764-453e21c22d51';

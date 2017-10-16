@@ -1,12 +1,5 @@
 import { TypedRecord } from './TypedRecord';
 
-export interface IServerNode {
-  readonly id: Guid;
-  readonly text: string;
-  readonly creation: Date;
-  readonly lastUpdate: Date;
-}
-
 export interface INodeContent {
   readonly id: Guid;
   readonly text: string;
