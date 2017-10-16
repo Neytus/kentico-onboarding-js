@@ -1,7 +1,7 @@
 import { IAction } from './IAction';
 import { INodeContent, IServerNode } from '../models/NodeContent';
 
-interface IFetchNodesDependencies {
+interface IGetNodesDependencies {
   getNodesFetch: () => Promise<Array<IServerNode>>;
   getNodesRequest: () => IAction;
   getNodesSuccess: (nodes: Array<INodeContent>) => IAction;
@@ -9,7 +9,7 @@ interface IFetchNodesDependencies {
   parseFetchedNodes: (nodes: Array<IServerNode>) => Array<INodeContent>;
 }
 
-export const fetchNodesFactory = (dependencies: IFetchNodesDependencies) => () => {
+export const getNodesFactory = (dependencies: IGetNodesDependencies) => () => {
   return (dispatch: Dispatch): Promise<IAction> => {
     dispatch(dependencies.getNodesRequest());
 

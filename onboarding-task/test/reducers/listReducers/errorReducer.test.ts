@@ -3,9 +3,9 @@ import { OrderedMap } from 'immutable';
 import * as actions from '../../../src/actions/actionCreators';
 import { errorReducer } from '../../../src/reducers/nodesListReducers/errorReducer';
 import {
-  POST_NODE_FAILURE,
+  ADD_NODE_FAILURE,
   GET_NODES_FAILURE,
-  PUT_NODE_FAILURE,
+  UPDATE_NODE_FAILURE,
   DELETE_NODE_FAILURE
 } from '../../../src/actions/actionTypes';
 
@@ -15,9 +15,9 @@ describe('errorReducer', () => {
   const text = 'error text';
   const nonEmptyState = emptyState.set(id, text);
   const failureActionTypes = [
-    POST_NODE_FAILURE,
+    ADD_NODE_FAILURE,
     GET_NODES_FAILURE,
-    PUT_NODE_FAILURE,
+    UPDATE_NODE_FAILURE,
     DELETE_NODE_FAILURE
   ];
 
@@ -30,9 +30,9 @@ describe('errorReducer', () => {
     expect(actualState).toEqual(emptyState);
   });
 
-  describe('DELETE_ERROR', () => {
+  describe('DISMISS_ERROR', () => {
     it('deletes an error statement correctly', () => {
-      const action = actions.deleteError(id);
+      const action = actions.dismissError(id);
 
       const actualState = errorReducer(nonEmptyState, action);
 
@@ -41,7 +41,7 @@ describe('errorReducer', () => {
 
     it('handles deleting non-existent node correctly', () => {
       const anotherId = '05012399-087d-4944-a742-7cf698e01b85';
-      const action = actions.deleteError(anotherId);
+      const action = actions.dismissError(anotherId);
 
       const actualState = errorReducer(nonEmptyState, action);
 

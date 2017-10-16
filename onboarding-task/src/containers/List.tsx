@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import { List as ListComponent, IListDataProps, IListCallbacksProps } from '../components/List';
 import { IAppState } from '../reducers/IAppState';
-import { fetchNodes } from '../actions/thunkActionCreators';
+import { getNodes } from '../actions/thunkActionCreators';
 
 const mapStateToProps = ({nodesList: {nodesIds, isFetching, errors}}: IAppState): IListDataProps => ({
   nodesIds,
@@ -12,7 +12,7 @@ const mapStateToProps = ({nodesList: {nodesIds, isFetching, errors}}: IAppState)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): IListCallbacksProps => ({
-  fetchNodes: () => setTimeout(() => dispatch(fetchNodes()), 2500),
+  fetchNodes: () => setTimeout(() => dispatch(getNodes()), 2500),
 });
 
 export const List: React.ComponentClass = connect(mapStateToProps, mapDispatchToProps)(ListComponent);

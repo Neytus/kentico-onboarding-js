@@ -4,33 +4,33 @@ import * as types from '../../src/actions/actionTypes.ts';
 const id = '80149842-a624-b66b-5d3c-37c24523ba46';
 
 describe('actionCreators', () => {
-  describe('postNodeOptimistically', () => {
+  describe('addNodeOptimistically', () => {
     it('returns a correct new action', () => {
       const text = 'New action test';
       const expectedAction = {
-        type: types.POST_NODE_OPTIMISTIC,
+        type: types.ADD_NODE_OPTIMISTIC,
         payload: {
           id,
           text,
         },
       };
 
-      const actualAction = actions.postNodeOptimistically(expectedAction.payload);
+      const actualAction = actions.addNodeOptimistically(expectedAction.payload);
 
       expect(actualAction).toEqual(expectedAction);
     });
   });
 
-  describe('deleteError', () => {
+  describe('dismissError', () => {
     it('returns a correct new action', () => {
       const expectedAction = {
-        type: types.DELETE_ERROR,
+        type: types.DISMISS_ERROR,
         payload: {
           id,
         },
       };
 
-      const actualAction = actions.deleteError(id);
+      const actualAction = actions.dismissError(id);
 
       expect(actualAction).toEqual(expectedAction);
     });
@@ -61,12 +61,12 @@ describe('actionCreators', () => {
     });
   });
 
-  describe('postNodeSuccess', () => {
+  describe('addNodeSuccess', () => {
     it('returns a correct new action', () => {
       const text = 'some text';
       const temporaryId = '849e43f2-55de-48fe-ae4b-3510e60b17ca';
       const expectedAction = {
-        type: types.POST_NODE_SUCCESS,
+        type: types.ADD_NODE_SUCCESS,
         payload: {
           id,
           text,
@@ -74,7 +74,7 @@ describe('actionCreators', () => {
         },
       };
 
-      const actualAction = actions.postNodeSuccess(temporaryId, {
+      const actualAction = actions.addNodeSuccess(temporaryId, {
         id,
         text,
       });
@@ -111,7 +111,7 @@ describe('actionCreators', () => {
     });
   });
 
-  describe('putNodeSuccess', () => {
+  describe('updateNodeSuccess', () => {
     it('returns a correct new action', () => {
       const text = 'random text';
       const nodeDataToPut = {
@@ -119,14 +119,14 @@ describe('actionCreators', () => {
         text,
       };
       const expectedAction = {
-        type: types.PUT_NODE_SUCCESS,
+        type: types.UPDATE_NODE_SUCCESS,
         payload: {
           id,
           text,
         },
       };
 
-      expect(actions.putNodeSuccess(nodeDataToPut)).toEqual(expectedAction);
+      expect(actions.updateNodeSuccess(nodeDataToPut)).toEqual(expectedAction);
     });
   });
 });

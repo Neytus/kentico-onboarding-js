@@ -2,18 +2,18 @@ import {
   TOGGLE_NODE,
   GET_NODES_REQUEST,
   GET_NODES_SUCCESS,
-  DELETE_ERROR,
-  POST_NODE_REQUEST,
-  POST_NODE_SUCCESS,
-  POST_NODE_FAILURE,
+  DISMISS_ERROR,
+  ADD_NODE_REQUEST,
+  ADD_NODE_SUCCESS,
+  ADD_NODE_FAILURE,
   GET_NODES_FAILURE,
   DELETE_NODE_REQUEST,
   DELETE_NODE_SUCCESS,
   DELETE_NODE_FAILURE,
-  POST_NODE_OPTIMISTIC,
-  PUT_NODE_REQUEST,
-  PUT_NODE_SUCCESS,
-  PUT_NODE_FAILURE,
+  ADD_NODE_OPTIMISTIC,
+  UPDATE_NODE_REQUEST,
+  UPDATE_NODE_SUCCESS,
+  UPDATE_NODE_FAILURE,
 } from './actionTypes';
 import { IAction } from './IAction';
 import { errorFactory } from './addErrorFactory';
@@ -27,8 +27,8 @@ export const toggleNode = (id: Guid): IAction => ({
   },
 });
 
-export const deleteError = (id: Guid): IAction => ({
-  type: DELETE_ERROR,
+export const dismissError = (id: Guid): IAction => ({
+  type: DISMISS_ERROR,
   payload: {
     id
   }
@@ -47,20 +47,20 @@ export const getNodesSuccess = (nodes: Array<INodeContent>): IAction => ({
 
 export const getNodesFailure = errorFactory(generateId, GET_NODES_FAILURE);
 
-export const postNodeOptimistically = ({id, text }: INodeContent): IAction => ({
-  type: POST_NODE_OPTIMISTIC,
+export const addNodeOptimistically = ({id, text }: INodeContent): IAction => ({
+  type: ADD_NODE_OPTIMISTIC,
   payload: {
     id,
     text,
   }
 });
 
-export const postNodeRequest = (): IAction => ({
-  type: POST_NODE_REQUEST,
+export const addNodeRequest = (): IAction => ({
+  type: ADD_NODE_REQUEST,
 });
 
-export const postNodeSuccess = (temporaryId: Guid, {id, text}: INodeContent): IAction => ({
-  type: POST_NODE_SUCCESS,
+export const addNodeSuccess = (temporaryId: Guid, {id, text}: INodeContent): IAction => ({
+  type: ADD_NODE_SUCCESS,
   payload: {
     id,
     text,
@@ -68,21 +68,21 @@ export const postNodeSuccess = (temporaryId: Guid, {id, text}: INodeContent): IA
   }
 });
 
-export const postNodeFailure = errorFactory(generateId, POST_NODE_FAILURE);
+export const addNodeFailure = errorFactory(generateId, ADD_NODE_FAILURE);
 
-export const putNodeRequest = (): IAction => ({
-  type: PUT_NODE_REQUEST,
+export const updateNodeRequest = (): IAction => ({
+  type: UPDATE_NODE_REQUEST,
 });
 
-export const putNodeSuccess = ({id, text}: INodeContent): IAction => ({
-  type: PUT_NODE_SUCCESS,
+export const updateNodeSuccess = ({id, text}: INodeContent): IAction => ({
+  type: UPDATE_NODE_SUCCESS,
   payload: {
     id,
     text,
   },
 });
 
-export const putNodeFailure = errorFactory(generateId, PUT_NODE_FAILURE);
+export const updateNodeFailure = errorFactory(generateId, UPDATE_NODE_FAILURE);
 
 export const deleteNodeRequest = (): IAction => ({
   type: DELETE_NODE_REQUEST,

@@ -1,6 +1,6 @@
-import { putNodeFactory } from '../../src/actions/putNodeFactory';
+import { updateNodeFactory } from '../../src/actions/putNodeFactory';
 
-describe('putNodeFactory', () => {
+describe('updateNodeFactory', () => {
 
   const id = 'ef081749-250b-4c35-af07-4ff4364bafa1';
   const text = 'some random text';
@@ -11,15 +11,15 @@ describe('putNodeFactory', () => {
     type: 'PUT_REQUEST'
   }));
 
-  it('dispatches putNodeRequest action', () => {
+  it('dispatches updateNodeRequest action', () => {
     const myFetch = jest.fn(() => Promise.resolve(nodeDataToPut));
     const dispatch = identityFunction;
 
-    const putNode = putNodeFactory({
-      putNodeRequest: putRequest,
-      putNodeFetch: myFetch,
-      putNodeSuccess: identityFunction,
-      putNodeFailure: identityFunction,
+    const putNode = updateNodeFactory({
+      updateNodeRequest: putRequest,
+      updateNodeFetch: myFetch,
+      updateNodeSuccess: identityFunction,
+      updateNodeFailure: identityFunction,
     });
 
     return putNode(nodeDataToPut)(dispatch).then(() => {
@@ -28,30 +28,30 @@ describe('putNodeFactory', () => {
     });
   });
 
-  it('calls putNodeFetch method', () => {
+  it('calls updateNodeFetch method', () => {
     const myFetch = jest.fn(() => Promise.resolve(nodeDataToPut));
     const dispatch = identityFunction;
 
-    const putNode = putNodeFactory({
-      putNodeRequest: putRequest,
-      putNodeFetch: myFetch,
-      putNodeSuccess: identityFunction,
-      putNodeFailure: identityFunction,
+    const putNode = updateNodeFactory({
+      updateNodeRequest: putRequest,
+      updateNodeFetch: myFetch,
+      updateNodeSuccess: identityFunction,
+      updateNodeFailure: identityFunction,
     });
 
     return putNode(nodeDataToPut)(dispatch).then(() => expect(myFetch.mock.calls.length).toEqual(1));
   });
 
-  it('dispatches putNodeSuccess action correctly', () => {
+  it('dispatches updateNodeSuccess action correctly', () => {
     const myFetch = jest.fn(() => Promise.resolve(new Response(JSON.stringify({ok: true}))));
     const dispatch = identityFunction;
     const putNodeSuccess = jest.fn(() => 'SUCCESSFUL_UPDATE');
 
-    const putNode = putNodeFactory({
-      putNodeRequest: putRequest,
-      putNodeFetch: myFetch,
-      putNodeSuccess,
-      putNodeFailure: identityFunction,
+    const putNode = updateNodeFactory({
+      updateNodeRequest: putRequest,
+      updateNodeFetch: myFetch,
+      updateNodeSuccess: putNodeSuccess,
+      updateNodeFailure: identityFunction,
     });
 
     return putNode(nodeDataToPut)(dispatch).then(() => {
@@ -62,16 +62,16 @@ describe('putNodeFactory', () => {
     });
   });
 
-  it('dispatches putNodeFailure correctly', () => {
+  it('dispatches updateNodeFailure correctly', () => {
     const myFetch = jest.fn(() => Promise.reject(new Response(JSON.stringify({ok: false}))));
     const dispatch = identityFunction;
     const putNodeFailure = jest.fn(() => 'deleting failed');
 
-    const putNode = putNodeFactory({
-      putNodeRequest: putRequest,
-      putNodeFetch: myFetch,
-      putNodeSuccess: identityFunction,
-      putNodeFailure: putNodeFailure,
+    const putNode = updateNodeFactory({
+      updateNodeRequest: putRequest,
+      updateNodeFetch: myFetch,
+      updateNodeSuccess: identityFunction,
+      updateNodeFailure: putNodeFailure,
     });
 
     return putNode(nodeDataToPut)(dispatch).then(() =>

@@ -1,1 +1,1 @@
-export const DEFAULT_ROUTE = 'api/v1/nodes';
+export const API_ROUTE = 'api/v1/nodes';

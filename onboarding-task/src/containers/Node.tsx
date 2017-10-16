@@ -5,7 +5,7 @@ import { INodeCallbacksProps, INodeDataProps, Node as NodeComponent } from '../c
 import { createMemoizedNodeViewModel } from '../models/NodeViewModel';
 import { toggleNode } from '../actions/actionCreators';
 import { IAppState } from '../reducers/IAppState';
-import { deleteNode, putNode } from '../actions/thunkActionCreators';
+import { deleteNode, updateNode } from '../actions/thunkActionCreators';
 
 interface INodeContainerProps {
   id: Guid;
@@ -18,7 +18,7 @@ const mapStateToProps = ({nodesList: {nodes, nodesInfo}}: IAppState, {id, index}
 
 const mapDispatchToProps = (dispatch: Dispatch, {id}: INodeContainerProps): INodeCallbacksProps => ({
   onEdit: () => dispatch(toggleNode(id)),
-  onSave: (text: string) => dispatch(putNode({id, text})),
+  onSave: (text: string) => dispatch(updateNode({id, text})),
   onCancel: () => dispatch(toggleNode(id)),
   onDelete: () => dispatch(deleteNode(id)),
 });

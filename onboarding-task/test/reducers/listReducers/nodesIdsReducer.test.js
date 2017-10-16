@@ -18,9 +18,9 @@ describe('nodesIdsReducer', () => {
     expect(actualState).toEqual(emptyState);
   });
 
-  describe('POST_NODE_OPTIMISTIC', () => {
+  describe('ADD_NODE_OPTIMISTIC', () => {
     it('handles adding a node', () => {
-      const action = actions.postNodeOptimistically({
+      const action = actions.addNodeOptimistically({
         id,
         text: 'text',
       });
@@ -31,9 +31,9 @@ describe('nodesIdsReducer', () => {
     });
   });
 
-  describe('POST_NODE_SUCCESS', () => {
+  describe('ADD_NODE_SUCCESS', () => {
     it('handles adding a node', () => {
-      const action = actions.postNodeSuccess(anotherId, {
+      const action = actions.addNodeSuccess(anotherId, {
         id,
         text: 'some text',
       });
@@ -44,7 +44,7 @@ describe('nodesIdsReducer', () => {
     });
 
     it('successfully replaces a non persistent node', () => {
-      const action = actions.postNodeSuccess(id, {
+      const action = actions.addNodeSuccess(id, {
         id: anotherId,
         text: 'some text',
       });

@@ -3,8 +3,8 @@ import { List } from 'immutable';
 import {
   DELETE_NODE_SUCCESS,
   GET_NODES_SUCCESS,
-  POST_NODE_OPTIMISTIC,
-  POST_NODE_SUCCESS,
+  ADD_NODE_OPTIMISTIC,
+  ADD_NODE_SUCCESS,
 } from '../../actions/actionTypes';
 import { IAction } from '../../actions/IAction';
 import { INodeContent } from '../../models/NodeContent';
@@ -23,12 +23,12 @@ export const nodesIdsReducer = (state: INodesIds = List<Guid>(), action: IAction
           List<Guid>()
         );
 
-    case POST_NODE_SUCCESS: {
+    case ADD_NODE_SUCCESS: {
       const temporaryState = state.filter(nodeId => nodeId !== action.payload.temporaryId).toList();
       return temporaryState.push(action.payload.id);
     }
 
-    case POST_NODE_OPTIMISTIC:
+    case ADD_NODE_OPTIMISTIC:
       return state.push(action.payload.id);
 
     default:

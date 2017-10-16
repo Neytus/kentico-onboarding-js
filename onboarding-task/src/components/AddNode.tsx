@@ -10,7 +10,7 @@ export interface IAddNodeCallbacksProps {
 
 interface IAddNodeState {
   text: string;
-  isAddingDisabled: boolean;
+  isValid: boolean;
 }
 
 export class AddNode extends React.PureComponent<IAddNodeCallbacksProps, IAddNodeState> {
@@ -24,12 +24,12 @@ export class AddNode extends React.PureComponent<IAddNodeCallbacksProps, IAddNod
     super(props);
     this.state = {
       text: '',
-      isAddingDisabled: true,
+      isValid: true,
     };
   }
 
   _onAdd = (event: React.KeyboardEvent<HTMLFormElement>): void => {
-    if (!this.state.isAddingDisabled) {
+    if (!this.state.isValid) {
       event.preventDefault();
       this.props.onAdd(this.state.text);
       this.setState(() => ({text: ''}));
@@ -40,7 +40,7 @@ export class AddNode extends React.PureComponent<IAddNodeCallbacksProps, IAddNod
     const text = event.target.value;
     this.setState(() => ({
       text,
-      isAddingDisabled: isNullOrWhitespace(text)
+      isValid: isNullOrWhitespace(text)
     }));
   };
 
@@ -60,7 +60,7 @@ export class AddNode extends React.PureComponent<IAddNodeCallbacksProps, IAddNod
             autoFocus
             type="submit"
             className="btn btn-default"
-            disabled={this.state.isAddingDisabled}
+            disabled={this.state.isValid}
           >
             Add
           </button>

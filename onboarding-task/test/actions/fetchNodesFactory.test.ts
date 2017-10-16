@@ -1,6 +1,6 @@
-import { fetchNodesFactory } from '../../src/actions/fetchNodesFactory';
+import { getNodesFactory } from '../../src/actions/fetchNodesFactory';
 
-describe('fetchNodesFactory', () => {
+describe('getNodesFactory', () => {
   const id = 'bf2c5661-bd00-4e10-9d2a-2562823041e3';
   const text = 'testing text';
   const node = {
@@ -15,7 +15,7 @@ describe('fetchNodesFactory', () => {
     const myFetch = jest.fn(() => Promise.resolve(nodesArray));
     const dispatch = identityFunction;
 
-    const fetchNodes = fetchNodesFactory({
+    const fetchNodes = getNodesFactory({
       getNodesFetch: myFetch,
       getNodesRequest: fetchRequest,
       getNodesFailure: identityFunction,
@@ -33,7 +33,7 @@ describe('fetchNodesFactory', () => {
     const myFetch = jest.fn(() => Promise.resolve(nodesArray));
     const dispatch = identityFunction;
 
-    const fetchNodes = fetchNodesFactory({
+    const fetchNodes = getNodesFactory({
       getNodesFetch: myFetch,
       getNodesRequest: fetchRequest,
       getNodesFailure: identityFunction,
@@ -49,7 +49,7 @@ describe('fetchNodesFactory', () => {
     const dispatch = identityFunction;
     const getNodesSuccess = jest.fn(() => 'SUCCESSFUL_FETCH');
 
-    const fetchNodes = fetchNodesFactory({
+    const fetchNodes = getNodesFactory({
       getNodesFetch: myFetch,
       getNodesRequest: identityFunction,
       getNodesFailure: identityFunction,
@@ -70,7 +70,7 @@ describe('fetchNodesFactory', () => {
     const newFetchFailure = jest.fn(() => 'Getting nodes has failed.');
     const dispatch = identityFunction;
 
-    const fetchNodes = fetchNodesFactory({
+    const fetchNodes = getNodesFactory({
       getNodesFetch: myFetch,
       getNodesRequest: identityFunction,
       getNodesFailure: newFetchFailure,

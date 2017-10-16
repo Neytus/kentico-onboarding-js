@@ -1,6 +1,6 @@
-import { DEFAULT_ROUTE } from '../constants/routes';
+import { API_ROUTE } from '../constants/routes';
 import { checkStatus } from '../utils/checkStatus';
-import { fetchNodesFactory } from './fetchNodesFactory';
+import { getNodesFactory } from './fetchNodesFactory';
 import {
   deleteNodeFailure,
   deleteNodeRequest,
@@ -8,37 +8,37 @@ import {
   getNodesFailure,
   getNodesRequest,
   getNodesSuccess,
-  postNodeFailure,
-  postNodeOptimistically,
-  postNodeRequest,
-  postNodeSuccess,
-  putNodeFailure,
-  putNodeRequest,
-  putNodeSuccess
+  addNodeFailure,
+  addNodeOptimistically,
+  addNodeRequest,
+  addNodeSuccess,
+  updateNodeFailure,
+  updateNodeRequest,
+  updateNodeSuccess
 } from './actionCreators';
 import { parseFetchedNode, parseFetchedNodes } from '../utils/parseFetchedNodes';
-import { postNodeFactory } from './postNodeFactory';
+import { addNodeFactory } from './postNodeFactory';
 import { deleteNodeFactory } from './deleteNodeFactory';
 import { generateId } from '../utils/generateId';
 import { INodeContent } from '../models/NodeContent';
-import { putNodeFactory } from './putNodeFactory';
+import { updateNodeFactory } from './putNodeFactory';
 
-const getNodesFetch = () => fetch(DEFAULT_ROUTE)
+const getNodesFetch = () => fetch(API_ROUTE)
   .catch(() => {
     throw new Error('Server is disconnected, could not fetch data. ');
   })
   .then(response => checkStatus(response))
   .then(response => response.json());
 
-export const fetchNodes = fetchNodesFactory({
-  getNodesFetch: getNodesFetch,
-  getNodesRequest: getNodesRequest,
-  getNodesSuccess: getNodesSuccess,
-  getNodesFailure: getNodesFailure,
+export const getNodes = getNodesFactory({
+  getNodesFetch,
+  getNodesRequest,
+  getNodesSuccess,
+  getNodesFailure,
   parseFetchedNodes
 });
 
-const postNodeFetch = (text: string) => fetch(DEFAULT_ROUTE, {
+const addNodeFetch = (text: string) => fetch(API_ROUTE, {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
@@ -51,17 +51,17 @@ const postNodeFetch = (text: string) => fetch(DEFAULT_ROUTE, {
   .then(response => checkStatus(response))
   .then(response => response.json());
 
-export const postNode = postNodeFactory({
-  postNodeFetch,
-  postNodeRequest,
-  postNodeOptimistically,
-  postNodeSuccess,
-  postNodeFailure,
+export const addNode = addNodeFactory({
+  addNodeFetch,
+  addNodeRequest,
+  addNodeOptimistically,
+  addNodeSuccess,
+  addNodeFailure,
   parseFetchedNode,
   idGenerator: generateId,
 });
 
-const putNodeFetch = ({id, text}: INodeContent) => fetch(DEFAULT_ROUTE + '/' + id, {
+const updateNodeFetch = ({id, text}: INodeContent) => fetch(API_ROUTE + '/' + id, {
   method: 'PUT',
   headers: {
     'Content-Type': 'application/json',
@@ -71,19 +71,19 @@ const putNodeFetch = ({id, text}: INodeContent) => fetch(DEFAULT_ROUTE + '/' + i
   }),
 })
   .catch(() => {
-  throw new Error('Server is disconnected, could not update node with text: ' + text + '. ');
-})
+    throw new Error('Server is disconnected, could not update node with text: ' + text + '. ');
+  })
   .then(response => checkStatus(response))
   .then(response => response.json());
 
-export const putNode = putNodeFactory({
-  putNodeRequest,
-  putNodeFetch,
-  putNodeSuccess,
-  putNodeFailure,
+export const updateNode = updateNodeFactory({
+  updateNodeRequest,
+  updateNodeFetch,
+  updateNodeSuccess,
+  updateNodeFailure,
 });
 
-const deleteNodeFetch = (id: Guid) => fetch(DEFAULT_ROUTE + '/' + id, {
+const deleteNodeFetch = (id: Guid) => fetch(API_ROUTE + '/' + id, {
   method: 'DELETE',
   body: JSON.stringify(id),
 })

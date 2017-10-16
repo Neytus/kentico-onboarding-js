@@ -1,24 +1,24 @@
 import { IAction } from './IAction';
 import { INodeContent, IServerNode } from '../models/NodeContent';
 
-interface IPostNodeDependencies {
-  postNodeFetch: Fetch;
-  postNodeRequest: () => IAction;
-  postNodeOptimistically: (node: INodeContent) => IAction;
-  postNodeSuccess: (temporaryId: Guid, node: INodeContent) => IAction;
-  postNodeFailure: (text: string) => IAction;
+interface IAddNodeDependencies {
+  addNodeFetch: Fetch;
+  addNodeRequest: () => IAction;
+  addNodeOptimistically: (node: INodeContent) => IAction;
+  addNodeSuccess: (temporaryId: Guid, node: INodeContent) => IAction;
+  addNodeFailure: (text: string) => IAction;
   parseFetchedNode: (node: IServerNode) => INodeContent;
   idGenerator: () => Guid;
 }
 
-export const postNodeFactory = (dependencies: IPostNodeDependencies) => (text: string) => {
+export const addNodeFactory = (dependencies: IAddNodeDependencies) => (text: string) => {
   return (dispatch: Dispatch): Promise<IAction> => {
-    dispatch(dependencies.postNodeRequest());
+    dispatch(dependencies.addNodeRequest());
     const temporaryId = dependencies.idGenerator();
-    dispatch(dependencies.postNodeOptimistically({id: temporaryId, text}));
-    return dependencies.postNodeFetch(text)
+    dispatch(dependencies.addNodeOptimistically({id: temporaryId, text}));
+    return dependencies.addNodeFetch(text)
       .then((json: any) => dependencies.parseFetchedNode(json))
-      .then(node => dispatch(dependencies.postNodeSuccess(temporaryId, node)))
-      .catch(error => dispatch(dependencies.postNodeFailure(error.message)));
+      .then(node => dispatch(dependencies.addNodeSuccess(temporaryId, node)))
+      .catch(error => dispatch(dependencies.addNodeFailure(error.message)));
   };
 };

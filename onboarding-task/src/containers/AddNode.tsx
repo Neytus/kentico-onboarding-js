@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 import * as React from 'react';
 
-import { postNode } from '../actions/thunkActionCreators';
+import { addNode } from '../actions/thunkActionCreators';
 import { AddNode as AddNodeComponent, IAddNodeCallbacksProps } from '../components/AddNode';
 
 const mapDispatchToProps = (dispatch: Dispatch): IAddNodeCallbacksProps => ({
-  onAdd: (text: string) => dispatch(postNode(text)),
+  onAdd: (text: string) => dispatch(addNode(text)),
 });
 
 export const AddNode: React.ComponentClass = connect(

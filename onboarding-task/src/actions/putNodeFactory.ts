@@ -1,18 +1,18 @@
 import { IAction } from './IAction';
 import { INodeContent } from '../models/NodeContent';
 
-interface IPutNodeDependencies {
-  putNodeFetch: Fetch;
-  putNodeRequest: () => IAction;
-  putNodeSuccess: (node: INodeContent) => IAction;
-  putNodeFailure: (text: string) => IAction;
+interface IUpdateNodeDependencies {
+  updateNodeFetch: Fetch;
+  updateNodeRequest: () => IAction;
+  updateNodeSuccess: (node: INodeContent) => IAction;
+  updateNodeFailure: (text: string) => IAction;
 }
 
-export const putNodeFactory = (dependencies: IPutNodeDependencies) => (updateNode: INodeContent) => {
+export const updateNodeFactory = (dependencies: IUpdateNodeDependencies) => (updateNode: INodeContent) => {
   return (dispatch: Dispatch): Promise<IAction> => {
-    dispatch(dependencies.putNodeRequest());
-    return dependencies.putNodeFetch(updateNode)
-      .then(() => dispatch(dependencies.putNodeSuccess(updateNode)))
-      .catch(error => dispatch(dependencies.putNodeFailure(error.message)));
+    dispatch(dependencies.updateNodeRequest());
+    return dependencies.updateNodeFetch(updateNode)
+      .then(() => dispatch(dependencies.updateNodeSuccess(updateNode)))
+      .catch(error => dispatch(dependencies.updateNodeFailure(error.message)));
   };
 };
