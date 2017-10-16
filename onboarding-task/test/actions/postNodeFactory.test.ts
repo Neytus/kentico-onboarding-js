@@ -1,4 +1,4 @@
-import { addNodeFactory } from '../../src/actions/postNodeFactory';
+import { addNodeFactory } from '../../src/actions/addNodeFactory';
 
 describe('addNodeFactory', () => {
   const id = 'bf2c5661-bd00-4e10-9d2a-2562823041e3';

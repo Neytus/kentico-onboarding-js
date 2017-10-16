@@ -1,4 +1,4 @@
-import { updateNodeFactory } from '../../src/actions/putNodeFactory';
+import { updateNodeFactory } from '../../src/actions/updateNodeFactory';
 
 describe('updateNodeFactory', () => {
 

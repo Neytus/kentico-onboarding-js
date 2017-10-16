@@ -1,4 +1,4 @@
-import { getNodesFactory } from '../../src/actions/fetchNodesFactory';
+import { getNodesFactory } from '../../src/actions/getNodesFactory';
 
 describe('getNodesFactory', () => {
   const id = 'bf2c5661-bd00-4e10-9d2a-2562823041e3';

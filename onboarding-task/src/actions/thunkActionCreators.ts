@@ -1,6 +1,6 @@
 import { API_ROUTE } from '../constants/routes';
 import { checkStatus } from '../utils/checkStatus';
-import { getNodesFactory } from './fetchNodesFactory';
+import { getNodesFactory } from './getNodesFactory';
 import {
   deleteNodeFailure,
   deleteNodeRequest,
@@ -17,11 +17,11 @@ import {
   updateNodeSuccess
 } from './actionCreators';
 import { parseFetchedNode, parseFetchedNodes } from '../utils/parseFetchedNodes';
-import { addNodeFactory } from './postNodeFactory';
+import { addNodeFactory } from './addNodeFactory';
 import { deleteNodeFactory } from './deleteNodeFactory';
 import { generateId } from '../utils/generateId';
 import { INodeContent } from '../models/NodeContent';
-import { updateNodeFactory } from './putNodeFactory';
+import { updateNodeFactory } from './updateNodeFactory';
 
 const getNodesFetch = () => fetch(API_ROUTE)
   .catch(() => {
