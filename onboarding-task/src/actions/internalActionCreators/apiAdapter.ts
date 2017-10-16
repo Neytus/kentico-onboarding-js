@@ -1,4 +1,4 @@
-import { API_ROUTE } from '../../constants/routes';
+import { API_URL } from '../../constants/urls';
 import { INodeContent } from '../../models/NodeContent';
 
 export const checkStatus = (response: Response) => {
@@ -8,14 +8,14 @@ export const checkStatus = (response: Response) => {
   return response;
 };
 
-export const getNodesFetch = () => fetch(API_ROUTE)
+export const getNodesFetch = () => fetch(API_URL)
   .catch(() => {
     throw new Error('Server is disconnected, could not fetch data. ');
   })
   .then(response => checkStatus(response))
   .then(response => response.json());
 
-export const addNodeFetch = (text: string) => fetch(API_ROUTE, {
+export const addNodeFetch = (text: string) => fetch(API_URL, {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
@@ -28,7 +28,7 @@ export const addNodeFetch = (text: string) => fetch(API_ROUTE, {
   .then(response => checkStatus(response))
   .then(response => response.json());
 
-export const updateNodeFetch = ({id, text}: INodeContent) => fetch(API_ROUTE + '/' + id, {
+export const updateNodeFetch = ({id, text}: INodeContent) => fetch(API_URL + '/' + id, {
   method: 'PUT',
   headers: {
     'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ export const updateNodeFetch = ({id, text}: INodeContent) => fetch(API_ROUTE + '
   .then(response => checkStatus(response))
   .then(response => response.json());
 
-export const deleteNodeFetch = (id: Guid) => fetch(API_ROUTE + '/' + id, {
+export const deleteNodeFetch = (id: Guid) => fetch(API_URL + '/' + id, {
   method: 'DELETE',
   body: JSON.stringify(id),
 })
