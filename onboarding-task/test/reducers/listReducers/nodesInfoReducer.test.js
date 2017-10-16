@@ -1,6 +1,6 @@
 import { OrderedMap } from 'immutable';
 
-import * as actions from '../../../src/actions/baseActionCreators.ts';
+import * as actions from '../../../src/actions/internalActionCreators/baseActionCreators.ts';
 import { NodeInfo } from '../../../src/models/NodeInfo.ts';
 import { nodesInfoReducer } from '../../../src/reducers/nodesListReducers/nodesInfoReducer.ts';
 

@@ -1,4 +1,4 @@
-import { errorFactory } from '../../src/actions/addErrorFactory';
+import { errorFactory } from '../../src/actions/internalActionCreators/addErrorFactory';
 
 const id = '05d0e770-b33e-4a1b-bdf8-138916d405ef';
 const generateId = jest.fn(() => id);

@@ -1,6 +1,6 @@
 import { List } from 'immutable';
 
-import * as actions from '../../../src/actions/baseActionCreators.ts';
+import * as actions from '../../../src/actions/internalActionCreators/baseActionCreators.ts';
 import { nodesIdsReducer } from '../../../src/reducers/nodesListReducers/nodesIdsReducer.ts';
 
 describe('nodesIdsReducer', () => {

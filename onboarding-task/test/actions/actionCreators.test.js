@@ -1,4 +1,4 @@
-import * as actions from '../../src/actions/baseActionCreators.ts';
+import * as actions from '../../src/actions/internalActionCreators/baseActionCreators.ts';
 import * as types from '../../src/constants/actionTypes.ts';
 
 const id = '80149842-a624-b66b-5d3c-37c24523ba46';

@@ -1,6 +1,6 @@
 import { OrderedMap } from 'immutable';
 
-import * as actions from '../../../src/actions/baseActionCreators';
+import * as actions from '../../../src/actions/internalActionCreators/baseActionCreators';
 import { errorReducer } from '../../../src/reducers/nodesListReducers/errorReducer';
 import {
   ADD_NODE_FAILURE,

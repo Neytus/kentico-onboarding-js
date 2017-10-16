@@ -1,4 +1,4 @@
-import { getNodesFactory } from './getNodesFactory';
+import { getNodesFactory } from './internalActionCreators/getNodesFactory';
 import {
   deleteNodeFailure,
   deleteNodeStart,
@@ -12,13 +12,15 @@ import {
   addNodeSuccess,
   updateNodeFailure,
   updateNodeStart,
-  updateNodeSuccess
-} from './baseActionCreators';
+  updateNodeSuccess,
+  toggleNode,
+  dismissError,
+} from './internalActionCreators/baseActionCreators';
 import { parseFetchedNode, parseFetchedNodes } from '../utils/parseFetchedNodes';
-import { addNodeFactory } from './addNodeFactory';
-import { deleteNodeFactory } from './deleteNodeFactory';
+import { addNodeFactory } from './internalActionCreators/addNodeFactory';
+import { deleteNodeFactory } from './internalActionCreators/deleteNodeFactory';
 import { generateId } from '../utils/generateId';
-import { updateNodeFactory } from './updateNodeFactory';
+import { updateNodeFactory } from './internalActionCreators/updateNodeFactory';
 import {
   addNodeFetch,
   deleteNodeFetch,
@@ -57,3 +59,8 @@ export const deleteNode = deleteNodeFactory({
   deleteNodeSuccess,
   deleteNodeFetch
 });
+
+export {
+  toggleNode,
+  dismissError
+};

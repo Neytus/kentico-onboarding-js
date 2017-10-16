@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import { INodeCallbacksProps, INodeDataProps, Node as NodeComponent } from '../components/Node';
 import { createMemoizedNodeViewModel } from '../models/NodeViewModel';
-import { toggleNode } from '../actions/baseActionCreators';
+import { toggleNode } from '../actions/publicActionCreators';
 import { IAppState } from '../reducers/IAppState';
 import { deleteNode, updateNode } from '../actions/publicActionCreators';
 

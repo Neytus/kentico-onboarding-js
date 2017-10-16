@@ -1,4 +1,4 @@
-import { updateNodeFactory } from '../../src/actions/updateNodeFactory';
+import { updateNodeFactory } from '../../src/actions/internalActionCreators/updateNodeFactory';
 
 describe('updateNodeFactory', () => {
 

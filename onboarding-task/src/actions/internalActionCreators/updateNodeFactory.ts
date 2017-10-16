@@ -1,5 +1,5 @@
-import { IAction } from './IAction';
-import { INodeContent } from '../models/NodeContent';
+import { IAction } from '../IAction';
+import { INodeContent } from '../../models/NodeContent';
 
 interface IUpdateNodeDependencies {
   updateNodeFetch: Fetch;

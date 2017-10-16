@@ -14,11 +14,11 @@ import {
   UPDATE_NODE_SUCCESS,
   UPDATE_NODE_FAILURE,
   GET_NODES_START,
-} from '../constants/actionTypes';
-import { IAction } from './IAction';
+} from '../../constants/actionTypes';
+import { IAction } from '../IAction';
 import { errorFactory } from './addErrorFactory';
-import { generateId } from '../utils/generateId';
-import { INodeContent } from '../models/NodeContent';
+import { generateId } from '../../utils/generateId';
+import { INodeContent } from '../../models/NodeContent';
 
 export const toggleNode = (id: Guid): IAction => ({
   type: TOGGLE_NODE,

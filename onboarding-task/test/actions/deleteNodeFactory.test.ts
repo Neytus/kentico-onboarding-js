@@ -1,4 +1,4 @@
-import { deleteNodeFactory } from '../../src/actions/deleteNodeFactory';
+import { deleteNodeFactory } from '../../src/actions/internalActionCreators/deleteNodeFactory';
 
 describe('deleteNodeFactory', () => {
   const id = 'ef081749-250b-4c35-af07-4ff4364bafa1';
