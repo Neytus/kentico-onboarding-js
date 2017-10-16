@@ -13,6 +13,6 @@ export const updateNodeFactory = (dependencies: IUpdateNodeDependencies) => (upd
     dispatch(dependencies.updateNodeStart());
     return dependencies.updateNodeFetch(updateNode)
       .then(() => dispatch(dependencies.updateNodeSuccess(updateNode)))
-      .catch(error => dispatch(dependencies.updateNodeFailure(error.message)));
+      .catch(() => dispatch(dependencies.updateNodeFailure('Could not save the selected node.')));
   };
 };

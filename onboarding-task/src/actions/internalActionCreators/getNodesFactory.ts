@@ -17,6 +17,6 @@ export const getNodesFactory = (dependencies: IGetNodesDependencies) => () => {
     return dependencies.getNodesFetch()
       .then(json => dependencies.parseFetchedNodes(json))
       .then(nodes => dispatch(dependencies.getNodesSuccess(nodes)))
-      .catch(error => dispatch(dependencies.getNodesFailure(error.message)));
+      .catch(() => dispatch(dependencies.getNodesFailure('Could not retrieve nodes from the server.')));
   };
 };

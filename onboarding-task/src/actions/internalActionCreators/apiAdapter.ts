@@ -23,7 +23,7 @@ export const addNodeFetch = (text: string) => fetch(API_ROUTE, {
   body: JSON.stringify({text}),
 })
   .catch(() => {
-    throw new Error('Server is disconnected, could not save text: ' + text + '. ');
+    throw new Error('Server is disconnected, could not add node with text: ' + text + '. ');
   })
   .then(response => checkStatus(response))
   .then(response => response.json());
@@ -38,7 +38,7 @@ export const updateNodeFetch = ({id, text}: INodeContent) => fetch(API_ROUTE + '
   }),
 })
   .catch(() => {
-    throw new Error('Server is disconnected, could not update node with text: ' + text + '. ');
+    throw new Error('Server is disconnected, could not save node with updated text: ' + text + '. ');
   })
   .then(response => checkStatus(response))
   .then(response => response.json());

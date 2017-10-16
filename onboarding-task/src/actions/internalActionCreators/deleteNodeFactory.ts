@@ -12,6 +12,6 @@ export const deleteNodeFactory = (dependencies: IDeleteNodeDependencies) => (id:
     dispatch(dependencies.deleteNodeStart());
     return dependencies.deleteNodeFetch(id)
       .then(() => dispatch(dependencies.deleteNodeSuccess(id)))
-      .catch(error => dispatch(dependencies.deleteNodeFailure(error.message)));
+      .catch(() => dispatch(dependencies.deleteNodeFailure('Could not delete the selected node.')));
   };
 };
