@@ -1,4 +1,7 @@
-import { IAction } from '../actions/IAction';
+export type IAction = {
+  type: string;
+  payload?: any;
+};
 
 type ThunkPromise = (dispatch: Dispatch, getState: any) => Promise<IAction>;
 type BasicDispatch = (action: IAction) => IAction;

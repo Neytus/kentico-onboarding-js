@@ -1,4 +1,4 @@
-import { IAction } from '../IAction';
+import { IAction } from '../../@types/global';
 import { INodeContent } from '../../models/NodeContent';
 
 interface IUpdateNodeDependencies {

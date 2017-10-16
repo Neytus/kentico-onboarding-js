@@ -9,7 +9,7 @@ import {
   UPDATE_NODE_SUCCESS,
 } from '../../constants/actionTypes';
 import { NodeInfo } from '../../models/NodeInfo';
-import { IAction } from '../../actions/IAction';
+import { IAction } from '../../@types/global';
 import { INodeContent } from '../../models/NodeContent';
 
 export type INodesInfo = OrderedMap<Guid, NodeInfo>;

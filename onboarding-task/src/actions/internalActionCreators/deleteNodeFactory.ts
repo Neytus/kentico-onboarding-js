@@ -1,4 +1,4 @@
-import { IAction } from '../IAction';
+import { IAction } from '../../@types/global';
 
 interface IDeleteNodeDependencies {
   deleteNodeStart: () => IAction;

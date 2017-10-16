@@ -2,7 +2,7 @@ import { nodesReducer } from './nodesReducer';
 import { nodesInfoReducer } from './nodesInfoReducer';
 import { nodesIdsReducer } from './nodesIdsReducer';
 import { INodesList } from './INodesList';
-import { IAction } from '../../actions/IAction';
+import { IAction } from '../../@types/global';
 import { isFetchingReducer } from './isFetchingReducer';
 import { errorReducer } from './errorReducer';
 

@@ -1,6 +1,6 @@
 import { OrderedMap } from 'immutable';
 
-import { IAction } from '../../actions/IAction';
+import { IAction } from '../../@types/global';
 import {
   GET_NODES_FAILURE,
   DISMISS_ERROR,
