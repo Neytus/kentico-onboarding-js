@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import * as React from 'react';
 
-import { List as ListComponent, IListDataProps } from '../components/List';
+import { List as ListComponent, IListDataProps, IListCallbacksProps } from '../components/List';
 import { IAppState } from '../reducers/IAppState';
 import { fetchNodes } from '../actions/thunkActionCreators';
 
@@ -11,7 +11,7 @@ const mapStateToProps = ({nodesList: {nodesIds, isFetching, errors}}: IAppState)
   errors
 });
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
+const mapDispatchToProps = (dispatch: Dispatch): IListCallbacksProps => ({
   fetchNodes: () => setTimeout(() => dispatch(fetchNodes()), 2500),
 });
 

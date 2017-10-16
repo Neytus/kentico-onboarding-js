@@ -27,13 +27,13 @@ export class EditableNode extends React.PureComponent<IEditableNodeProps, IEdita
   static displayName = 'EditableNode';
 
   static propTypes: React.ValidationMap<IEditableNodeProps> = {
-    onSave: PropTypes.func.isRequired,
-    onCancel: PropTypes.func.isRequired,
-    onDelete: PropTypes.func.isRequired,
     nodeViewModel: ImmutablePropTypes.recordOf({
       text: PropTypes.string.isRequired,
       index: PropTypes.number.isRequired,
     }).isRequired,
+    onSave: PropTypes.func.isRequired,
+    onCancel: PropTypes.func.isRequired,
+    onDelete: PropTypes.func.isRequired,
   };
 
   constructor(props: IEditableNodeProps) {
@@ -62,15 +62,16 @@ export class EditableNode extends React.PureComponent<IEditableNodeProps, IEdita
 
   render() {
     const {text} = this.state;
+    const props = this.props;
 
     return (
       <HotKeys handlers={{
-        cancelNode: this.props.onCancel,
+        cancelNode: props.onCancel,
         saveNode: this._saveNode,
-        deleteNode: this.props.onDelete,
+        deleteNode: props.onDelete,
       }}>
         <form className="form-inline" onSubmit={this._saveNode}>
-          {this.props.nodeViewModel.index}.
+          {props.nodeViewModel.index}.
 
           <input
             autoFocus
@@ -90,7 +91,7 @@ export class EditableNode extends React.PureComponent<IEditableNodeProps, IEdita
           <button
             type="button"
             className="btn btn-default"
-            onClick={this.props.onCancel}
+            onClick={props.onCancel}
           >
             Cancel
           </button>
@@ -98,7 +99,7 @@ export class EditableNode extends React.PureComponent<IEditableNodeProps, IEdita
           <button
             type="button"
             className="btn btn-danger"
-            onClick={this.props.onDelete}
+            onClick={props.onDelete}
           >
             Delete
           </button>

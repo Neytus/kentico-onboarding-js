@@ -1,6 +1,7 @@
 const ImmutablePropTypes = require('react-immutable-proptypes');
 const Loading = require('react-loading-animation');
 import * as React from 'react';
+import * as PropTypes from 'prop-types';
 import { List as ImmutableList, OrderedMap } from 'immutable';
 import { HotKeys } from 'react-hotkeys';
 
@@ -15,8 +16,8 @@ export interface IListDataProps {
   errors: OrderedMap<Guid, string>;
 }
 
-export interface  IListCallbacksProps {
-  fetchNodes: any;
+export interface IListCallbacksProps {
+  fetchNodes: () => void;
 }
 
 const keyMap: IKeyMap = {
@@ -29,33 +30,30 @@ export class List extends React.PureComponent<IListDataProps & IListCallbacksPro
   static displayName = 'List';
   static propTypes = {
     nodesIds: ImmutablePropTypes.list.isRequired,
+    isFetching: PropTypes.bool.isRequired,
+    errors: ImmutablePropTypes.map.isRequired,
+    fetchNodes: PropTypes.func.isRequired,
   };
-
-  constructor(props: IListDataProps & IListCallbacksProps) {
-    super(props);
-  }
 
   componentDidMount() {
     this.props.fetchNodes();
   }
 
   render() {
-    const
-      nodes = this.props.nodesIds
-        .map((id: Guid, index: number) => (
-          <li className="list-group-item" key={id} >
-            <Node
-              id={id}
-              index={index}
-            />
-          </li>
-        ));
+    const nodes = this.props.nodesIds
+      .map((id: Guid, index: number) => (
+        <li className="list-group-item" key={id}>
+          <Node
+            id={id}
+            index={index}
+          />
+        </li>
+      ));
 
-    const
-      errors = this.props.errors.keySeq()
-        .map((id: Guid) => (
-            <Error id={id} key={id}/>
-        ));
+    const errors = this.props.errors.keySeq()
+      .map((id: Guid) => (
+        <Error id={id} key={id} />
+      ));
 
     return (
       <div className="row">

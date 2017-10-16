@@ -1,6 +1,7 @@
-import { Error as ErrorComponent, IErrorDataProps } from '../components/Error';
-import { connect } from 'react-redux';
 import * as React from 'react';
+import { connect } from 'react-redux';
+
+import { Error as ErrorComponent, IErrorCallbacksProps, IErrorDataProps } from '../components/Error';
 import { deleteError } from '../actions/actionCreators';
 import { IAppState } from '../reducers/IAppState';
 
@@ -13,7 +14,7 @@ const mapStateToProps = ({nodesList: {errors}}: IAppState, {id}: IErrorContainer
   errorText: errors.get(id)
 });
 
-const mapDispatchToProps = (dispatch: Dispatch, {id}: IErrorContainerProps) => ({
+const mapDispatchToProps = (dispatch: Dispatch, {id}: IErrorContainerProps): IErrorCallbacksProps => ({
   onClick: () => dispatch(deleteError(id))
 });
 

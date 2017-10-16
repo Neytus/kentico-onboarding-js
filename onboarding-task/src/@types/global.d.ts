@@ -11,5 +11,3 @@ declare global {
 
   type Guid = string;
 }
-
-export {};
