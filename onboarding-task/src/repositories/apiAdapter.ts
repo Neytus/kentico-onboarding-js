@@ -1,5 +1,5 @@
-import { API_URL } from '../../constants/urls';
-import { INodeContent } from '../../models/NodeContent';
+import { API_URL } from '../constants/urls';
+import { INodeContent } from '../models/NodeContent';
 
 export const checkStatus = (response: Response) => {
   if (!response.ok) {

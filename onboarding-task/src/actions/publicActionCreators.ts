@@ -26,7 +26,7 @@ import {
   deleteNodeFetch,
   getNodesFetch,
   updateNodeFetch,
-} from './internalActionCreators/apiAdapter';
+} from '../repositories/apiAdapter';
 
 export const getNodes = getNodesFactory({
   getNodesFetch,
