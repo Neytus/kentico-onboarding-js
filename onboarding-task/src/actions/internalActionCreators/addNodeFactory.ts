@@ -1,4 +1,4 @@
-import { IAction } from '../../@types/global';
+import { IAction } from '../../@types/IAction';
 import { INodeContent } from '../../models/NodeContent';
 import { IServerNode } from '../../utils/parseFetchedNodes';
 

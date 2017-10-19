@@ -1,4 +1,4 @@
-import { IAction } from '../../@types/global';
+import { IAction } from '../../@types/IAction';
 import {
   GET_NODES_SUCCESS,
   GET_NODES_FAILURE,

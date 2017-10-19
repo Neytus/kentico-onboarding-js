@@ -1,4 +1,4 @@
-import { IAction } from '../../@types/global';
+import { IAction } from '../../@types/IAction';
 
 export const errorFactory = (generateId: () => Guid, actionType: string) => (text: string): IAction => ({
   type: actionType,

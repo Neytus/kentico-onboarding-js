@@ -8,7 +8,7 @@ import {
   UPDATE_NODE_SUCCESS,
 } from '../../constants/actionTypes';
 import { INodeContent, NodeContent } from '../../models/NodeContent';
-import { IAction } from '../../@types/global';
+import { IAction } from '../../@types/IAction';
 
 export type INodes = OrderedMap<Guid, NodeContent>;
 

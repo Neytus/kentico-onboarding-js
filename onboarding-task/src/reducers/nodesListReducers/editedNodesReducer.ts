@@ -1,6 +1,6 @@
 import { OrderedMap } from 'immutable';
 
-import { IAction } from '../../@types/global';
+import { IAction } from '../../@types/IAction';
 import {
   ADD_NODE_OPTIMISTIC,
   ADD_NODE_SUCCESS,

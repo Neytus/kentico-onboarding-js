@@ -6,7 +6,7 @@ import {
   ADD_NODE_OPTIMISTIC,
   ADD_NODE_SUCCESS,
 } from '../../constants/actionTypes';
-import { IAction } from '../../@types/global';
+import { IAction } from '../../@types/IAction';
 import { INodeContent } from '../../models/NodeContent';
 
 export type INodesIds = List<Guid>;

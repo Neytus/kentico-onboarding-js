@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
-import { IAction } from '../@types/global';
+import { IAction } from '../@types/IAction';
 
 export interface IErrorDataProps {
   id: Guid;

@@ -1,9 +1,5 @@
 import { IAppState } from '../reducers/IAppState';
-
-export type IAction = {
-  type: string;
-  payload?: any;
-};
+import { IAction } from './IAction';
 
 type ThunkPromise = (dispatch: Dispatch, getState: () => IAppState) => Promise<IAction>;
 type BasicDispatch = (action: IAction) => IAction;

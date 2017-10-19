@@ -1,7 +1,7 @@
 import { nodesReducer } from './nodesReducer';
 import { nodesIdsReducer } from './nodesIdsReducer';
 import { INodesList } from './INodesList';
-import { IAction } from '../../@types/global';
+import { IAction } from '../../@types/IAction';
 import { isFetchingReducer } from './isFetchingReducer';
 import { errorReducer } from './errorReducer';
 import { editedNodesReducer } from './editedNodesReducer';

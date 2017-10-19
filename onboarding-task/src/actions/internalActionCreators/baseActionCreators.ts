@@ -15,7 +15,7 @@ import {
   UPDATE_NODE_FAILURE,
   GET_NODES_START,
 } from '../../constants/actionTypes';
-import { IAction } from '../../@types/global';
+import { IAction } from '../../@types/IAction';
 import { errorFactory } from './addErrorFactory';
 import { generateId } from '../../utils/generateId';
 import { INodeContent } from '../../models/NodeContent';
