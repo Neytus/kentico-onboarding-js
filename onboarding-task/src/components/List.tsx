@@ -40,7 +40,9 @@ export class List extends React.PureComponent<IListDataProps & IListCallbacksPro
   }
 
   render() {
-    const nodes = this.props.nodesIds
+    const { nodesIds, errors, isFetching } = this.props;
+
+    const nodes = nodesIds
       .map((id: Guid, index: number) => (
         <li className="list-group-item" key={id}>
           <Node
@@ -50,7 +52,7 @@ export class List extends React.PureComponent<IListDataProps & IListCallbacksPro
         </li>
       ));
 
-    const errors = this.props.errors.keySeq()
+    const errorsShown = errors.keySeq()
       .map((id: Guid) => (
         <Error id={id} key={id} />
       ));
@@ -58,14 +60,14 @@ export class List extends React.PureComponent<IListDataProps & IListCallbacksPro
     return (
       <div className="row">
         <div className="col-sm-12 col-md-offset-2 col-md-8 ">
-          <Loading isLoading={this.props.isFetching}>
+          <Loading isLoading={isFetching}>
             <ul className="list-group">
               <HotKeys keyMap={keyMap}>
                 {nodes}
                 <li className="list-group-item">
                   <AddNode />
                 </li>
-                {errors}
+                {errorsShown}
               </HotKeys>
             </ul>
           </Loading>

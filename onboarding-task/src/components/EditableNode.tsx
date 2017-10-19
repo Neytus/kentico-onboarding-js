@@ -62,16 +62,16 @@ export class EditableNode extends React.PureComponent<IEditableNodeProps, IEdita
 
   render() {
     const {text} = this.state;
-    const props = this.props;
+    const { nodeViewModel, onCancel, onDelete } = this.props;
 
     return (
       <HotKeys handlers={{
-        cancelNode: props.onCancel,
+        cancelNode: onCancel,
         saveNode: this._saveNode,
-        deleteNode: props.onDelete,
+        deleteNode: onDelete,
       }}>
         <form className="form-inline" onSubmit={this._saveNode}>
-          {props.nodeViewModel.index}.
+          {nodeViewModel.index}.
 
           <input
             autoFocus
@@ -91,7 +91,7 @@ export class EditableNode extends React.PureComponent<IEditableNodeProps, IEdita
           <button
             type="button"
             className="btn btn-default"
-            onClick={props.onCancel}
+            onClick={onCancel}
           >
             Cancel
           </button>
@@ -99,7 +99,7 @@ export class EditableNode extends React.PureComponent<IEditableNodeProps, IEdita
           <button
             type="button"
             className="btn btn-danger"
-            onClick={props.onDelete}
+            onClick={onDelete}
           >
             Delete
           </button>
