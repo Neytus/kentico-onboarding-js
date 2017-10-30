@@ -48,6 +48,5 @@ export const Node: React.StatelessComponent<INodeProps> = props =>
     />
   );
 
-
 Node.displayName = 'Node';
 Node.propTypes = nodePropTypes;

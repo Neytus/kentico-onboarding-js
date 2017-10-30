@@ -26,7 +26,9 @@ const keyMap: IKeyMap = {
   'deleteNode': 'ctrl+del',
 };
 
-export class List extends React.PureComponent<IListDataProps & IListCallbacksProps> {
+type IListProps = IListDataProps & IListCallbacksProps;
+
+export class List extends React.PureComponent<IListProps> {
   static displayName = 'List';
   static propTypes = {
     nodesIds: ImmutablePropTypes.list.isRequired,
@@ -40,7 +42,7 @@ export class List extends React.PureComponent<IListDataProps & IListCallbacksPro
   }
 
   render() {
-    const { nodesIds, errors, isFetching } = this.props;
+    const {nodesIds, errors, isFetching} = this.props;
 
     const nodes = nodesIds
       .map((id: Guid, index: number) => (
