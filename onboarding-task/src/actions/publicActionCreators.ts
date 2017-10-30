@@ -61,11 +61,6 @@ export const deleteNode = deleteNodeFactory({
 });
 
 export {
-  deleteNodeSuccess,
-  getNodesSuccess,
-  addNodeOptimistically,
-  addNodeSuccess,
-  updateNodeSuccess,
   toggleNode,
   dismissError,
 };
