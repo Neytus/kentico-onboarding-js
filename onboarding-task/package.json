@@ -116,7 +116,7 @@
       "^react-native$": "react-native-web"
     }
   },
-  "proxy": "http://localhost:52713/",
+  "proxy": "http://todolistapi20171031051039.azurewebsites.net",
   "babel": {
     "presets": [
       "react-app"
