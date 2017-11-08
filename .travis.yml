@@ -3,16 +3,14 @@ language: node_js
 node_js:
   - "8"
   
-before_install:
-  - cd onboarding-task
-    
 cache:
   directories:
     - onboarding-task/node_modules/
   
-after_success: 
-  - npm run build
-  - ls
-  - ls build/
-  - surge --project ./build/ --domain mixed-position.surge.sh
-  
+before_install:
+  - cd onboarding-task
+    
+after_success:
+  - test $TRAVIS_BRANCH = "master" && 
+    npm run build &&
+    surge --project ./build/ --domain mixed-position.surge.sh
