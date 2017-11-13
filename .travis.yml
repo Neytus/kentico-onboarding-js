@@ -9,8 +9,10 @@ cache:
   
 before_install:
   - cd onboarding-task
+  
+script:
+  - npm run build
     
 after_success:
-  - test $TRAVIS_BRANCH = "master" && 
-    npm run build &&
+  - test $TRAVIS_BRANCH = "master" &&
     surge --project ./build/ --domain mixed-position.surge.sh
