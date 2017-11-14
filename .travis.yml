@@ -18,5 +18,3 @@ deploy:
   project: ./onboarding-task/build/
   domain: mixed-position.surge.sh
   skip_cleanup: true
-  on:
-     all_branches: true
